@@ -97,7 +97,7 @@ declare module 'vue' {
     RouterManagePage: typeof import('./src/components/system-components/tool/manageTool/page/RouterManagePage.vue')['default']
     RouterTable: typeof import('./src/components/system-components/tool/manageTool/page/table/RouterTable.vue')['default']
     RouterView: typeof import('vue-router')['RouterView']
-    SearchInput: typeof import('./src/components/system-components/widget/SearchInput.vue')['default']
+    SearchInput: typeof import('./src/components/tool-components/chatGptTool/widget/SearchInput.vue')['default']
     SecureLabel: typeof import('./src/components/system-components/avatar/SecureLabel.vue')['default']
     SetPhoneDialog: typeof import('./src/components/system-components/avatar/SetPhoneDialog.vue')['default']
     Slide: typeof import('./src/components/system-components/layouts/tool/Slide.vue')['default']

@@ -10,9 +10,10 @@
 
 <script setup lang="ts">
 
-import MenuItem from "@/components/desktop/widget/MenuItem.vue";
+
 import {onMounted} from "vue";
 import {ipcRenderer} from "electron";
+import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 
 
 function keepTray(event) {
