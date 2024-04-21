@@ -140,8 +140,8 @@ import UserAvatar from "@/components/system-components/avatar/UserAvatar.vue";
 import DefaultBtn from "@/components/system-components/tool/btn/DefaultBtn.vue";
 import {ToolLayout} from "@/model/menu";
 import {ConversationEntity} from "@/components/system-components/tool/chatGptTool/chat/model/chat";
-import WindowCloseBtn from "@/components/system-components/widget/WindowCloseBtn.vue";
-import WindowMinimizeBtn from "@/components/system-components/widget/WindowMinimizeBtn.vue";
+import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBtn.vue";
+import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMinimizeBtn.vue";
 import {ipcRenderer} from "electron";
 
 const {getPaletteColor} = colors

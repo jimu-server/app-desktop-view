@@ -247,8 +247,9 @@ import {loadUserInfo} from "@/components/system-components/utils/userutil";
 import {useChatCtxStore} from "@/components/system-components/tool/chatGptTool/chat/store/chat_ctx";
 import {defaultLogin, getPhoneCode} from "@/components/system-components/request";
 import {ipcRenderer} from "electron";
-import WindowMinimizeBtn from "@/components/system-components/widget/WindowMinimizeBtn.vue";
-import WindowCloseBtn from "@/components/system-components/widget/WindowCloseBtn.vue";
+import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMinimizeBtn.vue";
+import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBtn.vue";
+import {desktop_login} from "@/components/system-components/desktop/desktop";
 
 
 const $q = useQuasar()
@@ -441,7 +442,7 @@ function defaultLoginAction() {
       await loadUserInfo()
       setTimeout(async () => {
         // 触发登录改变窗口大小
-        ipcRenderer.send('login')
+        desktop_login()
         await router.push(homePath)
         loading.value = false
       }, 1000)
@@ -481,13 +482,6 @@ async function doRegister() {
   }
 }
 
-function minimize() {
-  ipcRenderer.send('window-min')
-}
-
-function close() {
-  ipcRenderer.send('window-quite')
-}
 
 onMounted(() => {
   loginBox.value = document.getElementById('loginBox')

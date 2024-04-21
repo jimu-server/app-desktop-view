@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import {ipcRenderer} from "electron";
+import {desktop_minimize} from "@/components/system-components/desktop/desktop";
 
-function minimize() {
-  ipcRenderer.send('window-min')
-}
 </script>
 
 <template>
-  <q-btn dense square flat class="window-minimize" icon="jimu-zuixiaohua1" @click.stop="minimize"
+  <q-btn dense square flat class="window-minimize" icon="jimu-zuixiaohua1" @click.stop="desktop_minimize"
          style="height: 100%;width: 40px;-webkit-app-region: no-drag;"/>
 </template>
 
