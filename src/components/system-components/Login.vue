@@ -10,14 +10,10 @@
                   enter-active-class="animate__animated animate__flipInY"
               >
                 <div v-show="!register" class="fit row justify-center">
-                  <div class=" full-height column justify-center" style="width: 85%">
+                  <div class=" full-height column" style="width: 85%">
                     <div class="row">
                       <div class="full-width">
                         <q-bar class="bg-transparent" style="padding: 0;-webkit-app-region: drag;">
-                          <!--   q-space 用于配置 鼠标拖拽窗口   -->
-                          <div style="margin-left: 8px;margin-bottom:20px;font-size: 27px">
-                            登录
-                          </div>
                           <q-space/>
                           <WindowMinimizeBtn/>
                           <WindowCloseBtn/>
@@ -46,8 +42,8 @@
                                        outlined
                                        v-model="account"
                                        placeholder="账号/手机/邮箱"
+                                       style="width: 100%"
                                        :error="false"
-                                       style="width: 96%"
                               >
                                 <template v-slot:prepend>
                                   <q-icon name="jimu-yonghuming" size="20px"/>
@@ -58,7 +54,7 @@
                               <q-input table-index :ref="el=> loginInputRef[1]=el" dense outlined v-model="passwd"
                                        type="password"
                                        :error="false"
-                                       style="width: 96%"
+                                       style="width: 100%"
                                        placeholder="密码"
                               >
                                 <template v-slot:prepend>
@@ -76,7 +72,7 @@
                                        v-model="phone"
                                        placeholder="手机"
                                        :error="false"
-                                       style="width: 96%"
+                                       style="width: 100%"
                               >
                                 <template v-slot:before>
                                   <q-select v-model="area" :options="areaOptions"
@@ -92,7 +88,7 @@
                             <div class="full-width row justify-center">
                               <q-input table-index :ref="el=> loginInputRef[1]=el" dense outlined v-model="code"
                                        :error="false"
-                                       style="width: 96%"
+                                       style="width: 100%"
                                        placeholder="验证码"
                               >
                                 <template v-slot:append>
