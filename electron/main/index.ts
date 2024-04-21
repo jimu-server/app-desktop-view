@@ -192,13 +192,13 @@ ipcMain.on('DevTools', () => {
 ipcMain.on('login', () => {
     if (win) {
         win.hide()
-        win.setMinimumSize(1000, 600)
-        win.setSize(1000, 600)
-        win.center()
-        win.setMaximizable(true)
-        win.setResizable(true)
-        win.setMinimizable(true)
         setTimeout(() => {
+            win.setMinimumSize(1000, 600)
+            win.setContentSize(1000, 600)
+            win.center()
+            win.setMaximizable(true)
+            win.setResizable(true)
+            win.setMinimizable(true)
             win.show()
         }, 1000)
 
@@ -212,12 +212,12 @@ ipcMain.on('login', () => {
 ipcMain.on('logout', () => {
     if (win) {
         win.hide()
-        win.setMinimumSize(360, 400)
-        win.setContentSize(360, 400)
-        win.center()
-        win.setResizable(false)
-        win.setMaximizable(false)
         setTimeout(() => {
+            win.setMinimumSize(360, 400)
+            win.setContentSize(360, 400)
+            win.center()
+            win.setResizable(false)
+            win.setMaximizable(false)
             win.show()
         }, 1000)
     }

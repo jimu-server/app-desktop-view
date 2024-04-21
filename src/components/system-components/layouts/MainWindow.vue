@@ -2,6 +2,7 @@
   <q-layout view="lHr lpR fFf">
     <q-header
         :class="theme.header.className"
+        style="-webkit-app-region: drag;"
     >
       <slot name="header">
         <q-bar
@@ -19,7 +20,7 @@
               style="margin-left: 5px;-webkit-app-region: no-drag;"
           />
           <window-scroll v-if="widowsLabel.windowLabels.length !== 0"/>
-          <q-space class="fit" style="-webkit-app-region: drag;"/>
+          <q-space />
           <q-btn dense flat :icon=" $q.dark.isActive?'jimu-light':'jimu-dark'" @click.stop="alter"
                  style="height: 100%;width: 40px;-webkit-app-region: no-drag;"/>
           <WindowMinimizeBtn/>

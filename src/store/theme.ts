@@ -25,11 +25,15 @@ export const useThemeStore = defineStore('theme', {
             this.dark = flag;
             if (flag) {
                 // 深色
-                elementsByName.setAttribute('class', 'dark')
+                if (elementsByName) {
+                    elementsByName.setAttribute('class', 'dark')
+                }
                 this.header.className = 'bg-transparent text-white';
             } else {
                 // 浅色
-                elementsByName.removeAttribute('class')
+                if (elementsByName) {
+                    elementsByName.removeAttribute('class')
+                }
                 this.header.className = 'bg-transparent text-black';
             }
         },
