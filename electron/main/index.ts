@@ -367,7 +367,6 @@ function closeTray() {
     debounce_tray(() => {
         trayMenu.hide()
     }, 3000)()
-
 }
 
 
