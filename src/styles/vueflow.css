@@ -1,0 +1,33 @@
+@import 'https://cdn.jsdelivr.net/npm/@vue-flow/core@1.33.5/dist/style.css';
+@import 'https://cdn.jsdelivr.net/npm/@vue-flow/core@1.33.5/dist/theme-default.css';
+@import 'https://cdn.jsdelivr.net/npm/@vue-flow/controls@latest/dist/style.css';
+@import 'https://cdn.jsdelivr.net/npm/@vue-flow/minimap@latest/dist/style.css';
+@import 'https://cdn.jsdelivr.net/npm/@vue-flow/node-resizer@latest/dist/style.css';
+
+.vue-flow__minimap {
+    transform: scale(75%);
+    transform-origin: bottom right;
+}
+
+.interactionflow .controls {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 4;
+    font-size: 11px;
+    background-color: #d3d3d3;
+    border-bottom-right-radius: 10px;
+    padding: 8px
+}
+
+.interactionflow .controls .label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer
+}
+
+.interactionflow .controls .label input {
+    cursor: pointer
+}
