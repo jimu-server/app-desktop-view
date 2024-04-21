@@ -10,7 +10,7 @@
                   enter-active-class="animate__animated animate__flipInY"
               >
                 <div v-show="!register" class="fit row justify-center">
-                  <div class=" full-height column" style="width: 85%">
+                  <div class=" full-height column" style="width: 100%">
                     <div class="row">
                       <div class="full-width">
                         <q-bar class="bg-transparent" style="padding: 0;-webkit-app-region: drag;">
@@ -111,7 +111,7 @@
                           <q-checkbox size="xs" v-model="keep" @update:model-value="keepChange" val="xs"
                                       label="记住用户名"/>
                           <q-space/>
-                          <!--                        <div><span @click="register=true" class="register-but text-primary">注册账号</span></div>-->
+                                                  <div><span @click="register=true" class="register-but text-primary">注册账号</span></div>
                         </div>
 
                         <div class="full-width row justify-center">
