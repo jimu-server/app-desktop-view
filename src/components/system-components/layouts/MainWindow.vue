@@ -5,8 +5,7 @@
         style="-webkit-app-region: drag;"
     >
       <slot name="header">
-        <q-bar
-            class="bg-transparent"
+        <q-bar class="bg-transparent"
             :style="{
             padding:0,
             borderBottom:widowsLabel.windowLabels.length <= 0 ?'none':'rgba(140,147,157,0.34) 1px solid',
@@ -40,7 +39,7 @@
           </template>
         </template>
         <template v-slot:bottom>
-          <q-btn dense flat icon="jimu-xitongshezhi">
+          <q-btn dense flat icon="jimu-caidan">
             <q-menu
                 anchor="top right" self="top left" fit
                 transition-show="scale"
@@ -48,19 +47,18 @@
                 :offset="[13,0]"
             >
               <q-list dense>
-                <!--                    <q-item class="column justify-center" clickable v-close-popup
-                                            @click="addWindows('/app/setting', '设置',6)"
-                                            style="padding: 0">
-                                      <menu-item icon="online-setting" text="设置"/>
-                                    </q-item>
+                <q-item class="column justify-center" clickable v-close-popup
+                        style="padding: 0">
+                  <menu-item icon="jimu-shezhi-2" text="设置"/>
+                </q-item>
 
-                                    <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-                                      <menu-item icon="arrow_circle_up" text="检查更新"/>
-                                    </q-item>
+                <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
+                  <menu-item icon="jimu-banbengengxin" text="检查更新"/>
+                </q-item>
 
-                                    <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-                                      <menu-item icon="question_mark" text="关于"/>
-                                    </q-item>-->
+                <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
+                  <menu-item icon="jimu-guanyu" text="关于"/>
+                </q-item>
                 <q-item class="column justify-center" clickable v-close-popup @click="logout" style="padding: 0">
                   <menu-item icon="jimu-zhuxiao" text="退出账号"/>
                 </q-item>
