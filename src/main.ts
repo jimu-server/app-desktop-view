@@ -16,31 +16,23 @@ import 'quasar/src/css/index.sass'
 import router from "./route";
 import pina from "./pinia";
 import piniaPersist from 'pinia-plugin-persist'
-
-
-// import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import './styles/el-light.scss'
 import './styles/el-dark.scss'
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-
-
 // vueflow
 import './styles/vueflow.css'
-
 import {init} from "@/init";
-
 //
 import Vue3DraggableResizable from 'vue3-draggable-resizable'
 //default styles
 import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
 
-import '@/components/system-components/tool/chatGptTool/chat/style/md.css'
-import '@/components/system-components/tool/chatGptTool/chat/style/md-dark.css'
-
-import '@/components/system-components/tool/chatGptTool/chat/initPrism'
+import '@/components/tool-components/chatGptTool/chat/style/md.css'
+import '@/components/tool-components/chatGptTool/chat/style/md-dark.css'
+import '@/components/tool-components/chatGptTool/chat/initPrism'
 
 // 自动缓存插件
 pina.use(piniaPersist)

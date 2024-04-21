@@ -244,9 +244,7 @@ import {userStore} from "@/store/user";
 import axiosForServer from "@/plugins/axiosForServer";
 import {ElMessage} from "element-plus";
 import {loadUserInfo} from "@/components/system-components/utils/userutil";
-import {useChatCtxStore} from "@/components/system-components/tool/chatGptTool/chat/store/chat_ctx";
 import {defaultLogin, getPhoneCode} from "@/components/system-components/request";
-import {ipcRenderer} from "electron";
 import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMinimizeBtn.vue";
 import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBtn.vue";
 import {desktop_login} from "@/components/system-components/desktop/desktop";
@@ -254,7 +252,6 @@ import {desktop_login} from "@/components/system-components/desktop/desktop";
 
 const $q = useQuasar()
 const user = userStore()
-const ctx = useChatCtxStore()
 const router = useRouter()
 const centerDialogVisible = ref(false)
 
