@@ -2,7 +2,7 @@ import { IMSDK } from "./sdk";
 import emitter from "../plugins/event";
 import {ScrollMove, SendActionScroll, UpdateConversation} from "../plugins/evenKey";
 import { useChatCtxStore } from "../store/chat_ctx";
-import { sys } from "../model/system";
+import { sys } from "../components/system-components/model/system";
 import { MessageItem, PicBaseInfo } from "./lib/types/entity";
 import { v4 as uuidv4 } from 'uuid';
 

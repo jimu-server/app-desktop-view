@@ -1,6 +1,6 @@
 
 import axiosForServer from "@/plugins/axiosForServer";
-import {Records} from "@/model/system";
+import {Records} from "@/components/system-components/model/system";
 
 
 export function getAllNotify() {

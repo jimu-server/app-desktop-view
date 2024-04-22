@@ -1,6 +1,6 @@
 import axiosForServer from "@/plugins/axiosForServer";
-import {Org, Page, Result, Role, Router, Tool, Tree, User} from "@/model/system";
-
+import {Org, Page, Result, Role, Tool, Tree, User} from "@/components/system-components/model/system";
+import {Router} from "vue-router";
 
 export function defaultLogin(account: string, password: string) {
     return new Promise<Result<any>>(resolve => {
@@ -330,4 +330,54 @@ export function checkPassword(password: string) {
             })
     })
 }
+
+export function getForgetCode(email: string, phone: string) {
+    return new Promise<Result<any>>(resolve => {
+        axiosForServer.get<Result<any>>('/public/forget/code', {
+            params: {
+                email: email,
+                phone: phone
+            }
+        })
+            .then(({data}) => {
+                resolve(data)
+            })
+    })
+}
+
+export function checkForgetCode(email: string, phone: string, code: string) {
+    return new Promise<Result<any>>(resolve => {
+        axiosForServer.post<Result<any>>('/public/forget/code/check', {
+            phone: phone,
+            email: email,
+            code: code
+        })
+            .then(({data}) => {
+                resolve(data)
+            })
+    })
+}
+
+
+export function doResetPassword(phone: string, email: string, password: string) {
+    return new Promise<Result<any>>(resolve => {
+        axiosForServer.post<Result<any>>('/public/forget/reset', {
+            phone: phone,
+            email: email,
+            password: password
+        }).then(({data}) => {
+            resolve(data)
+        })
+    })
+}
+
+export function registerUser(data: any) {
+    return new Promise<Result<any>>(resolve => {
+        axiosForServer.post<Result<any>>('/public/register', data).then(({data}) => {
+            resolve(data)
+        })
+    })
+}
+
+
 

@@ -2,7 +2,7 @@
   <el-dialog
       v-model="model"
       :title="title"
-      style="width: 400px"
+      style="width: 400px;-webkit-app-region: no-drag;"
       draggable
   >
     <div class="full-width row justify-center" style="overflow: auto">
@@ -37,7 +37,7 @@
 
 
 import {ref, watch} from "vue";
-import {Router} from "@/model/system";
+import {Router} from "@/components/system-components/model/system";
 
 const props = defineProps({
   title: {

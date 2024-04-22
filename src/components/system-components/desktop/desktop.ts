@@ -5,6 +5,10 @@ export function desktop_login() {
     ipcRenderer.send('login')
 }
 
+export function desktop_logout() {
+    ipcRenderer.send('logout')
+}
+
 export function desktop_minimize() {
     ipcRenderer.send('window-min')
 }

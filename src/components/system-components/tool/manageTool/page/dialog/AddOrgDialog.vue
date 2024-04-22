@@ -4,6 +4,7 @@
       :title="title"
       draggable
       width="400"
+      style="-webkit-app-region: no-drag;"
   >
     <div class="fit column justify-between">
       <div class="full-width row justify-center" style="flex-grow: 1;padding: 5px">
@@ -36,7 +37,7 @@
 
 
 import {ref, watch} from "vue";
-import {Org} from "@/model/system";
+import {Org} from "@/components/system-components/model/system";
 import {CreateOrg} from "@/components/system-components/tool/manageTool/manageRequest";
 import {ElMessage} from "element-plus";
 

@@ -1,7 +1,7 @@
 /*
 * @description 转化后端数据适配 ElTree 组件使用
 * */
-import {Tree} from "@/model/system";
+import {Tree} from "@/components/system-components/model/system";
 
 export function initializeElTree<T>(tree: Tree<T>[]): any[] {
     let arr = []

@@ -2,7 +2,7 @@
 * @ description 发送存文本消息
 * */
 import {useChatCtxStore} from "@/components/system-components/chat/store/chat_ctx";
-import {sys} from "@/model/system";
+import {sys} from "@/components/system-components/model/system";
 import {MessageItem} from "@/components/system-components/chat/model/chat";
 
 

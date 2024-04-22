@@ -4,6 +4,7 @@
       :title="title"
       width="400"
       draggable
+      style="-webkit-app-region: no-drag;"
   >
     <div class="fit column">
       <div class="full-width row justify-center" style="flex-grow: 1;padding: 5px;margin-top: 5px">

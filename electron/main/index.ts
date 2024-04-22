@@ -73,9 +73,9 @@ async function createWindow() {
     win = new BrowserWindow({
         title: 'online',
         width: 360,
-        height: 400,
+        height: 450,
         minWidth: 360,
-        minHeight: 400,
+        minHeight: 450,
         icon: appIcon,
         frame: false,
         resizable: false,
@@ -210,8 +210,11 @@ ipcMain.on('logout', () => {
     if (win) {
         win.hide()
         setTimeout(() => {
-            win.setMinimumSize(360, 400)
-            win.setContentSize(360, 400)
+            if (win.isMaximized()) {
+                win.restore()
+            }
+            win.setMinimumSize(360, 450)
+            win.setContentSize(360, 450)
             win.center()
             win.setResizable(false)
             win.setMaximizable(false)

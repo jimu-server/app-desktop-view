@@ -86,7 +86,7 @@
 import {onMounted, ref, watch} from "vue";
 import {userStore} from "@/store/user";
 import {getOrgChildTree} from "@/components/system-components/tool/manageTool/manageRequest";
-import {Org, Tree} from "@/model/system";
+import {Org, Tree} from "@/components/system-components/model/system";
 import OrgNodeIcon from "@/components/system-components/tool/manageTool/icon/OrgNodeIcon.vue";
 import {useAppStore} from "@/store/app";
 

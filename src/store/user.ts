@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {Org, Role, Token, User} from "@/model/system";
+import {Org, Role, Token, User} from "@/components/system-components/model/system";
 
 
 export const userStore = defineStore('user', {

@@ -4,7 +4,7 @@
       :title="title"
       draggable
       append-to-body
-      style="max-width:100vw;width: 700px;height: 700px"
+      style="max-width:100vw;width: 700px;height: 700px;-webkit-app-region: no-drag;"
   >
     <div class="fit column">
       <div class="full-width row" style="padding-left: 10px">
@@ -169,7 +169,7 @@
 </template>
 <script setup lang="ts">
 import {computed, onMounted, ref, watch} from "vue";
-import {Role, Tool, User} from "@/model/system";
+import {Role, Tool, User} from "@/components/system-components/model/system";
 import {
   getOrgUserRole,
   getOrgUserTool,

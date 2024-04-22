@@ -42,7 +42,7 @@ import ToolSidebar from "@/components/system-components/layouts/tool/ToolSidebar
 import {onMounted, ref, watch} from "vue";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
-import {Tool} from "@/model/system";
+import {Tool} from "@/components/system-components/model/system";
 
 const tool = useToolStore()
 const user = userStore()

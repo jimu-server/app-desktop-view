@@ -60,6 +60,7 @@ declare module 'vue' {
     EmailVerify: typeof import('./src/components/system-components/EmailVerify.vue')['default']
     FloatingPopup: typeof import('./src/components/system-components/widget/FloatingPopup.vue')['default']
     FlowChart: typeof import('./src/components/tool-components/flowTool/FlowChart.vue')['default']
+    ForGetPassword: typeof import('./src/components/system-components/ForGetPassword.vue')['default']
     FunManagePage: typeof import('./src/components/system-components/tool/manageTool/page/FunManagePage.vue')['default']
     GPTSettingPanel: typeof import('./src/components/tool-components/chatGptTool/chat/editor/widget/GPTSettingPanel.vue')['default']
     HomePage: typeof import('./src/components/system-components/pages/HomePage.vue')['default']

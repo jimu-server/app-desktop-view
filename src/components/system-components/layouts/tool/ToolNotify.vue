@@ -8,7 +8,7 @@
 
 import WebSocket from "@/components/system-components/layouts/tool/WebSocket.vue";
 import {userStore} from "@/store/user";
-import {Tool} from "@/model/system";
+import {Tool} from "@/components/system-components/model/system";
 
 const props = defineProps<{
   btn: Tool

@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import {useQuasar} from "quasar";
 import {useNotifyStore} from "@/store/tool/notify";
-import {Records, Tool} from "@/model/system";
+import {Records, Tool} from "@/components/system-components/model/system";
 
 const $q = useQuasar()
 const notify = useNotifyStore()

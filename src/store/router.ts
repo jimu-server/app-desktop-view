@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import Axios from "@/plugins/axiosForServer";
-import {Router, Result, RouterCache} from "@/model/system";
+import {Router, Result, RouterCache} from "@/components/system-components/model/system";
 
 
 export const useRouterStore = defineStore('router', {

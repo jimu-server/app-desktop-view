@@ -31,7 +31,7 @@ import {useRouter} from "vue-router";
 import {useWindowsStore} from "@/store/windows";
 import {useThemeStore} from "@/store/theme";
 import {colors, useQuasar} from "quasar";
-import {WindowLabel} from "@/model/system";
+import {WindowLabel} from "@/components/system-components/model/system";
 
 
 const {getPaletteColor} = colors

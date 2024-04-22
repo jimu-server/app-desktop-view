@@ -10,7 +10,7 @@
 </template>
 <script setup lang="ts">
 import {useToolStore} from "@/store/tool";
-import {Tool} from "@/model/system";
+import {Tool} from "@/components/system-components/model/system";
 
 
 const tool = useToolStore()

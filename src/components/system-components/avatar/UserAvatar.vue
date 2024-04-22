@@ -120,7 +120,7 @@ import type {UploadInstance} from 'element-plus'
 
 import {userStore} from "@/store/user";
 import {getUserJoinOrgRoleList, getUserOrgDefaultRole} from "@/components/system-components/request";
-import {Org, Role} from "@/model/system";
+import {Org, Role} from "@/components/system-components/model/system";
 import emitter from "@/plugins/event";
 import {UpdateAuthEvent} from "@/plugins/evenKey";
 import UserInfoEditorDialog from "@/components/system-components/avatar/UserInfoEditorDialog.vue";

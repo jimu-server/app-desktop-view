@@ -4,7 +4,7 @@ import {rootPathName} from "@/variable";
 import {getUserAuthToolMenu} from "@/components/system-components/request";
 import {userStore} from "@/store/user";
 import pina from "@/pinia";
-import {Router, Tool, Tree} from "@/model/system";
+import {Router, Tool, Tree} from "@/components/system-components/model/system";
 
 export const useToolStore = defineStore('tool', {
     state: () => {

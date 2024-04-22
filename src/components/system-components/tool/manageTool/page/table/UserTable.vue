@@ -55,7 +55,7 @@
 <script setup lang="ts">
 import {useAppStore} from "@/store/app";
 import {onMounted, ref, watch} from "vue";
-import {Role} from "@/model/system";
+import {Role} from "@/components/system-components/model/system";
 
 import AddToolDialog from "@/components/system-components/tool/manageTool/page/dialog/AddToolDialog.vue";
 

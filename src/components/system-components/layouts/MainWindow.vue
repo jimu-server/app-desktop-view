@@ -136,11 +136,12 @@ import MainWindowTool from "@/components/system-components/layouts/tool/MainWind
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import UserAvatar from "@/components/system-components/avatar/UserAvatar.vue";
 import DefaultBtn from "@/components/system-components/tool/btn/DefaultBtn.vue";
-import {ToolLayout} from "@/model/menu";
+import {ToolLayout} from "@/components/system-components/model/menu";
 import {ConversationEntity} from "@/components/system-components/tool/chatGptTool/chat/model/chat";
 import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBtn.vue";
 import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMinimizeBtn.vue";
 import {ipcRenderer} from "electron";
+import {desktop_logout} from "@/components/system-components/desktop/desktop";
 
 const {getPaletteColor} = colors
 
@@ -176,7 +177,7 @@ function toggleLeftDrawer() {
 }
 
 async function logout() {
-  ipcRenderer.send('logout')
+  desktop_logout()
   setTimeout(async () => {
     await router.push('/login')
     localStorage.clear()

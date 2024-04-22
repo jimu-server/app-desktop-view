@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-import {Menu, Tool, Tree} from "@/model/system";
+import {Menu, Tool, Tree} from "@/components/system-components/model/system";
 import {useToolStore} from "@/store/tool";
 import MenuLabel from "@/components/system-components/tool/manageTool/menu/MenuLabel.vue";
 

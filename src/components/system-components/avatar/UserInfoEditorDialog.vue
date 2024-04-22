@@ -201,7 +201,7 @@ import {
 } from "@/components/system-components/request";
 import {baseInfo} from "@/components/system-components/utils/userutil";
 import {useAppStore} from "@/store/app";
-import {Role} from "@/model/system";
+import {Role} from "@/components/system-components/model/system";
 import AlterPasswordDialog from "@/components/system-components/avatar/AlterPasswordDialog.vue";
 import AlterPhoneDialog from "@/components/system-components/avatar/AlterPhoneDialog.vue";
 import SetPhoneDialog from "@/components/system-components/avatar/SetPhoneDialog.vue";

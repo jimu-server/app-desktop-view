@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {Records} from "@/model/menu";
+import {Records} from "@/components/system-components/model/menu";
 
 
 export const useNotifyStore = defineStore('notify', {

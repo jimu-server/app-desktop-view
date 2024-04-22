@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 
-import {Router, Tree, WindowLabel} from "@/model/system";
+import {Router, Tree, WindowLabel} from "@/components/system-components/model/system";
 import router from "@/route";
 import {useWindowsStore} from "@/store/windows";
 

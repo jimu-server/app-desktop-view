@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 
-import {WindowLabel} from "@/model/system";
+import {WindowLabel} from "@/components/system-components/model/system";
 import {homePath} from "@/variable";
 import router from "@/route";
 

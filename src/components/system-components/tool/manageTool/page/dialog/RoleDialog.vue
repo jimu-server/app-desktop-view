@@ -2,7 +2,7 @@
   <el-dialog
       v-model="model"
       :title="title"
-      style="width: 700px;height: 700px"
+      style="width: 700px;height: 700px;-webkit-app-region: no-drag;"
       draggable
       append-to-body
   >
@@ -102,7 +102,7 @@
 </template>
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
-import {Role, Tool} from "@/model/system";
+import {Role, Tool} from "@/components/system-components/model/system";
 import {
   getOrgUserToolRouter,
   OrgRoleTool,

@@ -2,7 +2,7 @@
   <el-dialog
       v-model="model"
       :title="title"
-      style="width: 400px;"
+      style="width: 400px;-webkit-app-region: no-drag;"
       draggable
   >
     <div class="row fit justify-center" style="overflow: auto;">
@@ -113,7 +113,7 @@
 
 
 import {reactive, ref, watch} from "vue";
-import {Tool} from "@/model/system";
+import {Tool} from "@/components/system-components/model/system";
 import {getIcon} from "@/components/system-components/utils/systemutils";
 import {FormInstance, FormRules} from "element-plus";
 

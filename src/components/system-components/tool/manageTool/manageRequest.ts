@@ -1,5 +1,5 @@
 import axiosForServer from "@/plugins/axiosForServer";
-import {Org, Page, Result, Role, Router, Tool, Tree, User} from "@/model/system";
+import {Org, Page, Result, Role, Router, Tool, Tree, User} from "@/components/system-components/model/system";
 
 
 /*

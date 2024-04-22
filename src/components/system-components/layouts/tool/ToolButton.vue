@@ -11,13 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import {Tool, WindowLabel} from "@/model/system";
+import {Tool, WindowLabel} from "@/components/system-components/model/system";
 import router from "@/route";
 import {useWindowsStore} from "@/store/windows";
 
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
-import {ToolBtnType, ToolLayout} from "@/model/menu";
+import {ToolBtnType, ToolLayout} from "@/components/system-components/model/menu";
 
 const props = defineProps<{
   btn: Tool
