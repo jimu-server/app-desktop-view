@@ -199,6 +199,9 @@ function beginObserver() {
 }
 
 const theme = useThemeStore()
+setTimeout(() => {
+  updateTheme(theme.dark)
+}, 500)
 watch(() => theme.dark, (value) => {
   updateTheme(value)
 })

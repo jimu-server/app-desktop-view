@@ -32,7 +32,8 @@
         <!--   用户消息展示     -->
         <TextMessage v-if="message.role=='user'" :message="message" :index="index"/>
         <!--   gpt消息展示     -->
-        <MarkDownMessage v-if="message.role=='assistant'" :message="message" :index="index" @height-change="isFold"/>
+        <MarkDownMessage v-if="message.role!=='user'" :message="message" :index="index" @height-change="isFold"/>
+        <!--        <MarkDownMessage v-if="message.role=='assistant'" :message="message" :index="index"/>-->
       </div>
       <!-- 消息页角 -->
       <div class="chat-footer" @mouseover="overFooter=true" @mouseleave="outOverFooter">

@@ -16,7 +16,7 @@ import {
 } from "@/components/tool-components/chatGptTool/chatRequest";
 
 
-export const useChatCtxStore = defineStore('chat_ctx', {
+export const useChatCtxStore = defineStore('chat', {
     state: () => {
         return {
             defaultAvatar: 'https://im-1252940994.cos.ap-nanjing.myqcloud.com/go.jpg',
@@ -202,16 +202,15 @@ export const useChatCtxStore = defineStore('chat_ctx', {
         * @description 加载指定会话消息的历史记录到当前聊天记录
         * @param {string} id 会话id
         * */
-        GetConversationMessageList(id: string) {
+        async GetConversationMessageList(id: string) {
             this.CurrentChat.messageList = []
             this.view = []
             this.newView = []
-            getConversationMessage(id).then(data => {
-                this.CurrentChat.messageList = data
-                setTimeout(() => {
-                    emitter.emit(MessageObserver)
-                }, 500)
-            })
+            let data = await getConversationMessage(id)
+            this.CurrentChat.messageList = data
+            setTimeout(() => {
+                emitter.emit(MessageObserver)
+            }, 500)
         },
 
         UpdateConversationLastMsg(conversationID: string, message: string, picture: string) {

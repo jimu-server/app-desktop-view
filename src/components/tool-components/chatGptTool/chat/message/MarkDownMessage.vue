@@ -4,7 +4,7 @@
   </template>
   <template v-else-if="!send">
     <div class="fit" style="position: relative">
-      <div ref="typing" class="markdown-message gpt-message" v-html="info.content" v-height></div>
+      <div ref="typing" class="markdown-message gpt-message" v-html="info.content" v-height="height"></div>
       <div ref="cursor" v-show="showCursor" class="typing-cursor"></div>
     </div>
   </template>
@@ -74,7 +74,7 @@ if (!send.value) {
   direction_text.value = 'row'
 }
 
-function sleep(ms) {
+function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -201,8 +201,14 @@ function end() {
 // 自定义指令监听dvi的高度变化
 const vHeight = {
   updated(el, binding, vnode, prevVnode) {
-    emit('heightChange', el.clientHeight)
+    if (typeof binding.value === 'function') {
+      binding.value(el.clientHeight);
+    }
   },
+}
+
+function height(value: number) {
+  emit('heightChange', value)
 }
 
 /*
@@ -273,8 +279,12 @@ if (!send.value) {
 }
 
 if (theme.dark) {
-  typing.value.setAttribute('theme', 'dark')
-  cursor.value.setAttribute('theme', 'dark')
+  if (typing.value) {
+    typing.value.setAttribute('theme', 'dark')
+  }
+  if (cursor.value) {
+    cursor.value.setAttribute('theme', 'dark')
+  }
 }
 </script>
 
