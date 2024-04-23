@@ -85,21 +85,17 @@ onMounted(() => {
   if (byId) {
     app.ui.page.height = byId.style.minHeight
   }
+  // 获取当前操作系统的主题
   const match = matchMedia('(prefers-color-scheme: dark)');
+  // 设置Quasar的主题
   $q.dark.set(match.matches)
+  // 设置app主题
   theme.setTheme(match.matches)
-  let elementsByName = document.getElementById('html');
+  // 添加变化监听
   match.addEventListener('change', () => {
     $q.dark.set(match.matches)
     theme.setTheme(match.matches)
   })
-  if (theme.dark) {
-    elementsByName.setAttribute('class', 'dark')
-    $q.dark.set(theme.dark)
-  } else {
-    elementsByName.removeAttribute('class')
-    $q.dark.set(theme.dark)
-  }
 })
 
 // 切换组织 角色 触发更新权限
