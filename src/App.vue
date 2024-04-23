@@ -85,19 +85,20 @@ onMounted(() => {
   if (byId) {
     app.ui.page.height = byId.style.minHeight
   }
+  const match = matchMedia('(prefers-color-scheme: dark)');
+  $q.dark.set(match.matches)
+  theme.setTheme(match.matches)
   let elementsByName = document.getElementById('html');
+  match.addEventListener('change', () => {
+    $q.dark.set(match.matches)
+    theme.setTheme(match.matches)
+  })
   if (theme.dark) {
-    if (elementsByName) {
-      elementsByName.setAttribute('class', 'dark')
-    }
-
+    elementsByName.setAttribute('class', 'dark')
     $q.dark.set(theme.dark)
   } else {
-    if (elementsByName) {
-      elementsByName.removeAttribute('class')
-    }
+    elementsByName.removeAttribute('class')
     $q.dark.set(theme.dark)
-
   }
 })
 
