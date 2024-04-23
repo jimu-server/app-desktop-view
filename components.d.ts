@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AboutDialog: typeof import('./src/components/system-components/other/AboutDialog.vue')['default']
     AddOrgDialog: typeof import('./src/components/system-components/tool/manageTool/page/dialog/AddOrgDialog.vue')['default']
     AddOrgRoleDialog: typeof import('./src/components/system-components/tool/manageTool/page/dialog/AddOrgRoleDialog.vue')['default']
     AddRouterDialog: typeof import('./src/components/system-components/tool/manageTool/page/dialog/AddRouterDialog.vue')['default']
@@ -101,6 +102,7 @@ declare module 'vue' {
     SearchInput: typeof import('./src/components/tool-components/chatGptTool/widget/SearchInput.vue')['default']
     SecureLabel: typeof import('./src/components/system-components/avatar/SecureLabel.vue')['default']
     SetPhoneDialog: typeof import('./src/components/system-components/avatar/SetPhoneDialog.vue')['default']
+    SettingDialog: typeof import('./src/components/system-components/setting/SettingDialog.vue')['default']
     Slide: typeof import('./src/components/system-components/layouts/tool/Slide.vue')['default']
     SliderTab: typeof import('./src/components/system-components/widget/SliderTab.vue')['default']
     TableTemplate: typeof import('./src/components/system-components/widget/TableTemplate.vue')['default']

@@ -4,8 +4,7 @@ import 'prismjs/themes/prism.min.css'
 import 'prismjs/plugins/toolbar/prism-toolbar.min'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.min'
 import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard'
-import '@/components/tool-components/chatGptTool/chat/style/md.css'
-import '@/components/tool-components/chatGptTool/chat/style/md-dark.css'
+
 
 Prism.plugins.toolbar.registerButton('copy-code', {
     text: 'Copy', // required

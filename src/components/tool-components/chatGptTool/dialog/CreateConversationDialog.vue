@@ -5,7 +5,6 @@
       draggable
       append-to-body
       width="400"
-      style="-webkit-app-region: no-drag;"
   >
     <div class="fit column justify-between">
       <div class="full-width row justify-center" style="flex-grow: 1;padding: 5px">

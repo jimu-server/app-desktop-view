@@ -49,7 +49,7 @@
               <q-list dense>
                 <q-item class="column justify-center" clickable v-close-popup
                         style="padding: 0">
-                  <menu-item icon="jimu-shezhi-2" text="设置"/>
+                  <menu-item icon="jimu-shezhi-2" text="设置" @click="showSettingDialog=true"/>
                 </q-item>
 
                 <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
@@ -91,6 +91,7 @@
       </Transition>
     </q-page-container>
     <AboutDialog v-model="showAboutDialog"/>
+    <SettingDialog v-model="showSettingDialog"/>
   </q-layout>
 </template>
 
@@ -116,6 +117,7 @@ import {desktop_logout} from "@/components/system-components/desktop/desktop";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import AboutDialog from "@/components/system-components/other/AboutDialog.vue";
+import SettingDialog from "@/components/system-components/setting/SettingDialog.vue";
 
 
 const widowsLabel = useWindowsStore()
@@ -125,6 +127,7 @@ const router = useRouter()
 const $q = useQuasar()
 const leftDrawerOpen = ref(false)
 const showAboutDialog = ref(false)
+const showSettingDialog = ref(false)
 const mini = ref(false)
 
 const infoShow = ref(false)

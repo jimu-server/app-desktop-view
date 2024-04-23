@@ -171,7 +171,6 @@ async function send(message: ChatMessageEntity[]) {
     switch (item.contentType) {
         // 文本消息,包含表情
       case MessageType.TextMessage:
-
         await SendTextMessage(messageId, item.data)
         break
         // 图片消息

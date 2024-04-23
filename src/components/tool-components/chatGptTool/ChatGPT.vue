@@ -5,10 +5,12 @@
 </template>
 
 <script setup lang="ts">
+
+
 import MainPage from "@/components/system-components/layouts/MainPage.vue";
+
 import {onMounted} from "vue";
 import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
-import ChatPanel from "@/components/tool-components/chatGptTool/chat/ChatPanel.vue";
 
 const ctx = useChatCtxStore()
 onMounted(() => {

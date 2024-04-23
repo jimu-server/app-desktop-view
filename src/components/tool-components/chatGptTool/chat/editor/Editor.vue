@@ -146,19 +146,18 @@ function analyze(): ChatMessageEntity[] {
   let arr: ChatMessageEntity[] = []
   let data = ""
   let editorData = editor.getData()
-  // console.log('editorData:', editorData)
   let doc = new DOMParser()
   let msg = doc.parseFromString(editorData, 'text/html').body
-  // console.log('msg:', msg)
   for (let i = 0; i < msg.childNodes.length; i++) {
     let node = msg.childNodes[i]
-    // console.log(node.nodeName, node.nodeType, node)
     switch (node.nodeType) {
         // html 节点
       case 1:
         switch (node.nodeName) {
           case "P":
-            if (node.textContent != '') {
+            let content = node.textContent;
+            let replaceAll = content.replace(/^\s+|\s+$/g, '');
+            if (replaceAll != "") {
               data += node.textContent + "\n"
             }
             break
