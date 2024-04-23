@@ -121,7 +121,7 @@
 
 <script setup lang="ts">
 import {onMounted, onUnmounted, ref} from 'vue'
-import {colors, useQuasar} from "quasar";
+import {useQuasar} from "quasar";
 import {useWindowsStore} from "@/store/windows";
 
 import {useRouter} from "vue-router";
@@ -129,21 +129,18 @@ import {useThemeStore} from "@/store/theme";
 import {GlobalNotification} from "@/plugins/evenKey";
 import emitter from "@/plugins/event";
 import WindowScroll from "@/components/system-components/window/tag/WindowScroll.vue";
-
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
 import MainWindowTool from "@/components/system-components/layouts/tool/MainWindowTool.vue";
-import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import UserAvatar from "@/components/system-components/avatar/UserAvatar.vue";
 import DefaultBtn from "@/components/system-components/tool/btn/DefaultBtn.vue";
 import {ToolLayout} from "@/components/system-components/model/menu";
-import {ConversationEntity} from "@/components/system-components/tool/chatGptTool/chat/model/chat";
 import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBtn.vue";
 import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMinimizeBtn.vue";
-import {ipcRenderer} from "electron";
 import {desktop_logout} from "@/components/system-components/desktop/desktop";
+import MenuItem from "@/components/system-components/widget/MenuItem.vue";
+import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
 
-const {getPaletteColor} = colors
 
 const widowsLabel = useWindowsStore()
 const user = userStore()

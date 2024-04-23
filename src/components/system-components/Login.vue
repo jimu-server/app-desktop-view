@@ -294,29 +294,22 @@ import {useRouter} from "vue-router";
 import {useQuasar} from "quasar";
 import {homePath} from "@/variable";
 import {userStore} from "@/store/user";
-import axiosForServer from "@/plugins/axiosForServer";
+
 import {ElMessage, FormInstance, FormItemRule, FormRules} from "element-plus";
 import {loadUserInfo} from "@/components/system-components/utils/userutil";
 import {defaultLogin, doResetPassword, getPhoneCode, registerUser} from "@/components/system-components/request";
 import ForGetPassword from "@/components/system-components/ForGetPassword.vue";
 import {desktop_login} from "@/components/system-components/desktop/desktop";
 
-
-const $q = useQuasar()
 const user = userStore()
 const router = useRouter()
 const centerDialogVisible = ref(false)
-
-
 const logRef = ref()
 const account = ref('')
 const passwd = ref('')
 const loading = ref(false)
 const tab = ref('default')
 const area = ref('+86')
-
-const newPassword = ref('')
-
 const areaOptions = [
   '+86',
   '+87',
@@ -325,29 +318,16 @@ const areaOptions = [
   '+90',
   '+91',
 ]
-
 const step = ref(1)
-
-
 const showPanel = ref('login')
-const register = ref(false)
-
-const card = ref();
 const keep = ref(false);
 const clause = ref(false);
-
-
 const phone = ref('')
 const code = ref('')
 const value = ref(30)
 const flag = ref(false)
 let count
-
-
-const registerPassword = ref('')
 const rregisterPassword = ref('')
-const registerName = ref('')
-const registerAccount = ref('')
 
 const registerForm = ref({
   account: '',
@@ -355,12 +335,7 @@ const registerForm = ref({
   password: '',
   confirmPassword: '',
 })
-
-const slide = ref(1)
-const autoplay = ref(true)
-
 const loginBox = ref()
-
 const loginInputRef = ref([])
 const registerRef = ref<FormInstance>()
 const group = ref('phone')
@@ -381,11 +356,9 @@ function groupChange(value) {
 
 }
 
-
 function keepChange(value) {
 
 }
-
 
 const timepiece = computed(() => {
   return `${value.value} s后可重发`
@@ -396,29 +369,7 @@ function agree() {
   clause.value = true
 }
 
-
-function forget() {
-
-}
-
-
-
-
-// 密码校验规则
-const passwordCheck = [
-  (val: string) => val.length > 0 || '密码不能为空',
-  (val: string) => val.length > 8 || '密码长度为至少为8',
-  (val: string) => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/.test(val) || '必须包含大小写字母和数字或特殊字符的组合',
-]
-
-// 密码码确认校验规则
-const rpasswordCheck = [
-  (val: string) => val.length > 0 || '确认密码不能为空',
-  (val: string) => rregisterPassword.value == val || '密码不一致'
-]
-
 function sendCode() {
-
   getPhoneCode(phone.value).then(res => {
     if (res.code == 200) {
       ElMessage({
@@ -443,10 +394,6 @@ function sendCode() {
   })
 }
 
-function getCode() {
-
-}
-
 // 执行登录
 function login() {
   switch (tab.value) {
@@ -458,7 +405,6 @@ function login() {
       break
   }
 }
-
 
 function phoneLoginAction() {
   if (phone.value.length == 0) {
@@ -539,7 +485,6 @@ async function doRegister() {
   })
 }
 
-
 async function doReset() {
   let password = ''
   let phone = ''
@@ -566,7 +511,6 @@ async function doReset() {
     }, 500)
   }
 }
-
 
 const accountCheck = (rule: FormItemRule, value: string, callback: Function) => {
   if (value.length == 0) {
@@ -618,13 +562,11 @@ function cleanRegister() {
   showPanel.value = 'login'
 }
 
-
 const rules = reactive<FormRules<typeof registerForm>>({
   account: [{validator: accountCheck, trigger: 'blur'}],
   name: [{validator: nameCheck, trigger: 'blur'}],
   confirmPassword: [{validator: confirmPasswordCheck, trigger: 'blur'}],
 })
-
 
 onMounted(() => {
   loginBox.value = document.getElementById('loginBox')
