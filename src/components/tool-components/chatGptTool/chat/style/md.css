@@ -14,7 +14,7 @@
 
     --md-msg-a: #3451b2;
     --md-msg-inline-code-bg: rgba(255, 255, 255, 0.38);
-    --md-msg-inline-code-bg-dark: rgb(100, 179, 133);
+    --md-msg-inline-code-bg-dark: rgba(134, 207, 165, 0.9);
 
     --md-msg-block-code-bg: rgb(255, 255, 255);
     --md-msg-block-code-bg-dark: #000000;

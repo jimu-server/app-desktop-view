@@ -4,6 +4,7 @@ export function updateTheme(dark: boolean) {
     elements.push(document.querySelectorAll('.markdown-message :not(pre) > code'))
     elements.push(document.querySelectorAll('.markdown-message pre'))
     elements.push(document.querySelectorAll('.gpt-fold'))
+    elements.push(document.querySelectorAll('.typing-cursor'))
     if (dark) {
         for (const element of elements) {
             element.forEach(item => {

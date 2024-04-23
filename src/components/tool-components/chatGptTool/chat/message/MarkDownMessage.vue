@@ -3,9 +3,10 @@
     <div ref="typing" class="markdown-message gpt-message" v-html="info.content"></div>
   </template>
   <template v-else-if="!send">
-    <div class="fit" style="position: relative">
-      <div ref="typing" class="markdown-message gpt-message" v-html="info.content" v-height="height"></div>
-      <div ref="cursor" v-show="showCursor" class="typing-cursor"></div>
+    <div class="fit" ref="typingBox" style="position: relative">
+      <div ref="typing" class="markdown-message gpt-message" :theme="theme.dark?'dark':''" v-html="info.content"
+           v-height="height"></div>
+      <div ref="cursor" v-show="showCursor" :theme="theme.dark?'dark':''" class="typing-cursor"></div>
     </div>
   </template>
 </template>
@@ -24,6 +25,7 @@ import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/
 import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessagePreview";
 import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
 import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {updateTheme} from "@/components/tool-components/chatGptTool/chat/style/update";
 
 
 const ctx = useChatCtxStore()
@@ -41,6 +43,7 @@ const props = defineProps<
     }
 >()
 // 打字容器对象
+const typingBox = ref<HTMLElement>()
 const typing = ref<HTMLElement>()
 const cursor = ref<HTMLElement>()
 // 是否显示打字光标
@@ -279,30 +282,34 @@ if (!send.value) {
 }
 
 if (theme.dark) {
-  if (typing.value) {
-    typing.value.setAttribute('theme', 'dark')
-  }
-  if (cursor.value) {
-    cursor.value.setAttribute('theme', 'dark')
-  }
+  updateTheme(theme.dark)
 }
+
+
 </script>
 
 <style scoped>
 
+</style>
+
+<style>
+
 .typing-cursor[theme="dark"] {
-  color: #fff !important;
+  background: #fff !important;
 }
+
 .typing-cursor {
   content: '';
   position: absolute;
   width: 10px;
   height: 18px;
+  background: black;
   animation: toggle 0.5s linear infinite;
   opacity: 0;
   left: calc(v-bind('pos.x') * 1px);
   top: calc(v-bind('pos.y') * 1px);
 }
+
 @keyframes toggle {
   30% {
     opacity: 1;

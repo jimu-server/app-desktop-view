@@ -40,7 +40,7 @@
         <!--  gpt消息操作      -->
         <template v-if="!send">
           <!--    消息折叠遮罩      -->
-          <div v-show="foldFlag" class="gpt-fold"></div>
+          <div v-show="foldFlag" class="gpt-fold" :theme="theme.dark?'dark':''"></div>
           <!--    消息操作按钮      -->
           <div v-show="isShowAction" class="full-width row reverse" style="margin-top: 5px">
             <q-icon class="msg-option" size="15px" dense flat name="jimu-fuzhi">
@@ -98,7 +98,9 @@ import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/sto
 import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/gpt";
 import {retryMessage} from "@/components/tool-components/chatGptTool/gptutil";
 import MarkDownMessage from "@/components/tool-components/chatGptTool/chat/message/MarkDownMessage.vue";
+import {useThemeStore} from "@/store/theme";
 
+const theme = useThemeStore()
 const ctx = useChatCtxStore()
 const user = userStore()
 const bodyRef = ref<HTMLElement>()
@@ -201,8 +203,16 @@ const isShowAction = computed(() => {
 
 const isShowFoldAction = computed(() => {
   if (!bodyRef.value) return false
+  console.log(bodyRef.value.clientHeight, currentHeight.value, defaultHeight.value)
   return bodyRef.value.clientHeight > defaultHeight.value || currentHeight.value > defaultHeight.value
 })
+
+/*
+* @description: 对当前高度进行一个延迟计算,防止计算过快导致无法正常显示折叠按钮
+* */
+setTimeout(() => {
+  currentHeight.value = bodyRef.value.clientHeight
+}, 500)
 
 /*
 *@description: 折叠消息

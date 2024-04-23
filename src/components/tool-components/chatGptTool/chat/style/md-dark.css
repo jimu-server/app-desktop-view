@@ -93,8 +93,9 @@
 
 .gpt-fold[theme="dark"] {
     position: absolute;
+    border-radius: 5px;
     width: 100%;
     height: 50px;
     top: -3rem;
-    background-image: linear-gradient(0deg, #1f1f1f 0, #272020 30%, rgb(47 45 45 / 78%) 65%, rgba(255, 255, 255, 0) 100%);
+    background-image: linear-gradient(0deg, rgba(31, 31, 31, 0.74) 0, #1f1f1f 30%, rgb(47 45 45 / 78%) 65%, rgba(255, 255, 255, 0) 100%);
 }
