@@ -57,7 +57,7 @@
                 </q-item>
 
                 <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-                  <menu-item icon="jimu-guanyu" text="关于"/>
+                  <menu-item icon="jimu-guanyu" text="关于" @click="showAboutDialog=true"/>
                 </q-item>
                 <q-item class="column justify-center" clickable v-close-popup @click="logout" style="padding: 0">
                   <menu-item icon="jimu-zhuxiao" text="退出账号"/>
@@ -90,32 +90,7 @@
         </router-view>
       </Transition>
     </q-page-container>
-    <!-- 隐藏左侧导航的悬浮菜单 -->
-    <!--    <transition enter-active-class="animate__animated animate__fadeInLeft"
-                    leave-active-class="animate__animated animate__fadeOutLeft">
-          <q-card flat ref="SuspensionRef" id="suspension-menu" v-if="mini" class="bg-primary text-white">
-            <q-scroll-area class="fit">
-              <div class="row">
-                &lt;!&ndash; 好友页面 &ndash;&gt;
-                <div class="row justify-center drawer-opt">
-                  <q-btn dense flat icon="account_box" @click="addWindows('/app/friend', '好友')">
-
-                  </q-btn>
-                </div>
-                &lt;!&ndash; 聊天页面 &ndash;&gt;
-                <div class="row justify-center drawer-opt">
-                  <q-btn dense flat icon="chat" @click="addWindows('/app/chat', '聊天')">
-
-                  </q-btn>
-                </div>
-                &lt;!&ndash; app 设置页面 &ndash;&gt;
-                <div class="row justify-center drawer-opt">
-                  <q-btn dense flat icon="settings" @click="addWindows('/app/setting', '设置')"/>
-                </div>
-              </div>
-            </q-scroll-area>
-          </q-card>
-        </transition>-->
+    <AboutDialog v-model="showAboutDialog"/>
   </q-layout>
 </template>
 
@@ -140,28 +115,17 @@ import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMini
 import {desktop_logout} from "@/components/system-components/desktop/desktop";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
+import AboutDialog from "@/components/system-components/other/AboutDialog.vue";
 
 
 const widowsLabel = useWindowsStore()
 const user = userStore()
 const tool = useToolStore()
 const router = useRouter()
-
 const $q = useQuasar()
-
 const leftDrawerOpen = ref(false)
-
+const showAboutDialog = ref(false)
 const mini = ref(false)
-
-const text = ref('')
-
-const settingRef = ref()
-
-const userInfoDialogRef = ref()
-const index = ref(0)
-
-const count = ref(0)
-const FindDialogRef = ref()
 
 const infoShow = ref(false)
 const infoShowOut = ref(false)
