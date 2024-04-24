@@ -54,9 +54,7 @@ export interface LLmMole {
     modelDetails?: string
     isDownload?: boolean
     createTime?: string
-
-    // 接收下载参数
-    downloads?: any[];
+    downloads?: boolean;
 }
 
 export interface ProgressResponse {

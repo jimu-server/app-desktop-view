@@ -123,3 +123,13 @@ export function getLLmMole() {
     })
 }
 
+export function deleteModel(name: string) {
+    return new Promise<Result<any>>(resolve => {
+        axiosForServer.post<Result<any>>("/api/chat/model/delete", {
+            name: name
+        })
+            .then(({data}) => {
+                resolve(data)
+            })
+    })
+}

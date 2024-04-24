@@ -28,6 +28,16 @@
             {{ ctx.ui.currentModel.name }}
           </div>
         </template>
+        <template v-slot:option="scope">
+          <q-item v-bind="scope.itemProps" v-if="scope.opt.isDownload">
+            <!--            <q-item-section avatar>
+                          <q-icon class="chat-tool-opt" size="25px" :name="'img:'+scope.opt.picture"/>
+                        </q-item-section>-->
+            <q-item-section>
+              <q-item-label> {{ scope.opt.name }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </template>
       </q-select>
 
       <q-btn dense flat icon="jimu-caidan1">
@@ -40,7 +50,7 @@
         >
           <q-list dense>
             <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-              <menu-item icon="jimu-yunxiazai_o" text="拉取模型" @click="showDownload=true"/>
+              <menu-item icon="jimu-Model" text="模型管理" @click="ollamaManageFlage=true"/>
             </q-item>
             <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
               <menu-item icon="jimu-chuangjian" text="创建模型"/>
@@ -48,11 +58,6 @@
           </q-list>
         </q-menu>
       </q-btn>
-      <!--      <q-icon class="chat-tool-opt" size="25px" name="jimu-gengduo-2">
-              <q-tooltip :offset="[0, 0]">
-                更多
-              </q-tooltip>
-            </q-icon>-->
     </q-toolbar>
     <div style="height:89%;overflow-x: hidden;">
       <q-scroll-area ref="scrollAreaRef" id="messageScrollArea" class="fit" :visible="false"
@@ -78,7 +83,7 @@
         </div>
       </q-scroll-area>
     </div>
-    <DownloadModel v-model="showDownload"/>
+    <OllamaModelManage v-model="ollamaManageFlage"/>
   </div>
 </template>
 
@@ -92,11 +97,11 @@ import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/sto
 import {MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {updateTheme} from "@/components/tool-components/chatGptTool/chat/style/update";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
-import DownloadModel from "@/components/tool-components/chatGptTool/widget/DownloadModel.vue";
+import OllamaModelManage from "@/components/tool-components/chatGptTool/widget/OllamaModelManage.vue";
 
 const scrollAreaRef = ref()
 const ctx = useChatCtxStore()
-const showDownload = ref(false)
+const ollamaManageFlage = ref(false)
 defineExpose({
   MoveScrollBottom,
 })

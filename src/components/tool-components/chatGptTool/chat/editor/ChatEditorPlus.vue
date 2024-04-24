@@ -213,5 +213,7 @@ onMounted(() => {
 </style>
 
 <style>
-
+.q-menu--dark {
+  box-shadow: none;
+}
 </style>
