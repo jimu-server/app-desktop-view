@@ -203,7 +203,6 @@ const isShowAction = computed(() => {
 
 const isShowFoldAction = computed(() => {
   if (!bodyRef.value) return false
-  console.log(bodyRef.value.clientHeight, currentHeight.value, defaultHeight.value)
   return bodyRef.value.clientHeight > defaultHeight.value || currentHeight.value > defaultHeight.value
 })
 

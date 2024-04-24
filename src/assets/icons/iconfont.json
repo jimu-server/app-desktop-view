@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5388010",
+      "name": "云下载_o",
+      "font_class": "yunxiazai_o",
+      "unicode": "ebb4",
+      "unicode_decimal": 60340
+    },
+    {
+      "icon_id": "7587933",
+      "name": "菜单",
+      "font_class": "caidan1",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "14303343",
+      "name": "创建",
+      "font_class": "chuangjian",
+      "unicode": "e749",
+      "unicode_decimal": 59209
+    },
+    {
+      "icon_id": "7319076",
+      "name": "知识库",
+      "font_class": "zhishi",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "25626386",
+      "name": "智能助手",
+      "font_class": "zhinengzhushou",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
       "icon_id": "9666182",
       "name": "关于",
       "font_class": "guanyu",

@@ -15,12 +15,6 @@
         </div>
       </div>
       <q-space/>
-      <!--      <q-icon class="chat-tool-opt" size="25px" name="jimu-gengduo-2">
-              <q-tooltip :offset="[0, 0]">
-                更多
-              </q-tooltip>
-
-            </q-icon>-->
 
       <q-select borderless v-model="ctx.ui.currentModel" :options="ctx.ui.modelList" dense options-dense
                 option-label="name" option-value="model"
@@ -35,6 +29,30 @@
           </div>
         </template>
       </q-select>
+
+      <q-btn dense flat icon="jimu-caidan1">
+        <q-menu
+            anchor="bottom end" self="top right"
+            fit
+            transition-show="scale"
+            transition-hide="scale"
+            :offset="[13,0]"
+        >
+          <q-list dense>
+            <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
+              <menu-item icon="jimu-yunxiazai_o" text="拉取模型" @click="showDownload=true"/>
+            </q-item>
+            <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
+              <menu-item icon="jimu-chuangjian" text="创建模型"/>
+            </q-item>
+          </q-list>
+        </q-menu>
+      </q-btn>
+      <!--      <q-icon class="chat-tool-opt" size="25px" name="jimu-gengduo-2">
+              <q-tooltip :offset="[0, 0]">
+                更多
+              </q-tooltip>
+            </q-icon>-->
     </q-toolbar>
     <div style="height:89%;overflow-x: hidden;">
       <q-scroll-area ref="scrollAreaRef" id="messageScrollArea" class="fit" :visible="false"
@@ -60,6 +78,7 @@
         </div>
       </q-scroll-area>
     </div>
+    <DownloadModel v-model="showDownload"/>
   </div>
 </template>
 
@@ -72,9 +91,12 @@ import {useThemeStore} from "@/store/theme";
 import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
 import {MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {updateTheme} from "@/components/tool-components/chatGptTool/chat/style/update";
+import MenuItem from "@/components/system-components/widget/MenuItem.vue";
+import DownloadModel from "@/components/tool-components/chatGptTool/widget/DownloadModel.vue";
 
 const scrollAreaRef = ref()
 const ctx = useChatCtxStore()
+const showDownload = ref(false)
 defineExpose({
   MoveScrollBottom,
 })

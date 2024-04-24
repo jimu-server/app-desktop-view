@@ -52,6 +52,7 @@
         </template>
       </q-splitter>
     </template>
+    <FloatingDownload/>
   </q-splitter>
 </template>
 

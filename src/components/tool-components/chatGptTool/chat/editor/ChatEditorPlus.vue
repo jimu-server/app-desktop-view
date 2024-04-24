@@ -5,19 +5,8 @@
         <GPTSettingPanel/>
       </ToolWidget>
       <ToolWidget>
-        <q-icon size="20px" class="edit-tool-option" name="jimu-wenjianjia">
-          <q-tooltip :offset="[0, 0]">
-            文件
-          </q-tooltip>
-        </q-icon>
+        <KnowledgeBasePanel/>
       </ToolWidget>
-      <!--      <div class="column justify-center">
-              <VoiceTool>
-                <q-tooltip :offset="[0, 0]">
-                  语音消息
-                </q-tooltip>
-              </VoiceTool>
-            </div>-->
       <div class="column justify-center">
         <q-toggle v-model="ctx.ui.autoHistory" size="sm" color="primary" checked-icon="jimu-shijian-2">
           <q-tooltip :offset="[0, 0]">
@@ -87,6 +76,7 @@ import Editor from "./Editor.vue";
 import {IsEmpty} from "@/components/system-components/utils/systemutils";
 import {ChatMessageEntity, MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import KnowledgeBasePanel from "@/components/tool-components/chatGptTool/chat/editor/widget/KnowledgeBasePanel.vue";
 
 
 

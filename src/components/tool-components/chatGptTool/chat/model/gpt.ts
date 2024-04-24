@@ -42,6 +42,7 @@ export interface AppChatMessageItem {
 }
 
 export interface LLmMole {
+
     id?: string
     // 模型展示名
     name?: string
@@ -49,8 +50,18 @@ export interface LLmMole {
     model?: string
     // 模型图标
     picture?: string
-    parameters?: string
     size?: string
-    download?: string
+    modelDetails?: string
+    isDownload?: boolean
     createTime?: string
+
+    // 接收下载参数
+    downloads?: any[];
+}
+
+export interface ProgressResponse {
+    status?: string
+    digest?: string
+    total: number
+    completed?: number
 }

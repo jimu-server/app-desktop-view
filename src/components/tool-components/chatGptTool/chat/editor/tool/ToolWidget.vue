@@ -1,5 +1,5 @@
 <template>
-  <div class="column justify-center">
+  <div class="column justify-center" style="margin-left: 10px;">
     <slot></slot>
   </div>
 </template>
