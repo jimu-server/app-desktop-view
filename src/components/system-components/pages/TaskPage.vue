@@ -39,8 +39,8 @@ import {onMounted, ref} from "vue";
 
 import {colors} from 'quasar'
 
-import {useGptStore} from "@/components/system-components/chat/store/chat_ctx";
 import TaskTable from "@/components/system-components/widget/TaskTable.vue";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 
 const {getPaletteColor} = colors
 

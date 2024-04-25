@@ -47,8 +47,9 @@
 
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
-import {useGptStore} from "@/components/system-components/chat/store/chat_ctx";
+
 import {colors} from 'quasar'
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 
 const {getPaletteColor} = colors
 
