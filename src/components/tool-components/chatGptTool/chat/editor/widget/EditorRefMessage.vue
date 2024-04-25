@@ -21,10 +21,10 @@
 </template>
 
 <script setup lang="ts">
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
 
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 const props = defineProps<
     {
       message?: MessageItem

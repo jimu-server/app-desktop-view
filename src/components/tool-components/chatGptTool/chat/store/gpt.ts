@@ -7,7 +7,7 @@ import {
     AppChatConversationItem,
     AppChatMessageItem,
     LLmMole
-} from "@/components/tool-components/chatGptTool/chat/model/gpt";
+} from "@/components/tool-components/chatGptTool/chat/model/model";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
 import {
     getConversation,
@@ -16,7 +16,7 @@ import {
 } from "@/components/tool-components/chatGptTool/chatRequest";
 
 
-export const useChatCtxStore = defineStore('chat', {
+export const useGptStore = defineStore('gpt', {
     state: () => {
         return {
             defaultAvatar: 'https://im-1252940994.cos.ap-nanjing.myqcloud.com/go.jpg',
@@ -76,11 +76,7 @@ export const useChatCtxStore = defineStore('chat', {
                 marks: [0, 0],
                 defaultMarks: 0,
 
-                currentModel: {
-                    name: 'llama2',
-                    model: 'llama2',
-                    icon: 'https://jimuos-1252940994.cos.ap-nanjing.myqcloud.com/llm%2Fiocn%2Fgemma.png'
-                } as LLmMole,
+                currentModel: null as LLmMole,
                 modelList: [] as LLmMole[],
                 // 用于前端 通过消息记录中的 modeid 快速查询到 模型信息显示消息名称等信息
                 modelInfo: {}
@@ -103,15 +99,7 @@ export const useChatCtxStore = defineStore('chat', {
             stream: {}
         }
     },
-    persist: {
-        enabled: true,
-        strategies: [
-            {
-                key: 'chat',
-                storage: localStorage,
-            }
-        ],
-    },
+    persist: true,
     getters: {},
     actions: {
         setConversation(list: AppChatConversationItem[]) {
@@ -193,7 +181,7 @@ export const useChatCtxStore = defineStore('chat', {
                     this.ui.modelInfo[item.id] = item
                 }
                 // 默认选中第一个
-                if (data.length > 0) {
+                if (data.length > 0 && this.ui.currentModel == null) {
                     this.ui.currentModel = data[0]
                 }
             })

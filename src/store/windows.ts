@@ -4,7 +4,7 @@ import {WindowLabel} from "@/components/system-components/model/system";
 import {homePath} from "@/variable";
 import router from "@/route";
 
-export const useWindowsStore = defineStore('administrator-windows', {
+export const useWindowsStore = defineStore('windows', {
     state: () => {
         return {
             // 菜单右键选中的窗口标签索引值
@@ -14,26 +14,7 @@ export const useWindowsStore = defineStore('administrator-windows', {
             windowLabels: [] as WindowLabel[],
         }
     },
-    persist: {
-        enabled: true,
-        strategies: [
-            {
-                key: 'select',
-                storage: localStorage,
-                paths: ['select']
-            },
-            {
-                key: 'index',
-                storage: localStorage,
-                paths: ['index']
-            },
-            {
-                key: 'windowLabels',
-                storage: localStorage,
-                paths: ['windowLabels']
-            }
-        ]
-    },
+    persist: true,
     getters: {},
     actions: {
         // 用于切换角色时候对重新根据 auths 初始化全局标签的处理

@@ -94,14 +94,14 @@ import {computed, ref} from "vue";
 
 
 import {userStore} from "@/store/user";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
-import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/model";
 import {retryMessage} from "@/components/tool-components/chatGptTool/gptutil";
 import MarkDownMessage from "@/components/tool-components/chatGptTool/chat/message/MarkDownMessage.vue";
 import {useThemeStore} from "@/store/theme";
 
 const theme = useThemeStore()
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 const user = userStore()
 const bodyRef = ref<HTMLElement>()
 

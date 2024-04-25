@@ -29,7 +29,7 @@
 import {ref} from "vue";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ElMessage} from "element-plus";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {getConversation} from "@/components/tool-components/chatGptTool/chatRequest";
 
 
@@ -41,7 +41,7 @@ const props = defineProps({
 })
 
 const text = ref('')
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 const openCreate = ref(false)
 
 function createSuccess(id: string) {

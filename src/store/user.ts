@@ -21,16 +21,7 @@ export const userStore = defineStore('user', {
             } as Token,
         }
     },
-    persist: {
-        enabled: true,
-        strategies: [
-            {
-                key: 'info',
-                storage: localStorage,
-                paths: ['info']
-            }
-        ],
-    },
+    persist: true,
     getters: {},
     actions: {}
 })

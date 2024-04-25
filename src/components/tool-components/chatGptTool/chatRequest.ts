@@ -4,7 +4,7 @@ import {
     AppChatConversationItem,
     AppChatMessageItem,
     LLmMole
-} from "@/components/tool-components/chatGptTool/chat/model/gpt";
+} from "@/components/tool-components/chatGptTool/chat/model/model";
 
 
 

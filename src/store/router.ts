@@ -7,10 +7,11 @@ export const useRouterStore = defineStore('router', {
     state: () => {
         return {
             // 定义 状态数据
-            cache: JSON.parse(sessionStorage.getItem('route_cache') as string) as RouterCache[] || [] as RouterCache[],
+            cache:  [] as RouterCache[],
             menu_route: MenuToolRoute()
         }
     },
+    persist: true,
     actions: {
         AddRouteCache(value: RouterCache) {
             let index = -1

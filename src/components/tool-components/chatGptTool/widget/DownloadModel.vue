@@ -45,14 +45,14 @@
 
 <script setup lang="ts">
 
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {computed, ref} from "vue";
-import {LLmMole, ProgressResponse} from "@/components/tool-components/chatGptTool/chat/model/gpt";
+import {LLmMole, ProgressResponse} from "@/components/tool-components/chatGptTool/chat/model/model";
 import {GetHeaders} from "@/plugins/axiosutil";
 import {ElNotification} from "element-plus";
 
 const model = defineModel({default: false, required: true})
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 
 const progress = ref<ProgressResponse>(null)
 

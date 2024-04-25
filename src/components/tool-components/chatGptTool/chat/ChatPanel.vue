@@ -51,8 +51,12 @@
           <ChatEditorPlus @send="send" @max-editor="maxInput"/>
         </template>
       </q-splitter>
+      <div v-else class="fit row justify-center">
+        <div class=" column justify-center">
+          <q-icon name="img:/public/ai.svg" size="500px"/>
+        </div>
+      </div>
     </template>
-    <FloatingDownload/>
   </q-splitter>
 </template>
 
@@ -67,7 +71,7 @@ import SearchInput from "@/components/tool-components/chatGptTool/widget/SearchI
 
 import {useAppStore} from "@/store/app";
 import {ElMessage} from "element-plus";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
 import {
   ChatMessageEntity,
@@ -97,7 +101,7 @@ const scrollAreaRef = ref()
 const messageListRef = ref()
 
 
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 
 
 if (!IsEmpty(ctx.CurrentChat.Current)) {

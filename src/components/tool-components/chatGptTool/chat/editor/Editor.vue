@@ -40,7 +40,7 @@ import {keyCodes} from '@ckeditor/ckeditor5-utils/src/keyboard';
 
 import emitter from "@/plugins/event";
 import {MessageAt, MessageRef, MessageTest} from "@/plugins/evenKey";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {ChatMessageEntity, MessageItem, MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {createEditor} from "@/components/tool-components/chatGptTool/chat/editor/ckeditor";
 
@@ -71,7 +71,7 @@ const props = defineProps({
 
 // 编辑器 当前的字符数量双向绑定
 const characters = defineModel('characters', {default: 0})
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 // 当前编辑器是否处于回复消息状态
 const isRef = ref(false)
 

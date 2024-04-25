@@ -5,58 +5,58 @@
     <q-card
         flat
         style="width: 50vw;height: 60vh;max-width:100vw;overflow: hidden"
-        id="mode_download"
+        id="create_mode"
     >
-      <div class="fit column">
-        <div class="full-width row justify-center" style="padding-top: 10px">
-          <q-input dense v-model="text" outlined style="width: 95%">
-            <template v-slot:append>
-              <q-icon name="jimu-sousuo-2" />
-            </template>
-          </q-input>
+      <div class="fit column" style="padding-left: 5px;padding-right: 5px">
+        <div class="full-width row justify-between" style="padding-top: 10px">
+          <div class="row ">
+            <q-input outlined dense v-model="text" label="模型名"/>
+            <div style="margin-left: 10px">
+              <q-select outlined v-model="modelSelect" :options="ctx.ui.modelList" dense options-dense
+                        option-label="name" option-value="model"
+                        dropdown-icon="jimu-xiangxia-2" label="基础模型">
+                <template #prepend>
+                  <q-icon class="chat-tool-opt" size="25px" :name="'img:'+ctx.ui.currentModel.picture"/>
+                </template>
+                <template v-slot:selected>
+                  <div class="ellipsis">
+                    {{ modelSelect.name }}
+                  </div>
+                </template>
+                <template v-slot:option="scope">
+                  <!--       展示一下载的模型提供选择         -->
+                  <q-item v-bind="scope.itemProps" v-if="scope.opt.isDownload">
+                    <q-item-section>
+                      <q-item-label> {{ scope.opt.name }}</q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </template>
+              </q-select>
+            </div>
+          </div>
+          <div>
+            <q-btn outline icon="jimu-Model" color="primary" label="创建" @click="createModel"/>
+          </div>
         </div>
         <div class="column" style="flex-grow: 1">
-          <q-scroll-area class="fit" :visible="false">
-            <q-list class="fit">
-              <q-item v-for="(item,index) in ctx.ui.modelList">
-                <q-item-section avatar>
-                  <q-avatar :icon="'img:'+item.picture"/>
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label>
-                    <span>{{ item.name }}</span>
-                    <span style="margin-left: 5px" class="text-grey-7">{{ item.model }}</span>
-                  </q-item-label>
-                  <q-item-label v-if="!item.isDownload && item.downloads">
-                    <div class="full-width">
-                      <q-linear-progress v-if="progressValue==0" size="md" :indeterminate="progressValue==0"
-                                         :value="progressValue"/>
-                      <q-linear-progress v-else size="md" :value="progressValue">
-                      </q-linear-progress>
-                    </div>
-                    <div class="full-width ellipsis text-grey-6" style="font-size: 10px;align-content: center">
-                      {{ progressInfo }}
-                    </div>
-                  </q-item-label>
-                </q-item-section>
-                <q-item-section avatar>
-                  <template v-if="item.isDownload">
-                    <span class="text-grey-7" style="font-size: 10px">以拉取</span>
-                  </template>
-                  <template v-else>
-                    <q-btn v-if="!flag" flat dense icon="jimu-yunxiazai_o" @click="downloadModel(item)"
-                           color="primary"/>
-                    <q-btn v-else flat dense icon="jimu-guanbi" @click="clean"/>
-                  </template>
-                </q-item-section>
-                <q-item-section avatar v-if="item.isDownload">
-                  <div class="fit column justify-center">
-                    <q-btn dense icon="jimu-shanchu" color="red" flat @click="delModel(item)"/>
-                  </div>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-scroll-area>
+          <div class="column" style="padding-top: 10px">
+            <q-editor
+                v-model="modelFile"
+                placeholder="file content"
+                :toolbar="[]"
+                style="width: 100%;height: 100%"
+            />
+          </div>
+          <div v-if="flag" style="margin-top: 10px">
+            <div class="full-width">
+              <q-linear-progress v-if="progressValue==0" size="md" :indeterminate="progressValue==0"
+                                 :value="progressValue"/>
+              <q-linear-progress v-else size="md" :value="progressValue"/>
+            </div>
+            <div class="full-width ellipsis text-grey-6" style="font-size: 10px;align-content: center">
+              {{ progressInfo }}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -75,11 +75,14 @@ import {deleteModel} from "@/components/tool-components/chatGptTool/chatRequest"
 
 const model = defineModel({default: false, required: true})
 const ctx = useGptStore()
+const modelSelect = ref<LLmMole>(ctx.ui.currentModel)
 // 只允许单个下载
 const flag = ref(false)
 const cleanFlag = ref(false)
 const progress = ref<ProgressResponse>(null)
 const text = ref('')
+const description = ref('')
+const modelFile = ref('')
 
 // 计算下载进度
 const progressValue = computed(() => {
@@ -104,7 +107,6 @@ const progressValue = computed(() => {
   return progress.value.completed / progress.value.total
 })
 
-
 // 显示下载信息
 const progressInfo = computed(() => {
   if (progress.value == null) {
@@ -124,17 +126,32 @@ function clean() {
   cleanFlag.value = true
 }
 
+function getModelFileText(element: HTMLElement): string {
+  let value = ''
+  for (let i = 0; i < element.childNodes.length; i++) {
+    let el = element.childNodes[i] as HTMLElement
+    if (!el) {
+      continue
+    }
+    value += el.innerText + '\n'
+  }
+  return value
+}
 
-async function downloadModel(item: LLmMole) {
+async function createModel() {
   if (flag.value) return
   flag.value = true
-  item.downloads = true
+  let doc = new DOMParser()
+  let element = doc.parseFromString(modelFile.value, 'text/html').body
+  let modelfile = 'FROM ' + modelSelect.value.model + '\n' + getModelFileText(element)
+
   let data = {
-    name: item.model,
-    model: item.model,
+    baseModel: modelSelect.value.model,
+    name: text.value,
+    modelfile: modelfile,
     stream: true,
   }
-  const response = await fetch('http://localhost:8080/api/chat/model/pull', {
+  const response = await fetch('http://localhost:8080/api/chat/model/create', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -150,13 +167,12 @@ async function downloadModel(item: LLmMole) {
       if (cleanFlag.value) {
         await reader.cancel()
         cleanFlag.value = false
-        item.downloads = false
         flag.value = false
-        item.isDownload = false
         return
       }
       const {done, value} = await reader.read()
       if (done) {
+        flag.value = false
         break
       }
       let decodedData = decoder.decode(value);
@@ -172,13 +188,10 @@ async function downloadModel(item: LLmMole) {
               // 根据业务码处理具体操作 当前默认结束客户端操作
               if (code == 200) {
                 setTimeout(() => {
-                  item.isDownload = true;
                   flag.value = false
-                }, 2000)
+                }, 1000)
                 return;
               }
-              item.isDownload = false;
-              item.downloads = false;
               return
             }
             // console.log(parsed)
@@ -186,7 +199,12 @@ async function downloadModel(item: LLmMole) {
             if (parsed.status === 'success') {
               progress.value = parsed
               setTimeout(() => {
-                item.isDownload = true;
+                ElMessage({
+                  message: '创建成功',
+                  type: 'success',
+                  plain: true,
+                  appendTo: document.getElementById('create_mode')
+                })
                 flag.value = false
               }, 2000)
               return
@@ -201,25 +219,6 @@ async function downloadModel(item: LLmMole) {
     }
   } catch (e) {
 
-  }
-}
-
-
-async function delModel(item: LLmMole) {
-  let result = await deleteModel(item.model)
-  if (result.code == 200) {
-    ElMessage({
-      message: '删除成功',
-      plain: true,
-      appendTo: document.getElementById('mode_download')
-    })
-    // 需要根据 当前ui选择的 model 做出修改
-    item.downloads = false
-    item.isDownload = false
-    if (ctx.ui.currentModel.model == item.model) {
-      // 如果删除的是当前使用的模型 则需要清空当前选择的模型,选取列表第一个模型作为当前模型
-      ctx.ui.currentModel = ctx.ui.modelList[0]
-    }
   }
 }
 

@@ -34,8 +34,6 @@ import '@/components/tool-components/chatGptTool/chat/style/md.css'
 import '@/components/tool-components/chatGptTool/chat/style/md-dark.css'
 import '@/components/tool-components/chatGptTool/chat/initPrism'
 
-// 自动缓存插件
-pina.use(piniaPersist)
 const app = createApp(App)
 
 app.use(Quasar, {

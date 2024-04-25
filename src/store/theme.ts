@@ -14,9 +14,7 @@ export const useThemeStore = defineStore('theme', {
             },
         }
     },
-    persist: {
-        enabled: true
-    },
+    persist: true,
     getters: {},
     actions: {
         // 切换 light 主题
@@ -25,15 +23,11 @@ export const useThemeStore = defineStore('theme', {
             this.dark = flag;
             if (flag) {
                 // 深色
-                if (elementsByName) {
-                    elementsByName.setAttribute('class', 'dark')
-                }
+                elementsByName.setAttribute('class', 'dark')
                 this.header.className = 'bg-transparent text-white';
             } else {
                 // 浅色
-                if (elementsByName) {
-                    elementsByName.removeAttribute('class')
-                }
+                elementsByName.removeAttribute('class')
                 this.header.className = 'bg-transparent text-black';
             }
         },

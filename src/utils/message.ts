@@ -1,7 +1,7 @@
 import { IMSDK } from "./sdk";
 import emitter from "../plugins/event";
 import {ScrollMove, SendActionScroll, UpdateConversation} from "../plugins/evenKey";
-import { useChatCtxStore } from "../store/chat_ctx";
+import { useGptStore } from "../store/chat_ctx";
 import { sys } from "../components/system-components/model/system";
 import { MessageItem, PicBaseInfo } from "./lib/types/entity";
 import { v4 as uuidv4 } from 'uuid';
@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 * @ description 发送存文本消息
 * */
 export async function SendTextMessage(message: sys.ChatMessageEntity) {
-    let ctx = useChatCtxStore()
+    let ctx = useGptStore()
     if (message.data == "" || message.data == "\n") {
         return
     }
@@ -52,7 +52,7 @@ export async function SendImageMessage(message: sys.ChatMessageEntity) {
 
 
 async function send(data: MessageItem) {
-    let ctx = useChatCtxStore()
+    let ctx = useGptStore()
     let current = ctx.CurrentChat.Current
     await IMSDK.sendMessage({
         recvID: current.Conversation?.userID!,

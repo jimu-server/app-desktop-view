@@ -2,15 +2,15 @@ import {GetHeaders} from "@/plugins/axiosutil";
 import pinia from "@/pinia";
 import emitter from "@/plugins/event";
 import {SendActionScroll} from "@/plugins/evenKey";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {getUuid, send} from "@/components/tool-components/chatGptTool/chatRequest";
-import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/gpt";
+import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/model";
 
-let ctxStore = useChatCtxStore(pinia);
+let ctxStore = useGptStore(pinia);
 
 export async function SendTextMessage(recoverMessageId: string, text: string) {
     // 获取当前连天选择模型
-    let store = useChatCtxStore(pinia);
+    let store = useGptStore(pinia);
     let model = store.ui.currentModel
     let conversationId = ""
     if (!store.CurrentChat.Current) {
@@ -45,7 +45,7 @@ export async function retryMessage(message: AppChatMessageItem) {
 
 async function getReply(message: AppChatMessageItem) {
     // 获取当前连天选择模型
-    let store = useChatCtxStore(pinia);
+    let store = useGptStore(pinia);
     let model = store.ui.currentModel
     let conversationId = ""
     if (!store.CurrentChat.Current) {

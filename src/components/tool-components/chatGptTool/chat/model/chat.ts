@@ -3,7 +3,7 @@
 * */
 
 
-import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/chat/model/gpt";
+import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/chat/model/model";
 
 export declare interface ConversationItem {
     conversationID?: string;

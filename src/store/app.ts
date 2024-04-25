@@ -7,26 +7,13 @@ export const useAppStore = defineStore('app', {
             defaultAvatar: 'https://jimuos-1252940994.cos.ap-nanjing.myqcloud.com/go.jpg',
             dict: {},
             ui: {
-                // 窗口属性
-                window: {
-                    width: 0,
-                    height: 0
-                },
                 page: {
                     height: ''
                 },
             }
         }
     },
-    persist: {
-        enabled: true,
-        strategies: [
-            {
-                key: 'app',
-                storage: localStorage
-            }
-        ]
-    },
+    persist: true,
     getters: {},
     actions: {
 

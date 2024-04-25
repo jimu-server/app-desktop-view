@@ -10,9 +10,9 @@
 import MainPage from "@/components/system-components/layouts/MainPage.vue";
 
 import {onMounted} from "vue";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 onMounted(() => {
   // 加载会话
   ctx.GetConversationList()

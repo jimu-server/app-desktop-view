@@ -23,26 +23,7 @@ export const useToolStore = defineStore('tool', {
             buttons_router: {} as Map<string, Tree<Router>[]>
         }
     },
-    persist: {
-        enabled: true,
-        strategies: [
-            {
-                key: 'buttons',
-                storage: localStorage,
-                paths: ['buttons']
-            },
-            {
-                key: 'buttons_router',
-                storage: localStorage,
-                paths: ['buttons_router']
-            },
-            {
-                key: 'ctx',
-                storage: localStorage,
-                paths: ['ctx']
-            }
-        ],
-    },
+    persist: true,
     getters: {},
     actions: {
         /*

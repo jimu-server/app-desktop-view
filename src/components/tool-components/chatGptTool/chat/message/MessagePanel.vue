@@ -15,31 +15,7 @@
         </div>
       </div>
       <q-space/>
-
-      <q-select borderless v-model="ctx.ui.currentModel" :options="ctx.ui.modelList" dense options-dense
-                option-label="name" option-value="model"
-                style="width: 120px"
-                dropdown-icon="jimu-xiangxia-2">
-        <template #prepend>
-          <q-icon class="chat-tool-opt" size="25px" :name="'img:'+ctx.ui.currentModel.picture"/>
-        </template>
-        <template v-slot:selected>
-          <div class="ellipsis">
-            {{ ctx.ui.currentModel.name }}
-          </div>
-        </template>
-        <template v-slot:option="scope">
-          <q-item v-bind="scope.itemProps" v-if="scope.opt.isDownload">
-            <!--            <q-item-section avatar>
-                          <q-icon class="chat-tool-opt" size="25px" :name="'img:'+scope.opt.picture"/>
-                        </q-item-section>-->
-            <q-item-section>
-              <q-item-label> {{ scope.opt.name }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </template>
-      </q-select>
-
+      <OllamaModelSelect/>
       <q-btn dense flat icon="jimu-caidan1">
         <q-menu
             anchor="bottom end" self="top right"
@@ -53,7 +29,7 @@
               <menu-item icon="jimu-Model" text="模型管理" @click="ollamaManageFlage=true"/>
             </q-item>
             <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-              <menu-item icon="jimu-chuangjian" text="创建模型"/>
+              <menu-item icon="jimu-chuangjian" text="创建模型" @click="ollamaCreateFlag=true"/>
             </q-item>
           </q-list>
         </q-menu>
@@ -84,6 +60,7 @@
       </q-scroll-area>
     </div>
     <OllamaModelManage v-model="ollamaManageFlage"/>
+    <OllamaCreateModel v-model="ollamaCreateFlag"/>
   </div>
 </template>
 
@@ -93,15 +70,17 @@ import {onUnmounted, ref, watch} from "vue";
 import emitter from "@/plugins/event";
 import {MessageObserver, ScrollMove, SendActionScroll} from "@/plugins/evenKey";
 import {useThemeStore} from "@/store/theme";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {updateTheme} from "@/components/tool-components/chatGptTool/chat/style/update";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import OllamaModelManage from "@/components/tool-components/chatGptTool/widget/OllamaModelManage.vue";
+import OllamaModelSelect from "@/components/tool-components/chatGptTool/widget/OllamaModelSelect.vue";
 
 const scrollAreaRef = ref()
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 const ollamaManageFlage = ref(false)
+const ollamaCreateFlag = ref(false)
 defineExpose({
   MoveScrollBottom,
 })

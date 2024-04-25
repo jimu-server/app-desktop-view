@@ -7,11 +7,9 @@ import OrgManagePage from "@/components/system-components/tool/manageTool/page/O
 import FunManagePage from "@/components/system-components/tool/manageTool/page/FunManagePage.vue";
 import ToolManagePage from "@/components/system-components/tool/manageTool/page/ToolManagePage.vue";
 import RouterManagePage from "@/components/system-components/tool/manageTool/page/RouterManagePage.vue";
-import ChatGPT from "@/components/tool-components/chatGptTool/ChatGPT.vue";
-
 
 const components = [
-    ChatGPT,
+
     NotifyTool,
     ManageTool,
     NotifyBtn,

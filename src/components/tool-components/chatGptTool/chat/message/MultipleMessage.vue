@@ -8,12 +8,14 @@
 <script setup lang="ts">
 
 import {ref} from "vue";
-import {useChatCtxStore} from "@/components/system-components/tool/chatGptTool/chat/store/chat_ctx";
+
 import {userStore} from "@/store/user";
-import {MessageItem} from "@/components/system-components/tool/chatGptTool/chat/model/chat";
+import {MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 
 
-const ctx = useChatCtxStore()
+
+const ctx = useGptStore()
 const user = userStore()
 
 const props = defineProps<{ message?: MessageItem }

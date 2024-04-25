@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {Records} from "@/components/system-components/model/menu";
+import {Records} from "@/components/system-components/model/system";
 
 
 export const useNotifyStore = defineStore('notify', {
@@ -8,15 +8,7 @@ export const useNotifyStore = defineStore('notify', {
             list: [] as Records[]
         }
     },
-    persist: {
-        enabled: true,
-        strategies: [
-            {
-                key: 'notify',
-                storage: localStorage,
-            },
-        ],
-    },
+    persist: true,
     getters: {},
     actions: {}
 })

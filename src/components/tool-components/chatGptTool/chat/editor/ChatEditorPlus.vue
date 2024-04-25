@@ -75,7 +75,7 @@ import {colors} from "quasar";
 import Editor from "./Editor.vue";
 import {IsEmpty} from "@/components/system-components/utils/systemutils";
 import {ChatMessageEntity, MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import KnowledgeBasePanel from "@/components/tool-components/chatGptTool/chat/editor/widget/KnowledgeBasePanel.vue";
 
 
@@ -104,7 +104,7 @@ const text = ref('')
 const editRef = ref()
 const characters = ref(0)
 const shame = ref(false)
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 const info = ref(null)
 const isMax = ref(false)
 const MaxHeight = ref({

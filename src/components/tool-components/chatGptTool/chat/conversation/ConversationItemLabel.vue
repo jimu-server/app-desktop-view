@@ -54,9 +54,9 @@ import {ref} from "vue";
 
 import {ElMessage} from "element-plus";
 import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
-import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/chat/model/gpt";
+import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/chat/model/model";
 import {delConversation, getConversation} from "@/components/tool-components/chatGptTool/chatRequest";
 
 
@@ -71,7 +71,7 @@ const emits = defineEmits(
     }
 )
 
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 
 const list = ref([
   {

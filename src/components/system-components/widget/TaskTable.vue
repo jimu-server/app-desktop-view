@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
-import {useChatCtxStore} from "@/components/system-components/chat/store/chat_ctx";
+import {useGptStore} from "@/components/system-components/chat/store/chat_ctx";
 import {colors} from 'quasar'
 
 const {getPaletteColor} = colors
@@ -59,7 +59,7 @@ const props = defineProps({
   }
 })
 
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 
 const splitterModel = ref(30)
 

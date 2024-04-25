@@ -37,12 +37,12 @@
 
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
-import {useChatCtxStore} from "../chat/store/chat_ctx";
+import {useGptStore} from "../chat/store/chat_ctx";
 import {colors} from 'quasar'
 
 const {getPaletteColor} = colors
 
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 
 
 const taskBox = ref({

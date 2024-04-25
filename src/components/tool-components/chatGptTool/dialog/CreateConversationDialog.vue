@@ -30,7 +30,7 @@
 
 import {ref, watch} from "vue";
 import {ElMessage} from "element-plus";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {createConversation} from "@/components/tool-components/chatGptTool/chatRequest";
 
 
@@ -45,7 +45,7 @@ const emits = defineEmits({
 })
 
 const name = ref('')
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 
 async function submit() {
   if (name.value == '') {

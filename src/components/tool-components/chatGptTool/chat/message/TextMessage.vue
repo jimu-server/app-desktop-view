@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/gpt";
+import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/model";
 
 
 

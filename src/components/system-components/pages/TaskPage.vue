@@ -39,12 +39,12 @@ import {onMounted, ref} from "vue";
 
 import {colors} from 'quasar'
 
-import {useChatCtxStore} from "@/components/system-components/chat/store/chat_ctx";
+import {useGptStore} from "@/components/system-components/chat/store/chat_ctx";
 import TaskTable from "@/components/system-components/widget/TaskTable.vue";
 
 const {getPaletteColor} = colors
 
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 
 const splitterModel = ref(30)
 const date = ref(new Date())

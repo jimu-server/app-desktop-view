@@ -6,6 +6,7 @@ export const useMenuStore = defineStore('menu', {
         return {
         }
     },
+    persist: true,
     actions: {
 
     }

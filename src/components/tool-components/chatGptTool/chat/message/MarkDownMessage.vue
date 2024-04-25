@@ -21,14 +21,14 @@ import emitter from "@/plugins/event";
 import {useThemeStore} from "@/store/theme";
 
 import {ElNotification} from "element-plus";
-import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/gpt";
+import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/model";
 import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessagePreview";
 import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
-import {useChatCtxStore} from "@/components/tool-components/chatGptTool/chat/store/chat_ctx";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {updateTheme} from "@/components/tool-components/chatGptTool/chat/style/update";
 
 
-const ctx = useChatCtxStore()
+const ctx = useGptStore()
 const theme = useThemeStore()
 const emit = defineEmits({
   // 打字容器高度变化时间

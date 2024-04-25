@@ -4,18 +4,10 @@ import {defineStore} from "pinia";
 export const useAuthStore = defineStore('auth', {
     state: () => {
         return {
-            auth: JSON.parse(localStorage.getItem('auth')) as string[] || [] as string[],
+            auth: [] as string[],
         }
     },
-    persist: {
-        enabled: true,
-        strategies: [
-            {
-                key: 'auth',
-                storage: localStorage
-            }
-        ]
-    },
+    persist: true,
     getters: {},
     actions: {
         // 添加授权路径
