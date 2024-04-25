@@ -70,7 +70,6 @@
     "markdown-it-testgen": "^0.1.6",
     "mitt": "^3.0.0",
     "pinia": "^2.1.7",
-    "pinia-plugin-persist": "^1.0.0",
     "prismjs": "^1.29.0",
     "quasar": "^2.13.0",
     "sass-loader": "^14.1.1",

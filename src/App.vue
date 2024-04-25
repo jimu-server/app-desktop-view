@@ -27,8 +27,6 @@ const tool = useToolStore()
 const auth = useAuthStore()
 const theme = useThemeStore()
 ipcRenderer.on('win-change', (event, arg) => {
-  app.ui.window.width = document.body.clientWidth
-  app.ui.window.height = document.body.clientHeight
   // console.log(ctx.ui.window.width, ctx.ui.window.height)
   setTimeout(() => {
     let byId = document.getElementById("page-view");
@@ -73,7 +71,6 @@ async function UpdateAuth() {
   // todo 触发窗口权限更新
   emitter.emit(UpdateAuthWindowEvent)
 }
-
 
 onMounted(() => {
   // 屏蔽 浏览器菜单
