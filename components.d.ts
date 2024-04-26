@@ -59,6 +59,7 @@ declare module 'vue' {
     ElTree: typeof import('element-plus/es')['ElTree']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     EmailVerify: typeof import('./src/components/system-components/EmailVerify.vue')['default']
+    FileUI: typeof import('./src/components/tool-components/chatGptTool/chat/editor/widget/FileUI.vue')['default']
     FloatingDownload: typeof import('./src/components/tool-components/chatGptTool/widget/FloatingDownload.vue')['default']
     FloatingPopup: typeof import('./src/components/system-components/widget/FloatingPopup.vue')['default']
     FlowChart: typeof import('./src/components/tool-components/flowTool/FlowChart.vue')['default']
@@ -104,6 +105,7 @@ declare module 'vue' {
     RouterManagePage: typeof import('./src/components/system-components/tool/manageTool/page/RouterManagePage.vue')['default']
     RouterTable: typeof import('./src/components/system-components/tool/manageTool/page/table/RouterTable.vue')['default']
     RouterView: typeof import('vue-router')['RouterView']
+    ScrollX: typeof import('./src/components/tool-components/chatGptTool/chat/editor/widget/ScrollX.vue')['default']
     SearchInput: typeof import('./src/components/tool-components/chatGptTool/widget/SearchInput.vue')['default']
     SecureLabel: typeof import('./src/components/system-components/avatar/SecureLabel.vue')['default']
     SetPhoneDialog: typeof import('./src/components/system-components/avatar/SetPhoneDialog.vue')['default']
@@ -134,6 +136,7 @@ declare module 'vue' {
     WindowCloseBtn: typeof import('./src/components/system-components/desktop/WindowCloseBtn.vue')['default']
     WindowMinimizeBtn: typeof import('./src/components/system-components/desktop/WindowMinimizeBtn.vue')['default']
     WindowScroll: typeof import('./src/components/system-components/window/tag/WindowScroll.vue')['default']
+    WindowScrollX: typeof import('./src/components/system-components/window/tag/WindowScrollX.vue')['default']
     WindowTag: typeof import('./src/components/system-components/window/tag/WindowTag.vue')['default']
   }
 }

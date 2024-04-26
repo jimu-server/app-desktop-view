@@ -5,18 +5,14 @@
         style="-webkit-app-region: drag;"
     >
       <slot name="header">
-        <q-bar class="bg-transparent"
+        <q-bar class="bg-transparent row"
             :style="{
             padding:0,
             borderBottom:widowsLabel.windowLabels.length <= 0 ?'none':'rgba(140,147,157,0.34) 1px solid',
           }">
           <!--  侧边栏隐藏后的展开按钮   -->
-          <q-btn
-              dense
-              flat
-              :icon="!leftDrawerOpen?'jimu-arrow-double-right':'jimu-arrow-double-left'"
-              @click.stop="toggleLeftDrawer"
-              style="margin-left: 5px;-webkit-app-region: no-drag;"
+          <q-btn dense flat :icon="!leftDrawerOpen?'jimu-arrow-double-right':'jimu-arrow-double-left'"
+                 @click.stop="toggleLeftDrawer" style="margin-left: 5px;-webkit-app-region: no-drag;"
           />
           <window-scroll v-if="widowsLabel.windowLabels.length !== 0"/>
           <q-space />

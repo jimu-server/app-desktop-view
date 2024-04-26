@@ -92,7 +92,7 @@
     "@babel/types": "^7.18.10",
     "@quasar/vite-plugin": "^1.5.0",
     "@vitejs/plugin-vue": "^4.1.0",
-    "electron": "^28.1.4",
+    "electron": "^30.0.1",
     "electron-builder": "^24.6.4",
     "electron-icon-builder": "^2.0.1",
     "sass": "^1.69.5",

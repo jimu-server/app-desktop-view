@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "18863193",
+      "name": "文件",
+      "font_class": "wenjian",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "11056884",
+      "name": "添加文件",
+      "font_class": "tianjiawenjian",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "26661686",
+      "name": "文件夹",
+      "font_class": "wenjianjia1",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "35781979",
+      "name": "添加文件夹",
+      "font_class": "tianjiawenjianjia",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
       "icon_id": "16623469",
       "name": "Model",
       "font_class": "Model",
@@ -333,13 +361,6 @@
       "font_class": "emoji",
       "unicode": "e616",
       "unicode_decimal": 58902
-    },
-    {
-      "icon_id": "15644387",
-      "name": "文件夹",
-      "font_class": "wenjianjia",
-      "unicode": "e6cc",
-      "unicode_decimal": 59084
     },
     {
       "icon_id": "38430045",

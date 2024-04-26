@@ -63,3 +63,19 @@ export interface ProgressResponse {
     total: number
     completed?: number
 }
+
+export enum KnowledgeFileType {
+    Folder = 1,
+    File = 2,
+}
+
+export interface KnowledgeFile {
+    id?: string
+    pid?: string
+    name?: string
+    path?: string
+    serverPath?: string
+    createTime?: string
+    size?: string
+    type?: KnowledgeFileType
+}

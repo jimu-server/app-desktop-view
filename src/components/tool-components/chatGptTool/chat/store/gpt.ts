@@ -75,11 +75,18 @@ export const useGptStore = defineStore('gpt', {
                 // 历史数据区间范围 marks 的区间来自于 当前历史消息内
                 marks: [0, 0],
                 defaultMarks: 0,
-
+                // 当前 对话所选则的模型
                 currentModel: null as LLmMole,
+                // 所有模型列表
                 modelList: [] as LLmMole[],
                 // 用于前端 通过消息记录中的 modeid 快速查询到 模型信息显示消息名称等信息
-                modelInfo: {}
+                modelInfo: {},
+                knowledge: {
+                    // 知识库导航目录
+                    nva: [],
+                    // 知识库导航目录内对应的所有文件
+                    files: []
+                },
             },
             params: {
                 SelectUserParams: {
