@@ -81,6 +81,7 @@ declare module 'vue' {
     MessageFloatingPopup: typeof import('./src/components/tool-components/chatGptTool/chat/message/MessageFloatingPopup.vue')['default']
     MessageMenu: typeof import('./src/components/tool-components/chatGptTool/chat/message/MessageMenu.vue')['default']
     MessagePanel: typeof import('./src/components/tool-components/chatGptTool/chat/message/MessagePanel.vue')['default']
+    ModelManagePage: typeof import('./src/components/tool-components/chatGptTool/manage/ModelManagePage.vue')['default']
     MultipleMessage: typeof import('./src/components/tool-components/chatGptTool/chat/message/MultipleMessage.vue')['default']
     NavMenuFloatingPopup: typeof import('./src/components/system-components/widget/NavMenuFloatingPopup.vue')['default']
     NodeElement: typeof import('./src/components/tool-components/flowTool/NodeElement.vue')['default']
