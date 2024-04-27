@@ -10,13 +10,14 @@
         anchor="top start" self="bottom start"
         transition-show="scale"
         transition-hide="scale"
+        style="overflow: hidden"
     >
-      <div style="width: 500px;height: 200px;overflow: hidden;padding: 5px">
+      <div style="width: 500px;height: 200px;overflow: hidden;padding: 5px;">
         <div class="fit column">
           <div class="full-width row justify-between" style="height: 32px">
-            <div class="column justify-center" style="flex: 1">
-              <ScrollX class="full-width" style="height: 32px ">
-                <div class="fit column justify-center">
+            <div class="hull-height column justify-center" style="flex: 1;height: 32px">
+              <ScrollX class="fit">
+                <div class="fit column justify-center" style="height: 32px">
                   <q-breadcrumbs gutter="none" class="full-width">
                     <q-breadcrumbs-el label="Home"/>
                     <q-breadcrumbs-el label="Components"/>
@@ -46,13 +47,8 @@
   </div>
 </template>
 <script setup lang="ts">
-
-
 import ScrollX from "@/components/tool-components/chatGptTool/chat/editor/widget/ScrollX.vue";
 
-function scrollChange(event) {
-  console.log(event)
-}
 </script>
 
 

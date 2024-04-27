@@ -10,6 +10,7 @@ import {
 } from "@/components/tool-components/chatGptTool/chat/model/model";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
 import {
+    getBaseModel,
     getConversation,
     getConversationMessage,
     getLLmMole
@@ -75,6 +76,9 @@ export const useGptStore = defineStore('gpt', {
                 // 历史数据区间范围 marks 的区间来自于 当前历史消息内
                 marks: [0, 0],
                 defaultMarks: 0,
+
+                baseModelList: [] as LLmMole[],
+
                 // 当前 对话所选则的模型
                 currentModel: null as LLmMole,
                 // 所有模型列表
@@ -178,6 +182,12 @@ export const useGptStore = defineStore('gpt', {
         async GetConversationList() {
             getConversation().then(data => {
                 this.setConversation(data)
+            })
+        },
+
+        async GetBaseModelList() {
+            getBaseModel().then(data => {
+                this.ui.baseModelList = data
             })
         },
 

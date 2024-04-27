@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-box" v-size="sizeChange">
+  <div ref="scrollX" class="scroll-box full-width" v-size-s="sizeChange">
     <div class="scroll-x">
       <div class="scroll-content">
         <slot></slot>
@@ -10,14 +10,15 @@
 
 <script setup lang="ts">
 
-import {onMounted, onUnmounted, reactive} from "vue";
+import {onMounted, onUnmounted, reactive, ref} from "vue";
 
+const scrollX = ref()
 const s = reactive({
   w: 0,
   h: 0,
 })
 
-const vSize = {
+const vSizeS = {
   updated(el, binding, vnode, prevVnode) {
     if (typeof binding.value === 'function') {
       binding.value(el.clientWidth, el.clientHeight);
@@ -25,14 +26,19 @@ const vSize = {
   },
 }
 
-function sizeChange(widht: number, height: number) {
-  console.log(widht, height)
-  s.w = widht
+function sizeChange(width: number, height: number) {
+  console.log(width, height)
+  s.w = width
   s.h = height
 }
 
 onMounted(() => {
-  console.log(s.w, s.h)
+
+  setTimeout(() => {
+    s.w = scrollX.value.clientWidth
+    s.h = scrollX.value.clientHeight
+    console.log(s.w, s.h)
+  }, 200)
 })
 
 onUnmounted(() => {

@@ -133,3 +133,17 @@ export function deleteModel(name: string) {
             })
     })
 }
+
+export function getBaseModel() {
+    return new Promise<LLmMole[]>(resolve => {
+        axiosForServer.get<Result<LLmMole[]>>("/api/chat/manage/modelList").then(({data}) => {
+            if (data.code === 200) {
+                if (data.data == null) {
+                    resolve([])
+                    return;
+                }
+                resolve(data.data)
+            }
+        })
+    })
+}

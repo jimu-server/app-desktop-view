@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3876823",
+      "name": "07 深度学习",
+      "font_class": "shenduxuexi",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "6370962",
+      "name": "模型管理",
+      "font_class": "moxingguanli",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
       "icon_id": "18863193",
       "name": "文件",
       "font_class": "wenjian",
