@@ -6,8 +6,13 @@
 body {
     width: 100vw;
     height: 100vh;
-    background: transparent;
     overflow: hidden;
+    background: white;
+
+}
+
+.electron {
+    border: none;
 }
 
 #app {
@@ -15,7 +20,6 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: transparent;
 }
 
 /* 全局 滚动条样式*/

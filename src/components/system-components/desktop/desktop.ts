@@ -16,3 +16,7 @@ export function desktop_minimize() {
 export function desktop_close() {
     ipcRenderer.send('window-quite')
 }
+
+export function desktop_max() {
+    ipcRenderer.send('window-max')
+}

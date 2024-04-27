@@ -23,6 +23,7 @@ process.env.VITE_PUBLIC = process.env.VITE_DEV_SERVER_URL
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
 
+
 // Set application name for Windows 10+ notifications
 if (process.platform === 'win32') app.setAppUserModelId(app.getName())
 
@@ -80,6 +81,8 @@ async function createWindow() {
         frame: false,
         resizable: false,
         maximizable: false,
+        titleBarStyle: 'hidden',
+        // transparent: true,
         webPreferences: {
             preload,
             nodeIntegration: true,
@@ -264,7 +267,7 @@ ipcMain.on("window-logout", () => {
 
 ipcMain.on("window-max", (event, args) => {
     if (win.isMaximized()) {
-        win.restore()
+        win.unmaximize()
     } else {
         win.maximize()
     }

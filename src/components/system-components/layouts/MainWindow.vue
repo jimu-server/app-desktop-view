@@ -1,6 +1,5 @@
 <template>
   <q-layout view="lHr lpR fFf">
-<!--     :class="theme.header.className"  -->
     <q-header
         :class="theme.header.className"
         style="-webkit-app-region: drag;"
@@ -17,7 +16,7 @@
           />
           <window-scroll v-show="widowsLabel.windowLabels.length !== 0"/>
           <q-space />
-          <q-btn dense flat :icon=" $q.dark.isActive?'jimu-light':'jimu-dark'" @click.stop="alter"
+          <q-btn dense square flat :icon=" $q.dark.isActive?'jimu-light':'jimu-dark'" @click.stop="alter"
                  style="height: 100%;width: 40px;-webkit-app-region: no-drag;"/>
           <WindowMinimizeBtn/>
           <WindowCloseBtn/>
@@ -65,8 +64,6 @@
         </template>
       </MainWindowTool>
     </q-drawer>
-
-
     <!--  聊天窗口 目标的信息窗口,单聊显示 好友信息及其好友设置,群聊则显示群信息和群设置  -->
     <q-drawer id="r-d" show-if-above side="right" :width="tool.right.width" behavior="desktop"
               bordered
@@ -110,7 +107,12 @@ import DefaultBtn from "@/components/system-components/tool/btn/DefaultBtn.vue";
 import {ToolLayout} from "@/components/system-components/model/menu";
 import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBtn.vue";
 import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMinimizeBtn.vue";
-import {desktop_logout} from "@/components/system-components/desktop/desktop";
+import {
+  desktop_login,
+  desktop_logout,
+  desktop_max,
+  desktop_minimize
+} from "@/components/system-components/desktop/desktop";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import AboutDialog from "@/components/system-components/other/AboutDialog.vue";
@@ -157,22 +159,10 @@ async function logout() {
 }
 
 
-function userHome() {
-  router.push("/app/user/home")
+function dbClick() {
+  desktop_max()
 }
 
-function infoOut() {
-  setTimeout(() => {
-    if (!infoShowOut.value) {
-      infoShow.value = false
-    }
-  }, 100)
-}
-
-function popupOut() {
-  infoShow.value = false
-  infoShowOut.value = false
-}
 
 /* 
 @description: 全局消息推送
