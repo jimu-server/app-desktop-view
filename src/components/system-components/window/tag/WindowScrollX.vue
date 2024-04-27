@@ -1,5 +1,5 @@
 <template>
-  <div class="window-scroll-box full-width" v-size="sizeChange">
+  <div class="window-scroll-box fit" v-size="sizeChange">
     <div class="window-scroll-x">
       <div class="window-scroll-content">
         <slot></slot>
@@ -60,7 +60,7 @@ function sizeChange(widht: number, height: number) {
 }
 
 .window-scroll-x::-webkit-scrollbar-thumb {
-  border-radius: 0px;
+  border-radius: 0;
   box-shadow: none;
   background: none;
 }

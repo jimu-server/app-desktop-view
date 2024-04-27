@@ -15,7 +15,7 @@
         <div class="fit column">
           <div class="full-width row justify-between" style="height: 32px">
             <div class="column justify-center" style="flex: 1">
-              <ScrollX class="full-width" style="height: 32px">
+              <ScrollX class="full-width" style="height: 32px ">
                 <div class="fit column justify-center">
                   <q-breadcrumbs gutter="none" class="full-width">
                     <q-breadcrumbs-el label="Home"/>
@@ -47,6 +47,8 @@
 </template>
 <script setup lang="ts">
 
+
+import ScrollX from "@/components/tool-components/chatGptTool/chat/editor/widget/ScrollX.vue";
 
 function scrollChange(event) {
   console.log(event)

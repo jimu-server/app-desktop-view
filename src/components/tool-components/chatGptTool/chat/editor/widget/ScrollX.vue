@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 
-import {reactive} from "vue";
+import {onMounted, onUnmounted, reactive} from "vue";
 
 const s = reactive({
   w: 0,
@@ -30,6 +30,14 @@ function sizeChange(widht: number, height: number) {
   s.w = widht
   s.h = height
 }
+
+onMounted(() => {
+  console.log(s.w, s.h)
+})
+
+onUnmounted(() => {
+  console.log(s.w, s.h)
+})
 </script>
 
 

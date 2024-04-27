@@ -1,5 +1,6 @@
 <template>
   <q-layout view="lHr lpR fFf">
+<!--     :class="theme.header.className"  -->
     <q-header
         :class="theme.header.className"
         style="-webkit-app-region: drag;"
@@ -14,7 +15,7 @@
           <q-btn dense flat :icon="!leftDrawerOpen?'jimu-arrow-double-right':'jimu-arrow-double-left'"
                  @click.stop="toggleLeftDrawer" style="margin-left: 5px;-webkit-app-region: no-drag;"
           />
-          <window-scroll v-if="widowsLabel.windowLabels.length !== 0"/>
+          <window-scroll v-show="widowsLabel.windowLabels.length !== 0"/>
           <q-space />
           <q-btn dense flat :icon=" $q.dark.isActive?'jimu-light':'jimu-dark'" @click.stop="alter"
                  style="height: 100%;width: 40px;-webkit-app-region: no-drag;"/>
