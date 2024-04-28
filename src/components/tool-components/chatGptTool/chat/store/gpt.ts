@@ -20,6 +20,7 @@ import {
 export const useGptStore = defineStore('gpt', {
     state: () => {
         return {
+            test: '',
             defaultAvatar: 'https://im-1252940994.cos.ap-nanjing.myqcloud.com/go.jpg',
             gptDefaultAvatar: 'public/GPT.png',
             // 可显示数据范围
@@ -76,9 +77,8 @@ export const useGptStore = defineStore('gpt', {
                 // 历史数据区间范围 marks 的区间来自于 当前历史消息内
                 marks: [0, 0],
                 defaultMarks: 0,
-
+                // 基础模型列表
                 baseModelList: [] as LLmMole[],
-
                 // 当前 对话所选则的模型
                 currentModel: null as LLmMole,
                 // 所有模型列表
@@ -92,22 +92,6 @@ export const useGptStore = defineStore('gpt', {
                     files: []
                 },
             },
-            params: {
-                SelectUserParams: {
-                    // 分页页码
-                    page: 1,
-                    // 每页条数
-                    size: 100,
-                    // 数据是否已经完全到底,用于增量加载的判断标识
-                    isEnd: false
-                },
-                SelectGroupParams: {
-                    page: 1,
-                    size: 100,
-                    isEnd: false
-                }
-            },
-            stream: {}
         }
     },
     persist: true,

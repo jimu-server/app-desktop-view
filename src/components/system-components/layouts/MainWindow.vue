@@ -129,8 +129,6 @@ const showAboutDialog = ref(false)
 const showSettingDialog = ref(false)
 const mini = ref(false)
 
-const infoShow = ref(false)
-const infoShowOut = ref(false)
 
 const theme = useThemeStore()
 
@@ -159,10 +157,6 @@ async function logout() {
 }
 
 
-function dbClick() {
-  desktop_max()
-}
-
 
 /* 
 @description: 全局消息推送
@@ -172,10 +166,6 @@ function Notification() {
 
 emitter.on(GlobalNotification, Notification)
 
-
-function updateConversation(data: ConversationEntity) {
-
-}
 
 /* 
   @description: 左侧抽屉隐藏 鼠标触发悬浮菜单展示
@@ -199,9 +189,6 @@ document.addEventListener('mousemove', (event) => {
   }
 })
 
-function openManageAccountWindow() {
-
-}
 
 
 function alter() {

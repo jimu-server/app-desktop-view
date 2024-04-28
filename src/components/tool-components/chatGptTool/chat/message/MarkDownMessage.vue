@@ -97,9 +97,7 @@ function beginTyping() {
             await reader.cancel()
             // 延迟查询消息补偿提前结束无法及时取出的消息
             setTimeout(async () => {
-              let message = await getMessage(props.message.id);
-              console.log(message.content)
-              ctx.UpdateConversationLastMsg(props.message.conversationID, message.content, props.message.picture)
+              await updateSelfMessage()
               end()
             }, 1000)
             console.log("typing stop..")
@@ -114,9 +112,7 @@ function beginTyping() {
             await reader.cancel()
             // 延迟查询消息补偿提前结束无法及时取出的消息
             setTimeout(async () => {
-              let message = await getMessage(props.message.id);
-              console.log(message.content)
-              ctx.UpdateConversationLastMsg(props.message.conversationID, message.content, props.message.picture)
+              await updateSelfMessage()
               end()
             }, 1000)
             console.log("typing stop..")
@@ -124,7 +120,7 @@ function beginTyping() {
           }
         }
         console.log("typing end..")
-        ctx.UpdateConversationLastMsg(props.message.conversationID, content.value, props.message.picture)
+        await updateSelfMessage()
         end()
       } catch (error) {
         console.error("Stream reading error:", error);
@@ -198,6 +194,12 @@ function end() {
   // 重置取消回复标识
   ctx.ui.stop = false
   console.log("Refresh status")
+}
+
+async function updateSelfMessage() {
+  let message = await getMessage(props.message.id);
+  ctx.UpdateConversationLastMsg(props.message.conversationID, message.content, props.message.picture)
+  ctx.CurrentChat.messageList[props.index] = message
 }
 
 
