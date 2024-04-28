@@ -69,7 +69,7 @@ export class RouterCache {
 // 树形结构
 export interface Tree<T> {
     entity: T
-    children: Array<Tree<T>>
+    children: Tree<T>[]
 }
 
 

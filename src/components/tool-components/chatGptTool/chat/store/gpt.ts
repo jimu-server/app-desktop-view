@@ -5,7 +5,7 @@ import {MessageObserver} from "@/plugins/evenKey";
 import {ConversationEntity, MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {
     AppChatConversationItem,
-    AppChatMessageItem,
+    AppChatMessageItem, KnowledgeFile,
     LLmMole
 } from "@/components/tool-components/chatGptTool/chat/model/model";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
@@ -15,6 +15,7 @@ import {
     getConversationMessage,
     getLLmMole
 } from "@/components/tool-components/chatGptTool/chatRequest";
+import {Tree} from "@/components/system-components/model/system";
 
 
 export const useGptStore = defineStore('gpt', {
@@ -89,7 +90,7 @@ export const useGptStore = defineStore('gpt', {
                     // 知识库导航目录
                     nva: [],
                     // 知识库导航目录内对应的所有文件
-                    files: []
+                    files: [] as Tree<KnowledgeFile>[],
                 },
             },
         }

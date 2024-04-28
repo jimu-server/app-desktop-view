@@ -1,8 +1,8 @@
 import axiosForServer from "@/plugins/axiosForServer";
-import {Result} from "@/components/system-components/model/system";
+import {Result, Tree} from "@/components/system-components/model/system";
 import {
     AppChatConversationItem,
-    AppChatMessageItem,
+    AppChatMessageItem, KnowledgeFile,
     LLmMole
 } from "@/components/tool-components/chatGptTool/chat/model/model";
 
@@ -137,6 +137,25 @@ export function deleteModel(name: string) {
 export function getBaseModel() {
     return new Promise<LLmMole[]>(resolve => {
         axiosForServer.get<Result<LLmMole[]>>("/api/chat/manage/modelList").then(({data}) => {
+            if (data.code === 200) {
+                if (data.data == null) {
+                    resolve([])
+                    return;
+                }
+                resolve(data.data)
+            }
+        })
+    })
+}
+
+
+export function getFiles(pid: string) {
+    return new Promise<Tree<KnowledgeFile>[]>(resolve => {
+        axiosForServer.get<Result<Tree<KnowledgeFile>[]>>("/api/chat/knowledge/list", {
+            params: {
+                pid: pid
+            }
+        }).then(({data}) => {
             if (data.code === 200) {
                 if (data.data == null) {
                     resolve([])

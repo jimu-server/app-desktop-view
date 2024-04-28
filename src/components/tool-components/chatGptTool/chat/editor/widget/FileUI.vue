@@ -4,20 +4,24 @@
       <q-icon name="jimu-wenjianjia1" size="24px"/>
     </div>
     <div class="file-name">
-      xxxxx
+      {{ info.entity.fileName }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import {KnowledgeFile} from "@/components/tool-components/chatGptTool/chat/model/model";
+import {Tree} from "@/components/system-components/model/system";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 
 const props = defineProps<{
-  file?: KnowledgeFile
+  info: Tree<KnowledgeFile>
 }>()
+const ctx = useGptStore()
 
 function dbClick() {
-
+  ctx.ui.knowledge.nva.push(props.info)
+  ctx.ui.knowledge.files = props.info.children
 }
 
 </script>
@@ -37,6 +41,7 @@ function dbClick() {
   height: 100%;
   align-content: center;
   padding-left: 5px;
+  user-select: none;
 }
 
 .file-ui:hover {

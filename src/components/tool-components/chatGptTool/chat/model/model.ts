@@ -65,17 +65,18 @@ export interface ProgressResponse {
 }
 
 export enum KnowledgeFileType {
-    Folder = 1,
-    File = 2,
+    Folder = 0,
+    File = 1,
 }
 
 export interface KnowledgeFile {
-    id?: string
-    pid?: string
-    name?: string
-    path?: string
+    id: string
+    pid: string
+    userId: string
+    fileName: string
+    filePath: string
     serverPath?: string
-    createTime?: string
+    createTime: string
     size?: string
-    type?: KnowledgeFileType
+    fileType: KnowledgeFileType
 }

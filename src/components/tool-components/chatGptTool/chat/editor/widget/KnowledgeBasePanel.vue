@@ -19,13 +19,11 @@
               <ScrollX class="fit">
                 <div class="fit column justify-center" style="height: 32px">
                   <q-breadcrumbs gutter="none" class="full-width">
-                    <q-breadcrumbs-el label="Home"/>
-                    <q-breadcrumbs-el label="Components"/>
-                    <q-breadcrumbs-el label="Breadcrumbs"/>
-                    <q-breadcrumbs-el label="Breadcrumbs"/>
-                    <q-breadcrumbs-el label="Breadcrumbs"/>
-                    <q-breadcrumbs-el label="Breadcrumbs"/>
-                    <q-breadcrumbs-el label="Breadcrumbs"/>
+                    <q-breadcrumbs-el v-for="(item,index) in ctx.ui.knowledge.nva" @click="back(index,item)">
+                      <el-link :type="index==ctx.ui.knowledge.nva.length-1?'default':'primary'">
+                        {{ item.entity.fileName }}
+                      </el-link>
+                    </q-breadcrumbs-el>
                   </q-breadcrumbs>
                 </div>
               </ScrollX>
@@ -36,9 +34,18 @@
             </div>
           </div>
           <div class="full-width column" style="flex-grow: 1">
-            <q-scroll-area class="fit" :visible="false">
-              <FileUI v-for="i in 20"/>
-            </q-scroll-area>
+            <transition enter-active-class="animate__animated animate__bounceIn">
+              <q-scroll-area class="fit" :visible="false">
+                <draggable :list="ctx.ui.knowledge.files"
+                           animation="100"
+                           style="flex-wrap: nowrap"
+                >
+                  <template #item="{element}">
+                    <FileUI :info="element"/>
+                  </template>
+                </draggable>
+              </q-scroll-area>
+            </transition>
           </div>
         </div>
 
@@ -48,7 +55,50 @@
 </template>
 <script setup lang="ts">
 import ScrollX from "@/components/tool-components/chatGptTool/chat/editor/widget/ScrollX.vue";
+import {onMounted, ref} from "vue";
+import {getFiles} from "@/components/tool-components/chatGptTool/chatRequest";
+import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {Tree} from "@/components/system-components/model/system";
+import {KnowledgeFile} from "@/components/tool-components/chatGptTool/chat/model/model";
+import draggable from 'vuedraggable'
 
+const ctx = useGptStore()
+const pid = ref('')
+
+function back(index: number, data: Tree<KnowledgeFile>) {
+  // 最后一个数据不处理
+  if (index === ctx.ui.knowledge.nva.length - 1) {
+    return;
+  }
+  // 查看根数据
+  if (index === 0) {
+    ctx.ui.knowledge.nva = [{
+      entity: {
+        fileName: 'root'
+      }
+    }]
+    getFiles('').then(res => {
+      ctx.ui.knowledge.files = res
+    })
+    return
+  }
+  ctx.ui.knowledge.files = ctx.ui.knowledge.nva[index].children
+  // 计算 当前所有后面有几个元素
+  let count = ctx.ui.knowledge.nva.length - 1 - index
+  console.log(ctx.ui.knowledge.nva.length, index, count)
+  ctx.ui.knowledge.nva.splice(index + 1, count)
+}
+
+onMounted(() => {
+  getFiles('').then(res => {
+    ctx.ui.knowledge.files = res
+    ctx.ui.knowledge.nva = [{
+      entity: {
+        fileName: 'root'
+      }
+    }]
+  })
+})
 </script>
 
 
