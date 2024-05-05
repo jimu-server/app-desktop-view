@@ -1,18 +1,10 @@
 <template>
-  <div class="row fit justify-center">
-    <div class="fit column justify-center">
-      <div class="row fit">
-        <div class="row fit menu-item" style="margin: 3px">
-          <div class="column justify-center" style="margin-left: 5px;align-content: center">
-            <slot>
-              <q-icon ref="iconRef" v-if="icon!==''" :name="icon" class="menu-icon"/>
-            </slot>
-          </div>
-          <div class="column justify-center" style="margin-left: 5px;align-content: center">
-            {{ text }}
-          </div>
-        </div>
-      </div>
+  <div class="row menu-item">
+    <div class="column justify-center" style="margin-left: 5px">
+      <q-icon ref="iconRef" :name="icon" class="menu-icon"/>
+    </div>
+    <div class="column justify-center" style="margin-left: 5px;margin-right: 10px">
+      {{ text }}
     </div>
   </div>
 </template>
@@ -55,10 +47,14 @@ function over(event) {
 
 <style scoped>
 
+.menu-icon {
+
+}
+
 .menu-item {
   height: 25px;
-  padding: 5px;
-  border-radius: 3px;
+  margin: 2px;
+  border-radius: 5px;
 }
 
 .menu-item:hover {

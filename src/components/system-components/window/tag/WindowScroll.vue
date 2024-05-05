@@ -1,6 +1,6 @@
 <template>
   <transition enter-active-class="animate__animated animate__bounceIn">
-    <WindowScrollX class="fit">
+    <WindowScrollX class="fit" style="height: 32px">
       <div class="fit row">
         <draggable class="row" :list="labels.windowLabels" :force-fallback="true"
                    animation="100"
@@ -17,7 +17,7 @@
                 <q-list dense>
                   <q-item class="column justify-center" dense clickable v-close-popup @click="labels.closeLabel"
                           style="padding: 0">
-                    <menu-item text="关闭"/>
+                    <menu-item icon="jimu-guanbi-2" text="关闭"/>
                   </q-item>
                   <q-item class="column justify-center" dense clickable v-close-popup @click="labels.closeOther"
                           style="padding: 0">
@@ -46,7 +46,6 @@ import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import emitter from "@/plugins/event";
 import {UpdateAuthEvent, UpdateAuthWindowEvent} from "@/plugins/evenKey";
 import {useAuthStore} from "@/store/auth";
-import WindowScrollX from "@/components/system-components/window/tag/WindowScrollX.vue";
 
 
 const labels = useWindowsStore()

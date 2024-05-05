@@ -1,7 +1,6 @@
 <template>
   <Transition class="animate__animated animate__zoomIn">
-    <div class="label-body bg-transparent" @mousemove="showClose" @mouseleave="hideClose"
-         style="-webkit-app-region: no-drag;">
+    <div class="label-body bg-transparent column" @mousemove="showClose" @mouseleave="hideClose">
       <div class="row fit">
         <div class="column justify-center" @click.stop="OpenWindow">
           <q-icon style="margin-left: 5px" :name="win.icon"/>
@@ -12,6 +11,10 @@
           </div>
         </div>
         <div class="column justify-center">
+          <!--          <q-btn v-if="showCloseFlag" size="sm" dense flat icon="close" @click.stop="CloseWindow"
+                           @mousemove="colseColorIn" @mouseleave="colseColorOut" :text-color="btn_hover_color"
+                           style="margin-right: 1px;"/>-->
+
           <q-btn v-if="showCloseFlag" size="sm" dense flat icon="jimu-guanbi-2" @click.stop="CloseWindow"
                  :text-color="'red'"
                  style="margin-right: 1px;"/>
@@ -110,7 +113,7 @@ onMounted(() => {
 .label-body {
   border-style: none;
   width: 100px;
-  height: 32px;
+  height: 40px;
   cursor: default;
   user-select: none;
   border-bottom: rgba(140, 147, 157, 0.34) 1px solid;

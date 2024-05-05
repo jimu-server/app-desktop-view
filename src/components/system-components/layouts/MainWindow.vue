@@ -9,6 +9,7 @@
             :style="{
             padding:0,
             borderBottom:widowsLabel.windowLabels.length <= 0 ?'none':'rgba(140,147,157,0.34) 1px solid',
+            height:'40px'
           }">
           <!--  侧边栏隐藏后的展开按钮   -->
           <q-btn dense flat :icon="!leftDrawerOpen?'jimu-arrow-double-right':'jimu-arrow-double-left'"

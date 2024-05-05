@@ -1,5 +1,5 @@
 <template>
-  <div class="window-scroll-box fit" v-size="sizeChange">
+  <div class="window-scroll-box full-width" v-size="sizeChange">
     <div class="window-scroll-x">
       <div class="window-scroll-content">
         <slot></slot>
@@ -25,9 +25,8 @@ const vSize = {
   },
 }
 
-function sizeChange(widht: number, height: number) {
-  console.log(widht, height)
-  s.w = widht
+function sizeChange(width: number, height: number) {
+  s.w = width
   s.h = height
 }
 </script>
@@ -60,7 +59,7 @@ function sizeChange(widht: number, height: number) {
 }
 
 .window-scroll-x::-webkit-scrollbar-thumb {
-  border-radius: 0;
+  border-radius: 0px;
   box-shadow: none;
   background: none;
 }

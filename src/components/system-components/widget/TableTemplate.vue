@@ -37,6 +37,7 @@
 
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
+
 import {colors} from 'quasar'
 import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 

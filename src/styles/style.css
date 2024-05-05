@@ -6,13 +6,8 @@
 body {
     width: 100vw;
     height: 100vh;
+    background: transparent;
     overflow: hidden;
-    background: white;
-
-}
-
-.electron {
-    border: none;
 }
 
 #app {
@@ -20,6 +15,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    background: transparent;
 }
 
 /* 全局 滚动条样式*/
@@ -89,6 +85,17 @@ div::-webkit-scrollbar-track {
 
 .el-dialog.is-draggable .el-dialog__header:hover {
     cursor: default !important;
+}
+
+
+.q-card.q-card--dark.q-dark {
+    box-shadow: none;
+}
+
+.q-menu--dark {
+    border-color: rgba(158, 160, 161, 0.54);
+    border-style: solid;
+    border-width: 1px;
 }
 
 

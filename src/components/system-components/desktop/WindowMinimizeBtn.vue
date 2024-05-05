@@ -5,7 +5,7 @@ import {desktop_minimize} from "@/components/system-components/desktop/desktop";
 
 <template>
   <q-btn dense square flat class="window-minimize" icon="jimu-zuixiaohua1" @click.stop="desktop_minimize"
-         style="height: 100%;width: 40px;-webkit-app-region: no-drag;"/>
+         style="height: 100%;width: 43px;-webkit-app-region: no-drag;"/>
 </template>
 
 <style scoped>

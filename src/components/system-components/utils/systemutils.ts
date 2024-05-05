@@ -22,59 +22,76 @@ export function debounce(fn: Function, delay: number) {
 
 export function formatTime(timeStamp) {
     let date = new Date(timeStamp);
-    let value = date.toLocaleString()
-    return getTimestampDifference(value);
+    return getConversationLastTime(date);
 }
 
-export function getTimestampDifference(value): string {
+export function getConversationLastTime(sendTime: Date) {
     let now = new Date();
-    let sendTime = new Date(value);
-    let differenceInMilliseconds = sendTime.getTime() - now.getTime();
 
-    // 对未来时间的处理
-    if (differenceInMilliseconds > 0) {
-        if (differenceInMilliseconds < 60000) {
-            return "片刻后";
+    console.log(`${sendTime.getFullYear() + '-' + sendTime.getMonth() + '-' + sendTime.getDate() + " " + sendTime.getUTCHours() + ':' + sendTime.getUTCMinutes()}`)
+    let y: any = sendTime.getUTCFullYear()
+    let m: any = sendTime.getUTCMonth()
+    let d: any = sendTime.getUTCDate()
+    let hh: any = sendTime.getUTCHours()
+    let mm: any = sendTime.getUTCMinutes()
+    let ss: any = sendTime.getUTCSeconds()
+
+    let ny: any = sendTime.getUTCFullYear()
+    let nm: any = sendTime.getUTCMonth()
+    let nd: any = sendTime.getUTCDate()
+    let week: any = sendTime.getUTCDay()
+    let weekValue: any = ''
+
+
+    if (ny == y && nm == m && nd == d) {
+        if (hh < 10) {
+            hh = '0' + hh
         }
-        if (differenceInMilliseconds < 3600000) {
-            return Math.floor(differenceInMilliseconds / 60000) + "分钟后";
+        if (mm < 10) {
+            mm = '0' + mm
         }
-        if (differenceInMilliseconds < 86400000) {
-            return Math.floor(differenceInMilliseconds / 3600000) + "小时后";
-        }
-        if (differenceInMilliseconds < 604800000) {
-            return Math.floor(differenceInMilliseconds / 86400000) + "天后";
-        }
-        if (differenceInMilliseconds < 2592000000) {
-            return Math.floor(differenceInMilliseconds / 604800000) + "周后";
-        }
-        if (differenceInMilliseconds < 31536000000) {
-            return Math.floor(differenceInMilliseconds / 2592000000) + "月后";
-        }
-        return Math.floor(differenceInMilliseconds / 31536000000) + "年后";
+        return `${hh + ':' + mm}`
     }
 
-    // 对过去时间的处理
-    differenceInMilliseconds = -differenceInMilliseconds; // 转为正值以简化计算
-    if (differenceInMilliseconds < 60000) {
-        return "刚刚";
+    switch (week) {
+        case 0:
+            weekValue = '周日'
+            break
+        case 1:
+            weekValue = '周一'
+            break
+        case 2:
+            weekValue = '周二'
+            break
+        case 3:
+            weekValue = '周三'
+            break
+        case 4:
+            weekValue = '周四'
+            break
+        case 5:
+            weekValue = '周五'
+            break
+        case 6:
+            weekValue = '周六'
+            break
     }
-    if (differenceInMilliseconds < 3600000) {
-        return Math.floor(differenceInMilliseconds / 60000) + "分钟前";
+
+    if (nd - d == 1) {
+        return '昨天'
     }
-    if (differenceInMilliseconds < 86400000) {
-        return Math.floor(differenceInMilliseconds / 3600000) + "小时前";
+    if (nd - d > 7) {
+        if (m < 10) {
+            m = '0' + m
+        }
+        if (d < 10) {
+            d = '0' + d
+        }
+        return `${y + '-' + m + '-' + d}`
     }
-    if (differenceInMilliseconds < 604800000) {
-        return Math.floor(differenceInMilliseconds / 86400000) + "天前";
+    if (nd - d > 1) {
+        return weekValue
     }
-    if (differenceInMilliseconds < 2592000000) {
-        return Math.floor(differenceInMilliseconds / 604800000) + "周前";
-    }
-    if (differenceInMilliseconds < 31536000000) {
-        return Math.floor(differenceInMilliseconds / 2592000000) + "月前";
-    }
-    return Math.floor(differenceInMilliseconds / 31536000000) + "年前";
 }
 
 
@@ -93,5 +110,9 @@ export function getIcon() {
         })
     })
     return arr
+}
+
+export function hasOwnProperty(obj: object, prop: string) {
+    return obj.hasOwnProperty(prop);
 }
 

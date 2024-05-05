@@ -1,201 +1,210 @@
 <template>
   <div id="login-page" class="fit row justify-center">
     <div class="fit column justify-center">
-      <div class="row justify-center">
-        <q-card id="login" ref="logRef" class="login-box">
-          <div class="fit" id="loginBox">
-            <!-- 账号登录 -->
-            <transition
-                enter-active-class="animate__animated animate__flipInY"
-            >
-              <div v-if="showPanel=='login'" class="fit row justify-center">
-                <div class=" full-height column justify-center" style="width: 85%">
-                  <q-form class="input  justify-center" autofocus autocorrect="off" autocomplete="off"
-                          autocapitalize="off"
-                          spellcheck="false">
-                    <div>
-                      <q-tabs
-                          v-model="tab"
-                          indicator-color="transparent"
-                          active-color="primary"
-                          class="bg-transparent"
-                      >
-                        <q-tab name="default" :ripple="false" label="账号密码"/>
-                        <q-tab name="phone" :ripple="false" label="短信登录"/>
-                      </q-tabs>
-                      <q-tab-panels v-model="tab" animated class="shadow-2 rounded-borders">
-                        <q-tab-panel name="default">
-                          <div class="full-width row justify-center">
-                            <q-input table-index
-                                     :ref="el=> loginInputRef[0]=el"
-                                     dense
-                                     outlined
-                                     v-model="account"
-                                     placeholder="账号/手机/邮箱"
-                                     :error="false"
-                                     style="width: 100%"
-                            >
-                              <template v-slot:prepend>
-                                <q-icon name="jimu-yonghuming" size="20px"/>
-                              </template>
-                            </q-input>
-                          </div>
-                          <div class="full-width row justify-center">
-                            <q-input table-index :ref="el=> loginInputRef[1]=el" dense outlined v-model="passwd"
-                                     type="password"
-                                     :error="false"
-                                     style="width: 100%"
-                                     placeholder="密码"
-                            >
-                              <template v-slot:prepend>
-                                <q-icon name="jimu-mima" size="20px"/>
-                              </template>
-                              <template v-slot:append>
-                                <el-link type="primary" @click="showPanel='forget'">忘记密码?</el-link>
-                              </template>
-                            </q-input>
-                          </div>
-                        </q-tab-panel>
-                        <q-tab-panel name="phone">
-                          <div class="full-width row justify-center">
-                            <q-input table-index
-                                     :ref="el=> loginInputRef[0]=el"
-                                     dense
-                                     outlined
-                                     v-model="phone"
-                                     placeholder="手机"
-                                     :error="false"
-                                     style="width: 100%"
-                            >
-                              <template v-slot:before>
-                                <q-select v-model="area" :options="areaOptions"
-                                          dense
-                                          options-dense
-                                          dropdown-icon=""
-                                          outlined
-                                          style="width: 50px"
-                                />
-                              </template>
-                            </q-input>
-                          </div>
-                          <div class="full-width row justify-center">
-                            <q-input table-index :ref="el=> loginInputRef[1]=el" dense outlined v-model="code"
-                                     :error="false"
-                                     style="width: 100%"
-                                     placeholder="验证码"
-                            >
-                              <template v-slot:append>
-                                <q-btn flat dense no-caps :disable="phone==''||flag" @click="sendCode">
-                                  <template v-if="!flag">
-                                    发送验证码
-                                  </template>
-                                  <template v-else>
-                                    {{ timepiece }}
-                                  </template>
-                                </q-btn>
-                              </template>
-                            </q-input>
-                          </div>
-                        </q-tab-panel>
-                      </q-tab-panels>
-                    </div>
-                    <div>
-                      <div class="row justify-between" style="padding-right: 8px;margin-bottom: 10px">
-                        <q-checkbox size="xs" v-model="keep" @update:model-value="keepChange" val="xs"
-                                    label="记住用户名"/>
-                        <q-space/>
-                        <div><span @click="showPanel='register'" class="register-but text-primary">注册账号</span></div>
+      <div class=" fit row justify-center">
+        <div class="fit column">
+          <q-bar class="bg-transparent" style="padding: 0;-webkit-app-region: drag; height: 40px">
+            <q-space/>
+            <WindowMinimizeBtn/>
+            <WindowCloseBtn/>
+          </q-bar>
+          <q-card id="login" ref="logRef" class="login-box" style="flex-grow: 1">
+            <div class="fit" id="loginBox">
+              <!-- 账号登录 -->
+              <transition
+                  enter-active-class="animate__animated animate__flipInY"
+              >
+                <div v-if="showPanel=='login'" class="fit row justify-center">
+                  <div class=" full-height column justify-center">
+                    <q-form class="input  justify-center" autofocus autocorrect="off" autocomplete="off"
+                            autocapitalize="off"
+                            spellcheck="false">
+                      <div>
+                        <q-tabs
+                            v-model="tab"
+                            indicator-color="transparent"
+                            active-color="primary"
+                            class="bg-transparent"
+                        >
+                          <q-tab name="default" :ripple="false" label="账号密码"/>
+                          <q-tab name="phone" :ripple="false" label="短信登录"/>
+                        </q-tabs>
+                        <q-tab-panels v-model="tab" animated class="shadow-2 rounded-borders">
+                          <q-tab-panel name="default">
+                            <div class="full-width row justify-center">
+                              <q-input table-index
+                                       :ref="el=> loginInputRef[0]=el"
+                                       dense
+                                       outlined
+                                       v-model="account"
+                                       placeholder="账号/手机/邮箱"
+                                       :error="false"
+                                       style="width: 100%"
+                              >
+                                <template v-slot:prepend>
+                                  <q-icon name="jimu-yonghuming" size="20px"/>
+                                </template>
+                              </q-input>
+                            </div>
+                            <div class="full-width row justify-center">
+                              <q-input table-index :ref="el=> loginInputRef[1]=el" dense outlined v-model="passwd"
+                                       type="password"
+                                       :error="false"
+                                       style="width: 100%"
+                                       placeholder="密码"
+                              >
+                                <template v-slot:prepend>
+                                  <q-icon name="jimu-mima" size="20px"/>
+                                </template>
+                                <template v-slot:append>
+                                  <el-link type="primary" @click="showPanel='forget'">忘记密码?</el-link>
+                                </template>
+                              </q-input>
+                            </div>
+                          </q-tab-panel>
+                          <q-tab-panel name="phone">
+                            <div class="full-width row justify-center">
+                              <q-input table-index
+                                       :ref="el=> loginInputRef[0]=el"
+                                       dense
+                                       outlined
+                                       v-model="phone"
+                                       placeholder="手机"
+                                       :error="false"
+                                       style="width: 100%"
+                              >
+                                <template v-slot:before>
+                                  <q-select v-model="area" :options="areaOptions"
+                                            dense
+                                            options-dense
+                                            dropdown-icon=""
+                                            outlined
+                                            style="width: 50px"
+                                  />
+                                </template>
+                              </q-input>
+                            </div>
+                            <div class="full-width row justify-center">
+                              <q-input table-index :ref="el=> loginInputRef[1]=el" dense outlined v-model="code"
+                                       :error="false"
+                                       style="width: 100%"
+                                       placeholder="验证码"
+                              >
+                                <template v-slot:append>
+                                  <q-btn flat dense no-caps :disable="phone==''||flag" @click="sendCode">
+                                    <template v-if="!flag">
+                                      发送验证码
+                                    </template>
+                                    <template v-else>
+                                      {{ timepiece }}
+                                    </template>
+                                  </q-btn>
+                                </template>
+                              </q-input>
+                            </div>
+                          </q-tab-panel>
+                        </q-tab-panels>
                       </div>
+                      <div>
+                        <div class="row justify-between" style="padding-right: 8px;margin-bottom: 10px">
+                          <q-checkbox size="xs" v-model="keep" @update:model-value="keepChange" val="xs"
+                                      label="记住用户名"/>
+                          <q-space/>
+                          <div><span @click="showPanel='register'" class="register-but text-primary">注册账号</span>
+                          </div>
+                        </div>
 
-                      <div class="full-width row justify-center">
-                        <q-btn color="primary" style="width: 96%" @click="login" :loading="loading">
-                          登录
-                          <template v-slot:loading>
-                            <q-spinner style="margin-right: 5px"/>
+                        <div class="full-width row justify-center">
+                          <q-btn color="primary" style="width: 96%" @click="login" :loading="loading">
                             登录
-                          </template>
-                        </q-btn>
-                      </div>
-                      <div class="row" style="margin-top: 10px;padding-right: 1px" @click="clause=!clause">
-                        <q-checkbox size="xs" v-model="clause" val="xs"/>
-                        <div class="column justify-center">
-                          <div style="user-select: none">
-                            已阅读并同意：&nbsp;
-                            <span class="clause-opt text-blue" @click.stop>隐私政策</span>&nbsp;、
-                            <span class="clause-opt text-blue" @click.stop>产品服务协议</span>
+                            <template v-slot:loading>
+                              <q-spinner style="margin-right: 5px"/>
+                              登录
+                            </template>
+                          </q-btn>
+                        </div>
+                        <div class="row" style="margin-top: 10px;padding-right: 1px" @click="clause=!clause">
+                          <q-checkbox size="xs" v-model="clause" val="xs"/>
+                          <div class="column justify-center">
+                            <div style="user-select: none">
+                              已阅读并同意：&nbsp;
+                              <span class="clause-opt text-blue" @click.stop>隐私政策</span>&nbsp;、
+                              <span class="clause-opt text-blue" @click.stop>产品服务协议</span>
+                            </div>
                           </div>
                         </div>
                       </div>
+                    </q-form>
+                  </div>
+                </div>
+              </transition>
+              <!-- 注册账号 -->
+              <transition
+                  enter-active-class="animate__animated animate__flipInY"
+              >
+                <div v-if="showPanel=='register'" class="row justify-center" style="width:100%;height: 100%">
+                  <div class="column justify-center" style="width: 70%">
+                    <el-form ref="registerRef" :model="registerForm" size="large" :rules="rules">
+                      <el-form-item prop="account">
+                        <el-input v-model="registerForm.account" placeholder="账号"></el-input>
+                      </el-form-item>
+                      <el-form-item prop="name">
+                        <el-input v-model="registerForm.name" placeholder="昵称"></el-input>
+                      </el-form-item>
+                      <el-form-item prop="password">
+                        <el-input type="password" v-model="registerForm.password" placeholder="密码"></el-input>
+                      </el-form-item>
+                      <el-form-item prop="confirmPassword">
+                        <el-input type="password" v-model="registerForm.confirmPassword"
+                                  placeholder="确认密码"></el-input>
+                      </el-form-item>
+                    </el-form>
+                    <div class="row justify-between" style="margin-top: 10px">
+                      <q-btn outline v-if="step==1" @click="cleanRegister" label="取消"/>
+                      <q-btn outline v-show="step == 1" @click="doRegister" color="primary" label="注册"/>
                     </div>
-                  </q-form>
-                </div>
-              </div>
-            </transition>
-            <!-- 注册账号 -->
-            <transition
-                enter-active-class="animate__animated animate__flipInY"
-            >
-              <div v-if="showPanel=='register'" class="row justify-center" style="width:100%;height: 100%">
-                <div class="column justify-center" style="width: 70%">
-                  <el-form ref="registerRef" :model="registerForm" size="large" :rules="rules">
-                    <el-form-item prop="account">
-                      <el-input v-model="registerForm.account" placeholder="账号"></el-input>
-                    </el-form-item>
-                    <el-form-item prop="name">
-                      <el-input v-model="registerForm.name" placeholder="昵称"></el-input>
-                    </el-form-item>
-                    <el-form-item prop="password">
-                      <el-input type="password" v-model="registerForm.password" placeholder="密码"></el-input>
-                    </el-form-item>
-                    <el-form-item prop="confirmPassword">
-                      <el-input type="password" v-model="registerForm.confirmPassword"
-                                placeholder="确认密码"></el-input>
-                    </el-form-item>
-                  </el-form>
-                  <div class="row justify-between" style="margin-top: 10px">
-                    <q-btn outline v-if="step==1" @click="cleanRegister" label="取消"/>
-                    <q-btn outline v-show="step == 1" @click="doRegister" color="primary" label="注册"/>
                   </div>
                 </div>
-              </div>
-            </transition>
-            <!--     忘记密码       -->
-            <transition
-                enter-active-class="animate__animated animate__flipInY"
-            >
-              <div v-if="showPanel=='forget'" class="fit column justify-center"
-                   style="padding-top: 10px;margin-bottom: 10px">
-                <q-option-group
-                    v-model="group"
-                    :options="options"
-                    @@update:model-value="groupChange"
-                    color="primary"
-                    inline
-                />
-                <div class="full-width row justify-center" style="flex-grow: 1">
-                  <template v-if="group=='phone'">
-                    <ForGetPassword ref="phoneForget" title="手机号"/>
-                  </template>
-                  <template v-if="group=='email'">
-                    <ForGetPassword ref="emailForget" title="邮箱号"/>
-                  </template>
-                </div>
-                <div class="full-width column">
-                  <div class="row justify-center" style="margin-bottom: 10px">
-                    <q-btn outline dense color="primary" @click="doReset" style="width: 90%;height: 36px">
-                      提交
-                    </q-btn>
+              </transition>
+              <!--     忘记密码       -->
+              <transition
+                  enter-active-class="animate__animated animate__flipInY"
+              >
+                <div v-if="showPanel=='forget'" class="fit column justify-center"
+                     style="padding-top: 10px;margin-bottom: 10px">
+                  <q-option-group
+                      v-model="group"
+                      :options="options"
+                      @@update:model-value="groupChange"
+                      color="primary"
+                      inline
+                  />
+                  <div class="full-width row justify-center" style="flex-grow: 1">
+                    <template v-if="group=='phone'">
+                      <ForGetPassword ref="phoneForget" title="手机号"/>
+                    </template>
+                    <template v-if="group=='email'">
+                      <ForGetPassword ref="emailForget" title="邮箱号"/>
+                    </template>
                   </div>
-                  <div class="row justify-center" style="margin-bottom: 10px">
-                    <q-btn outline dense @click="showPanel='login'" style="width: 90% ;height: 36px">
-                      取消
-                    </q-btn>
+                  <div class="full-width column">
+                    <div class="row justify-center" style="margin-bottom: 10px">
+                      <q-btn outline dense color="primary" @click="doReset" style="width: 90%;height: 36px">
+                        提交
+                      </q-btn>
+                    </div>
+                    <div class="row justify-center" style="margin-bottom: 10px">
+                      <q-btn outline dense @click="showPanel='login'" style="width: 90% ;height: 36px">
+                        取消
+                      </q-btn>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </transition>
-          </div>
-        </q-card>
+              </transition>
+            </div>
+          </q-card>
+        </div>
+
       </div>
     </div>
     <el-dialog
@@ -232,6 +241,9 @@ import {ElMessage, FormInstance, FormItemRule, FormRules} from "element-plus";
 import {loadUserInfo} from "@/components/system-components/utils/userutil";
 import {defaultLogin, doResetPassword, getPhoneCode, registerUser} from "@/components/system-components/request";
 import ForGetPassword from "@/components/system-components/ForGetPassword.vue";
+import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMinimizeBtn.vue";
+import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBtn.vue";
+import {desktop_login} from "@/components/system-components/desktop/desktop";
 
 const user = userStore()
 const router = useRouter()
@@ -402,6 +414,7 @@ function defaultLoginAction() {
       user.info.token = data.data.token
       await loadUserInfo()
       setTimeout(async () => {
+        desktop_login()
         await router.push(homePath)
         loading.value = false
       }, 1000)
@@ -535,6 +548,8 @@ onUnmounted(() => {
 #login-page {
   display: flex;
   flex-direction: column;
+  width: 360px;
+  height: 400px;
 }
 
 #login {
@@ -543,8 +558,7 @@ onUnmounted(() => {
 
 
 .login-box {
-  width: 360px;
-  height: 400px;
+
 }
 
 .login-box:hover {

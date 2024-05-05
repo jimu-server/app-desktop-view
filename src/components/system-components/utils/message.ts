@@ -1,11 +1,13 @@
 /*
 * @ description 发送存文本消息
 * */
-import {useGptStore} from "@/components/system-components/chat/store/chat_ctx";
-import {sys} from "@/components/system-components/model/system";
-import {MessageItem} from "@/components/system-components/chat/model/chat";
 
 
+
+
+
+
+import {MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
 
 async function send(data: MessageItem) {
 
