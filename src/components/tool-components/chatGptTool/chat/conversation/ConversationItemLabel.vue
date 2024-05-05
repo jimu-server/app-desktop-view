@@ -5,8 +5,10 @@
       :active="item!.active"
       clickable
       @click="selectChat(item,index)"
-      :active-class="item.active? 'chat-active text-white' : 'text-black'"
-
+      :active-class="item.active? 'chat-active text-white':'text-black'"
+      style="border-radius: 5px;margin-top: 5px"
+      :class="item.active?'chat-active text-white':'chat-unactive'"
+      :theme="theme.dark?'dark':'light'"
   >
     <!--    好友头像     -->
     <q-item-section avatar>
@@ -58,6 +60,7 @@ import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/g
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
 import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/chat/model/model";
 import {delConversation, getConversation} from "@/components/tool-components/chatGptTool/chatRequest";
+import {useThemeStore} from "@/store/theme";
 
 
 defineProps<{
@@ -72,7 +75,7 @@ const emits = defineEmits(
 )
 
 const ctx = useGptStore()
-
+const theme = useThemeStore()
 const list = ref([
   {
     name: "删除会话",
@@ -123,5 +126,20 @@ function latestMsg(conver: AppChatConversationItem) {
 
 
 <style scoped>
+
+</style>
+<style>
+.chat-active {
+  background-color: #0098fe;
+  color: #ffffff;
+}
+
+.chat-unactive {
+  background-color: rgba(234, 234, 234, 0.92);
+}
+
+.chat-unactive[theme="dark"] {
+  background-color: rgb(34, 34, 43);
+}
 
 </style>

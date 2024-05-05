@@ -1,11 +1,12 @@
 <template>
   <q-dialog
       v-model="model"
+      id="create_model"
   >
     <q-card
         flat
         style="width: 50vw;height: 60vh;max-width:100vw;overflow: hidden"
-        id="create_mode"
+
     >
       <div class="fit column" style="padding-left: 5px;padding-right: 5px">
         <div class="full-width row justify-between" style="padding-top: 10px">
@@ -39,23 +40,13 @@
           </div>
         </div>
         <div class="column" style="flex-grow: 1">
-          <div class="column" style="padding-top: 10px">
+          <div class="column full-height" style="padding-top: 10px;padding-bottom: 10px">
             <q-editor
                 v-model="modelFile"
                 placeholder="file content"
                 :toolbar="[]"
                 style="width: 100%;height: 100%"
             />
-          </div>
-          <div v-if="flag" style="margin-top: 10px">
-            <div class="full-width">
-              <q-linear-progress v-if="progressValue==0" size="md" :indeterminate="progressValue==0"
-                                 :value="progressValue"/>
-              <q-linear-progress v-else size="md" :value="progressValue"/>
-            </div>
-            <div class="full-width ellipsis text-grey-6" style="font-size: 10px;align-content: center">
-              {{ progressInfo }}
-            </div>
           </div>
         </div>
       </div>
@@ -70,8 +61,8 @@ import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/g
 import {computed, ref} from "vue";
 import {LLmMole, ProgressResponse} from "@/components/tool-components/chatGptTool/chat/model/model";
 import {GetHeaders} from "@/plugins/axiosutil";
-import {ElMessage, ElNotification} from "element-plus";
-import {deleteModel} from "@/components/tool-components/chatGptTool/chatRequest";
+import {ElMessage} from "element-plus";
+import {Stream} from "@/components/system-components/stream/stream";
 
 const model = defineModel({default: false, required: true})
 const ctx = useGptStore()
@@ -139,6 +130,19 @@ function getModelFileText(element: HTMLElement): string {
 }
 
 async function createModel() {
+  let htmlElement = document.getElementById('create_model');
+  console.log(htmlElement)
+  if (text.value == '') {
+    ElMessage({
+      message: '模型名不能为空',
+      type: 'warning',
+      duration: 100000,
+      appendTo: htmlElement,
+      grouping: true,
+      plain: true
+    })
+    return
+  }
   if (flag.value) return
   flag.value = true
   let doc = new DOMParser()
@@ -151,7 +155,7 @@ async function createModel() {
     modelfile: modelfile,
     stream: true,
   }
-  const response = await fetch('http://localhost:8080/api/chat/model/create', {
+  const response = await fetch('http://localhost:8080/api/chat/user/model/create', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -159,67 +163,31 @@ async function createModel() {
     },
     body: JSON.stringify(data),
   });
-  const reader = response.body.getReader()
-  const decoder = new TextDecoder('utf-8')
-  try {
-    while (true) {
-      // 检查停止下载
-      if (cleanFlag.value) {
-        await reader.cancel()
-        cleanFlag.value = false
-        flag.value = false
-        return
-      }
-      const {done, value} = await reader.read()
-      if (done) {
-        flag.value = false
-        break
-      }
-      let decodedData = decoder.decode(value);
-      let accumulatedData = ""; // Accumulate chunks of data here
-      accumulatedData += decodedData;
-      accumulatedData.split('\n').forEach(line => {
-        if (line) {
-          try {
-            let parsed = JSON.parse(line);
-            // 检查当前的流消息是否出现错误
-            let {code, streamFlag} = streamResponse(parsed);
-            if (streamFlag) {
-              // 根据业务码处理具体操作 当前默认结束客户端操作
-              if (code == 200) {
-                setTimeout(() => {
-                  flag.value = false
-                }, 1000)
-                return;
-              }
-              return
-            }
-            // console.log(parsed)
-            // 检查当前的流消息是否完成
-            if (parsed.status === 'success') {
-              progress.value = parsed
-              setTimeout(() => {
-                ElMessage({
-                  message: '创建成功',
-                  type: 'success',
-                  plain: true,
-                  appendTo: document.getElementById('create_mode')
-                })
-                flag.value = false
-              }, 2000)
-              return
-            }
-            progress.value = parsed
-          } catch (error) {
-            console.error("Error parsing JSON:", error);
-            console.error(line)
-          }
-        }
-      });
-    }
-  } catch (e) {
 
-  }
+  let stream = new Stream(response)
+
+  stream.setHandler((data: any, status: number) => {
+    console.log(data, status)
+    if (data.status === 'success') {
+      ElMessage({
+        message: '创建成功',
+        type: 'success',
+        plain: true,
+        appendTo: htmlElement
+      })
+      flag.value = false
+      // 刷新用户可选择的聊天模型列表
+      ctx.GetModelList()
+      setTimeout(() => {
+        model.value = false
+      }, 700)
+      return
+    }
+  })
+  stream.setEnd((data: any, status: number) => {
+    console.log(data, status)
+  })
+  await stream.listen()
 }
 
 
@@ -249,5 +217,9 @@ function streamResponse(value: any) {
 <style>
 #mode_download .q-scrollarea__content.absolute {
   width: 100%;
+}
+
+#create_model .q-card > div:not(.q--avoid-card-border), .q-card > img:not(.q--avoid-card-border) {
+  border-radius: 0;
 }
 </style>

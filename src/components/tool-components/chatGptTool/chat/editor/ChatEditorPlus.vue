@@ -5,7 +5,7 @@
         <GPTSettingPanel/>
       </ToolWidget>
       <ToolWidget>
-        <KnowledgeBasePanel/>
+        <KnowledgeOptionsPanel/>
       </ToolWidget>
       <div class="column justify-center">
         <q-toggle v-model="ctx.ui.autoHistory" size="sm" color="primary" checked-icon="jimu-shijian-2">
@@ -61,22 +61,37 @@
     </div>
     <div class="send-box row reverse">
       <div class="column justify-center">
-        <q-btn split dense color="primary" label="发 送" icon="jimu-send" @click="sendMessage"
-               style="width: 70px;height:30px;margin-right: 10px">
-        </q-btn>
+        <q-btn-dropdown no-caps split align="left" dense color="primary" :label="'发 送 '+'('+shape+')'"
+                        icon="jimu-send"
+                        @click="sendMessage"
+                        dropdown-icon="jimu-xiangxia-2"
+                        style="height:30px;margin-right: 10px">
+          <q-list dense>
+            <q-item dense clickable v-close-popup style="padding: 0" @click="shape='Enter'">
+              <menu-item text="Enter">
+                <q-radio dense v-model="shape" val="Enter"/>
+              </menu-item>
+            </q-item>
+            <q-item dense clickable v-close-popup style="padding: 0" @click="shape='Ctrl+Enter'">
+              <menu-item text="Ctrl+Enter">
+                <q-radio dense v-model="shape" val="Ctrl+Enter"/>
+              </menu-item>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {colors} from "quasar";
 import Editor from "./Editor.vue";
 import {IsEmpty} from "@/components/system-components/utils/systemutils";
 import {ChatMessageEntity, MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
-import KnowledgeBasePanel from "@/components/tool-components/chatGptTool/chat/editor/widget/KnowledgeBasePanel.vue";
+import KnowledgeOptionsPanel from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeOptionsPanel.vue";
 
 
 
@@ -101,6 +116,8 @@ const emits = defineEmits({
 
 const text = ref('')
 
+// shape 默认 回车按键发送消息
+const shape = ref()
 const editRef = ref()
 const characters = ref(0)
 const shame = ref(false)
@@ -113,6 +130,11 @@ const MaxHeight = ref({
   send: '25%'
 })
 
+if (!ctx.ui.send) {
+  shape.value = 'Enter'
+} else {
+  shape.value = 'Ctrl+Enter'
+}
 
 function stopReplying() {
   ctx.ui.stop = true
@@ -171,6 +193,14 @@ function sendAction(data: ChatMessageEntity[]) {
   ctx.chat_editor_content[current.Conversation.id] = ''
 }
 
+
+watch(() => shape.value, (value) => {
+  if (value === 'Ctrl+Enter') {
+    ctx.ui.send = true
+  } else {
+    ctx.ui.send = false
+  }
+})
 
 onMounted(() => {
 })

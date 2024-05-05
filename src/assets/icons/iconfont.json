@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9287422",
+      "name": "菜单",
+      "font_class": "caidan2",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "18532319",
+      "name": "数据生成规则",
+      "font_class": "shujushengchengguize",
+      "unicode": "e6e1",
+      "unicode_decimal": 59105
+    },
+    {
+      "icon_id": "7594806",
+      "name": "24gl-folderOpen",
+      "font_class": "folderOpen",
+      "unicode": "eabe",
+      "unicode_decimal": 60094
+    },
+    {
       "icon_id": "3876823",
       "name": "07 深度学习",
       "font_class": "shenduxuexi",

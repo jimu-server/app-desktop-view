@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4446394 */
-  src: url('iconfont.woff2?t=1714210161736') format('woff2'),
-       url('iconfont.woff?t=1714210161736') format('woff'),
-       url('iconfont.ttf?t=1714210161736') format('truetype');
+  src: url('iconfont.woff2?t=1714734961533') format('woff2'),
+       url('iconfont.woff?t=1714734961533') format('woff'),
+       url('iconfont.ttf?t=1714734961533') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.jimu-caidan2:before {
+  content: "\e623";
+}
+
+.jimu-shujushengchengguize:before {
+  content: "\e6e1";
+}
+
+.jimu-folderOpen:before {
+  content: "\eabe";
 }
 
 .jimu-shenduxuexi:before {

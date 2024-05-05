@@ -5,61 +5,64 @@
     <q-card
         flat
         style="width: 50vw;height: 60vh;max-width:100vw;overflow: hidden"
-        id="mode_download"
     >
-      <div class="fit column">
-        <div class="full-width row justify-center" style="padding-top: 10px">
-          <q-input dense v-model="text" outlined style="width: 95%">
-            <template v-slot:append>
-              <q-icon name="jimu-sousuo-2" />
-            </template>
-          </q-input>
-        </div>
-        <div class="column" style="flex-grow: 1">
-          <q-scroll-area class="fit" :visible="false">
-            <q-list class="fit">
-              <q-item v-for="(item,index) in ctx.ui.modelList">
-                <q-item-section avatar>
-                  <q-avatar :icon="'img:'+item.picture"/>
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label>
-                    <span>{{ item.name }}</span>
-                    <span style="margin-left: 5px" class="text-grey-7">{{ item.model }}</span>
-                  </q-item-label>
-                  <q-item-label v-if="!item.isDownload && item.downloads">
-                    <div class="full-width">
-                      <q-linear-progress v-if="progressValue==0" size="md" :indeterminate="progressValue==0"
-                                         :value="progressValue"/>
-                      <q-linear-progress v-else size="md" :value="progressValue">
-                      </q-linear-progress>
-                    </div>
-                    <div class="full-width ellipsis text-grey-6" style="font-size: 10px;align-content: center">
-                      {{ progressInfo }}
-                    </div>
-                  </q-item-label>
-                </q-item-section>
-                <q-item-section avatar>
-                  <template v-if="item.isDownload">
-                    <span class="text-grey-7" style="font-size: 10px">以拉取</span>
-                  </template>
-                  <template v-else>
-                    <q-btn v-if="!flag" flat dense icon="jimu-yunxiazai_o" @click="downloadModel(item)"
-                           color="primary"/>
-                    <q-btn v-else flat dense icon="jimu-guanbi" @click="clean"/>
-                  </template>
-                </q-item-section>
-                <q-item-section avatar v-if="item.isDownload">
-                  <div class="fit column justify-center">
-                    <q-btn dense icon="jimu-shanchu" color="red" flat @click="delModel(item)"/>
-                  </div>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-scroll-area>
+      <div class="fit" id="user-model-manage">
+        <div class="column fit">
+          <div class="full-width row justify-center" style="padding-top: 10px">
+            <q-input dense v-model="text" outlined style="width: 95%">
+              <template v-slot:append>
+                <q-icon name="jimu-sousuo-2"/>
+              </template>
+            </q-input>
+          </div>
+          <div class="column" style="flex-grow: 1">
+            <q-scroll-area class="fit" :visible="false">
+              <q-list class="fit">
+                <template v-for="(item,index) in ctx.ui.modelList">
+                  <!-- id==pid 的模型属于系统预置模型,不能暴露给用户个人操作 -->
+                  <q-item v-if="item.id!=item.pid">
+                    <q-item-section avatar>
+                      <q-avatar :icon="'img:'+item.picture"/>
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>
+                        <span>{{ item.name }}</span>
+                        <span style="margin-left: 5px" class="text-grey-7">{{ item.model }}</span>
+                      </q-item-label>
+                      <q-item-label v-if="!item.isDownload && item.downloads">
+                        <div class="full-width">
+                          <q-linear-progress v-if="progressValue==0" size="md" :indeterminate="progressValue==0"
+                                             :value="progressValue"/>
+                          <q-linear-progress v-else size="md" :value="progressValue">
+                          </q-linear-progress>
+                        </div>
+                        <div class="full-width ellipsis text-grey-6" style="font-size: 10px;align-content: center">
+                          {{ progressInfo }}
+                        </div>
+                      </q-item-label>
+                    </q-item-section>
+                    <q-item-section avatar>
+                      <template v-if="item.isDownload">
+                        <span class="text-grey-7" style="font-size: 10px">以拉取</span>
+                      </template>
+                      <template v-else>
+                        <q-btn v-if="!flag" flat dense icon="jimu-yunxiazai_o" @click="downloadModel(item)"
+                               color="primary"/>
+                        <q-btn v-if="item.downloads" flat dense icon="jimu-guanbi" @click="clean"/>
+                      </template>
+                    </q-item-section>
+                    <q-item-section avatar v-if="item.isDownload">
+                      <div class="fit column justify-center">
+                        <q-btn dense icon="jimu-shanchu" color="red" flat @click="delModel(item)"/>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </template>
+              </q-list>
+            </q-scroll-area>
+          </div>
         </div>
       </div>
-
     </q-card>
   </q-dialog>
 </template>
@@ -67,20 +70,21 @@
 <script setup lang="ts">
 
 import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {LLmMole, ProgressResponse} from "@/components/tool-components/chatGptTool/chat/model/model";
 import {GetHeaders} from "@/plugins/axiosutil";
 import {ElMessage, ElNotification} from "element-plus";
 import {deleteModel} from "@/components/tool-components/chatGptTool/chatRequest";
+import {useAppStore} from "@/store/app";
 
-const model = defineModel({default: false, required: true})
 const ctx = useGptStore()
 // 只允许单个下载
 const flag = ref(false)
 const cleanFlag = ref(false)
 const progress = ref<ProgressResponse>(null)
 const text = ref('')
-
+const app = useAppStore()
+const model = defineModel({default: false})
 // 计算下载进度
 const progressValue = computed(() => {
   if (progress.value == null) {
@@ -211,15 +215,13 @@ async function delModel(item: LLmMole) {
     ElMessage({
       message: '删除成功',
       plain: true,
-      appendTo: document.getElementById('mode_download')
+      appendTo: document.getElementById('mode-manage')
     })
     // 需要根据 当前ui选择的 model 做出修改
     item.downloads = false
     item.isDownload = false
-    if (ctx.ui.currentModel.model == item.model) {
-      // 如果删除的是当前使用的模型 则需要清空当前选择的模型,选取列表第一个模型作为当前模型
-      ctx.ui.currentModel = ctx.ui.modelList[0]
-    }
+    // 更新聊天可选模型列表
+    await ctx.GetModelList()
   }
 }
 
@@ -241,6 +243,10 @@ function streamResponse(value: any) {
   };
 }
 
+onMounted(() => {
+  ctx.GetBaseModelList()
+})
+
 </script>
 
 
@@ -248,7 +254,7 @@ function streamResponse(value: any) {
 
 </style>
 <style>
-#mode_download .q-scrollarea__content.absolute {
+#mode-manage .q-scrollarea__content.absolute {
   width: 100%;
 }
 </style>

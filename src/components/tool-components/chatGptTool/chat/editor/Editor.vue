@@ -1,9 +1,6 @@
 <template>
-  <div class="editor fit column" @click="Focus" style="overflow: auto">
-    <!--    <div v-if="isRef" style="width: 100%;">
-          <EditorRefMessage v-model:show="isRef" :message="message"/>
-        </div>-->
-    <div class="fit" id="editor" @paste="Paste" spellcheck="false"></div>
+  <div class="editor fit column" @click="Focus" style="overflow: auto;position: relative">
+    <div ref="editorArea" class="fit" id="editor" @paste="Paste" spellcheck="false"></div>
     <q-menu
         context-menu
     >
@@ -25,7 +22,7 @@
 
 <script setup lang="ts">
 
-import {onMounted, onUnmounted, ref} from "vue";
+import {onMounted, onUnmounted, reactive, ref} from "vue";
 
 
 // CKEditorInspector 编辑器开发的检查工具
@@ -38,11 +35,11 @@ import {colors} from "quasar";
 import {BalloonEditor} from "@ckeditor/ckeditor5-editor-balloon";
 import {keyCodes} from '@ckeditor/ckeditor5-utils/src/keyboard';
 
-import emitter from "@/plugins/event";
-import {MessageAt, MessageRef, MessageTest} from "@/plugins/evenKey";
 import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {ChatMessageEntity, MessageItem, MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {createEditor} from "@/components/tool-components/chatGptTool/chat/editor/ckeditor";
+import {TextWatcher} from "@ckeditor/ckeditor5-typing";
+import {createRegExp} from "@ckeditor/ckeditor5-mention/src/mentionui";
 
 
 
@@ -68,7 +65,7 @@ const props = defineProps({
   },
 })
 
-
+const editorArea = ref()
 // 编辑器 当前的字符数量双向绑定
 const characters = defineModel('characters', {default: 0})
 const ctx = useGptStore()
@@ -83,10 +80,6 @@ let editor: BalloonEditor = null
 
 let editorContent = ''
 
-const toolbarConfig = {
-  toolbar: ['heading', 'alignment', '|', 'bold', 'italic', 'highlight', '|', 'code', 'codeBlock'],
-}
-
 // 编辑器的配置 (相对固定的比一部分配置)
 const editorConfig = {
   wordCount: {
@@ -97,12 +90,6 @@ const editorConfig = {
 }
 
 const toolbar = ref()
-
-
-/*if (props.shame) {
-  toolbar.value = toolbarConfig
-}*/
-
 
 function insert(data: ChatMessageEntity) {
   switch (data.contentType) {
@@ -278,68 +265,7 @@ function copyVideo(file: Blob) {
 
 }
 
-/*
-* @description 获取快捷 At 列表提示到 编辑器中
-* */
-/*function getFeedItems(queryText: string): Promise<Array<MentionFeedItem>> {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      // 从 editor 中获过滤输入文本 获取 At 列表
-      let itemsToDisplay = props.ats.filter(isItemMatching)
-      resolve(itemsToDisplay);
-    }, 100);
-  });
 
-  function isItemMatching(item: any) {
-    const searchString = queryText.toLowerCase();
-    return (item.name.toLowerCase().includes(searchString) || item.id.toLowerCase().includes(searchString)
-    );
-  }
-}*/
-
-/*
- * @description 编辑器At 列表渲染列表项
- */
-function customItemRenderer(item) {
-  let insert = null
-  insert = document.createElement("div")
-  insert.appendChild(document.createTextNode(item.id))
-  return insert;
-}
-
-/*
-* @description 编辑消息菜单回复消息处理
-* */
-function MessageRefHandler(data: MessageItem) {
-  // 清空编辑器 然后处理回复消息
-  message.value = data
-  isRef.value = true
-}
-
-
-/*
-* @description 编辑 @ 消息
-* */
-function MessageAtHandler(data: MessageItem) {
-  const focus = editor.model.document.selection.focus
-  editor.execute('mention', {
-    marker: '@',
-    mention: {
-      id: `@${data.sendID}`,
-    },
-    range: editor.model.createRange(focus.getShiftedBy(-1), focus)
-  });
-}
-
-
-function TestHandler(data: any) {
-  editor.execute('insertFile', data)
-}
-
-
-emitter.on(MessageRef, MessageRefHandler)
-emitter.on(MessageAt, MessageAtHandler)
-emitter.on(MessageTest, TestHandler)
 
 onMounted(async () => {
   let elementById = document.querySelector("#editor") as HTMLElement;
@@ -350,24 +276,6 @@ onMounted(async () => {
   // 开启 or 关闭 对指定的编辑区域检查
   // CKEditorInspector.attach(balloonEditor)
 })
-
-// 监听 编辑器模式的切换变化
-// 后续会根据模式切换变化来重新初始化编辑器 (取消模式变化监听)
-// watch(() => props.shame, async (value, oldValue) => {
-//   let elementById = document.querySelector("#editor") as HTMLElement;
-//   await editor.destroy()
-//   if (value) {
-//     editor = await createEditor(elementById, {...editorConfig, ...toolbar.value})
-//     EditorEvents(editor)
-//     console.log("切换编辑器为富文本")
-//   } else {
-//     editor = await createEditor(elementById, {...editorConfig})
-//     EditorEvents(editor)
-//     console.log("切换编辑器为普通本")
-//   }
-//   editor.setData(editorContent)
-// })
-
 
 function EditorEvents(editor: BalloonEditor) {
   // 监听实现删除整个 小部件
@@ -397,7 +305,8 @@ function EditorEvents(editor: BalloonEditor) {
     // 判断 ctrl+enter 组合发送消息
     if (keyCodes.enter === data.keyCode && data.ctrlKey) {
       // 检查当前的消息模式
-      if (!ctx.ui.send) {
+      if (ctx.ui.send) {
+        console.log('ctrl+enter')
         // 执行发送消息触发事件
         let msg = Message()
         emits('send', msg)
@@ -412,7 +321,8 @@ function EditorEvents(editor: BalloonEditor) {
 
     // 没有 按住 ctrl 使用 enter 发送消息
     if (keyCodes.enter === data.keyCode && !data.ctrlKey) {
-      if (ctx.ui.send) {
+      if (!ctx.ui.send) {
+        console.log('enter')
         // 执行发送消息触发事件
         let msg = Message()
         emits('send', msg)
@@ -436,12 +346,25 @@ function EditorEvents(editor: BalloonEditor) {
     editorContent = editor.getData()
     emits('input', editorContent)
   });
+
+  // 文本观察器
+  const watcher = new TextWatcher(editor.model, createTestCallback('/', 0));
+  watcher.on('matched', (evt, data) => {
+
+  });
+  watcher.on('unmatched', () => {
+    console.log("unmatched")
+  });
+}
+
+function createTestCallback(marker, minimumCharacters) {
+  const regExp = createRegExp(marker, minimumCharacters);
+
+  return text => regExp.test(text);
 }
 
 onUnmounted(() => {
-  emitter.off(MessageRef, MessageRefHandler)
-  emitter.off(MessageAt, MessageAtHandler)
-  emitter.off(MessageTest, TestHandler)
+
 })
 
 </script>

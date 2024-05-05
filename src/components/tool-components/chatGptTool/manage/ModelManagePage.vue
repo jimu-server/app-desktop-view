@@ -40,7 +40,7 @@
                   <template v-else>
                     <q-btn v-if="!flag" flat dense icon="jimu-yunxiazai_o" @click="downloadModel(item)"
                            color="primary"/>
-                    <q-btn v-else flat dense icon="jimu-guanbi" @click="clean"/>
+                    <q-btn v-if="item.downloads" flat dense icon="jimu-guanbi" @click="clean"/>
                   </template>
                 </q-item-section>
                 <q-item-section avatar v-if="item.isDownload">
@@ -210,10 +210,8 @@ async function delModel(item: LLmMole) {
     // 需要根据 当前ui选择的 model 做出修改
     item.downloads = false
     item.isDownload = false
-    if (ctx.ui.currentModel.model == item.model) {
-      // 如果删除的是当前使用的模型 则需要清空当前选择的模型,选取列表第一个模型作为当前模型
-      ctx.ui.currentModel = ctx.ui.modelList[0]
-    }
+    // 更新聊天可选模型列表
+    await ctx.GetModelList()
   }
 }
 

@@ -1,0 +1,44 @@
+<template>
+  <OllamaModelSelect/>
+  <q-btn dense flat icon="jimu-caidan1">
+    <q-menu
+        anchor="bottom end" self="top right"
+        fit
+        transition-show="scale"
+        transition-hide="scale"
+        :offset="[13,0]"
+    >
+      <q-list dense>
+        <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
+          <menu-item icon="jimu-Model" text="我的模型" @click="userModelManageFlag=true"/>
+        </q-item>
+        <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
+          <menu-item icon="jimu-folderOpen" text="文件管理" @click="fileManageFlag=true"/>
+        </q-item>
+        <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
+          <menu-item icon="jimu-chuangjian" text="创建模型" @click="ollamaCreateFlag=true"/>
+        </q-item>
+      </q-list>
+    </q-menu>
+  </q-btn>
+  <KnowledgeFileManage v-model="fileManageFlag"/>
+  <OllamaCreateModel v-model="ollamaCreateFlag"/>
+  <UserModelManage v-model="userModelManageFlag"/>
+</template>
+
+<script setup lang="ts">
+
+import OllamaModelSelect from "@/components/tool-components/chatGptTool/widget/OllamaModelSelect.vue";
+import MenuItem from "@/components/system-components/widget/MenuItem.vue";
+import {ref} from "vue";
+import KnowledgeFileManage from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeFileManage.vue";
+
+const fileManageFlag = ref(false)
+const ollamaCreateFlag = ref(false)
+const userModelManageFlag = ref(false)
+</script>
+
+
+<style scoped>
+
+</style>

@@ -18,9 +18,9 @@
           <div style="overflow:hidden;flex-grow: 1">
             <q-scroll-area :visible="false" class="fit">
               <div class="fit" style="overflow:hidden;">
-                <q-list padding>
+                <q-list padding style="padding: 5px">
                   <ConversationItemLabel
-                      v-for="(item,index) in ctx.CurrentChat.conversationList"
+                      v-for="(item,index) in ctx.sortConversation"
                       :item="item"
                       :index="index"
                       @select="selectChat"/>
@@ -34,11 +34,11 @@
       <!--   聊天消息展示以及消息输入面板   -->
       <template v-slot:after>
         <q-splitter
+            v-if="ctx.ui.showChat "
             v-model="splitterModel2"
             :limits="splitterModel2Limit"
             horizontal
             reverse
-            v-if="ctx.ui.showChat "
             separator-class="separator"
             style="overflow: hidden"
         >
@@ -81,7 +81,7 @@ import {
   MessageType
 } from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {SendTextMessage} from "@/components/tool-components/chatGptTool/gptutil";
-
+import draggable from 'vuedraggable'
 
 const {getPaletteColor} = colors
 
@@ -125,7 +125,9 @@ function selectChat(data: ConversationEntity, index: number) {
   // 切换当前会话消息选中状态
   ctx.SetCurrentChat(data, index)
   setTimeout(() => {
-    messageListRef.value.MoveScrollBottom()
+    if (messageListRef.value != null) {
+      messageListRef.value.MoveScrollBottom()
+    }
   }, 100)
 }
 
@@ -231,10 +233,7 @@ onMounted(init)
   color: v-bind('getPaletteColor("primary")');
 }
 
-.chat-active {
-  background-color: #0098fe;
-  color: #ffffff;
-}
+
 </style>
 
 

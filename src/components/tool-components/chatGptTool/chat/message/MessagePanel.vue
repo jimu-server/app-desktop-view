@@ -8,32 +8,11 @@
             <div style="margin-left: 5px;margin-right:10px;user-select: none;">
               {{ ctx.CurrentChat.Current.Conversation.title }}
             </div>
-            <!--                      <div>
-                                    <q-badge :color="ctx.CurrentChat.status==0?'red':'green'" rounded/>
-                                  </div>-->
           </div>
         </div>
       </div>
       <q-space/>
-      <OllamaModelSelect/>
-      <q-btn dense flat icon="jimu-caidan1">
-        <q-menu
-            anchor="bottom end" self="top right"
-            fit
-            transition-show="scale"
-            transition-hide="scale"
-            :offset="[13,0]"
-        >
-          <q-list dense>
-            <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-              <menu-item icon="jimu-Model" text="模型管理" @click="ollamaManageFlage=true"/>
-            </q-item>
-            <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-              <menu-item icon="jimu-chuangjian" text="创建模型" @click="ollamaCreateFlag=true"/>
-            </q-item>
-          </q-list>
-        </q-menu>
-      </q-btn>
+      <MessageHeaderBar/>
     </q-toolbar>
     <div style="height:89%;overflow-x: hidden;">
       <q-scroll-area ref="scrollAreaRef" id="messageScrollArea" class="fit" :visible="false"
@@ -59,8 +38,6 @@
         </div>
       </q-scroll-area>
     </div>
-    <OllamaModelManage v-model="ollamaManageFlage"/>
-    <OllamaCreateModel v-model="ollamaCreateFlag"/>
   </div>
 </template>
 
@@ -74,12 +51,12 @@ import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/g
 import {MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {updateTheme} from "@/components/tool-components/chatGptTool/chat/style/update";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
-import OllamaModelManage from "@/components/tool-components/chatGptTool/widget/OllamaModelManage.vue";
 import OllamaModelSelect from "@/components/tool-components/chatGptTool/widget/OllamaModelSelect.vue";
+import KnowledgeFileManage from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeFileManage.vue";
 
 const scrollAreaRef = ref()
 const ctx = useGptStore()
-const ollamaManageFlage = ref(false)
+const fileManageFlag = ref(false)
 const ollamaCreateFlag = ref(false)
 defineExpose({
   MoveScrollBottom,

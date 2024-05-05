@@ -24,7 +24,7 @@ import {MessageRef} from "@/plugins/evenKey";
 
 import emitter from "@/plugins/event";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
-import {MessageItem} from "@/components/system-components/tool/chatGptTool/chat/model/chat";
+import {MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
 
 
 const props = defineProps<{ message?: MessageItem }

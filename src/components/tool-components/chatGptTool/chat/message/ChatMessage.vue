@@ -35,49 +35,69 @@
         <MarkDownMessage v-if="message.role!=='user'" :message="message" :index="index" @height-change="isFold"/>
         <!--        <MarkDownMessage v-if="message.role=='assistant'" :message="message" :index="index"/>-->
       </div>
-      <!-- 消息页角 -->
-      <div class="chat-footer" @mouseover="overFooter=true" @mouseleave="outOverFooter">
+      <!-- 消息页角 该部分对用户暂时不要使用 v-if 进行屏蔽 不显示展位 -->
+      <div v-if="message.role!=='user'" class="chat-footer" @mouseover="overFooter=true" @mouseleave="outOverFooter">
         <!--  gpt消息操作      -->
         <template v-if="!send">
           <!--    消息折叠遮罩      -->
           <div v-show="foldFlag" class="gpt-fold" :theme="theme.dark?'dark':''"></div>
           <!--    消息操作按钮      -->
-          <div v-show="isShowAction" class="full-width row reverse" style="margin-top: 5px">
-            <q-icon class="msg-option" size="15px" dense flat name="jimu-fuzhi">
-              <q-tooltip :offset="[0, 10]">
-                复制
-              </q-tooltip>
-            </q-icon>
-            <q-icon class="msg-option" size="15px" dense flat name="jimu-diancai">
-              <q-tooltip :offset="[0, 10]">
-                踩
-              </q-tooltip>
-            </q-icon>
-            <q-icon class="msg-option" size="15px" dense flat name="jimu-dianzan">
-              <q-tooltip :offset="[0, 10]">
-                赞
-              </q-tooltip>
-            </q-icon>
-            <q-icon v-if="!doRetry" class="msg-option" size="15px" dense flat name="jimu-a-zhongshi1" @click="retry">
-              <q-tooltip :offset="[0, 10]">
-                重试
-              </q-tooltip>
-            </q-icon>
-            <q-spinner-ios
-                v-else
-                class="msg-option"
-                color="primary"
-                size="15px"
-                :thickness="2"
-            />
-            <q-icon v-show="isShowFoldAction" class="msg-option" size="15px" dense flat
-                    :name="foldFlag?'jimu-zhankai':'jimu-shouqi'"
-                    @click="check_fold">
-              <q-tooltip :offset="[0, 10]">
-                {{ foldFlag ? '展开' : '收起' }}
-              </q-tooltip>
-            </q-icon>
+          <div class="full-width row reverse" style="margin-top: 5px">
+            <MessageAction v-show="isShowAction">
+              <q-icon class="msg-option" size="15px" dense flat name="jimu-shanchu">
+                <q-tooltip :offset="[0, 10]">
+                  删除
+                </q-tooltip>
+              </q-icon>
+            </MessageAction>
+            <MessageAction v-show="isShowAction">
+              <q-icon class="msg-option" size="15px" dense flat name="jimu-fuzhi">
+                <q-tooltip :offset="[0, 10]">
+                  复制
+                </q-tooltip>
+              </q-icon>
+            </MessageAction>
 
+            <MessageAction v-show="isShowAction">
+              <q-icon class="msg-option" size="15px" dense flat name="jimu-diancai">
+                <q-tooltip :offset="[0, 10]">
+                  踩
+                </q-tooltip>
+              </q-icon>
+            </MessageAction>
+
+            <MessageAction v-show="isShowAction">
+              <q-icon class="msg-option" size="15px" dense flat name="jimu-dianzan">
+                <q-tooltip :offset="[0, 10]">
+                  赞
+                </q-tooltip>
+              </q-icon>
+            </MessageAction>
+
+            <MessageAction v-show="isShowAction">
+              <q-icon v-if="!doRetry" class="msg-option" size="15px" dense flat name="jimu-a-zhongshi1" @click="retry">
+                <q-tooltip :offset="[0, 10]">
+                  重试
+                </q-tooltip>
+              </q-icon>
+              <q-spinner-ios
+                  v-else
+                  class="msg-option"
+                  color="primary"
+                  size="15px"
+                  :thickness="2"
+              />
+            </MessageAction>
+
+            <MessageAction v-show="isShowAction">
+              <q-icon v-show="isShowFoldAction" class="msg-option" size="15px" dense flat
+                      :name="foldFlag?'jimu-zhankai':'jimu-shouqi'"
+                      @click="check_fold">
+                <q-tooltip :offset="[0, 10]">
+                  {{ foldFlag ? '展开' : '收起' }}
+                </q-tooltip>
+              </q-icon>
+            </MessageAction>
           </div>
         </template>
         <!--  用户消息操作      -->
@@ -99,6 +119,7 @@ import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/
 import {retryMessage} from "@/components/tool-components/chatGptTool/gptutil";
 import MarkDownMessage from "@/components/tool-components/chatGptTool/chat/message/MarkDownMessage.vue";
 import {useThemeStore} from "@/store/theme";
+import MessageAction from "@/components/tool-components/chatGptTool/chat/message/MessageAction.vue";
 
 const theme = useThemeStore()
 const ctx = useGptStore()

@@ -3,7 +3,7 @@
     <div ref="typing" class="markdown-message gpt-message" v-html="info.content"></div>
   </template>
   <template v-else-if="!send">
-    <div class="fit" ref="typingBox" style="position: relative">
+    <div  ref="typingBox" style="position: relative">
       <div ref="typing" class="markdown-message gpt-message" :theme="theme.dark?'dark':''" v-html="info.content"
            v-height="height"></div>
       <div ref="cursor" v-show="showCursor" :theme="theme.dark?'dark':''" class="typing-cursor"></div>
@@ -198,7 +198,7 @@ function end() {
 
 async function updateSelfMessage() {
   let message = await getMessage(props.message.id);
-  ctx.UpdateConversationLastMsg(props.message.conversationID, message.content, props.message.picture)
+  ctx.UpdateConversationLastMsg(props.message.conversationID, message)
   ctx.CurrentChat.messageList[props.index] = message
 }
 

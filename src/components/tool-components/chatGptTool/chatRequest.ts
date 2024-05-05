@@ -1,10 +1,12 @@
 import axiosForServer from "@/plugins/axiosForServer";
 import {Result, Tree} from "@/components/system-components/model/system";
 import {
-    AppChatConversationItem,
-    AppChatMessageItem, KnowledgeFile,
+    AppChatConversationItem, AppChatKnowledgeFile, AppChatKnowledgeInstance,
+    AppChatMessageItem,
     LLmMole
 } from "@/components/tool-components/chatGptTool/chat/model/model";
+import {For} from "@babel/types";
+import {GetHeaders} from "@/plugins/axiosutil";
 
 
 
@@ -125,7 +127,7 @@ export function getLLmMole() {
 
 export function deleteModel(name: string) {
     return new Promise<Result<any>>(resolve => {
-        axiosForServer.post<Result<any>>("/api/chat/model/delete", {
+        axiosForServer.post<Result<any>>("/api/chat/user/model/delete", {
             name: name
         })
             .then(({data}) => {
@@ -150,8 +152,8 @@ export function getBaseModel() {
 
 
 export function getFiles(pid: string) {
-    return new Promise<Tree<KnowledgeFile>[]>(resolve => {
-        axiosForServer.get<Result<Tree<KnowledgeFile>[]>>("/api/chat/knowledge/list", {
+    return new Promise<Tree<AppChatKnowledgeFile>[]>(resolve => {
+        axiosForServer.get<Result<Tree<AppChatKnowledgeFile>[]>>("/api/chat/knowledge/file/list", {
             params: {
                 pid: pid
             }
@@ -165,4 +167,43 @@ export function getFiles(pid: string) {
             }
         })
     })
+}
+
+export function createFiles(data: FormData) {
+    return new Promise<Result<any>>(resolve => {
+        axiosForServer.post<Result<any>>("/api/chat/knowledge/file/create", data)
+            .then(({data}) => {
+                resolve(data)
+            })
+    })
+}
+
+export function getKnowledge() {
+    return new Promise<AppChatKnowledgeInstance[]>(resolve => {
+        axiosForServer.get<Result<any[]>>("/api/chat/knowledge/list").then(({data}) => {
+            if (data.code === 200) {
+                if (data.data == null) {
+                    resolve([])
+                    return;
+                }
+                resolve(data.data)
+            }
+        })
+    })
+}
+
+export async function genKnowledge(name: string, files: string[]) {
+    let data = {
+        name: name,
+        files: files,
+    }
+    let response = await fetch('http://localhost:8080/api/chat/knowledge/gen', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            ...GetHeaders()
+        },
+        body: JSON.stringify(data),
+    });
+    return response;
 }

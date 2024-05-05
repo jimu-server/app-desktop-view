@@ -44,6 +44,7 @@ export interface AppChatMessageItem {
 export interface LLmMole {
 
     id?: string
+    pid?: string
     // 模型展示名
     name?: string
     // 发送消息 ollama 请求所需要携带的model参数
@@ -64,13 +65,14 @@ export interface ProgressResponse {
     completed?: number
 }
 
-export enum KnowledgeFileType {
+export enum AppChatKnowledgeFileType {
     Folder = 0,
     File = 1,
 }
 
-export interface KnowledgeFile {
+export interface AppChatKnowledgeFile {
     id: string
+    check: boolean
     pid: string
     userId: string
     fileName: string
@@ -78,5 +80,17 @@ export interface KnowledgeFile {
     serverPath?: string
     createTime: string
     size?: string
-    fileType: KnowledgeFileType
+    fileType: AppChatKnowledgeFileType
+}
+
+
+export interface AppChatKnowledgeInstance {
+    id?: string
+    userId?: string
+    knowledgeName?: string
+    knowledgeFiles: string[]
+    knowledgeDescription?: string
+    knowledgeType?: string
+    createTime?: string
+    check: boolean
 }

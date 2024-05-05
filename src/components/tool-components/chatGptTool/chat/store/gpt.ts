@@ -4,8 +4,8 @@ import emitter from "@/plugins/event";
 import {MessageObserver} from "@/plugins/evenKey";
 import {ConversationEntity, MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {
-    AppChatConversationItem,
-    AppChatMessageItem, KnowledgeFile,
+    AppChatConversationItem, AppChatKnowledgeFile, AppChatKnowledgeInstance,
+    AppChatMessageItem,
     LLmMole
 } from "@/components/tool-components/chatGptTool/chat/model/model";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
@@ -89,14 +89,30 @@ export const useGptStore = defineStore('gpt', {
                 knowledge: {
                     // 知识库导航目录
                     nva: [],
+                    root: [] as Tree<AppChatKnowledgeFile>[],
                     // 知识库导航目录内对应的所有文件
-                    files: [] as Tree<KnowledgeFile>[],
+                    files: [] as Tree<AppChatKnowledgeFile>[],
+
+                    instance: [] as AppChatKnowledgeInstance[],
                 },
             },
         }
     },
     persist: true,
-    getters: {},
+    getters: {
+        sortConversation() {
+            this.CurrentChat.conversationList.sort((a, b) => {
+                // Assuming each conversation has a `lastMessageTimestamp` property
+                // You might need to adjust this based on your actual data structure
+                const timestampA = new Date(a.Conversation.lastTime).getTime();
+                const timestampB = new Date(b.Conversation.lastTime).getTime();
+
+                return timestampA - timestampB; // F
+            })
+
+            return this.CurrentChat.conversationList.reverse()
+        }
+    },
     actions: {
         setConversation(list: AppChatConversationItem[]) {
             let arr = []
@@ -184,7 +200,12 @@ export const useGptStore = defineStore('gpt', {
                 }
                 // 默认选中第一个
                 if (data.length > 0 && this.ui.currentModel == null) {
-                    this.ui.currentModel = data[0]
+                    for (const datum of data) {
+                        if (datum.isDownload) {
+                            this.ui.currentModel = datum
+                            break
+                        }
+                    }
                 }
             })
         },
@@ -203,11 +224,12 @@ export const useGptStore = defineStore('gpt', {
             }, 500)
         },
 
-        UpdateConversationLastMsg(conversationID: string, message: string, picture: string) {
+        UpdateConversationLastMsg(conversationID: string, message: AppChatMessageItem) {
             for (const conversationEntity of this.CurrentChat.conversationList) {
                 if (conversationEntity.Conversation.id == conversationID) {
-                    conversationEntity.Conversation.lastMsg = message
-                    conversationEntity.Conversation.picture = picture
+                    conversationEntity.Conversation.lastMsg = message.content
+                    conversationEntity.Conversation.picture = message.picture
+                    conversationEntity.Conversation.lastTime = message.createTime
                 }
             }
         },
