@@ -60,7 +60,7 @@ const appIcon = join(__dirname, "../../build/icons/icon.ico")
 
 async function createWindow() {
     win = new BrowserWindow({
-        title: 'online',
+        title: 'jimu',
         width: 360,
         height: 450,
         minWidth: 360,
@@ -87,7 +87,6 @@ async function createWindow() {
     } else {
         await win.loadFile(indexHtml)
     }
-
     // Test actively push message to the Electron-Renderer
     win.webContents.on('did-finish-load', () => {
         win?.webContents.send('main-process-message', new Date().toLocaleString())
@@ -98,52 +97,45 @@ async function createWindow() {
         if (url.startsWith('https:')) shell.openExternal(url)
         return {action: 'deny'}
     })
-
-
     /*
     *  @description: resize 监听窗口大小改变
     * */
     win.on('resize', (event) => {
         win.webContents.send('win-change')
     })
-
     /*
     * @description: 放大窗口监听
     * */
     win.on('maximize', (event) => {
         win.webContents.send('win-change')
     })
-
     /*
     * @description: 取消最大化监听
     * */
     win.on('unmaximize', (event) => {
         win.webContents.send('win-change')
     })
-
     /*
     * @description: 最小化窗口监听
     * */
     win.on('minimize', (event) => {
         win.webContents.send('win-change')
     })
-
     /*
     * @description: 取消最小化窗口监听
     * */
     win.on('restore', (event) => {
         win.webContents.send('win-change')
     })
-
-    // win.webContents.on('will-navigate', (event, url) => { }) #344win
 }
 
 app.whenReady().then(async () => {
+    app.setUserTasks([])
     await createWindow()
+    await createTray()
     // 加载 vue 调试器插件
     console.log(vueDevToolsPath)
     await session.defaultSession.loadExtension(vueDevToolsPath)
-    createTray()
 })
 
 
@@ -280,7 +272,8 @@ ipcMain.on("login-app", (event) => {
 })
 
 let showFlag = false
-function createTray() {
+
+async function createTray() {
     // trayMessageView = new BrowserView()
     // 创建 托盘图标
     const icon = nativeImage.createFromPath(appIcon)
@@ -307,7 +300,7 @@ function createTray() {
             // partition: String(+new Date())
         },
     })
-    trayMenu.loadURL(url + "#/tray")
+    await trayMenu.loadURL(url + "#/tray")
 
     trayMenu.on('blur', () => {
         trayMenu.hide()
@@ -326,30 +319,17 @@ function createTray() {
     })
 
     tray.on('right-click', (event, point) => {
-        trayMenu.setPosition(point.x + 2 + (point.width / 2), point.y - menuHeight + (point.height / 2))
+        trayMenu.setPosition(point.x + (point.width / 2), point.y - menuHeight + (point.height / 2))
         trayMenu.show()
         trayMenu.focus()
         trayMenu.setAlwaysOnTop(true, 'pop-up-menu')
     })
-
     tray.on("mouse-enter", (event, point) => {
-       /* debounce_tray(() => {
-            trayMenu.hide()
-        }, 500)*/
     })
-
     tray.on("mouse-move", (event, point) => {
-      /*  debounce_tray(() => {
-            trayMenu.hide()
-        }, 500)*/
     })
-
     tray.on("mouse-leave", (event, point) => {
-      /*  debounce_tray(() => {
-            trayMenu.hide()
-        }, 500)*/
     })
-
     tray.setToolTip('jimu-os')
 }
 
