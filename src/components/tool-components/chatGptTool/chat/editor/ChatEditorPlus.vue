@@ -67,16 +67,16 @@
                         dropdown-icon="jimu-xiangxia-2"
                         style="height:30px;margin-right: 10px">
           <q-list dense>
-            <q-item dense clickable v-close-popup style="padding: 0" @click="shape='Enter'">
-              <menu-item text="Enter">
+            <menu-item text="Enter" @click="shape='Enter'">
+              <template #option>
                 <q-radio dense v-model="shape" val="Enter"/>
-              </menu-item>
-            </q-item>
-            <q-item dense clickable v-close-popup style="padding: 0" @click="shape='Ctrl+Enter'">
-              <menu-item text="Ctrl+Enter">
+              </template>
+            </menu-item>
+            <menu-item text="Ctrl+Enter" @click="shape='Ctrl+Enter'">
+              <template #option>
                 <q-radio dense v-model="shape" val="Ctrl+Enter"/>
-              </menu-item>
-            </q-item>
+              </template>
+            </menu-item>
           </q-list>
         </q-btn-dropdown>
       </div>
@@ -92,6 +92,7 @@ import {IsEmpty} from "@/components/system-components/utils/systemutils";
 import {ChatMessageEntity, MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import KnowledgeOptionsPanel from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeOptionsPanel.vue";
+import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 
 
 

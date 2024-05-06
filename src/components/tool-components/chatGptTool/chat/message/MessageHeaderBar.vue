@@ -9,15 +9,9 @@
         :offset="[13,0]"
     >
       <q-list dense>
-        <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-          <menu-item icon="jimu-Model" text="我的模型" @click="userModelManageFlag=true"/>
-        </q-item>
-        <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-          <menu-item icon="jimu-folderOpen" text="文件管理" @click="fileManageFlag=true"/>
-        </q-item>
-        <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-          <menu-item icon="jimu-chuangjian" text="创建模型" @click="ollamaCreateFlag=true"/>
-        </q-item>
+        <menu-item icon="jimu-Model" text="我的模型" @click="userModelManageFlag=true"/>
+        <menu-item icon="jimu-folderOpen" text="文件管理" @click="fileManageFlag=true"/>
+        <menu-item icon="jimu-chuangjian" text="创建模型" @click="ollamaCreateFlag=true"/>
       </q-list>
     </q-menu>
   </q-btn>
@@ -32,6 +26,8 @@ import OllamaModelSelect from "@/components/tool-components/chatGptTool/widget/O
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ref} from "vue";
 import KnowledgeFileManage from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeFileManage.vue";
+import OllamaCreateModel from "@/components/tool-components/chatGptTool/widget/OllamaCreateModel.vue";
+import UserModelManage from "@/components/tool-components/chatGptTool/manage/UserModelManage.vue";
 
 const fileManageFlag = ref(false)
 const ollamaCreateFlag = ref(false)

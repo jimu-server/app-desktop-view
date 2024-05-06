@@ -41,22 +41,10 @@ if (!app.requestSingleInstanceLock()) {
 let win: BrowserWindow | null = null
 let winId: number | null = 0
 
-// 聊天消息预览窗口
-let previewWin: BrowserWindow | null = null
-
-// 好友管理器
-let manageAccounts: BrowserWindow | null = null
-
-// 查找窗口
-let searchWin: BrowserWindow | null = null
-
 
 // 托盘
 let tray: Tray | null = null
 let trayMenu: BrowserWindow | null = null
-let trayMessageView: BrowserView | null = null
-let trayShow: boolean = false
-let trayMessageShow: boolean = false
 
 // Here, you can also use other preload
 const preload = join(__dirname, '../preload/index.js')
@@ -250,10 +238,14 @@ ipcMain.on("on-copy", () => {
 })
 
 /*
-* @description: 执行推出应用程序
+* @description: 执行关闭应用程序
 * */
 ipcMain.on("window-quite", () => {
     win.hide()
+})
+
+ipcMain.on("window-exit", () => {
+    app.quit()
 })
 
 
@@ -287,19 +279,18 @@ ipcMain.on("login-app", (event) => {
     event.sender.send("init-im-listener")
 })
 
-
+let showFlag = false
 function createTray() {
-    trayMessageView = new BrowserView()
+    // trayMessageView = new BrowserView()
     // 创建 托盘图标
     const icon = nativeImage.createFromPath(appIcon)
     tray = new Tray(icon)
 
+    let menuHeight = 39
     trayMenu = new BrowserWindow({
         title: 'tray',
         width: 100,
-        height: 200,
-        minWidth: 100,
-        minHeight: 200,
+        height: menuHeight,
         frame: false,
         resizable: false,
         maximizable: false,
@@ -318,6 +309,10 @@ function createTray() {
     })
     trayMenu.loadURL(url + "#/tray")
 
+    trayMenu.on('blur', () => {
+        trayMenu.hide()
+    })
+
     /*
     * @description: 双击托盘图标，显示窗口
     * */
@@ -331,22 +326,28 @@ function createTray() {
     })
 
     tray.on('right-click', (event, point) => {
-        // trayMenu.setPosition(point.x - (point.width / 2), point.y - (point.height / 2))
-        trayMenu.setPosition(point.x + (point.width / 2), point.y - 200 + (point.height / 2))
+        trayMenu.setPosition(point.x + 2 + (point.width / 2), point.y - menuHeight + (point.height / 2))
         trayMenu.show()
+        trayMenu.focus()
         trayMenu.setAlwaysOnTop(true, 'pop-up-menu')
     })
 
     tray.on("mouse-enter", (event, point) => {
-        closeTray()
+       /* debounce_tray(() => {
+            trayMenu.hide()
+        }, 500)*/
     })
 
     tray.on("mouse-move", (event, point) => {
-        closeTray()
+      /*  debounce_tray(() => {
+            trayMenu.hide()
+        }, 500)*/
     })
 
     tray.on("mouse-leave", (event, point) => {
-        closeTray()
+      /*  debounce_tray(() => {
+            trayMenu.hide()
+        }, 500)*/
     })
 
     tray.setToolTip('jimu-os')
@@ -366,234 +367,10 @@ function debounce_tray(fn: Function, delay: number) {
 }
 
 ipcMain.on('close-tray', () => {
-    closeTray()
-})
-
-function closeTray() {
     debounce_tray(() => {
         trayMenu.hide()
-    }, 3000)()
-}
-
-
-/*
-* @description: 创建消息预览窗口
-* */
-function createPreviewWindow() {
-    previewWin = new BrowserWindow({
-        width: 700,
-        height: 500,
-        minWidth: 700,
-        minHeight: 500,
-        // parent:BrowserWindow.fromId(winId),
-        frame: false,
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-        },
-    })
-    previewWin.loadURL(url + "#/preview")
-    // Open devTool if the app is not packaged
-    previewWin.webContents.openDevTools()
-}
-
-/*
-* @description: 打开消息预览窗口
-* */
-ipcMain.on("open-message-preview", (event, args) => {
-    if (previewWin) {
-        if (!previewWin.isVisible()) {
-            previewWin.show()
-        } else {
-            previewWin.moveTop()
-        }
-    } else {
-        createPreviewWindow()
-    }
-    previewWin.webContents.send("load-preview")
+    }, 500)
 })
-
-/*
-* @description: 关闭消息预览窗口
-* */
-ipcMain.on("close-message-preview", (event) => {
-    if (!previewWin.isDestroyed()) {
-        previewWin.hide()
-    }
-})
-
-
-/*
-* @description: 最大化消息预览窗口
-* */
-ipcMain.on("max-message-preview", (event) => {
-    if (previewWin.isMaximized()) {
-        previewWin.restore()
-    } else {
-        previewWin.maximize()
-    }
-})
-
-
-/*
-* @description: 最小化消息预览窗口
-* */
-ipcMain.on("min-message-preview", (event) => {
-    if (previewWin.isMinimized()) {
-        previewWin.restore()
-    } else {
-        previewWin.minimize()
-    }
-})
-
-ipcMain.on("open-select-dir", (event) => {
-    dialog.showOpenDialog({
-        properties: ['openDirectory']
-    }).then(result => {
-        if (result.canceled) {
-            return
-        }
-        console.log(result.filePaths[0])
-        event.sender.send("select-dir", result.filePaths[0])
-    })
-})
-
-
-/*
-* @description: 创建账号管理窗口
-* */
-function createManageAccountsWindow() {
-    manageAccounts = new BrowserWindow({
-        width: 700,
-        height: 500,
-        minWidth: 700,
-        minHeight: 500,
-        parent: BrowserWindow.fromId(winId),
-        frame: false,
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-        },
-    })
-    manageAccounts.loadURL(url + "#/manageAccounts")
-    // Open devTool if the app is not packaged
-    manageAccounts.webContents.openDevTools()
-}
-
-/*
-* @description: 打开账号管理窗口
-* */
-ipcMain.on("open-manage-accounts-window", (event, args) => {
-    if (manageAccounts) {
-        if (!manageAccounts.isVisible()) {
-            manageAccounts.show()
-        } else {
-            manageAccounts.moveTop()
-        }
-    } else {
-        createManageAccountsWindow()
-    }
-})
-
-/*
-* @description: 关闭账号管理窗口
-* */
-ipcMain.on("close-manage-accounts-window", (event) => {
-    if (!manageAccounts.isDestroyed()) {
-        manageAccounts.hide()
-    }
-})
-
-/*
-* @description: 最大化账号管理窗口
-* */
-ipcMain.on("max-manage-accounts-window", (event) => {
-    if (manageAccounts.isMaximized()) {
-        manageAccounts.restore()
-    } else {
-        manageAccounts.maximize()
-    }
-})
-
-
-/*
-* @description: 最小化账号管理窗口
-* */
-ipcMain.on("min-manage-accounts-window", (event) => {
-    if (manageAccounts.isMinimized()) {
-        manageAccounts.restore()
-    } else {
-        manageAccounts.minimize()
-    }
-})
-
-
-/*
-* @description: 创建账号管理窗口
-* */
-function createSearchWindow() {
-    searchWin = new BrowserWindow({
-        width: 700,
-        height: 500,
-        minWidth: 700,
-        minHeight: 500,
-        frame: false,
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-        },
-    })
-    searchWin.loadURL(url + "#/search")
-    // Open devTool if the app is not packaged
-    searchWin.webContents.openDevTools()
-}
-
-/*
-* @description: 打开账号查询窗口
-* */
-ipcMain.on("open-search-window", (event, args) => {
-    if (searchWin) {
-        if (!searchWin.isVisible()) {
-            searchWin.show()
-            searchWin.webContents.openDevTools()
-        } else {
-            searchWin.moveTop()
-        }
-    } else {
-        createSearchWindow()
-    }
-})
-
-/*
-* @description: 关闭账号查询窗口
-* */
-ipcMain.on("close-search-window", (event) => {
-    if (!searchWin.isDestroyed()) {
-        searchWin.hide()
-    }
-})
-
-// 主进程向渲染主主窗口查询好友信息
-ipcMain.on('search-action', (event, args) => {
-    win.webContents.send('search-friend-group', args)
-})
-
-// 返回给查询窗口数据结果
-ipcMain.on('search-action-result', (event, args) => {
-    searchWin.webContents.send('search-result', args)
-})
-
-
-// 执行添加好友
-ipcMain.on('add-action', (event, args) => {
-    win.webContents.send('add-friend-group', args)
-})
-
-// 添加好友返回结果
-ipcMain.on('add-action-result', (event, args) => {
-    searchWin.webContents.send('add-result', args)
-})
-
 
 
 

@@ -20,3 +20,7 @@ export function desktop_close() {
 export function desktop_max() {
     ipcRenderer.send('window-max')
 }
+
+export function desktop_exit() {
+    ipcRenderer.send('window-exit')
+}

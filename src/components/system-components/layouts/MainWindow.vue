@@ -44,21 +44,10 @@
                 :offset="[13,0]"
             >
               <q-list dense>
-                <q-item class="column justify-center" clickable v-close-popup
-                        style="padding: 0">
-                  <menu-item icon="jimu-shezhi-2" text="设置" @click="showSettingDialog=true"/>
-                </q-item>
-
-                <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-                  <menu-item icon="jimu-banbengengxin" text="检查更新"/>
-                </q-item>
-
-                <q-item class="column justify-center" clickable v-close-popup style="padding: 0">
-                  <menu-item icon="jimu-guanyu" text="关于" @click="showAboutDialog=true"/>
-                </q-item>
-                <q-item class="column justify-center" clickable v-close-popup @click="logout" style="padding: 0">
-                  <menu-item icon="jimu-zhuxiao" text="退出账号"/>
-                </q-item>
+                <menu-item icon="jimu-shezhi-2" text="设置" @click="showSettingDialog=true"/>
+                <menu-item icon="jimu-banbengengxin" text="检查更新"/>
+                <menu-item icon="jimu-guanyu" text="关于" @click="showAboutDialog=true"/>
+                <menu-item icon="jimu-zhuxiao" text="退出账号"/>
               </q-list>
             </q-menu>
           </q-btn>

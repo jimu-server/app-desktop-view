@@ -137,7 +137,7 @@ declare module 'vue' {
     ToolSidebarView: typeof import('./src/components/system-components/layouts/tool/ToolSidebarView.vue')['default']
     ToolTable: typeof import('./src/components/system-components/tool/manageTool/page/table/ToolTable.vue')['default']
     ToolWidget: typeof import('./src/components/tool-components/chatGptTool/chat/editor/tool/ToolWidget.vue')['default']
-    TrayMenu: typeof import('./src/components/system-components/TrayMenu.vue')['default']
+    TrayMenu: typeof import('./src/components/system-components/desktop/TrayMenu.vue')['default']
     UserAvatar: typeof import('./src/components/system-components/avatar/UserAvatar.vue')['default']
     UserInfoEditorDialog: typeof import('./src/components/system-components/avatar/UserInfoEditorDialog.vue')['default']
     UserInfoSetting: typeof import('./src/components/system-components/avatar/UserInfoSetting.vue')['default']

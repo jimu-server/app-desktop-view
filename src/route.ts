@@ -46,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
         router.addRoute({
             path: '/tray',
             name: 'tray',
-            component: () => import('@/components/system-components/TrayMenu.vue')
+            component: () => import('@/components/system-components/desktop/TrayMenu.vue')
         },)
         // 初始化 管理系统父路由
         router.addRoute({
