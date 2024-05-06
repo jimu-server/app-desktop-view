@@ -441,8 +441,6 @@ async function doRegister() {
         showPanel.value = 'login'
       }
     } else {
-
-      return false
     }
   })
 }
