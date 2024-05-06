@@ -8,7 +8,7 @@
             <WindowMinimizeBtn/>
             <WindowCloseBtn/>
           </q-bar>
-          <q-card id="login" ref="logRef" class="login-box" style="flex-grow: 1">
+          <q-card flat id="login" ref="logRef" class="login-box" style="flex-grow: 1">
             <div class="fit" id="loginBox">
               <!-- 账号登录 -->
               <transition
