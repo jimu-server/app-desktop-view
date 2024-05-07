@@ -1,7 +1,7 @@
 {
   "name": "jimuos",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "main": "dist-electron/main/index.js",
   "scripts": {
     "dev": "vite",

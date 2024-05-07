@@ -20,6 +20,7 @@ import {useAuthStore} from "@/store/auth";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
 import {UpdateAuthEvent, UpdateAuthWindowEvent} from "@/plugins/evenKey";
+import {desktop_open_dev} from "@/components/system-components/desktop/desktop";
 
 const app = useAppStore()
 const user = userStore()
@@ -93,6 +94,13 @@ onMounted(() => {
     $q.dark.set(match.matches)
     theme.setTheme(match.matches)
   })
+
+  window.onkeydown = function (event) {
+    if (event.key == "F12") {
+      desktop_open_dev()
+    }
+  }
+
 })
 
 // 切换组织 角色 触发更新权限

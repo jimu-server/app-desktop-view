@@ -9,6 +9,16 @@
   "directories": {
     "output": "release/${version}"
   },
+  extraResources: [
+    {
+      from: './build',
+      to: './build'
+    },
+    {
+      from: './src/assets',
+      to: './assets'
+    }
+  ],
   "files": [
     "dist",
     "dist-electron"

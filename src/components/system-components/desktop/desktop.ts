@@ -24,3 +24,8 @@ export function desktop_max() {
 export function desktop_exit() {
     ipcRenderer.send('window-exit')
 }
+
+
+export function desktop_open_dev() {
+    ipcRenderer.send('DevTools')
+}

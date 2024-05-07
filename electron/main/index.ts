@@ -1,4 +1,4 @@
-import {app, BrowserView, BrowserWindow, clipboard, dialog, ipcMain, nativeImage, session, shell, Tray} from 'electron'
+import {app, BrowserWindow, clipboard, dialog, ipcMain, nativeImage, session, shell, Tray} from 'electron'
 import {release} from 'node:os'
 import {join} from 'node:path'
 import * as path from "path";
@@ -56,11 +56,18 @@ process.env.VITE_DEV_SERVER_URL
     : process.env.DIST;
 
 const vueDevToolsPath = path.resolve(__dirname, '../../6.5.1_0')
-const appIcon = join(__dirname, "../../build/icons/icon.ico")
+let appIcon = null
+
+if (process.env.VITE_DEV_SERVER_URL) {
+    appIcon = join(__dirname, "../../build/icons/1024x1024.png")
+} else {
+    // 生产环境 图标加载位置为打包后的位置
+    appIcon = join(path.dirname(app.getPath('exe')), "resources/build/icons/icon.ico")
+}
 
 async function createWindow() {
     win = new BrowserWindow({
-        title: 'jimu',
+        title: 'jimuos',
         width: 360,
         height: 450,
         minWidth: 360,
@@ -70,7 +77,6 @@ async function createWindow() {
         resizable: false,
         maximizable: false,
         titleBarStyle: 'hidden',
-        // transparent: true,
         webPreferences: {
             preload,
             nodeIntegration: true,
@@ -85,7 +91,7 @@ async function createWindow() {
         // 打开浏览器调试窗口
         win.webContents.openDevTools()
     } else {
-        await win.loadFile(indexHtml)
+        await win.loadURL(indexHtml + '#/login')
     }
     // Test actively push message to the Electron-Renderer
     win.webContents.on('did-finish-load', () => {
@@ -134,7 +140,6 @@ app.whenReady().then(async () => {
     await createWindow()
     await createTray()
     // 加载 vue 调试器插件
-    console.log(vueDevToolsPath)
     await session.defaultSession.loadExtension(vueDevToolsPath)
 })
 
@@ -152,12 +157,12 @@ app.on('second-instance', () => {
     }
 })
 
-app.on('activate', () => {
+app.on('activate', async () => {
     const allWindows = BrowserWindow.getAllWindows()
     if (allWindows.length) {
         allWindows[0].focus()
     } else {
-        createWindow()
+        await createWindow()
     }
 })
 
@@ -207,7 +212,7 @@ ipcMain.on('logout', () => {
 })
 
 // New window example arg: new windows url
-ipcMain.handle('open-win', (_, arg) => {
+ipcMain.handle('open-win', async (_, arg) => {
     const childWindow = new BrowserWindow({
         webPreferences: {
             preload,
@@ -217,16 +222,14 @@ ipcMain.handle('open-win', (_, arg) => {
     })
 
     if (process.env.VITE_DEV_SERVER_URL) {
-        childWindow.loadURL(`${url}#${arg}`)
+        await childWindow.loadURL(`${url}#${arg}`)
     } else {
-        childWindow.loadFile(indexHtml, {hash: arg})
+        await childWindow.loadFile(indexHtml, {hash: arg})
     }
 })
 
 ipcMain.on("on-copy", () => {
-
     let text = clipboard.readText()
-    console.log(text)
 })
 
 /*
@@ -292,16 +295,17 @@ async function createTray() {
         show: false,
         webPreferences: {
             preload,
-            // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
-            // Consider using contextBridge.exposeInMainWorld
-            // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
             nodeIntegration: true,
             contextIsolation: false,
-            // partition: String(+new Date())
+            partition: String(+new Date())
         },
     })
-    await trayMenu.loadURL(url + "#/tray")
 
+    if (process.env.VITE_DEV_SERVER_URL) {
+        await trayMenu.loadURL(url + "#/tray")
+    } else {
+        await trayMenu.webContents.loadURL(indexHtml + "#/tray")
+    }
     trayMenu.on('blur', () => {
         trayMenu.hide()
     })

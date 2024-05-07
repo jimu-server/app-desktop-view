@@ -54,7 +54,7 @@
         </q-splitter>
         <div v-else class="fit row justify-center">
           <div class=" column justify-center">
-            <q-icon name="img:/public/ai.svg" size="500px"/>
+            <q-icon name="img:./ai.svg" size="500px"/>
           </div>
         </div>
       </template>
@@ -81,7 +81,12 @@ import {
   MessageType
 } from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {SendTextMessage} from "@/components/tool-components/chatGptTool/gptutil";
-import draggable from 'vuedraggable'
+import MessagePanel from "@/components/tool-components/chatGptTool/chat/message/MessagePanel.vue";
+import ChatEditorPlus from "@/components/tool-components/chatGptTool/chat/editor/ChatEditorPlus.vue";
+import ConversationItemLabel
+  from "@/components/tool-components/chatGptTool/chat/conversation/ConversationItemLabel.vue";
+import MainPage from "@/components/system-components/layouts/MainPage.vue";
+
 
 const {getPaletteColor} = colors
 

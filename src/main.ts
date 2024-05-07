@@ -15,7 +15,6 @@ import 'quasar/src/css/index.sass'
 
 import router from "./route";
 import pina from "./pinia";
-import piniaPersist from 'pinia-plugin-persist'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import './styles/el-light.scss'
@@ -33,6 +32,9 @@ import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
 import '@/components/tool-components/chatGptTool/chat/style/md.css'
 import '@/components/tool-components/chatGptTool/chat/style/md-dark.css'
 import '@/components/tool-components/chatGptTool/chat/initPrism'
+
+import ai from 'src/assets/ai.svg'
+import gpt from 'src/assets/GPT.png'
 
 const app = createApp(App)
 

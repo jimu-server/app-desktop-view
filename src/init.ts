@@ -9,7 +9,7 @@ import ToolManagePage from "@/components/system-components/tool/manageTool/page/
 import RouterManagePage from "@/components/system-components/tool/manageTool/page/RouterManagePage.vue";
 import ModelManagePage from "@/components/tool-components/chatGptTool/manage/ModelManagePage.vue";
 import Login from "@/components/system-components/Login.vue";
-import ChatGPT from "@/components/tool-components/chatGptTool/ChatGPT.vue";
+
 import FlowChart from "@/components/tool-components/flowTool/FlowChart.vue";
 import OllamaSetting from "@/components/tool-components/chatGptTool/setting/OllamaSetting.vue";
 import UserInfoSetting from "@/components/system-components/avatar/UserInfoSetting.vue";
@@ -25,7 +25,6 @@ const components = [
     FunManagePage,
     ToolManagePage,
     ModelManagePage,
-    ChatGPT,
     FlowChart,
     Login,
     OllamaSetting,

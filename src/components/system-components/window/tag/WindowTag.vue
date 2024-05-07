@@ -11,10 +11,6 @@
           </div>
         </div>
         <div class="column justify-center">
-          <!--          <q-btn v-if="showCloseFlag" size="sm" dense flat icon="close" @click.stop="CloseWindow"
-                           @mousemove="colseColorIn" @mouseleave="colseColorOut" :text-color="btn_hover_color"
-                           style="margin-right: 1px;"/>-->
-
           <q-btn v-if="showCloseFlag" size="sm" dense flat icon="jimu-guanbi-2" @click.stop="CloseWindow"
                  :text-color="'red'"
                  style="margin-right: 1px;"/>
@@ -117,6 +113,7 @@ onMounted(() => {
   cursor: default;
   user-select: none;
   border-bottom: rgba(140, 147, 157, 0.34) 1px solid;
+  -webkit-app-region: no-drag;
 }
 
 .label-title {

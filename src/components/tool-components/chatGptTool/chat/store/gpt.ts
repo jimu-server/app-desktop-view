@@ -23,7 +23,7 @@ export const useGptStore = defineStore('gpt', {
         return {
             test: '',
             defaultAvatar: 'https://im-1252940994.cos.ap-nanjing.myqcloud.com/go.jpg',
-            gptDefaultAvatar: 'public/GPT.png',
+            gptDefaultAvatar: './GPT.png',
             // 可显示数据范围
             view: [],
             // 新消息要单独存放一个可显示消息列表, view 在超过一定数量时候会删除排在前边的 可显示id列表,
@@ -109,7 +109,7 @@ export const useGptStore = defineStore('gpt', {
 
                 return timestampA - timestampB; // F
             })
-
+            this.CurrentChat.index = 0
             return this.CurrentChat.conversationList.reverse()
         }
     },

@@ -50,6 +50,7 @@ export default defineConfig(({command}) => {
       }),
       Components({
         resolvers: [ElementPlusResolver()],
+        // directoryAsNamespace: true,
       }),
       ckeditor5({theme: require.resolve('@ckeditor/ckeditor5-theme-lark')}),
       vue({
@@ -132,15 +133,7 @@ export default defineConfig(({command}) => {
           drop_debugger: true,
         },
       },
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes("node_modules") && !id.includes("rc") && !id.includes("ant")) {
-              return id.toString().split("node_modules/")[1].split("/")[0].toString();
-            }
-          },
-        },
-      },
+      electronBuild: {}
     }
   }
 })

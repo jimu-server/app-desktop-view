@@ -46,6 +46,7 @@ import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import emitter from "@/plugins/event";
 import {UpdateAuthEvent, UpdateAuthWindowEvent} from "@/plugins/evenKey";
 import {useAuthStore} from "@/store/auth";
+import WindowScrollX from "@/components/system-components/window/tag/WindowScrollX.vue";
 
 
 const labels = useWindowsStore()
