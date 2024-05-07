@@ -79,6 +79,10 @@ import {
   MessageType
 } from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {SendTextMessage} from "@/components/tool-components/chatGptTool/gptutil";
+import ConversationItemLabel
+  from "@/components/tool-components/chatGptTool/chat/conversation/ConversationItemLabel.vue";
+import MessagePanel from "@/components/tool-components/chatGptTool/chat/message/MessagePanel.vue";
+import ChatEditorPlus from "@/components/tool-components/chatGptTool/chat/editor/ChatEditorPlus.vue";
 
 
 const {getPaletteColor} = colors

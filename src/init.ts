@@ -13,6 +13,7 @@ import Login from "@/components/system-components/Login.vue";
 import FlowChart from "@/components/tool-components/flowTool/FlowChart.vue";
 import OllamaSetting from "@/components/tool-components/chatGptTool/setting/OllamaSetting.vue";
 import UserInfoSetting from "@/components/system-components/avatar/UserInfoSetting.vue";
+import ChatGPT from "@/components/tool-components/chatGptTool/ChatGPT.vue";
 
 
 const components = [
@@ -26,6 +27,7 @@ const components = [
     ToolManagePage,
     ModelManagePage,
     FlowChart,
+    ChatGPT,
     Login,
     OllamaSetting,
     UserInfoSetting

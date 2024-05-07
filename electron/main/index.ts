@@ -64,6 +64,7 @@ if (process.env.VITE_DEV_SERVER_URL) {
     // 生产环境 图标加载位置为打包后的位置
     appIcon = join(path.dirname(app.getPath('exe')), "resources/build/icons/icon.ico")
 }
+console.log(process.versions.chrome)
 
 async function createWindow() {
     win = new BrowserWindow({

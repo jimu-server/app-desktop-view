@@ -161,10 +161,15 @@ export const useGptStore = defineStore('gpt', {
         SetCurrentChat(conversation: ConversationEntity, index: number) {
             let item = null
             // 当前会话index 存在 则处理当前会话为未选中状态
-            if (this.CurrentChat.index !== -1) {
-                item = this.CurrentChat.conversationList[this.CurrentChat.index]
-                item.focused = false
-                item.active = false
+            if (!IsEmpty(this.CurrentChat.Current)) {
+                let finIndIndex = this.CurrentChat.conversationList.findIndex(e => {
+                    return e.Conversation.id == this.CurrentChat.Current.Conversation.id
+                });
+                if (finIndIndex != -1) {
+                    item = this.CurrentChat.conversationList[finIndIndex]
+                    item.focused = false
+                    item.active = false
+                }
             }
             // 更新当前即将选中的会话状态
             item = this.CurrentChat.conversationList[index]
