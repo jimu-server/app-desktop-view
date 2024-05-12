@@ -27,31 +27,18 @@
         >
           <template v-slot:before>
             <div class="fit" style="overflow: hidden">
-              <SettingItemList v-model:tab="tab" :list="list"/>
+              <SettingItemList v-model:tab="tab" :list="app.settings"/>
             </div>
           </template>
 
           <template v-slot:after>
             <div class="fit" style="overflow: hidden">
               <q-scroll-area class="fit" :visible="false">
-                <SettingView v-model:tab="tab" :list="list"/>
+                <SettingView v-model:tab="tab" :list="app.settings"/>
               </q-scroll-area>
             </div>
           </template>
         </q-splitter>
-      </div>
-      <div class="full-width row reverse" style="height: 60px">
-        <div class="full-height column justify-center" style="margin-right: 20px">
-          <q-btn :ripple="false" dense label="应 用" style="width: 60px"/>
-        </div>
-
-        <div class="full-height column justify-center" style="margin-right: 20px">
-          <q-btn :ripple="false" dense label="取 消" style="width: 60px"/>
-        </div>
-
-        <div class="full-height column justify-center" style="margin-right: 20px">
-          <q-btn :ripple="false" dense color="primary" label="保 存" style="width: 60px"/>
-        </div>
       </div>
     </q-card>
 
@@ -61,12 +48,14 @@
 <script setup lang="ts">
 import {ref, watch} from "vue";
 import {AppSetting} from "@/components/system-components/model/system";
+import {useAppStore} from "@/store/app";
 
 const model = defineModel({default: false, required: true})
 const splitterModel = ref(15)
 const splitterModelLimit = ref([15, 15])
 const text = ref("")
 const tab = ref("mails")
+const app = useAppStore()
 const list = ref<AppSetting[]>([
   {
     id: "1",

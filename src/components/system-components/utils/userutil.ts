@@ -5,6 +5,7 @@ import {userStore} from "@/store/user";
 import pina from "@/pinia";
 import {useToolStore} from "@/store/tool";
 import {
+    appSetting,
     getDicts,
     getUserAllRoute,
     getUserAuthTool,
@@ -39,6 +40,12 @@ export async function loadUserInfo() {
     notify.list = await getAllNotify()
     // todo 拉取所有字典信息
     app.dict = await getDicts()
+    // 拉取配置项信息
+    let tools = []
+    tool.buttons.forEach(element => {
+        tools.push(element.id)
+    })
+    app.settings = await appSetting(tools)
 }
 
 export async function baseInfo() {

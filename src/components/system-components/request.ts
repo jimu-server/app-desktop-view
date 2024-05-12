@@ -1,6 +1,16 @@
 import axiosForServer from "@/plugins/axiosForServer";
-import {Org, Page, Result, Role, Tool, Tree, User} from "@/components/system-components/model/system";
-import {Router} from "vue-router";
+import {
+    AppSetting,
+    Org,
+    Page,
+    Result,
+    Role,
+    Router,
+    Tool,
+    Tree,
+    User
+} from "@/components/system-components/model/system";
+
 
 export function defaultLogin(account: string, password: string) {
     return new Promise<Result<any>>(resolve => {
@@ -375,6 +385,20 @@ export function registerUser(data: any) {
     return new Promise<Result<any>>(resolve => {
         axiosForServer.post<Result<any>>('/public/register', data).then(({data}) => {
             resolve(data)
+        })
+    })
+}
+
+export function appSetting(tools: string[]) {
+    return new Promise<Tree<AppSetting>[]>(resolve => {
+        axiosForServer.post<Result<Tree<AppSetting>[]>>('/api/settings', {
+            tools: tools
+        }).then(({data}) => {
+            if (data.code != 200) {
+                resolve(null)
+                return
+            }
+            resolve(data.data)
         })
     })
 }

@@ -155,3 +155,18 @@ export interface ActionMenu {
     icon?: string
     action?: Function
 }
+
+
+export interface Progress {
+    status?: number
+    msg?: string
+    percent?: number
+}
+
+
+export interface AppSetting {
+    id: string
+    name: string
+    value: string
+    setting?: any
+}

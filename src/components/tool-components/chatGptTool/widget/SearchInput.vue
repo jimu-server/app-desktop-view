@@ -11,9 +11,7 @@
                    style="background: rgba(128,128,128,0.23)">
               <q-menu>
                 <q-list dense>
-                  <q-item dense class="column justify-center" clickable v-close-popup style="padding: 0">
-                    <menu-item icon="jimu-chuangjianhuihua" text="新会话" @click="openCreate=true"/>
-                  </q-item>
+                  <menu-item icon="jimu-chuangjianhuihua" text="新会话" @click="openCreate=true"/>
                 </q-list>
               </q-menu>
             </q-btn>

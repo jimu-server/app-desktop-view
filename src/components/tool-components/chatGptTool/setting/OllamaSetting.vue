@@ -1,6 +1,10 @@
 <template>
-  <div class="fit">
-      set
+  <div class="fit column" style="padding: 5px">
+    <q-input v-model="set.setting.url">
+      <template #prepend>
+        <q-icon name="jimu-24gl-network" />
+      </template>
+    </q-input>
   </div>
 </template>
 

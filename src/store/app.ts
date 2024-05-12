@@ -1,4 +1,5 @@
 import {defineStore} from "pinia";
+import {AppSetting, Tree} from "@/components/system-components/model/system";
 
 
 export const useAppStore = defineStore('app', {
@@ -10,7 +11,8 @@ export const useAppStore = defineStore('app', {
                 page: {
                     height: ''
                 },
-            }
+            },
+            settings: [] as Tree<AppSetting>[]
         }
     },
     persist: true,

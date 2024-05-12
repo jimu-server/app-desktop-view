@@ -11,16 +11,16 @@
     >
       <!--   聊天会话消息列表   -->
       <template v-slot:before>
-        <div ref="conversationListRef" class="fit column" style="overflow: hidden;">
-          <div class="row justify-center" style="padding: 5px">
-            <search-input width="96%"/>
+        <div ref="conversationListRef" class="fit column" style="overflow: hidden;min-width: 200px">
+          <div class="row justify-center" style="padding: 7px">
+            <search-input width="100%"/>
           </div>
           <div style="overflow:hidden;flex-grow: 1">
             <q-scroll-area :visible="false" class="fit">
               <div class="fit" style="overflow:hidden;">
                 <q-list padding style="padding: 5px">
                   <ConversationItemLabel
-                      v-for="(item,index) in ctx.sortConversation"
+                      v-for="(item,index) in ctx.CurrentChat.conversationList"
                       :item="item"
                       :index="index"
                       @select="selectChat"/>
@@ -81,18 +81,13 @@ import {
   MessageType
 } from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {SendTextMessage} from "@/components/tool-components/chatGptTool/gptutil";
-import MessagePanel from "@/components/tool-components/chatGptTool/chat/message/MessagePanel.vue";
-import ChatEditorPlus from "@/components/tool-components/chatGptTool/chat/editor/ChatEditorPlus.vue";
-import ConversationItemLabel
-  from "@/components/tool-components/chatGptTool/chat/conversation/ConversationItemLabel.vue";
-import MainPage from "@/components/system-components/layouts/MainPage.vue";
-
+import draggable from 'vuedraggable'
 
 const {getPaletteColor} = colors
 
 const app = useAppStore()
-const splitterModel = ref(15)
-const splitterModelLimit = ref([15, 35])
+const splitterModel = ref(20)
+const splitterModelLimit = ref([20, 20])
 const splitterModel2 = ref(30)
 const splitterModel2Limit = ref([30, 50])
 

@@ -36,7 +36,7 @@
         <!--        <MarkDownMessage v-if="message.role=='assistant'" :message="message" :index="index"/>-->
       </div>
       <!-- 消息页角 该部分对用户暂时不要使用 v-if 进行屏蔽 不显示展位 -->
-      <div v-if="message.role!=='user'" class="chat-footer" @mouseover="overFooter=true" @mouseleave="outOverFooter">
+      <div class="chat-footer" @mouseover="overFooter=true" @mouseleave="outOverFooter">
         <!--  gpt消息操作      -->
         <template v-if="!send">
           <!--    消息折叠遮罩      -->
@@ -102,7 +102,15 @@
         </template>
         <!--  用户消息操作      -->
         <template v-if="send">
-
+          <div class="full-width row" style="margin-top: 5px">
+            <MessageAction v-show="isShowAction">
+              <q-icon class="user-msg-option" size="15px" dense flat name="jimu-shanchu">
+                <q-tooltip :offset="[0, 10]">
+                  删除
+                </q-tooltip>
+              </q-icon>
+            </MessageAction>
+          </div>
         </template>
       </div>
     </div>
@@ -137,6 +145,11 @@ const props = defineProps<
       index: number
     }
 >()
+
+
+function deleteMessage() {
+
+}
 
 function outOverMessage() {
   setTimeout(() => {
@@ -334,6 +347,10 @@ function retry() {
 
 .msg-option {
   margin-left: 10px;
+}
+
+.user-msg-option {
+  margin-right: 10px;
 }
 
 .msg-option:hover {

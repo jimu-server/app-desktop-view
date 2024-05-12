@@ -92,7 +92,6 @@ import {IsEmpty} from "@/components/system-components/utils/systemutils";
 import {ChatMessageEntity, MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import KnowledgeOptionsPanel from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeOptionsPanel.vue";
-import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 
 
 
