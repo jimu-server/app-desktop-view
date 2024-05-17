@@ -29,3 +29,8 @@ export function desktop_exit() {
 export function desktop_open_dev() {
     ipcRenderer.send('DevTools')
 }
+
+
+export function desktop_theme_change(flag: boolean) {
+    ipcRenderer.send('theme', flag)
+}

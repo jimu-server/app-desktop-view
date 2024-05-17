@@ -13,16 +13,20 @@ import {onMounted, ref} from "vue";
 import {ipcMain, ipcRenderer} from "electron";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {desktop_exit} from "@/components/system-components/desktop/desktop";
+import {useAppStore} from "@/store/app";
+import {useThemeStore} from "@/store/theme";
 
 const tray = ref()
-
-function keepTray(event) {
-  ipcRenderer.send("close-tray");
-}
+const app = useAppStore()
+const theme = useThemeStore()
 
 ipcRenderer.on("open", () => {
   // 打开系统托盘时候获取焦点
   tray.value.focus()
+})
+
+ipcRenderer.on("theme-change", (event, args) => {
+  theme.setTheme(args)
 })
 
 // 菜单失去焦点时候隐藏

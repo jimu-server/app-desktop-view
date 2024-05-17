@@ -101,7 +101,7 @@ import {
   desktop_login,
   desktop_logout,
   desktop_max,
-  desktop_minimize
+  desktop_minimize, desktop_theme_change
 } from "@/components/system-components/desktop/desktop";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
@@ -184,6 +184,8 @@ document.addEventListener('mousemove', (event) => {
 function alter() {
   $q.dark.toggle()
   theme.setTheme($q.dark.isActive)
+  // 同步修改 系统托盘主题
+  desktop_theme_change($q.dark.isActive)
 }
 
 

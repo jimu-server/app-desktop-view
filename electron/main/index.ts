@@ -275,6 +275,11 @@ ipcMain.on("login-app", (event) => {
     event.sender.send("init-im-listener")
 })
 
+ipcMain.on("theme", (event, args) => {
+    console.log("theme-change", args)
+    trayMenu.webContents.send("theme-change", args)
+})
+
 let showFlag = false
 
 async function createTray() {
@@ -283,7 +288,7 @@ async function createTray() {
     const icon = nativeImage.createFromPath(appIcon)
     tray = new Tray(icon)
 
-    let menuHeight = 39
+    let menuHeight = 30
     trayMenu = new BrowserWindow({
         title: 'tray',
         width: 100,
