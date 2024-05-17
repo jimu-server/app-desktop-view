@@ -74,7 +74,6 @@ declare module 'vue' {
     HomePage: typeof import('./src/components/system-components/pages/HomePage.vue')['default']
     ImageEdit: typeof import('./src/components/tool-components/chatGptTool/chat/editor/ImageEdit.vue')['default']
     InfoEditor: typeof import('./src/components/system-components/avatar/InfoEditor.vue')['default']
-    KnowledgeBasePanel: typeof import('./src/components/tool-components/chatGptTool/chat/editor/widget/KnowledgeBasePanel.vue')['default']
     KnowledgeCardItem: typeof import('./src/components/tool-components/chatGptTool/widget/knowledge/KnowledgeCardItem.vue')['default']
     KnowledgeFileManage: typeof import('./src/components/tool-components/chatGptTool/widget/knowledge/KnowledgeFileManage.vue')['default']
     KnowledgeOptionsPanel: typeof import('./src/components/tool-components/chatGptTool/widget/knowledge/KnowledgeOptionsPanel.vue')['default']
@@ -156,5 +155,6 @@ declare module 'vue' {
     WindowScrollX: typeof import('./src/components/system-components/window/tag/WindowScrollX.vue')['default']
     WindowTag: typeof import('./src/components/system-components/window/tag/WindowTag.vue')['default']
     WindowThemeBtn: typeof import('./src/components/system-components/desktop/WindowThemeBtn.vue')['default']
+    WindowToggleBtn: typeof import('./src/components/system-components/desktop/WindowToggleBtn.vue')['default']
   }
 }

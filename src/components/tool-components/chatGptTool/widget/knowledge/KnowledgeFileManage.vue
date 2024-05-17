@@ -111,6 +111,8 @@ import CreateFolderUI from "@/components/tool-components/chatGptTool/widget/know
 import {GetHeaders} from "@/plugins/axiosutil";
 import {ElMessage, UploadProps} from "element-plus";
 import CreateKnowledge from "@/components/tool-components/chatGptTool/widget/knowledge/CreateKnowledge.vue";
+import FileUI from "@/components/tool-components/chatGptTool/widget/knowledge/FileUI.vue";
+import GenKnowledgeUI from "@/components/tool-components/chatGptTool/widget/knowledge/GenKnowledgeUI.vue";
 
 
 const manageRef = ref(null)

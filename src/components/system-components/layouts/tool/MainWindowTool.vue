@@ -30,7 +30,7 @@
         </div>
       </div>
     </ToolSidebar>
-    <ToolSidebarView :id="position" :toolCtx="toolCtx" :position="position"/>
+    <ToolSidebarView :id="position" :toolCtx="toolCtx" :position="position" style="-webkit-app-region: no-drag;"/>
     <Slide :class="position==1?slide_line_l:slide_line_r" @widthChange="widthChange"/>
   </div>
 </template>

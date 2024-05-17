@@ -13,12 +13,13 @@
           }">
           <!--  侧边栏隐藏后的展开按钮   -->
           <q-btn dense flat :icon="!leftDrawerOpen?'jimu-arrow-double-right':'jimu-arrow-double-left'"
-                 @click.stop="toggleLeftDrawer" style="margin-left: 5px;-webkit-app-region: no-drag;"
+                 @click.stop="toggleLeftDrawer" style="margin-left: 5px;margin-right: 5px;-webkit-app-region: no-drag;"
           />
           <window-scroll v-show="widowsLabel.windowLabels.length !== 0"/>
           <q-space />
           <WindowThemeBtn/>
           <WindowMinimizeBtn/>
+          <WindowToggleBtn/>
           <WindowCloseBtn2/>
         </q-bar>
       </slot>
@@ -59,7 +60,7 @@
               bordered
               style="min-width: 52px"
     >
-      <MainWindowTool :position="ToolLayout.Right" :tool-ctx="tool.right.ctx"/>
+      <MainWindowTool :position="ToolLayout.Right" :tool-ctx="tool.right.ctx" style="-webkit-app-region: no-drag;"/>
     </q-drawer>
 
     <!--  主视图  -->
@@ -109,6 +110,7 @@ import AboutDialog from "@/components/system-components/other/AboutDialog.vue";
 import SettingDialog from "@/components/system-components/setting/SettingDialog.vue";
 import WindowThemeBtn from "@/components/system-components/desktop/WindowThemeBtn.vue";
 import WindowCloseBtn2 from "@/components/system-components/desktop/WindowCloseBtn2.vue";
+import WindowToggleBtn from "@/components/system-components/desktop/WindowToggleBtn.vue";
 
 
 const widowsLabel = useWindowsStore()

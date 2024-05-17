@@ -1,5 +1,5 @@
 <template>
-  <ToolButton :btn="btn" @receive="receive">
+  <ToolButton :btn="btn" @receive="receive" :position="position">
     <template v-slot:notify-badge>
       <q-badge color="red" rounded  floating>{{ notify.list.length }}</q-badge>
     </template>
@@ -16,24 +16,12 @@ const $q = useQuasar()
 const notify = useNotifyStore()
 const props = defineProps<{
   btn: Tool
+  position: number
 }>()
 
 
 function receive(data: Records) {
-  console.log(data)
-  $q.notify({
-    type: 'success',
-    message: data.text,
-    multiLine: true,
-    actions: [
-      {
-        label: '关闭',
-        color: 'white', handler: () => {
 
-        }
-      }
-    ]
-  })
   notify.list.push(data)
 }
 
