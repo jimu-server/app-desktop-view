@@ -3,6 +3,9 @@ import {release} from 'node:os'
 import {join} from 'node:path'
 import * as path from "path";
 
+import {exec} from 'node:child_process'
+import {ChildProcess} from "child_process";
+
 
 // The built directory structure
 //
@@ -46,6 +49,9 @@ let winId: number | null = 0
 let tray: Tray | null = null
 let trayMenu: BrowserWindow | null = null
 
+// 本地服务
+let server: ChildProcess = null
+
 // Here, you can also use other preload
 const preload = join(__dirname, '../preload/index.js')
 const url = process.env.VITE_DEV_SERVER_URL
@@ -57,14 +63,25 @@ process.env.VITE_DEV_SERVER_URL
 
 const vueDevToolsPath = path.resolve(__dirname, '../../6.5.1_0')
 let appIcon = null
+let appServerPath = null
 
+// app 图标
 if (process.env.VITE_DEV_SERVER_URL) {
     appIcon = join(__dirname, "../../build/icons/1024x1024.png")
 } else {
     // 生产环境 图标加载位置为打包后的位置
     appIcon = join(path.dirname(app.getPath('exe')), "resources/build/icons/icon.ico")
 }
-console.log(process.versions.chrome)
+
+// app 本地服务器
+if (process.env.VITE_DEV_SERVER_URL) {
+    appServerPath = join(__dirname, "../../server/app.exe")
+} else {
+    // 生产环境 本地服务器 加载位置为打包后的位置
+    appServerPath = join(path.dirname(app.getPath('exe')), "resources/server/app.exe")
+}
+
+
 
 async function createWindow() {
     win = new BrowserWindow({
@@ -136,12 +153,32 @@ async function createWindow() {
     })
 }
 
+
+function startAppLocalServer() {
+    if (appServerPath) {
+        server = exec(appServerPath, (error, stdout, stderr) => {
+            if (error) {
+                console.error(error)
+            }
+            if (stderr) {
+                console.error(stderr)
+            }
+            if (stdout) {
+                console.log(stdout)
+            }
+        })
+        console.log(server.pid)
+    }
+}
+
 app.whenReady().then(async () => {
     app.setUserTasks([])
     await createWindow()
     await createTray()
+
     // 加载 vue 调试器插件
     await session.defaultSession.loadExtension(vueDevToolsPath)
+    startAppLocalServer()
 })
 
 
@@ -164,6 +201,18 @@ app.on('activate', async () => {
         allWindows[0].focus()
     } else {
         await createWindow()
+    }
+})
+
+
+app.on('quit', () => {
+    if (tray) {
+        tray.destroy()
+    }
+    // 结束正在运行的 服务器程序
+    if (server) {
+        server.kill()
+        console.log("shut down server")
     }
 })
 

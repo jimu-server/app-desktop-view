@@ -17,6 +17,10 @@
     {
       from: './src/assets',
       to: './assets'
+    },
+    {
+      from: './server',
+      to: './server'
     }
   ],
   "files": [
