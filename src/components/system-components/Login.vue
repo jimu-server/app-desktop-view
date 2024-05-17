@@ -16,9 +16,7 @@
               >
                 <div v-if="showPanel=='login'" class="fit row justify-center">
                   <div class=" full-height column justify-center">
-                    <q-form class="input  justify-center" autofocus autocorrect="off" autocomplete="off"
-                            autocapitalize="off"
-                            spellcheck="false">
+                    <q-form class="input  justify-center" autofocus autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
                       <div>
                         <q-tabs
                             v-model="tab"
@@ -29,7 +27,7 @@
                           <q-tab name="default" :ripple="false" label="账号密码"/>
                           <q-tab name="phone" :ripple="false" label="短信登录"/>
                         </q-tabs>
-                        <q-tab-panels v-model="tab" animated class="shadow-2 rounded-borders">
+                        <q-tab-panels v-model="tab" animated>
                           <q-tab-panel name="default">
                             <div class="full-width row justify-center">
                               <q-input table-index
@@ -39,7 +37,7 @@
                                        v-model="account"
                                        placeholder="账号/手机/邮箱"
                                        :error="false"
-                                       style="width: 100%"
+                                       style="width: 260px"
                               >
                                 <template v-slot:prepend>
                                   <q-icon name="jimu-yonghuming" size="20px"/>
@@ -50,7 +48,7 @@
                               <q-input table-index :ref="el=> loginInputRef[1]=el" dense outlined v-model="passwd"
                                        type="password"
                                        :error="false"
-                                       style="width: 100%"
+                                       style="width: 260px"
                                        placeholder="密码"
                               >
                                 <template v-slot:prepend>
@@ -71,7 +69,7 @@
                                        v-model="phone"
                                        placeholder="手机"
                                        :error="false"
-                                       style="width: 100%"
+                                       style="width: 260px"
                               >
                                 <template v-slot:before>
                                   <q-select v-model="area" :options="areaOptions"
@@ -87,7 +85,7 @@
                             <div class="full-width row justify-center">
                               <q-input table-index :ref="el=> loginInputRef[1]=el" dense outlined v-model="code"
                                        :error="false"
-                                       style="width: 100%"
+                                       style="width: 260px"
                                        placeholder="验证码"
                               >
                                 <template v-slot:append>
@@ -548,6 +546,7 @@ onUnmounted(() => {
   flex-direction: column;
   width: 360px;
   height: 400px;
+  overflow: hidden;
 }
 
 #login {

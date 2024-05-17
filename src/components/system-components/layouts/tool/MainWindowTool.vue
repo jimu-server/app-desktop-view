@@ -43,6 +43,7 @@ import {onMounted, ref, watch} from "vue";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
 import {Tool} from "@/components/system-components/model/system";
+import Slide from "@/components/system-components/layouts/tool/Slide.vue";
 
 const tool = useToolStore()
 const user = userStore()

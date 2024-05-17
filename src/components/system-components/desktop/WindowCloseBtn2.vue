@@ -15,8 +15,4 @@ import {desktop_close} from "@/components/system-components/desktop/desktop";
   color: white;
 }
 
-/* 处理 桌面窗口关闭时候的圆角问题 */
-.close-btn {
-  border-top-right-radius: 10px;
-}
 </style>

@@ -287,7 +287,7 @@ async function createTray() {
     // 创建 托盘图标
     const icon = nativeImage.createFromPath(appIcon)
     tray = new Tray(icon)
-
+    // 当前 ui 写的托盘菜单最低30(单个菜单项)
     let menuHeight = 30
     trayMenu = new BrowserWindow({
         title: 'tray',
@@ -306,7 +306,6 @@ async function createTray() {
             partition: String(+new Date())
         },
     })
-
     if (process.env.VITE_DEV_SERVER_URL) {
         await trayMenu.loadURL(url + "#/tray")
     } else {

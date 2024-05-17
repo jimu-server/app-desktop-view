@@ -17,26 +17,26 @@
           />
           <window-scroll v-show="widowsLabel.windowLabels.length !== 0"/>
           <q-space />
-          <q-btn dense square flat :icon=" $q.dark.isActive?'jimu-light':'jimu-dark'" @click.stop="alter"
-                 style="height: 100%;width: 40px;-webkit-app-region: no-drag;"/>
+          <WindowThemeBtn/>
           <WindowMinimizeBtn/>
-          <WindowCloseBtn/>
+          <WindowCloseBtn2/>
         </q-bar>
       </slot>
     </q-header>
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" behavior="desktop" bordered :width=" tool.left.width"
-              style="overflow: hidden; background: rgba(241,241,241,0);min-width: 52px">
+              style="overflow: hidden; background: rgba(241,241,241,0);min-width: 52px;-webkit-app-region: drag;">
       <MainWindowTool :position="ToolLayout.Left" :tool-ctx="tool.left.ctx">
         <div class="row justify-center drawer-opt">
-          <UserAvatar/>
+          <UserAvatar style="-webkit-app-region: no-drag;"/>
         </div>
         <template v-slot:top="scope">
           <template v-for="item in tool.buttons">
-            <DefaultBtn :btn="item" :key="item.id" v-if="item.position==scope.position" :position="scope.position"/>
+            <DefaultBtn :btn="item" :key="item.id" v-if="item.position==scope.position" :position="scope.position"
+                        style="-webkit-app-region: no-drag;"/>
           </template>
         </template>
         <template v-slot:bottom>
-          <q-btn dense flat icon="jimu-caidan">
+          <q-btn dense flat icon="jimu-caidan" style="-webkit-app-region: no-drag;">
             <q-menu
                 anchor="top right" self="top left" fit
                 transition-show="scale"
@@ -107,6 +107,8 @@ import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import AboutDialog from "@/components/system-components/other/AboutDialog.vue";
 import SettingDialog from "@/components/system-components/setting/SettingDialog.vue";
+import WindowThemeBtn from "@/components/system-components/desktop/WindowThemeBtn.vue";
+import WindowCloseBtn2 from "@/components/system-components/desktop/WindowCloseBtn2.vue";
 
 
 const widowsLabel = useWindowsStore()
@@ -180,13 +182,6 @@ document.addEventListener('mousemove', (event) => {
 })
 
 
-
-function alter() {
-  $q.dark.toggle()
-  theme.setTheme($q.dark.isActive)
-  // 同步修改 系统托盘主题
-  desktop_theme_change($q.dark.isActive)
-}
 
 
 onMounted(async () => {

@@ -6,6 +6,7 @@
 <script setup lang="ts">
 import {useQuasar} from "quasar";
 import {Tool} from "@/components/system-components/model/system";
+import ToolButton from "@/components/system-components/layouts/tool/ToolButton.vue";
 
 const $q = useQuasar()
 const props = defineProps<{

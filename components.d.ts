@@ -150,9 +150,11 @@ declare module 'vue' {
     WebSocket: typeof import('./src/components/system-components/layouts/tool/WebSocket.vue')['default']
     WidgetItem: typeof import('./src/components/system-components/widget/WidgetItem.vue')['default']
     WindowCloseBtn: typeof import('./src/components/system-components/desktop/WindowCloseBtn.vue')['default']
+    WindowCloseBtn2: typeof import('./src/components/system-components/desktop/WindowCloseBtn2.vue')['default']
     WindowMinimizeBtn: typeof import('./src/components/system-components/desktop/WindowMinimizeBtn.vue')['default']
     WindowScroll: typeof import('./src/components/system-components/window/tag/WindowScroll.vue')['default']
     WindowScrollX: typeof import('./src/components/system-components/window/tag/WindowScrollX.vue')['default']
     WindowTag: typeof import('./src/components/system-components/window/tag/WindowTag.vue')['default']
+    WindowThemeBtn: typeof import('./src/components/system-components/desktop/WindowThemeBtn.vue')['default']
   }
 }
