@@ -94,3 +94,31 @@ export interface AppChatKnowledgeInstance {
     createTime?: string
     check: boolean
 }
+
+
+//   对接 本地 ollama 模型返回数据
+
+
+export interface OllamaModelResponse {
+    name?: string
+    model?: string
+    modified_at?: string
+    size?: number
+    digest?: string
+    details: OllamaModelDetails
+}
+
+export interface OllamaModelDetails {
+    parent_model?: string
+    format?: string
+    family?: string
+    families?: string[]
+    parameter_size?: string
+    quantization_level?: string
+}
+
+export interface OllamaDownload {
+    model?: string
+    isDownload?: boolean
+    progress?:ProgressResponse
+}

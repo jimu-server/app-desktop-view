@@ -26,6 +26,7 @@ import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessage
 import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
 import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
 import {updateTheme} from "@/components/tool-components/chatGptTool/chat/style/update";
+import {Stream} from "@/components/system-components/stream/stream";
 
 
 const ctx = useGptStore()
@@ -46,6 +47,7 @@ const props = defineProps<
 const typingBox = ref<HTMLElement>()
 const typing = ref<HTMLElement>()
 const cursor = ref<HTMLElement>()
+const stream = ref<Stream>()
 // 是否显示打字光标
 const showCursor = ref(false)
 // 打字机 光标显示位置
@@ -86,46 +88,29 @@ function beginTyping() {
   setTimeout(async () => {
     if (!send.value && info.value.content === "") {
       ctx.ui.replying = true
-      const response = info.value.stream;
-      const reader = response.body.getReader()
       showCursor.value = true
-      try {
-        while (true) {
-          // 如果执行停止操作则结束打字
-          if (ctx.ui.stop) {
-            // 检查中断标识 true 表示 需要中断
-            await reader.cancel()
-            // 延迟查询消息补偿提前结束无法及时取出的消息
-            setTimeout(async () => {
-              await updateSelfMessage()
-              end()
-            }, 1000)
-            console.log("typing stop..")
-            return
-          }
-          const result = await reader.read();
-          if (result.done) break;
-          if (!do_typing(result.value)) break
-          // 如果执行停止操作则结束打字
-          if (ctx.ui.stop) {
-            // 检查中断标识 true 表示 需要中断
-            await reader.cancel()
-            // 延迟查询消息补偿提前结束无法及时取出的消息
-            setTimeout(async () => {
-              await updateSelfMessage()
-              end()
-            }, 1000)
-            console.log("typing stop..")
-            return
-          }
+      const response = info.value.stream;
+      stream.value = new Stream(response)
+
+      stream.value.setHandler((data, status) => {
+        if (data.message.content) {
+          // 保存原始消息
+          content.value += data.message.content
+          // 渲染 md 消息进行展示
+          info.value.content = md.render(content.value);
+          // 发送滚动条滚动指令
+          emitter.emit(SendActionScroll)
         }
-        console.log("typing end..")
+      })
+      stream.value.setComplete(async (data, status) => {
         await updateSelfMessage()
         end()
-      } catch (error) {
-        console.error("Stream reading error:", error);
-      }
-
+      })
+      stream.value.setEnd(async (data, status) => {
+        await updateSelfMessage()
+        end()
+      })
+      await stream.value.listen()
     }
   }, 300);
 }

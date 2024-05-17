@@ -113,3 +113,12 @@ export interface ChatMessageEntity {
     data: any // 消息数据
 }
 
+
+export interface ChatCtx {
+
+    // gpt 是否正在回复消息 , 目前对于回复中的消息不能切换会话
+    replying: string
+
+    // 当前聊天会话消息列表
+    messageList: ChatMessageEntity[]
+}

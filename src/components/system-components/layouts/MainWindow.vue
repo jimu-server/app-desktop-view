@@ -47,7 +47,7 @@
                 <menu-item icon="jimu-shezhi-2" text="设置" @click="showSettingDialog=true"/>
                 <menu-item icon="jimu-banbengengxin" text="检查更新"/>
                 <menu-item icon="jimu-guanyu" text="关于" @click="showAboutDialog=true"/>
-                <menu-item icon="jimu-zhuxiao" text="退出账号"/>
+                <menu-item icon="jimu-zhuxiao" text="退出账号" @click="logout"/>
               </q-list>
             </q-menu>
           </q-btn>

@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="full-width row justify-center">
-                          <q-btn color="primary" style="width: 96%" @click="login" :loading="loading">
+                          <q-btn color="primary" style="width: 96%" @click="login" :loading="loading" :disable="loading">
                             登录
                             <template v-slot:loading>
                               <q-spinner style="margin-right: 5px"/>

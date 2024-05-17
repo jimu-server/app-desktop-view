@@ -4,10 +4,7 @@
     <div class="chat-avatar">
       <q-avatar rounded size="40px"
                 class="text-white">
-        <img v-if="header!=''" :src="header" alt="" style="width: 40px;height: 40px"/>
-        <div v-else class="bg-primary text-white">
-          {{ name.substring(0, 1) }}
-        </div>
+        <img :src="header==''?ctx.gptDefaultAvatar:header" style="width: 40px;height: 40px"/>
         <q-menu
             touch-position
             context-menu
@@ -175,9 +172,15 @@ let info = props.message!
 const send = ref(false)
 const fold = ref('300px')
 const foldFlag = ref(false)
-const header = ref(user.info.user.picture)
+const header = ref('')
 if (props.message.content != '') {
   fold.value = 'none'
+}
+
+switch (props.message.role) {
+  case 'user':
+    header.value = user.info.user.picture
+    break
 }
 
 // 消息体折叠高度阈值 超过300可以折叠

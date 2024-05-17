@@ -6,7 +6,7 @@ import {ConversationEntity, MessageItem} from "@/components/tool-components/chat
 import {
     AppChatConversationItem, AppChatKnowledgeFile, AppChatKnowledgeInstance,
     AppChatMessageItem,
-    LLmMole
+    LLmMole, OllamaDownload, OllamaModelResponse
 } from "@/components/tool-components/chatGptTool/chat/model/model";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
 import {
@@ -16,6 +16,7 @@ import {
     getLLmMole
 } from "@/components/tool-components/chatGptTool/chatRequest";
 import {Tree} from "@/components/system-components/model/system";
+import {br} from "../../../../../../dist/assets/index-DYEF3-v0";
 
 
 export const useGptStore = defineStore('gpt', {
@@ -81,11 +82,15 @@ export const useGptStore = defineStore('gpt', {
                 // 基础模型列表
                 baseModelList: [] as LLmMole[],
                 // 当前 对话所选则的模型
-                currentModel: null as LLmMole,
+                currentModel: null as OllamaModelResponse,
                 // 所有模型列表
-                modelList: [] as LLmMole[],
+                modelList: [] as OllamaModelResponse[],
                 // 用于前端 通过消息记录中的 modeid 快速查询到 模型信息显示消息名称等信息
                 modelInfo: {},
+
+                // 下载模型列表
+                downloadModelList: [] as OllamaDownload[],
+
                 knowledge: {
                     // 知识库导航目录
                     nva: [],
@@ -200,16 +205,10 @@ export const useGptStore = defineStore('gpt', {
         async GetModelList() {
             getLLmMole().then(data => {
                 this.ui.modelList = data
-                for (const item of data) {
-                    this.ui.modelInfo[item.id] = item
-                }
-                // 默认选中第一个
                 if (data.length > 0 && this.ui.currentModel == null) {
                     for (const datum of data) {
-                        if (datum.isDownload) {
-                            this.ui.currentModel = datum
-                            break
-                        }
+                        this.ui.currentModel = datum
+                        break
                     }
                 }
             })

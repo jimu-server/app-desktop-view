@@ -33,12 +33,14 @@ import {markRaw, onMounted, ref} from 'vue'
 import NodeElement from "@/components/tool-components/flowTool/NodeElement.vue";
 import RectangleNode from "@/components/tool-components/flowTool/node/RectangleNode.vue";
 import {useAppStore} from "@/store/app";
+import {useFlowStore} from "@/components/tool-components/flowTool/store/flow";
 
 const app = useAppStore()
+const flow = useFlowStore()
 const splitterModel = ref(20)
 const splitterModel2 = ref(20)
 
-
+flow.data = [1]
 const nodeType = {
   rectangle: markRaw(RectangleNode)
 }

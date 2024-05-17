@@ -4,7 +4,7 @@
             option-label="name" option-value="model"
             dropdown-icon="jimu-xiangxia-2">
     <template #prepend>
-      <q-icon class="chat-tool-opt" size="25px" :name="'img:'+ctx.ui.currentModel.picture"/>
+      <q-icon class="chat-tool-opt" size="25px" :name="'img:'+'./GPT.png'"/>
     </template>
     <template v-slot:selected>
       <div class="ellipsis">
@@ -12,7 +12,7 @@
       </div>
     </template>
     <template v-slot:option="scope">
-      <q-item v-bind="scope.itemProps" v-if="scope.opt.isDownload">
+      <q-item v-bind="scope.itemProps">
         <q-item-section>
           <q-item-label> {{ scope.opt.name }}</q-item-label>
         </q-item-section>

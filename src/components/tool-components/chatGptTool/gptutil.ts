@@ -19,7 +19,7 @@ export async function SendTextMessage(recoverMessageId: string, text: string) {
     }
     conversationId = store.CurrentChat.Current.Conversation.id
     // 创建问题消息
-    send(conversationId, recoverMessageId,text, model.id).then(async result => {
+    send(conversationId, recoverMessageId, text, model.model).then(async result => {
         if (result.code === 200) {
             store.CurrentChat.messageList.push(result.data)
             // 新消息要追加到可显示列表中
@@ -65,8 +65,8 @@ async function getReply(message: AppChatMessageItem) {
         messageId: message.id,
         createTime: "",
         role: "user",
-        modelId: model.id,
-        picture: model.picture,
+        modelId: model.model,
+        picture: "",
     }
 
     let messages = []
@@ -80,7 +80,7 @@ async function getReply(message: AppChatMessageItem) {
         id: uuid,
         messageId: message.id,
         model: model.model,
-        modelId: model.id,
+        modelId: model.model,
         messages: messages
     }
     msg.stream = await genStream('http://localhost:8080/api/chat/conversation', data);

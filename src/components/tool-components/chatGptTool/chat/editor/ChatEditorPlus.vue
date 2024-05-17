@@ -61,12 +61,14 @@
     </div>
     <div class="send-box row reverse">
       <div class="column justify-center">
-        <q-btn-dropdown no-caps split align="left" dense color="primary" :label="'发 送 '+'('+shape+')'"
+        <q-btn-dropdown square :ripple="false" split no-caps align="left" dense color="primary" label="发 送 "
                         icon="jimu-send"
                         @click="sendMessage"
                         dropdown-icon="jimu-xiangxia-2"
-                        style="height:30px;margin-right: 10px">
-          <q-list dense>
+                        style="height:30px;width: 109px;margin-right: 10px"
+                        content-class="send-box-dropdown">
+
+        <q-list dense>
             <menu-item text="Enter" @click="shape='Enter'">
               <template #option>
                 <q-radio dense v-model="shape" val="Enter"/>
@@ -240,10 +242,15 @@ onMounted(() => {
   color: v-bind('getPaletteColor("primary")');
 }
 
+
+
 </style>
 
 <style>
 .q-menu--dark {
   box-shadow: none;
+}
+.send-box-dropdown {
+  border-radius: 0;
 }
 </style>

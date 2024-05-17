@@ -11,7 +11,7 @@
     >
       <!--   聊天会话消息列表   -->
       <template v-slot:before>
-        <div ref="conversationListRef" class="fit column" style="overflow: hidden;min-width: 200px">
+        <div ref="conversationListRef" class="fit column" style="overflow: hidden;">
           <div class="row justify-center" style="padding: 7px">
             <search-input width="100%"/>
           </div>
@@ -87,7 +87,7 @@ const {getPaletteColor} = colors
 
 const app = useAppStore()
 const splitterModel = ref(20)
-const splitterModelLimit = ref([20, 20])
+const splitterModelLimit = ref([20, 30])
 const splitterModel2 = ref(30)
 const splitterModel2Limit = ref([30, 50])
 

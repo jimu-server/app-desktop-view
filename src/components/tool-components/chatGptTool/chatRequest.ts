@@ -3,7 +3,7 @@ import {Result, Tree} from "@/components/system-components/model/system";
 import {
     AppChatConversationItem, AppChatKnowledgeFile, AppChatKnowledgeInstance,
     AppChatMessageItem,
-    LLmMole
+    LLmMole, OllamaModelResponse
 } from "@/components/tool-components/chatGptTool/chat/model/model";
 import {For} from "@babel/types";
 import {GetHeaders} from "@/plugins/axiosutil";
@@ -112,8 +112,8 @@ export function getMessage(id: string) {
 }
 
 export function getLLmMole() {
-    return new Promise<LLmMole[]>(resolve => {
-        axiosForServer.get<Result<LLmMole[]>>("/api/chat/model/list").then(({data}) => {
+    return new Promise<OllamaModelResponse[]>(resolve => {
+        axiosForServer.get<Result<OllamaModelResponse[]>>("/api/chat/model/list").then(({data}) => {
             if (data.code === 200) {
                 if (data.data == null) {
                     resolve([])
