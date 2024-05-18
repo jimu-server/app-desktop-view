@@ -35,8 +35,8 @@ import {colors} from "quasar";
 import {BalloonEditor} from "@ckeditor/ckeditor5-editor-balloon";
 import {keyCodes} from '@ckeditor/ckeditor5-utils/src/keyboard';
 
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
-import {ChatMessageEntity, MessageItem, MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
+import {ChatMessageEntity, MessageItem, MessageType} from "@/components/tool-components/chatGptTool/model/chat";
 import {createEditor} from "@/components/tool-components/chatGptTool/chat/editor/ckeditor";
 import {TextWatcher} from "@ckeditor/ckeditor5-typing";
 import {createRegExp} from "@ckeditor/ckeditor5-mention/src/mentionui";

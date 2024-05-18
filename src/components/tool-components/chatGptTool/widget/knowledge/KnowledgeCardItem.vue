@@ -15,7 +15,7 @@
 <script setup lang="ts">
 
 
-import {AppChatKnowledgeInstance} from "@/components/tool-components/chatGptTool/chat/model/model";
+import {AppChatKnowledgeInstance} from "@/components/tool-components/chatGptTool/model/model";
 import {ref, watch} from "vue";
 
 const props = defineProps<{

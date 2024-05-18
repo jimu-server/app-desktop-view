@@ -55,10 +55,10 @@ import {formatTime} from "@/components/system-components/utils/systemutils";
 import {ref} from "vue";
 
 import {ElMessage} from "element-plus";
-import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {ConversationEntity} from "@/components/tool-components/chatGptTool/model/chat";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
-import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/chat/model/model";
+import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/model/model";
 import {delConversation, getConversation} from "@/components/tool-components/chatGptTool/chatRequest";
 import {useThemeStore} from "@/store/theme";
 

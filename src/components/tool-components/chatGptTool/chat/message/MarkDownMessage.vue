@@ -21,11 +21,11 @@ import emitter from "@/plugins/event";
 import {useThemeStore} from "@/store/theme";
 
 import {ElNotification} from "element-plus";
-import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/model";
+import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
 import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessagePreview";
 import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
-import {updateTheme} from "@/components/tool-components/chatGptTool/chat/style/update";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
+import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
 import {Stream} from "@/components/system-components/stream/stream";
 
 

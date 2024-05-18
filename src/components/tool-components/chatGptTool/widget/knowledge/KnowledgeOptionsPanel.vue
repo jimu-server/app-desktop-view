@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {getKnowledge} from "@/components/tool-components/chatGptTool/chatRequest";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 
 
 const ctx = useGptStore()

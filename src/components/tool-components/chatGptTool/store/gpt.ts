@@ -2,21 +2,20 @@ import {defineStore} from "pinia";
 
 import emitter from "@/plugins/event";
 import {MessageObserver} from "@/plugins/evenKey";
-import {ConversationEntity, MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
+import {ConversationEntity, MessageItem} from "@/components/tool-components/chatGptTool/model/chat";
 import {
     AppChatConversationItem, AppChatKnowledgeFile, AppChatKnowledgeInstance,
     AppChatMessageItem,
     LLmMole, OllamaDownload, OllamaModelResponse
-} from "@/components/tool-components/chatGptTool/chat/model/model";
+} from "@/components/tool-components/chatGptTool/model/model";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
 import {
     getBaseModel,
     getConversation,
     getConversationMessage,
-    getLLmMole
 } from "@/components/tool-components/chatGptTool/chatRequest";
 import {Tree} from "@/components/system-components/model/system";
-import {br} from "../../../../../../dist/assets/index-DYEF3-v0";
+import {getLLmMole} from "@/components/tool-components/chatGptTool/ollamaRequest";
 
 
 export const useGptStore = defineStore('gpt', {
@@ -61,6 +60,8 @@ export const useGptStore = defineStore('gpt', {
             // 缓存 聊天编辑信息用于草稿状态
             chat_editor_content: {},
             ui: {
+                // 会话搜索关键字
+                search: '',
                 // gpt响应的消息是否自动折叠
                 autoFold: false,
                 // 发送消息是否携带历史
@@ -114,7 +115,13 @@ export const useGptStore = defineStore('gpt', {
 
                 return timestampA - timestampB; // F
             })
-            this.CurrentChat.index = 0
+            let list: ConversationEntity[] = []
+            if (this.ui.search != '') {
+                list = this.CurrentChat.conversationList.filter(item => {
+                    return item.Conversation.title.includes(this.ui.search)
+                })
+                return list
+            }
             return this.CurrentChat.conversationList.reverse()
         }
     },

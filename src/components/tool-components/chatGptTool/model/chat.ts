@@ -3,7 +3,7 @@
 * */
 
 
-import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/chat/model/model";
+import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/model/model";
 
 export declare interface ConversationItem {
     conversationID?: string;
@@ -122,3 +122,4 @@ export interface ChatCtx {
     // 当前聊天会话消息列表
     messageList: ChatMessageEntity[]
 }
+

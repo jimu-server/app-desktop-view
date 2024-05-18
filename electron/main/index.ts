@@ -94,7 +94,9 @@ async function createWindow() {
         frame: false,
         resizable: false,
         maximizable: false,
+        // transparent: true,
         titleBarStyle: 'hidden',
+        // skipTaskbar: true,
         webPreferences: {
             preload,
             nodeIntegration: true,
@@ -102,6 +104,7 @@ async function createWindow() {
             partition: String(+new Date())
         },
     })
+    // win.setIgnoreMouseEvents(false, {forward: true})
     winId = win.id
     if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
         // console.log(url)
@@ -167,7 +170,6 @@ function startAppLocalServer() {
                 console.log(stdout)
             }
         })
-        console.log(server.pid)
     }
 }
 
@@ -178,7 +180,9 @@ app.whenReady().then(async () => {
 
     // 加载 vue 调试器插件
     await session.defaultSession.loadExtension(vueDevToolsPath)
-    startAppLocalServer()
+
+    // 加载本地服务
+    // startAppLocalServer()
 })
 
 
@@ -224,19 +228,31 @@ ipcMain.on('DevTools', () => {
     }
 })
 
+ipcMain.on('toggle', () => {
+    if (win) {
+        if (win.isMaximized()) {
+            win.unmaximize()
+        } else {
+            win.maximize()
+        }
+    }
+})
+
 ipcMain.on('login', () => {
     if (win) {
         win.hide()
         setTimeout(() => {
-            win.setMinimumSize(1000, 600)
-            win.setContentSize(1000, 600)
-            win.center()
             win.setMaximizable(true)
             win.setResizable(true)
             win.setMinimizable(true)
+
+            win.setMinimumSize(1000, 600)
+            win.setContentSize(1000, 600)
+            win.setSize(1000, 600)
+            win.center()
+
             win.show()
         }, 1000)
-
     }
 })
 
@@ -251,11 +267,13 @@ ipcMain.on('logout', () => {
             if (win.isMaximized()) {
                 win.restore()
             }
-            win.setMinimumSize(360, 450)
-            win.setContentSize(360, 450)
-            win.center()
             win.setResizable(false)
             win.setMaximizable(false)
+            win.setMinimumSize(360, 450)
+            win.setContentSize(360, 450)
+            win.setSize(360, 450)
+            win.center()
+
             win.show()
         }, 1000)
     }

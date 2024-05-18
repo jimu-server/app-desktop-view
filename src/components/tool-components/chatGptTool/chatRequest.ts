@@ -4,7 +4,7 @@ import {
     AppChatConversationItem, AppChatKnowledgeFile, AppChatKnowledgeInstance,
     AppChatMessageItem,
     LLmMole, OllamaModelResponse
-} from "@/components/tool-components/chatGptTool/chat/model/model";
+} from "@/components/tool-components/chatGptTool/model/model";
 import {For} from "@babel/types";
 import {GetHeaders} from "@/plugins/axiosutil";
 
@@ -111,19 +111,7 @@ export function getMessage(id: string) {
     })
 }
 
-export function getLLmMole() {
-    return new Promise<OllamaModelResponse[]>(resolve => {
-        axiosForServer.get<Result<OllamaModelResponse[]>>("/api/chat/model/list").then(({data}) => {
-            if (data.code === 200) {
-                if (data.data == null) {
-                    resolve([])
-                    return;
-                }
-                resolve(data.data)
-            }
-        })
-    })
-}
+
 
 export function deleteModel(name: string) {
     return new Promise<Result<any>>(resolve => {

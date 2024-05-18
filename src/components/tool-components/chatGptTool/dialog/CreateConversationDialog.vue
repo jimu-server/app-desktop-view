@@ -30,7 +30,7 @@
 
 import {ref, watch} from "vue";
 import {ElMessage} from "element-plus";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {createConversation} from "@/components/tool-components/chatGptTool/chatRequest";
 
 

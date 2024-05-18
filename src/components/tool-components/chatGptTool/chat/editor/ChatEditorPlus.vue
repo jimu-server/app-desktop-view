@@ -61,7 +61,7 @@
     </div>
     <div class="send-box row reverse">
       <div class="column justify-center">
-        <q-btn-dropdown square :ripple="false" split no-caps align="left" dense color="primary" label="发 送 "
+        <q-btn-dropdown  :ripple="false" split no-caps align="left" dense color="primary" label="发 送 "
                         icon="jimu-send"
                         @click="sendMessage"
                         dropdown-icon="jimu-xiangxia-2"
@@ -91,8 +91,8 @@ import {onMounted, ref, watch} from "vue";
 import {colors} from "quasar";
 import Editor from "./Editor.vue";
 import {IsEmpty} from "@/components/system-components/utils/systemutils";
-import {ChatMessageEntity, MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {ChatMessageEntity, MessageType} from "@/components/tool-components/chatGptTool/model/chat";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import KnowledgeOptionsPanel from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeOptionsPanel.vue";
 
 

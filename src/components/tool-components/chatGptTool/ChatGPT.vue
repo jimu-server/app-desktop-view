@@ -13,14 +13,14 @@
       <template v-slot:before>
         <div ref="conversationListRef" class="fit column" style="overflow: hidden;">
           <div class="row justify-center" style="padding: 7px">
-            <search-input width="100%"/>
+            <search-input width="100%" @search="search"/>
           </div>
           <div style="overflow:hidden;flex-grow: 1">
             <q-scroll-area :visible="false" class="fit">
               <div class="fit" style="overflow:hidden;">
-                <q-list padding style="padding: 5px">
+                <q-list padding style="padding: 12px">
                   <ConversationItemLabel
-                      v-for="(item,index) in ctx.CurrentChat.conversationList"
+                      v-for="(item,index) in ctx.sortConversation"
                       :item="item"
                       :index="index"
                       @select="selectChat"/>
@@ -73,13 +73,13 @@ import SearchInput from "@/components/tool-components/chatGptTool/widget/SearchI
 
 import {useAppStore} from "@/store/app";
 import {ElMessage} from "element-plus";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
 import {
   ChatMessageEntity,
   ConversationEntity,
   MessageType
-} from "@/components/tool-components/chatGptTool/chat/model/chat";
+} from "@/components/tool-components/chatGptTool/model/chat";
 import {SendTextMessage} from "@/components/tool-components/chatGptTool/gptutil";
 import draggable from 'vuedraggable'
 
@@ -90,17 +90,9 @@ const splitterModel = ref(20)
 const splitterModelLimit = ref([20, 30])
 const splitterModel2 = ref(30)
 const splitterModel2Limit = ref([30, 50])
-
 const conversationListRef = ref()
-
-
-const scrollAreaRef = ref()
 const messageListRef = ref()
-
-
 const ctx = useGptStore()
-ctx.test='init'
-
 
 if (!IsEmpty(ctx.CurrentChat.Current)) {
   ctx.ui.showChat = true
@@ -130,35 +122,6 @@ function selectChat(data: ConversationEntity, index: number) {
     }
   }, 100)
 }
-
-
-/*
-*   @description: 删除聊天
-* */
-async function CloseConversation(id: string) {
-  // 找到当前的关闭会话列表位置
-  let index = ctx.CurrentChat.conversationList.findIndex(item => {
-    return item.Conversation.id === id
-  })
-  ctx.CurrentChat.conversationList.splice(index, 1)
-
-  if (ctx.CurrentChat.conversationList.length == 0) {
-    // 清空 当前的所有聊天状态及其缓存
-    //
-    ctx.CurrentChat.Current = null
-    ctx.CurrentChat.messageList = []
-    ctx.CurrentChat.conversationList = []
-    ctx.ui.showChat = false
-    return
-  }
-  if (ctx.CurrentChat.Current.Conversation.id == id) {
-    // 删除一个聊天会话 如果有多个会话 则默认显示第一个会话
-    if (ctx.CurrentChat.conversationList.length > 0) {
-      selectChat(ctx.CurrentChat.conversationList[0], 0)
-    }
-  }
-}
-
 /*
 * @description: 正常消息编辑器发送消息
 * */
@@ -212,6 +175,10 @@ async function init() {
 
   // 状态数据 更新 会话ui 需要对 showChat 参数进行重置
   await ctx.GetConversationList()
+}
+
+function search(value: string) {
+  ctx.ui.search = value
 }
 
 

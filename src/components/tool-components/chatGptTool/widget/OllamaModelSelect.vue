@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {onMounted} from "vue";
 
 const ctx = useGptStore()

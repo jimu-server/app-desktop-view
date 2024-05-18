@@ -2,11 +2,15 @@ import {GetHeaders} from "@/plugins/axiosutil";
 import pinia from "@/pinia";
 import emitter from "@/plugins/event";
 import {SendActionScroll} from "@/plugins/evenKey";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {getUuid, send} from "@/components/tool-components/chatGptTool/chatRequest";
-import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/chat/model/model";
+import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
+import {genStream} from "@/components/tool-components/chatGptTool/ollamaRequest";
 
-let ctxStore = useGptStore(pinia);
+
+const localServerUrl = "http://localhost:8080"
+const originServerUrl = "http://localhost:8080"
+
 
 export async function SendTextMessage(recoverMessageId: string, text: string) {
     // 获取当前连天选择模型
@@ -29,8 +33,6 @@ export async function SendTextMessage(recoverMessageId: string, text: string) {
             await getReply(result.data)
         }
     })
-
-
 }
 
 /*
@@ -71,7 +73,7 @@ async function getReply(message: AppChatMessageItem) {
 
     let messages = []
     // 检查是否开启上下文聊天
-    if (ctxStore.ui.autoHistory) messages.push(...ctxStore.CurrentChat.messageList)
+    if (store.ui.autoHistory) messages.push(...store.CurrentChat.messageList)
     messages.push(msg)
 
     // 请求流数据参数
@@ -83,7 +85,8 @@ async function getReply(message: AppChatMessageItem) {
         modelId: model.model,
         messages: messages
     }
-    msg.stream = await genStream('http://localhost:8080/api/chat/conversation', data);
+    let serverUrl = getServer()
+    msg.stream = await genStream(`${serverUrl}/api/chat/conversation`, data);
     // 清空内容,表示表示后面接收到流消息 判断 content 为 '' 就开始打印消息
     msg.content = ''
     msg.role = 'assistant'
@@ -94,17 +97,15 @@ async function getReply(message: AppChatMessageItem) {
     return true
 }
 
-async function genStream(url: string, data: any) {
-    // tip 此处的 response 不能 clone 返回,会无法清空取消持续读取
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            ...GetHeaders()
-        },
-        body: JSON.stringify(data),
-    });
-    return response;
+
+/*
+* @description 根据环境获取服务器地址
+* */
+export function getServer() {
+    if (localServerUrl.endsWith("/")) {
+        return localServerUrl.substring(0, localServerUrl.length - 1)
+    }
+    return localServerUrl
 }
 
 

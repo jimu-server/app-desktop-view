@@ -5,6 +5,7 @@
     <q-card
         flat
         style="width: 50vw;height: 60vh;max-width:100vw;overflow: hidden"
+        id="user-model-manage"
     >
       <div class="fit" id="user-model-manage">
         <div class="column fit">
@@ -66,18 +67,20 @@
 
 <script setup lang="ts">
 
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {computed, onMounted, ref} from "vue";
 import {
-  LLmMole,
+  LLmMole, OllamaDownload,
   OllamaModelResponse,
   ProgressResponse
-} from "@/components/tool-components/chatGptTool/chat/model/model";
+} from "@/components/tool-components/chatGptTool/model/model";
 import {GetHeaders} from "@/plugins/axiosutil";
 import {ElMessage, ElNotification} from "element-plus";
 import {deleteModel} from "@/components/tool-components/chatGptTool/chatRequest";
 import {useAppStore} from "@/store/app";
 import {Stream} from "@/components/system-components/stream/stream";
+import {downloadOllamaModel} from "@/components/tool-components/chatGptTool/ollamaRequest";
+import {Result} from "@/components/system-components/model/system";
 
 const ctx = useGptStore()
 // 只允许单个下载
@@ -89,8 +92,52 @@ const text = ref('')
 const model = defineModel({default: false})
 const stream = ref<Stream>()
 
-function beginDownload() {
 
+// 创建一个下载任务
+async function beginDownload() {
+  // 更具 用户输入 获取当前的model
+  let model = text.value
+  text.value = ''
+  if (model == '') {
+    ElMessage({
+      message: '请输入模型名称',
+      type: 'warning',
+      appendTo: document.getElementById('user-model-manage')
+    })
+    return
+  }
+  setTimeout(async () => {
+    let download: OllamaDownload = {
+      model: model,
+      isDownload: false,
+    }
+    let data = {
+      name: model,
+      model: model,
+      stream: true,
+    }
+
+    const response = await downloadOllamaModel(data)
+    let stream = new Stream(response)
+    download.stream = stream
+    let number = ctx.ui.downloadModelList.push(download) - 1;
+    stream.setHandler((data, status) => {
+      ctx.ui.downloadModelList[number].progress = data
+    })
+    stream.setComplete((data, status) => {
+      console.log("complete")
+      // 删除下载任务列表
+      let findIndex = ctx.ui.downloadModelList.findIndex(item => item.model == ctx.ui.downloadModelList[number].model);
+      if (findIndex != -1) {
+        ctx.ui.downloadModelList.splice(findIndex, 1)
+      }
+      ctx.GetModelList()
+    })
+    stream.setEnd((data: Result<any>, status) => {
+    })
+
+    stream.listen()
+  }, 200)
 }
 
 // 计算下载进度
@@ -136,38 +183,6 @@ function clean() {
   cleanFlag.value = true
 }
 
-async function downloadModel(item: LLmMole) {
-  if (flag.value) return
-  flag.value = true
-  item.downloads = true
-  let data = {
-    name: item.model,
-    model: item.model,
-    stream: true,
-  }
-  const response = await fetch('http://localhost:8080/api/chat/model/pull', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...GetHeaders()
-    },
-    body: JSON.stringify(data),
-  });
-  stream.value = new Stream(response)
-  stream.value.setHandler((data: any, status: number) => {
-    progress.value = data
-  })
-  stream.value.setComplete((data, status) => {
-    flag.value = false
-    cleanFlag.value = false
-    // 重新加载数据
-    ctx.GetModelList()
-  })
-  stream.value.setEnd((data, status) => {
-    flag.value = false
-  })
-  await stream.value.listen()
-}
 
 
 async function delModel(item: OllamaModelResponse) {
@@ -179,8 +194,11 @@ async function delModel(item: OllamaModelResponse) {
       appendTo: document.getElementById('mode-manage')
     })
     // 需要根据 当前ui选择的 model 做出修改
-    if (item == ctx.ui.currentModel) {
-      ctx.ui.currentModel = null
+    if (item.model == ctx.ui.currentModel.model) {
+      for (let model of ctx.ui.modelList) {
+        ctx.ui.currentModel = model
+        break
+      }
     }
     // 更新聊天可选模型列表
     await ctx.GetModelList()

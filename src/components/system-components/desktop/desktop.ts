@@ -34,3 +34,8 @@ export function desktop_open_dev() {
 export function desktop_theme_change(flag: boolean) {
     ipcRenderer.send('theme', flag)
 }
+
+export function desktop_toggle() {
+    console.log("desktop_toggle")
+    ipcRenderer.send('toggle')
+}

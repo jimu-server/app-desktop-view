@@ -1,4 +1,5 @@
-import {MessageType} from "@/components/tool-components/chatGptTool/chat/model/chat";
+import {MessageType} from "@/components/tool-components/chatGptTool/model/chat";
+import {Stream} from "@/components/system-components/stream/stream";
 
 
 export interface AppChatConversationItem {
@@ -121,4 +122,5 @@ export interface OllamaDownload {
     model?: string
     isDownload?: boolean
     progress?:ProgressResponse
+    stream?: Stream
 }

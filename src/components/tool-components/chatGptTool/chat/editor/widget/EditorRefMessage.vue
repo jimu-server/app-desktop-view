@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
-import {MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
+import {MessageItem} from "@/components/tool-components/chatGptTool/model/chat";
 
 const ctx = useGptStore()
 const props = defineProps<

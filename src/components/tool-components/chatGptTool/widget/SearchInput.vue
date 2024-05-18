@@ -24,10 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ElMessage} from "element-plus";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {getConversation} from "@/components/tool-components/chatGptTool/chatRequest";
 
 
@@ -35,6 +35,12 @@ import {getConversation} from "@/components/tool-components/chatGptTool/chatRequ
 const props = defineProps({
   width: {
     default: '100%',
+  }
+})
+
+const emits = defineEmits({
+  search: function (text: string) {
+
   }
 })
 
@@ -53,6 +59,10 @@ function createSuccess(id: string) {
     ctx.SetCurrentChatById(id)
   })
 }
+
+watch(() => text.value, (value) => {
+  emits('search', value)
+})
 
 </script>
 

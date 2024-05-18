@@ -29,8 +29,8 @@ import Vue3DraggableResizable from 'vue3-draggable-resizable'
 //default styles
 import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
 
-import '@/components/tool-components/chatGptTool/chat/style/md.css'
-import '@/components/tool-components/chatGptTool/chat/style/md-dark.css'
+import '@/components/tool-components/chatGptTool/style/md.css'
+import '@/components/tool-components/chatGptTool/style/md-dark.css'
 import '@/components/tool-components/chatGptTool/chat/initPrism'
 
 import ai from 'src/assets/ai.svg'

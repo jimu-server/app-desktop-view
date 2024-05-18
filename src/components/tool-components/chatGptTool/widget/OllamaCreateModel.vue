@@ -57,9 +57,9 @@
 
 <script setup lang="ts">
 
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {computed, ref} from "vue";
-import {LLmMole, ProgressResponse} from "@/components/tool-components/chatGptTool/chat/model/model";
+import {LLmMole, ProgressResponse} from "@/components/tool-components/chatGptTool/model/model";
 import {GetHeaders} from "@/plugins/axiosutil";
 import {ElMessage} from "element-plus";
 import {Stream} from "@/components/system-components/stream/stream";

@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 import {computed, ref} from "vue";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 
 
 

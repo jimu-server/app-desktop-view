@@ -10,8 +10,8 @@
 import {ref} from "vue";
 
 import {userStore} from "@/store/user";
-import {MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {MessageItem} from "@/components/tool-components/chatGptTool/model/chat";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 
 
 

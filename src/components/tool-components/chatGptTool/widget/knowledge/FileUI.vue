@@ -32,9 +32,9 @@
 </template>
 
 <script setup lang="ts">
-import {AppChatKnowledgeFile, AppChatKnowledgeFileType} from "@/components/tool-components/chatGptTool/chat/model/model";
+import {AppChatKnowledgeFile, AppChatKnowledgeFileType} from "@/components/tool-components/chatGptTool/model/model";
 import {Tree} from "@/components/system-components/model/system";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {ref, watch} from "vue";
 
 const props = defineProps<{

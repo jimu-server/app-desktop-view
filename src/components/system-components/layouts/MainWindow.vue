@@ -102,7 +102,7 @@ import {
   desktop_login,
   desktop_logout,
   desktop_max,
-  desktop_minimize, desktop_theme_change
+  desktop_minimize, desktop_theme_change, desktop_toggle
 } from "@/components/system-components/desktop/desktop";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
