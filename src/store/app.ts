@@ -12,7 +12,7 @@ export const useAppStore = defineStore('app', {
                     height: ''
                 },
             },
-            settings: [] as Tree<AppSetting>[]
+            settings: [] as Tree<AppSetting<any>>[]
         }
     },
     persist: true,
@@ -33,6 +33,20 @@ export const useAppStore = defineStore('app', {
                 }
             }
             return ''
+        },
+        getSettings(value: string): AppSetting<any> {
+            for (const element of this.settings) {
+                if (element.entity.name == value) {
+                    return element.entity
+                }
+                if (element.children.length > 0) {
+                    let result = this.getSettings(value)
+                    if (result != null) {
+                        return result
+                    }
+                }
+            }
+            return null
         }
     }
 })

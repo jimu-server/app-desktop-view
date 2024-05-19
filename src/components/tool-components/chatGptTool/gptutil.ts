@@ -6,6 +6,11 @@ import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {getUuid, send} from "@/components/tool-components/chatGptTool/chatRequest";
 import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
 import {genStream} from "@/components/tool-components/chatGptTool/ollamaRequest";
+import {useAppStore} from "@/store/app";
+import pina from "@/pinia";
+import {OllamaSetting} from "@/components/tool-components/chatGptTool/setting/setting";
+import {Platform} from "@/components/tool-components/chatGptTool/variable";
+
 
 
 const localServerUrl = "http://localhost:8080"
@@ -85,7 +90,7 @@ async function getReply(message: AppChatMessageItem) {
         modelId: model.model,
         messages: messages
     }
-    let serverUrl = getServer()
+    let serverUrl = getOllamaServer()
     msg.stream = await genStream(`${serverUrl}/api/chat/conversation`, data);
     // 清空内容,表示表示后面接收到流消息 判断 content 为 '' 就开始打印消息
     msg.content = ''
@@ -98,14 +103,17 @@ async function getReply(message: AppChatMessageItem) {
 }
 
 
+
 /*
-* @description 根据环境获取服务器地址
+* @description 根据环境获取Ollama服务器地址
 * */
-export function getServer() {
-    if (localServerUrl.endsWith("/")) {
-        return localServerUrl.substring(0, localServerUrl.length - 1)
+export function getOllamaServer() {
+    let server: string = import.meta.env.VITE_APP_OLLAMA_SERVER
+    if (server.endsWith("/")) {
+        return server.substring(0, localServerUrl.length - 1)
     }
-    return localServerUrl
+    // 使用用户的主机信息
+    return server
 }
 
 

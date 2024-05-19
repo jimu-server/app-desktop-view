@@ -177,12 +177,13 @@ app.whenReady().then(async () => {
     app.setUserTasks([])
     await createWindow()
     await createTray()
-
     // 加载 vue 调试器插件
     await session.defaultSession.loadExtension(vueDevToolsPath)
-
     // 加载本地服务
-    // startAppLocalServer()
+    if (process.env.VITE_USER_NODE_ENV=="production.electron"){
+        console.log("begin start ollama server")
+        startAppLocalServer()
+    }
 })
 
 
@@ -343,7 +344,6 @@ ipcMain.on("login-app", (event) => {
 })
 
 ipcMain.on("theme", (event, args) => {
-    console.log("theme-change", args)
     trayMenu.webContents.send("theme-change", args)
 })
 

@@ -164,9 +164,9 @@ export interface Progress {
 }
 
 
-export interface AppSetting {
+export interface AppSetting<T> {
     id: string
     name: string
     value: string
-    setting?: any
+    setting: T
 }
