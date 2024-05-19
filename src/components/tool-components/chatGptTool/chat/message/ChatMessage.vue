@@ -41,7 +41,7 @@
           <!--    消息操作按钮      -->
           <div class="full-width row reverse" style="margin-top: 5px">
             <MessageAction v-show="isShowAction">
-              <q-icon class="msg-option" size="15px" dense flat name="jimu-shanchu">
+              <q-icon class="msg-option" size="15px" dense flat name="jimu-shanchu" @click="deleteMessage">
                 <q-tooltip :offset="[0, 10]">
                   删除
                 </q-tooltip>
@@ -101,7 +101,7 @@
         <template v-if="send">
           <div class="full-width row" style="margin-top: 5px">
             <MessageAction v-show="isShowAction">
-              <q-icon class="user-msg-option" size="15px" dense flat name="jimu-shanchu">
+              <q-icon class="user-msg-option" size="15px" dense flat name="jimu-shanchu" @click="deleteMessage">
                 <q-tooltip :offset="[0, 10]">
                   删除
                 </q-tooltip>
@@ -125,6 +125,8 @@ import {retryMessage} from "@/components/tool-components/chatGptTool/gptutil";
 import MarkDownMessage from "@/components/tool-components/chatGptTool/chat/message/MarkDownMessage.vue";
 import {useThemeStore} from "@/store/theme";
 import MessageAction from "@/components/tool-components/chatGptTool/chat/message/MessageAction.vue";
+import {deleteMsg} from "@/components/tool-components/chatGptTool/chatRequest";
+import {ElMessage} from "element-plus";
 
 const theme = useThemeStore()
 const ctx = useGptStore()
@@ -145,6 +147,17 @@ const props = defineProps<
 
 
 function deleteMessage() {
+  setTimeout(async () => {
+    let result = await deleteMsg([props.message.id])
+    if (result.code == 200) {
+      ctx.CurrentChat.messageList.splice(props.index, 1)
+      ElMessage({
+        message: '删除成功',
+        type: 'success',
+        plain: true
+      })
+    }
+  }, 200)
 
 }
 

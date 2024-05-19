@@ -3,18 +3,14 @@
       context-menu
   >
     <q-list dense>
-      <q-item dense v-for="(item,index) in list" clickable v-close-popup @click="item.action(ConversationItem)"
-              style="padding: 0"
-      >
-        <menu-item :icon="item.icon" :text="item.name"/>
-      </q-item>
+      <menu-item dense v-for="(item,index) in list" clickable v-close-popup @click="item.action(ConversationItem)" :icon="item.icon" :text="item.name"/>
     </q-list>
   </q-menu>
 </template>
 <script setup lang="ts">
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ActionMenu} from "@/components/system-components/model/system";
-import {AppChatConversationItem} from "@/components/system-components/tool/chatGptTool/chat/model/gpt";
+import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/model/model";
 
 const props = defineProps<{
   list: ActionMenu[],

@@ -1,18 +1,17 @@
-import axiosForServer from "@/plugins/axiosForServer";
 import {Result, Tree} from "@/components/system-components/model/system";
 import {
     AppChatConversationItem, AppChatKnowledgeFile, AppChatKnowledgeInstance,
     AppChatMessageItem,
-    LLmMole, OllamaModelResponse
+    LLmMole
 } from "@/components/tool-components/chatGptTool/model/model";
-import {For} from "@babel/types";
 import {GetHeaders} from "@/plugins/axiosutil";
+import {OllamaServer} from "@/components/tool-components/chatGptTool/gptAxios";
 
 
 
 export function getConversation() {
     return new Promise<AppChatConversationItem[]>(resolve => {
-        axiosForServer.get<Result<AppChatConversationItem[]>>('/api/chat/conversation/get').then(({data}) => {
+        OllamaServer.get<Result<AppChatConversationItem[]>>('/api/chat/conversation/get').then(({data}) => {
             if (data.code === 200) {
                 if (data.data == null) {
                     resolve([])
@@ -26,7 +25,7 @@ export function getConversation() {
 
 export function createConversation(name: string) {
     return new Promise<Result<string>>(resolve => {
-        axiosForServer.post<Result<string>>("/api/chat/conversation/create", {
+        OllamaServer.post<Result<string>>("/api/chat/conversation/create", {
             title: name
         })
             .then(({data}) => {
@@ -38,7 +37,7 @@ export function createConversation(name: string) {
 
 export function delConversation(id: string) {
     return new Promise<Result<any>>(resolve => {
-        axiosForServer.post<Result<any>>("/api/chat/conversation/del", {
+        OllamaServer.post<Result<any>>("/api/chat/conversation/del", {
             Id: id
         })
             .then(({data}) => {
@@ -50,7 +49,7 @@ export function delConversation(id: string) {
 
 export function send(conversationId: string, recoverMessageId: string, value: string, modelId: string) {
     return new Promise<Result<AppChatMessageItem>>(resolve => {
-        axiosForServer.post<Result<AppChatMessageItem>>("/api/chat/send", {
+        OllamaServer.post<Result<AppChatMessageItem>>("/api/chat/send", {
             conversationId: conversationId,
             content: value,
             modelId: modelId,
@@ -64,7 +63,7 @@ export function send(conversationId: string, recoverMessageId: string, value: st
 
 export function getUuid() {
     return new Promise<string>(resolve => {
-        axiosForServer.get<Result<string>>("/api/chat/uuid").then(({data}) => {
+        OllamaServer.get<Result<string>>("/api/chat/uuid").then(({data}) => {
             if (data.code === 200) {
                 resolve(data.data)
                 return
@@ -77,7 +76,7 @@ export function getUuid() {
 
 export function getConversationMessage(id: string) {
     return new Promise<AppChatMessageItem[]>(resolve => {
-        axiosForServer.get<Result<AppChatMessageItem[]>>("/api/chat/conversation/message", {
+        OllamaServer.get<Result<AppChatMessageItem[]>>("/api/chat/conversation/message", {
             params: {
                 conversationId: id
             }
@@ -95,7 +94,7 @@ export function getConversationMessage(id: string) {
 
 export function getMessage(id: string) {
     return new Promise<AppChatMessageItem>(resolve => {
-        axiosForServer.get<Result<AppChatMessageItem>>("/api/chat/msg", {
+        OllamaServer.get<Result<AppChatMessageItem>>("/api/chat/msg", {
             params: {
                 id: id
             }
@@ -115,7 +114,7 @@ export function getMessage(id: string) {
 
 export function deleteModel(name: string) {
     return new Promise<Result<any>>(resolve => {
-        axiosForServer.post<Result<any>>("/api/chat/user/model/delete", {
+        OllamaServer.post<Result<any>>("/api/chat/user/model/delete", {
             name: name
         })
             .then(({data}) => {
@@ -126,7 +125,7 @@ export function deleteModel(name: string) {
 
 export function getBaseModel() {
     return new Promise<LLmMole[]>(resolve => {
-        axiosForServer.get<Result<LLmMole[]>>("/api/chat/manage/modelList").then(({data}) => {
+        OllamaServer.get<Result<LLmMole[]>>("/api/chat/manage/modelList").then(({data}) => {
             if (data.code === 200) {
                 if (data.data == null) {
                     resolve([])
@@ -141,7 +140,7 @@ export function getBaseModel() {
 
 export function getFiles(pid: string) {
     return new Promise<Tree<AppChatKnowledgeFile>[]>(resolve => {
-        axiosForServer.get<Result<Tree<AppChatKnowledgeFile>[]>>("/api/chat/knowledge/file/list", {
+        OllamaServer.get<Result<Tree<AppChatKnowledgeFile>[]>>("/api/chat/knowledge/file/list", {
             params: {
                 pid: pid
             }
@@ -159,7 +158,7 @@ export function getFiles(pid: string) {
 
 export function createFiles(data: FormData) {
     return new Promise<Result<any>>(resolve => {
-        axiosForServer.post<Result<any>>("/api/chat/knowledge/file/create", data)
+        OllamaServer.post<Result<any>>("/api/chat/knowledge/file/create", data)
             .then(({data}) => {
                 resolve(data)
             })
@@ -168,7 +167,7 @@ export function createFiles(data: FormData) {
 
 export function getKnowledge() {
     return new Promise<AppChatKnowledgeInstance[]>(resolve => {
-        axiosForServer.get<Result<any[]>>("/api/chat/knowledge/list").then(({data}) => {
+        OllamaServer.get<Result<any[]>>("/api/chat/knowledge/list").then(({data}) => {
             if (data.code === 200) {
                 if (data.data == null) {
                     resolve([])
@@ -194,4 +193,15 @@ export async function genKnowledge(name: string, files: string[]) {
         body: JSON.stringify(data),
     });
     return response;
+}
+
+export function deleteMsg(id: string[]) {
+    return new Promise<Result<any>>(resolve => {
+        OllamaServer.post<Result<any>>("/api/chat/msg/delete", {
+            ids: id
+        })
+            .then(({data}) => {
+                resolve(data)
+            })
+    })
 }
