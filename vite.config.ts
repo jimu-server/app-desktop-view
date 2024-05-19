@@ -1,5 +1,5 @@
 // @ts-ignore
-import {defineConfig} from 'vite'
+import {defineConfig, loadEnv} from 'vite'
 // @ts-ignore
 import vue from '@vitejs/plugin-vue'
 // @ts-ignore
@@ -31,13 +31,15 @@ import path from "path";
 
 const require = createRequire(import.meta.url);
 // https://vitejs.dev/config/
-export default defineConfig(({command}) => {
+export default defineConfig(({command, mode}) => {
   rmSync('dist-electron', {recursive: true, force: true})
-
+  // console.log(process.env)
   const isServe = command === 'serve'
   const isBuild = command === 'build'
   const sourcemap = isServe || !!process.env.VSCODE_DEBUG
-
+  // console.log(sourcemap)
+  const env = loadEnv(mode, process.cwd());
+  // console.log(env)
   return {
     resolve: {
       alias: {
@@ -114,14 +116,30 @@ export default defineConfig(({command}) => {
       ]),
       renderer(),
     ],
-    server: process.env.VSCODE_DEBUG && (() => {
-      const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
-      return {
-        host: url.hostname,
-        port: +url.port,
-        hmr: true
+    server: {
+      host: true,
+      // 跨域设置允许
+      cors: true,
+      // 如果端口已占用直接退出
+      strictPort: true,
+
+      proxy: {
+        [env.VITE_APP_API]: {
+          target: env.VITE_APP_SERVER,
+          // target: 'env.VITE_APP_SERVER',
+          changeOrigin: true,
+          rewrite: (path) => {
+            console.log(path)
+            let replace = ""
+            if (path.startsWith(env.VITE_APP_API)) {
+              replace = path.substring(env.VITE_APP_API.length)
+            }
+            console.log(replace)
+            return replace
+          }
+        },
       }
-    })(),
+    },
     clearScreen: false,
     build:{
       sourcemap: false,
