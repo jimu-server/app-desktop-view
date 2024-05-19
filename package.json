@@ -5,6 +5,17 @@
   "main": "dist-electron/main/index.js",
   "scripts": {
     "dev": "vite",
+    "web:dev": "vite --mode development",
+    "web:test": "vite --mode test",
+    "web:produc": "vite --mode production",
+    "electron:dev": "vite --mode development.electron",
+    "electron:test": "vite --mode test.electron",
+    "electron:produc": "vite --mode production.electron",
+
+    "electron:dev:build": "vite build --mode development.electron && electron-builder",
+    "electron:test:build": "vite build --mode test.electron && electron-builder",
+    "electron:produc:build": "vite build --mode production.electron && electron-builder",
+
     "build": "vite build && electron-builder",
     "preview": "vite preview",
     "electron:generate-icons": "electron-icon-builder --input=./public/logo.png --output=build --flatten"

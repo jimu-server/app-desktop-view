@@ -1,5 +1,5 @@
 <template>
-  <q-avatar size="30px">
+  <q-avatar size="30px" style="user-select:none;">
     <img :src="user.info.user.picture!=''?user.info.user.picture:app.defaultAvatar" alt=""/>
     <q-menu
         anchor="top right" self="top left"
@@ -102,9 +102,9 @@
         <div class="row justify-center" style="margin-bottom: 20px">
           <!--          <q-btn dense flat label="编辑资料" @click="edit=true" style="width: 100%;height: 100%" color="primary"
                            :ripple="false" v-close-popup/>-->
-          <el-button @click="edit=true" style="width: 90%;height: 100%" text v-close-popup>
+<!--          <el-button @click="edit=true" style="width: 90%;height: 100%" text v-close-popup>
             编辑资料
-          </el-button>
+          </el-button>-->
         </div>
       </q-card>
     </q-menu>

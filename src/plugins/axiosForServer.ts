@@ -3,7 +3,7 @@ import {ElNotification} from "element-plus";
 import {GetHeaders} from "@/plugins/axiosutil";
 
 const Axios: AxiosInstance = axios.create({
-    baseURL: 'http://127.0.0.1:8080',
+    baseURL: import.meta.env.VITE_APP_API,
     timeout: 5000,
 })
 
