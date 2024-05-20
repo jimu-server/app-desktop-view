@@ -40,13 +40,13 @@
           <div v-show="foldFlag" class="gpt-fold" :theme="theme.dark?'dark':''"></div>
           <!--    消息操作按钮      -->
           <div class="full-width row reverse" style="margin-top: 5px">
-            <MessageAction v-show="isShowAction">
+<!--            <MessageAction v-show="isShowAction">
               <q-icon class="msg-option" size="15px" dense flat name="jimu-shanchu" @click="deleteMessage">
                 <q-tooltip :offset="[0, 10]">
                   删除
                 </q-tooltip>
               </q-icon>
-            </MessageAction>
+            </MessageAction>-->
             <MessageAction v-show="isShowAction">
               <q-icon class="msg-option" size="15px" dense flat name="jimu-fuzhi">
                 <q-tooltip :offset="[0, 10]">
@@ -100,13 +100,13 @@
         <!--  用户消息操作      -->
         <template v-if="send">
           <div class="full-width row" style="margin-top: 5px">
-            <MessageAction v-show="isShowAction">
+<!--            <MessageAction v-show="isShowAction">
               <q-icon class="user-msg-option" size="15px" dense flat name="jimu-shanchu" @click="deleteMessage">
                 <q-tooltip :offset="[0, 10]">
                   删除
                 </q-tooltip>
               </q-icon>
-            </MessageAction>
+            </MessageAction>-->
           </div>
         </template>
       </div>

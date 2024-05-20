@@ -139,7 +139,10 @@ if (!ctx.ui.send) {
 }
 
 function stopReplying() {
-  ctx.ui.stop = true
+  if (ctx.ui.currentStream) {
+    ctx.ui.currentStream.Stop()
+    ctx.ui.stop = true
+  }
 }
 
 function max(event) {

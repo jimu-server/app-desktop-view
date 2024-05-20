@@ -91,7 +91,7 @@ function beginTyping() {
       showCursor.value = true
       const response = info.value.stream;
       stream.value = new Stream(response)
-
+      ctx.ui.currentStream = stream.value
       stream.value.setHandler((data, status) => {
         if (data.message.content) {
           // 保存原始消息
@@ -102,13 +102,19 @@ function beginTyping() {
           emitter.emit(SendActionScroll)
         }
       })
-      stream.value.setComplete(async (data, status) => {
-        await updateSelfMessage()
-        end()
+      stream.value.setComplete((data, status) => {
+        console.log("stream complete")
+        setTimeout(async () => {
+          await updateSelfMessage()
+          end()
+        }, 200)
       })
-      stream.value.setEnd(async (data, status) => {
-        await updateSelfMessage()
-        end()
+      stream.value.setEnd((data, status) => {
+        console.log("stream end")
+        setTimeout(async () => {
+          await updateSelfMessage()
+          end()
+        }, 200)
       })
       await stream.value.listen()
     }
@@ -178,6 +184,7 @@ function end() {
   showCursor.value = false
   // 重置取消回复标识
   ctx.ui.stop = false
+  ctx.ui.currentStream = null
   console.log("Refresh status")
 }
 

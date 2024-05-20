@@ -16,6 +16,7 @@ import {
 } from "@/components/tool-components/chatGptTool/chatRequest";
 import {Tree} from "@/components/system-components/model/system";
 import {getLLmMole} from "@/components/tool-components/chatGptTool/ollamaRequest";
+import {Stream} from "@/components/system-components/stream/stream";
 
 
 export const useGptStore = defineStore('gpt', {
@@ -74,6 +75,9 @@ export const useGptStore = defineStore('gpt', {
                 send: false,
 
                 stop: false,
+
+                currentStream: null as Stream,
+
                 // 聊天面板展示隐藏属性
                 showChat: false,
 

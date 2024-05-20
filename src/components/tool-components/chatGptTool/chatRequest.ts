@@ -63,7 +63,7 @@ export function send(conversationId: string, recoverMessageId: string, value: st
 
 export function getUuid() {
     return new Promise<string>(resolve => {
-        OllamaServer.get<Result<string>>("/api/chat/uuid").then(({data}) => {
+        OllamaServer.get<Result<string>>("/api/uuid").then(({data}) => {
             if (data.code === 200) {
                 resolve(data.data)
                 return

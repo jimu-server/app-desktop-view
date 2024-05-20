@@ -3,7 +3,7 @@
       context-menu
   >
     <q-list dense>
-      <menu-item dense v-for="(item,index) in list" clickable v-close-popup @click="item.action(ConversationItem)" :icon="item.icon" :text="item.name"/>
+      <menu-item dense v-for="(item,index) in list" @click="item.action(ConversationItem)" :icon="item.icon" :text="item.name"/>
     </q-list>
   </q-menu>
 </template>
