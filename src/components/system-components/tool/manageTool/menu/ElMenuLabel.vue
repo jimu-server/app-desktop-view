@@ -1,10 +1,10 @@
 <template>
-  <el-menu-item>
+  <el-menu-item @click="addWindows(menu)">
     <template #title>
       <el-icon v-if="menu.entity.icon!=''">
         <span :class="'icon iconfont '+menu.entity.icon"></span>
       </el-icon>
-      {{ menu.entity.name}}
+      {{ menu.entity.title}}
     </template>
   </el-menu-item>
 </template>

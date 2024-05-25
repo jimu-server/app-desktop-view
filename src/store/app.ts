@@ -9,7 +9,8 @@ export const useAppStore = defineStore('app', {
             dict: {},
             ui: {
                 page: {
-                    height: ''
+                    width: 0,
+                    height: 0
                 },
             },
             settings: [] as Tree<AppSetting<any>>[]

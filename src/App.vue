@@ -37,7 +37,8 @@ ipcRenderer.on('win-change', (event, arg) => {
   setTimeout(() => {
     let byId = document.getElementById("page-view");
     if (byId) {
-      app.ui.page.height = byId.style.minHeight
+      let h = byId.style.minHeight.substring(0, byId.style.minHeight.length - 2);
+      app.ui.page.height = parseInt(h)
     }
   }, 100)
 })
@@ -45,7 +46,8 @@ ipcRenderer.on('win-change', (event, arg) => {
 window.onresize = function () {
   let byId = document.getElementById("page-view");
   if (byId) {
-    app.ui.page.height = byId.style.minHeight
+    let h = byId.style.minHeight.substring(0, byId.style.minHeight.length - 2);
+    app.ui.page.height = parseInt(h)
   }
 }
 
@@ -98,7 +100,8 @@ onMounted(() => {
   }
   let byId = document.getElementById("page-view");
   if (byId) {
-    app.ui.page.height = byId.style.minHeight
+    let h = byId.style.minHeight.substring(0, byId.style.minHeight.length - 2);
+    app.ui.page.height = parseInt(h)
   }
   // 获取当前操作系统的主题
   const match = matchMedia('(prefers-color-scheme: dark)');

@@ -98,7 +98,7 @@
         </el-table-column>
       </el-table>
       <div>
-        <el-button class="mt-4" plain style="width: 100%" @click="add=true">新增工具</el-button>
+        <el-button class="mt-4" plain style="width: 100%;margin-top: 5px" @click="add=true">新增工具</el-button>
       </div>
     </div>
     <!--  分页组件  -->

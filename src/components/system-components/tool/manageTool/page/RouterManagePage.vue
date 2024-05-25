@@ -1,9 +1,7 @@
 <template>
   <main-page>
     <div id="router" class="row justify-center">
-      <div class="full-height" style="width: 98%">
-        <RouterTable/>
-      </div>
+      <RouterTable/>
     </div>
   </main-page>
 </template>

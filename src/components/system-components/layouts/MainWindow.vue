@@ -64,7 +64,7 @@
     </q-drawer>
 
     <!--  主视图  -->
-    <q-page-container class="column justify-center">
+    <q-page-container class="column justify-center" v-size="sizeChange">
       <Transition enter-active-class="animate__animated animate__fadeInLeft"
                   leave-active-class="animate__animated animate__fadeOutRight">
         <!--   添加路由组件状态管理     -->
@@ -110,6 +110,7 @@ import SettingDialog from "@/components/system-components/setting/SettingDialog.
 import WindowThemeBtn from "@/components/system-components/desktop/WindowThemeBtn.vue";
 import WindowCloseBtn2 from "@/components/system-components/desktop/WindowCloseBtn2.vue";
 import WindowToggleBtn from "@/components/system-components/desktop/WindowToggleBtn.vue";
+import {useAppStore} from "@/store/app";
 
 
 const widowsLabel = useWindowsStore()
@@ -121,7 +122,7 @@ const leftDrawerOpen = ref(false)
 const showAboutDialog = ref(false)
 const showSettingDialog = ref(false)
 const mini = ref(false)
-
+const app = useAppStore()
 
 const theme = useThemeStore()
 
@@ -129,6 +130,25 @@ const theme = useThemeStore()
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+const vSize = {
+  updated(el, binding, vnode, prevVnode) {
+    if (typeof binding.value === 'function') {
+      binding.value(el.clientWidth, el.clientHeight);
+    }
+  },
+}
+
+
+function sizeChange(width: number, height: number) {
+  let byId = document.getElementById("page-view");
+  if (byId) {
+    console.log(byId.style)
+    let h = byId.style.minHeight.substring(0, byId.style.minHeight.length - 2);
+    app.ui.page.height = parseInt(h)
+  }
+}
+
 
 async function logout() {
   desktop_logout()

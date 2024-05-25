@@ -1,6 +1,8 @@
 <template>
-  <main-page  :style="{height:app.ui.page.height}">
-    <div class="fit column justify-between" style="padding: 5px">
+  <main-page>
+    <div class=" fit column justify-between"
+         style="padding: 5px"
+    >
       <!--  条件过滤  -->
       <div class="filter column full-width justify-between" style="padding-bottom:10px;">
         <div class="row justify-between">

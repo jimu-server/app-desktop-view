@@ -1,9 +1,7 @@
 <template>
   <main-page>
-    <div id="tool" class="row justify-center">
-      <div class="full-height" style="width: 98%">
-        <ToolTable/>
-      </div>
+    <div id="tool" class="fit row justify-center">
+      <ToolTable/>
     </div>
   </main-page>
 </template>
@@ -16,6 +14,6 @@ const app = useAppStore()
 
 <style scoped>
 #tool {
-  height: v-bind('app.ui.page.height');
+
 }
 </style>

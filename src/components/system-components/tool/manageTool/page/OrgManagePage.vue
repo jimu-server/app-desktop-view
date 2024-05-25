@@ -3,7 +3,7 @@
     <q-splitter
         v-model="splitterModel"
         :limits="[15,30]"
-        :style="{height:app.ui.page.height}"
+        class="fit"
     >
       <template v-slot:before>
         <div class="full-width row justify-center">

@@ -1,5 +1,5 @@
 <template>
-  <q-page id="page-view" class="column justify-center">
+  <q-page id="page-view" class="full-width column">
     <slot>
 
     </slot>
@@ -15,8 +15,8 @@ const app = useAppStore()
 
 
 onMounted(async () => {
-  let byId = document.getElementById("page-view");
-  app.ui.page.height = byId.style.minHeight
+  // let byId = document.getElementById("page-view");
+  // app.ui.page.height = byId.style.minHeight
 })
 </script>
 
@@ -24,5 +24,7 @@ onMounted(async () => {
 <style scoped>
 #page-view {
   overflow: hidden;
+  padding: 5px;
+  height: calc(v-bind('app.ui.page.height') * 1px);
 }
 </style>
