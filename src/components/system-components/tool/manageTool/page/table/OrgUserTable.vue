@@ -4,10 +4,10 @@
     <div class="filter column full-width justify-between" style="padding-bottom:10px;">
       <div class="row justify-between">
         <div class="row ">
-          <el-input class="opt" v-model="filter.account" style="width: 140px" size="large" placeholder="账号"/>
-          <el-input class="opt" v-model="filter.name" style="width: 140px" size="large" placeholder="昵称"/>
+          <el-input class="opt" v-model="filter.account" style="width: 140px"  placeholder="账号"/>
+          <el-input class="opt" v-model="filter.name" style="width: 140px"  placeholder="昵称"/>
           <el-select class="opt" v-model="filter.gender" label="状态" value-key="value"
-                     size="large" style="width: 80px"
+                      style="width: 80px"
           >
             <el-option
                 v-for="item in genderOptions"
@@ -16,14 +16,27 @@
                 :value="item">
             </el-option>
           </el-select>
-          <el-input class="opt" v-model="filter.phone" style="width: 140px" size="large" placeholder="手机"/>
-          <el-input class="opt" v-model="filter.email" style="width: 240px" size="large" placeholder="邮箱"/>
+          <el-input class="opt" v-model="filter.phone" style="width: 140px"  placeholder="手机"/>
+          <el-input class="opt" v-model="filter.email" style="width: 240px"  placeholder="邮箱"/>
         </div>
         <div>
-          <el-button text size="large">
+          <el-button text type="primary">
             <el-icon>
               <span class="icon iconfont jimu-chaxun"></span>
             </el-icon>
+            <div style="margin-left: 5px">
+              查询
+            </div>
+          </el-button>
+          <el-button text type="danger">
+            <div>
+              <el-icon>
+                <span class="icon iconfont jimu-shanchu"></span>
+              </el-icon>
+            </div>
+            <div style="margin-left: 5px">
+              删除
+            </div>
           </el-button>
         </div>
       </div>
@@ -33,18 +46,7 @@
       <el-table :data="users" border style="width: 100%;height: 90%">
         <el-table-column type="selection" width="55"/>
         <el-table-column fixed prop="account" label="账号" width="100px"/>
-        <el-table-column prop="name" label="昵称" width="100">
-          <template #default="scope">
-            <div class="fit row">
-              <q-chip style="height: 15px">
-                <q-avatar>
-                  <img :src="scope.row.picture">
-                </q-avatar>
-                {{ scope.row.name }}
-              </q-chip>
-            </div>
-          </template>
-        </el-table-column>
+        <el-table-column prop="name" label="昵称" width="100"/>
         <el-table-column prop="gender" label="性别" width="100px">
           <template #default="scope">
             {{ app.get('user', scope.row.gender)}}
@@ -55,28 +57,34 @@
         <el-table-column fixed="right" label="操作" align="right" >
           <template #default="scope">
             <div class="row justify-end">
-              <el-button link size="large" type="warning" @click="open(scope.row)">
-                <el-icon>
-                  <span class="icon iconfont jimu-quanxianguanli"></span>
-                </el-icon>
+              <el-button text type="primary" @click="open(scope.row)">
+                <div>
+                  <el-icon>
+                    <span class="icon iconfont jimu-bianji1"></span>
+                  </el-icon>
+                </div>
+                <div style="margin-left: 5px">
+                  编辑
+                </div>
               </el-button>
               <el-popconfirm title="确认删除?">
                 <template #reference>
-                  <el-button link size="large" type="danger">
-                    <el-icon>
-                      <span class="icon iconfont jimu-shanchu"></span>
-                    </el-icon>
+                  <el-button text type="danger">
+                    <div>
+                      <el-icon>
+                        <span class="icon iconfont jimu-shanchu"></span>
+                      </el-icon>
+                    </div>
+                    <div style="margin-left: 5px">
+                      删除
+                    </div>
                   </el-button>
                 </template>
               </el-popconfirm>
             </div>
           </template>
           <template #header class="fit">
-            <div class="fit row reverse">
-              <div class="full-height column justify-center">
-                <el-button text type="danger" size="small">删除</el-button>
-              </div>
-            </div>
+           操作
           </template>
         </el-table-column>
       </el-table>

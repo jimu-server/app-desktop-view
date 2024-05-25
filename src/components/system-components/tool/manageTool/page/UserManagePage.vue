@@ -1,111 +1,122 @@
 <template>
-  <main-page>
-    <q-splitter
-      v-model="splitterModel"
-      :limits="[10,30]"
-      :style="{height:app.ui.page.height}"
-    >
-      <template v-slot:before>
-        <div class="full-width row justify-center">
-          <q-input outlined dense v-model="filterText" style="width: 95%;margin-top: 5px;margin-bottom: 5px"/>
-        </div>
-        <q-list>
-          <el-tree
-            ref="treeRef"
-            :data="trees"
-            :props="treeProps"
-            node-key="entity.id"
-            :icon="OrgNodeIcon"
-            @node-click="orgClick"
-            :filter-node-method="filterNode"
-            table-layout="auto"
-            size="large"
-          />
-        </q-list>
-      </template>
-
-      <template v-slot:after>
-        <div class="fit column justify-between">
-          <div class="filter row full-width" style="padding:5px;">
-            <q-input class="opt" dense outlined v-model="filter.name" label="昵称" style="width: 100px"/>
-            <q-select class="opt" v-model="filter.gender" label="性别" :options="genderOptions"
-                      dropdown-icon="jimu-xiangxia-2"
-                      outlined dense options-dense
-                      style="width: 80px"/>
-            <q-input class="opt" dense outlined v-model="filter.phone" label="手机" style="width: 200px"/>
-            <q-input class="opt" dense outlined v-model="filter.email" label="邮箱" style="width: 200px"/>
-            <q-btn dense flat label="查询" style="width: 85px" icon="jimu-chaxun" color="primary"/>
+  <main-page  :style="{height:app.ui.page.height}">
+    <div class="fit column justify-between" style="padding: 5px">
+      <!--  条件过滤  -->
+      <div class="filter column full-width justify-between" style="padding-bottom:10px;">
+        <div class="row justify-between">
+          <div class="row ">
+            <el-input class="opt" v-model="filter.account" style="width: 140px" placeholder="账号"/>
+            <el-input class="opt" v-model="filter.name" style="width: 140px" placeholder="昵称"/>
+            <el-select class="opt" v-model="filter.gender" label="状态" value-key="value"
+                       style="width: 80px"
+            >
+              <el-option
+                  v-for="item in genderOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item">
+              </el-option>
+            </el-select>
+            <el-input class="opt" v-model="filter.phone" style="width: 140px" placeholder="手机"/>
+            <el-input class="opt" v-model="filter.email" style="width: 240px" placeholder="邮箱"/>
           </div>
-          <div style="flex-grow: 1" class="full-width">
-            <el-table :data="users" style="background: transparent" class="fit">
-              <el-table-column type="selection" width="55"/>
-              <el-table-column fixed prop="account" label="账号"/>
-              <el-table-column prop="name" label="昵称">
-                <template #default="scope">
-                  <div class="fit row">
-                    <q-chip>
-                      <q-avatar>
-                        <img :src="scope.row.picture">
-                      </q-avatar>
-                      {{ scope.row.name }}
-                    </q-chip>
-                  </div>
-                </template>
-              </el-table-column>
-              <el-table-column prop="gender" label="性别">
-                <template #default="scope">
-                  {{ app.get('user', scope.row.gender) }}
-                </template>
-              </el-table-column>
-              <el-table-column prop="phone" label="手机"/>
-              <el-table-column prop="email" label="邮箱"/>
-              <el-table-column fixed="right" label="Operations" align="right">
-                <template #default="scope">
-                  <div class="row">
-                    <q-btn dense flat color="primary" icon="jimu-bianji1"/>
-                    <q-btn dense flat color="warning" icon="jimu-quanxianguanli"/>
-                    <q-btn dense flat color="red" icon="jimu-shanchu"/>
-                  </div>
-                </template>
-                <template #header>
-                  <q-input v-model="filter.account" outlined dense label="账号"/>
-                </template>
-              </el-table-column>
-            </el-table>
-          </div>
-          <div class="row justify-center" style="padding-top: 5px;padding-bottom: 5px">
-            <Pagination :page="page" :total="count" @action="action"/>
+          <div>
+            <el-button text type="primary">
+              <el-icon>
+                <span class="icon iconfont jimu-chaxun"></span>
+              </el-icon>
+              <div style="margin-left: 5px">
+                查询
+              </div>
+            </el-button>
+            <el-button text type="danger">
+              <div>
+                <el-icon>
+                  <span class="icon iconfont jimu-shanchu"></span>
+                </el-icon>
+              </div>
+              <div style="margin-left: 5px">
+                删除
+              </div>
+            </el-button>
           </div>
         </div>
-      </template>
-    </q-splitter>
+      </div>
+      <!--  表格数据  -->
+      <div style="flex-grow: 1" class="full-width column justify-between">
+        <el-table :data="users" border style="width: 100%;height: 90%">
+          <el-table-column type="selection" width="55"/>
+          <el-table-column fixed prop="account" label="账号" width="100px"/>
+          <el-table-column prop="name" label="昵称" width="100"/>
+          <el-table-column prop="gender" label="性别" width="100px">
+            <template #default="scope">
+              {{ app.get('user', scope.row.gender) }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="phone" label="手机" width="200px"/>
+          <el-table-column prop="email" label="邮箱" width="200px"/>
+          <el-table-column fixed="right" label="操作" align="right">
+            <template #default="scope">
+              <div class="row justify-end">
+                <el-button text type="primary">
+                  <div>
+                    <el-icon>
+                      <span class="icon iconfont jimu-bianji1"></span>
+                    </el-icon>
+                  </div>
+                  <div style="margin-left: 5px">
+                    编辑
+                  </div>
+                </el-button>
+                <el-popconfirm title="确认删除?">
+                  <template #reference>
+                    <el-button text type="danger">
+                      <div>
+                        <el-icon>
+                          <span class="icon iconfont jimu-shanchu"></span>
+                        </el-icon>
+                      </div>
+                      <div style="margin-left: 5px">
+                        删除
+                      </div>
+                    </el-button>
+                  </template>
+                </el-popconfirm>
+              </div>
+            </template>
+            <template #header class="fit">
+              操作
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <!--  分页组件  -->
+      <div class="row justify-center" style="padding-top: 15px">
+        <div class="column justify-center">
+          <Pagination v-model:page="page" v-model:size="size" :total="count" @action="action"/>
+        </div>
+      </div>
+    </div>
   </main-page>
 </template>
 <script setup lang="ts">
 
 import {onMounted, ref, watch} from "vue";
 import {userStore} from "@/store/user";
-import {getOrgChildTree, getOrgUserList} from "@/components/system-components/tool/manageTool/manageRequest";
+import {
+  getOrgChildTree,
+  getOrgUserList,
+  getUserList
+} from "@/components/system-components/tool/manageTool/manageRequest";
 import {Org, Tree, User} from "@/components/system-components/model/system";
 import OrgNodeIcon from "@/components/system-components/tool/manageTool/icon/OrgNodeIcon.vue";
 import {useAppStore} from "@/store/app";
 
 const user = userStore()
 const app = useAppStore()
-const splitterModel = ref(10)
-
-const trees = ref<Tree<Org>[]>([])
+// 用户当前组织
 const currentOrg = ref(user.info.org)
 const users = ref<User[]>([])
-
-const filterText = ref('')
-const treeRef = ref()
-
-let treeProps = {
-  label: function (data, node) {
-    return data.entity.name
-  },
-}
 
 const filter = ref({
   account: '',
@@ -125,16 +136,8 @@ let genderOptions = [
 
 
 const page = ref(1)
+const size = ref(10)
 const count = ref(0)
-
-/*
-* @description: 切换组织机构
-* */
-function orgClick(data: Tree<Org>) {
-  currentOrg.value = data.entity
-  page.value = 1
-  load()
-}
 
 /*
 * @description: 翻页动作
@@ -145,10 +148,10 @@ function action(page: number, size: number) {
 }
 
 /*
-* @description: 加载当前组织下所有用户
+* @description: 加载当所有用户
 * */
 function load(page: number = 1, size: number = 5) {
-  getOrgUserList(currentOrg.value.id, page, size).then(data => {
+  getUserList(page, size).then(data => {
     users.value = data.rows
     count.value = data.count
   })
@@ -158,16 +161,9 @@ function load(page: number = 1, size: number = 5) {
 * @description: 初始化页面数据
 * */
 function init() {
-  // 加载组织
-  getOrgChildTree(currentOrg.value.id).then((data) => {
-    trees.value = data
-  })
   load()
 }
 
-watch(filterText, (val) => {
-  treeRef.value!.filter(val)
-})
 
 const filterNode = (value: string, data: Tree<Org>) => {
   if (!value) return true
@@ -179,7 +175,7 @@ onMounted(init)
 
 
 <style scoped>
-.filter > .opt {
+.filter .opt {
   margin-right: 10px;
 }
 </style>

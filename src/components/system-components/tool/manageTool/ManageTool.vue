@@ -1,8 +1,9 @@
 <template>
   <div class="fit">
-    <q-list>
-      <MenuLabel v-for="item in tree" :item="item"/>
-    </q-list>
+    <!--    <q-list>
+          <MenuLabel v-for="item in tree" :item="item"/>
+        </q-list>-->
+    <ElMenuTree :menus="tree"/>
   </div>
 </template>
 

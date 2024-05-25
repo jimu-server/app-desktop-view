@@ -42,6 +42,26 @@ export function getOrgUserList(orgId: string, page: number, size: number) {
     })
 }
 
+/*
+* @description 获取所有用户列表
+* */
+export function getUserList(page: number, size: number) {
+    return new Promise<Page<User>>(resolve => {
+        axiosForServer.get<Result<Page<User>>>('/api/org/user/all', {
+            params: {
+                page: page,
+                pageSize: size,
+            }
+        }).then(({data}) => {
+            if (data.code != 200 || data.data == null) {
+                resolve(null)
+                return
+            }
+            resolve(data.data)
+        })
+    })
+}
+
 
 /*
 * @description: 获取组织指定用户的角色授权列表

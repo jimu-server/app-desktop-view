@@ -35,6 +35,7 @@ function mouseDown(event) {
   color.value = active.value
   document.addEventListener("mousemove", mouseMove);
   lastX.value = event.screenX;
+  document.getElementById("html").style.userSelect = 'none'
 }
 
 function mouseMove(event) {
@@ -46,6 +47,7 @@ function mouseUp() {
   lastX.value = "";
   color.value = un_active.value
   document.removeEventListener("mousemove", mouseMove);
+  document.getElementById("html").style.userSelect = 'auto'
 }
 
 function mouseOver() {
