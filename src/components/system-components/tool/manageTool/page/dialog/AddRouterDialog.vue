@@ -2,7 +2,7 @@
   <el-dialog
       v-model="model"
       :title="title"
-      style="width: 400px;-webkit-app-region: no-drag;"
+      style="width: 400px"
       draggable
   >
     <div class="full-width row justify-center" style="overflow: auto">

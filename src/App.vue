@@ -19,14 +19,19 @@ import {getUserAllRoute, getUserAuthTool} from "@/components/system-components/r
 import {useAuthStore} from "@/store/auth";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
-import {UpdateAuthEvent, UpdateAuthWindowEvent} from "@/plugins/evenKey";
+import {LoginOut, UpdateAuthEvent, UpdateAuthWindowEvent, UserLogout} from "@/plugins/evenKey";
 import {desktop_open_dev} from "@/components/system-components/desktop/desktop";
+import {useWindowsStore} from "@/store/windows";
+import {useRouter} from "vue-router";
 
 const app = useAppStore()
 const user = userStore()
 const tool = useToolStore()
 const auth = useAuthStore()
 const theme = useThemeStore()
+const router = useRouter()
+const win = useWindowsStore()
+
 ipcRenderer.on('win-change', (event, arg) => {
   // console.log(ctx.ui.window.width, ctx.ui.window.height)
   setTimeout(() => {
@@ -64,13 +69,25 @@ $q.iconMapFn = (iconName) => {
 async function UpdateAuth() {
   // todo 加载用户已授权的工具栏按钮
   tool.buttons = []
-  tool.buttons.push(...await getUserAuthTool(user.info.org.id, user.info.role.id, 1))
-  tool.buttons.push(...await getUserAuthTool(user.info.org.id, user.info.role.id, 2))
+  tool.buttons.push(...await getUserAuthTool())
   await tool.UpdateToolRoute()
   // todo 加载用户当前组织当前角色的所有前端路由权限列表
   auth.auth = await getUserAllRoute(user.info.org.id, user.info.role.id)
   // todo 触发窗口权限更新
   emitter.emit(UpdateAuthWindowEvent)
+}
+
+async function UserLogoutEvent() {
+  // 清空用户信息
+  user.clear()
+  // 清空窗口导航
+  win.clear()
+  // 清空tool信息
+  tool.clear()
+  localStorage.clear()
+  sessionStorage.clear()
+  // 回到登陆页面
+  await router.push('/login')
 }
 
 onMounted(() => {
@@ -105,8 +122,10 @@ onMounted(() => {
 
 // 切换组织 角色 触发更新权限
 emitter.on(UpdateAuthEvent, UpdateAuth)
+emitter.on(UserLogout, UserLogoutEvent)
 onUnmounted(() => {
   emitter.off(UpdateAuthEvent, UpdateAuth)
+  emitter.off(UserLogout, UserLogoutEvent)
 })
 
 </script>

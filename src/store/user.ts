@@ -23,5 +23,21 @@ export const userStore = defineStore('user', {
     },
     persist: true,
     getters: {},
-    actions: {}
+    actions: {
+        clear() {
+            this.info = {
+                token: '',
+                refreshToken: '',
+                user: {} as User,
+                // 用户当前所加入的组织
+                orgList: [] as Org[],
+                // 用户当前组织下分配的角色
+                roleList: [] as Role[],
+                org: {} as Org,
+                role: {} as Role,
+                defaultOrg: '',
+                defaultRole: '',
+            } as Token
+        }
+    }
 })

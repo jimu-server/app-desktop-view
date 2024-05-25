@@ -31,13 +31,13 @@ export const useToolStore = defineStore('tool', {
         * */
         async UpdateToolRoute() {
             // 加载 工具路由
-            let store = userStore(pina);
+            let store = userStore(pina)
+            // 获取所有已授权的路由
+            let menus = await getUserAuthToolMenu()
+            this.buttons_router = {}
             for (const button of this.buttons) {
-                let menus = await getUserAuthToolMenu(store.info.org.id, store.info.role.id, button.id)
-                this.buttons_router[button.id] = menus
                 // 用与初始化 工具的子路由的 父级路由名称 如果工具本身没有路由 , 子路由的父级路由将是  rootPathName
                 let routerName = rootPathName
-
                 // 判断 当前的工具栏受否是路由类型 不是路由类型 就不需要添加路由
                 if (button.type == 1) {
                     const component = modules[`./${button.component}.vue`]
@@ -54,7 +54,16 @@ export const useToolStore = defineStore('tool', {
                     )
                     routerName = button.routerName
                 }
-                this.UpdateToolMenuRouter(routerName, menus)
+                // 查找道歉的工具中是否存在菜单 如果存在菜单 就初始化
+                for (const menu of menus) {
+                    if (menu.entity.toolId === button.id) {
+                        if (!this.buttons_router[button.id]) {
+                            this.buttons_router[button.id] = [] as Tree<Router>[]
+                        }
+                        this.buttons_router[button.id].push(menu)
+                        this.UpdateToolMenuRouter(routerName, [menu])
+                    }
+                }
             }
         },
         /*
@@ -97,6 +106,22 @@ export const useToolStore = defineStore('tool', {
                     ctx.width = 300
                 }
             }
-        }
+        },
+
+
+        clear() {
+            this.left = {
+                width: 53,
+                ctx: {} as Tool,
+                isOpen: false
+            }
+            this.right = {
+                width: 53,
+                ctx: {} as Tool,
+                isOpen: false
+            }
+            this.buttons = []
+            this.buttons_router = {}
+        },
     },
 })

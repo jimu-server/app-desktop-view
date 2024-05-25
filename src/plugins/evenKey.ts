@@ -33,3 +33,7 @@ export const UpdateAuthWindowEvent = "UpdateAuthWindowEvent"
 
 
 export const UpdateTool = "UpdateTool"
+
+
+// UserLogout 用户触发登出事件 用于处理用户缓存的相关数据处理
+export const UserLogout = "UserLogout"

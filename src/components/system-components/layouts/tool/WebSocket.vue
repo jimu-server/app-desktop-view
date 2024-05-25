@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {userStore} from "@/store/user";
+import {GetHeaders} from "@/plugins/axiosutil";
 
 const props = defineProps({
   url: {
@@ -25,7 +26,6 @@ let emits = defineEmits({
     console.log("error");
   }
 });
-const user = userStore()
 const webSocket = ref<WebSocket>()
 onMounted(() => {
   webSocket.value = new WebSocket(props.url, props.protocols);

@@ -8,7 +8,7 @@ export const useRouterStore = defineStore('router', {
         return {
             // 定义 状态数据
             cache:  [] as RouterCache[],
-            menu_route: MenuToolRoute()
+            // menu_route: MenuToolRoute()
         }
     },
     persist: true,

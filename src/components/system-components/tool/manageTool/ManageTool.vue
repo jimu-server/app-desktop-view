@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-import {Menu, Tool, Tree} from "@/components/system-components/model/system";
+import {Router, Tool, Tree} from "@/components/system-components/model/system";
 import {useToolStore} from "@/store/tool";
 import MenuLabel from "@/components/system-components/tool/manageTool/menu/MenuLabel.vue";
 
@@ -19,7 +19,7 @@ const props = defineProps<{
 
 const tool = useToolStore()
 
-const tree = ref<Tree<Menu>[]>(tool.buttons_router[props.btn.id])
+const tree = ref<Tree<Router>[]>(tool.buttons_router[props.btn.id])
 console.log(tree.value)
 
 </script>

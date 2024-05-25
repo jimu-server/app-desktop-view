@@ -21,7 +21,6 @@ const props = defineProps<{
 
 
 function receive(data: Records) {
-
   notify.list.push(data)
 }
 

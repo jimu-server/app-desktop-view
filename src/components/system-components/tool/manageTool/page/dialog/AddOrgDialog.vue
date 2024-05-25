@@ -4,7 +4,6 @@
       :title="title"
       draggable
       width="400"
-      style="-webkit-app-region: no-drag;"
   >
     <div class="fit column justify-between">
       <div class="full-width row justify-center" style="flex-grow: 1;padding: 5px">
@@ -51,9 +50,7 @@ const emits = defineEmits({
 
   }
 })
-
 const name = ref('')
-
 async function submit() {
   if (name.value == '') {
     ElMessage(
@@ -76,19 +73,7 @@ async function submit() {
     model.value = false
   }
 }
-
-const CardRef = ref()
-const tempX = ref(0)
-const tempY = ref(0)
 const model = defineModel({default: false, required: true})
-
-const handleDrag = (event) => {
-  CardRef.value.$el.style.transform = `translate(${tempX.value + event.offset.x}px, ${tempY.value + event.offset.y}px)`;
-  if (event.isFinal) {
-    tempX.value += event.offset.x
-    tempY.value += event.offset.y
-  }
-}
 
 function destroy() {
   name.value = ''
@@ -99,8 +84,6 @@ function init() {
 }
 
 function close() {
-  tempX.value = 0;
-  tempY.value = 0;
   destroy()
 }
 

@@ -4,7 +4,7 @@
       :title="title"
       draggable
       append-to-body
-      style="max-width:100vw;width: 700px;height: 700px;-webkit-app-region: no-drag;"
+      style="max-width:100vw;width: 700px;height: 700px"
   >
     <div class="fit column">
       <div class="full-width row" style="padding-left: 10px">

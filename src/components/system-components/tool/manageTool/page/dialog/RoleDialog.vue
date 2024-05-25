@@ -2,7 +2,7 @@
   <el-dialog
       v-model="model"
       :title="title"
-      style="width: 700px;height: 700px;-webkit-app-region: no-drag;"
+      style="width: 700px;height: 700px"
       draggable
       append-to-body
   >

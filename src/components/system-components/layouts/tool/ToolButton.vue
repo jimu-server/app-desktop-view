@@ -12,12 +12,13 @@
 
 <script setup lang="ts">
 import {Tool, WindowLabel} from "@/components/system-components/model/system";
-import router from "@/route";
+
 import {useWindowsStore} from "@/store/windows";
 
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
 import {ToolBtnType, ToolLayout} from "@/components/system-components/model/menu";
+import {useRouter} from "vue-router";
 
 const props = defineProps<{
   btn: Tool
@@ -30,6 +31,7 @@ const emits = defineEmits({
   }
 })
 
+const router = useRouter()
 
 const user = userStore()
 const tool = useToolStore()

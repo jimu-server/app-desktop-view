@@ -163,5 +163,9 @@ export const useWindowsStore = defineStore('windows', {
             this.windowLabels = arr
             this.index = index
         },
+        clear() {
+            let arr: WindowLabel[] = []
+            this.update(arr, 0)
+        },
     }
 })

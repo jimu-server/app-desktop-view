@@ -7,7 +7,7 @@
 
 
 
-import {MessageItem} from "@/components/tool-components/chatGptTool/chat/model/chat";
+import {MessageItem} from "@/components/tool-components/chatGptTool/model/chat";
 
 async function send(data: MessageItem) {
 

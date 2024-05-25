@@ -30,7 +30,7 @@
         </div>
       </div>
     </ToolSidebar>
-    <ToolSidebarView :id="position" :toolCtx="toolCtx" :position="position" style="-webkit-app-region: no-drag;"/>
+    <ToolSidebarView :id="position" :toolCtx="toolCtx" :position="position"/>
     <Slide :class="position==1?slide_line_l:slide_line_r" @widthChange="widthChange"/>
   </div>
 </template>
@@ -43,7 +43,6 @@ import {onMounted, ref, watch} from "vue";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
 import {Tool} from "@/components/system-components/model/system";
-import Slide from "@/components/system-components/layouts/tool/Slide.vue";
 
 const tool = useToolStore()
 const user = userStore()

@@ -15,12 +15,9 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {getAllNotify} from "@/components/system-components/tool/notifyTool/notifyRequest";
 
 import {useNotifyStore} from "@/store/tool/notify";
 
-const init = ref()
 
 const notify = useNotifyStore()
 

@@ -75,15 +75,9 @@ export function getUserOrgDefaultRole(orgId: string) {
 /*
 * @description 获取用户所有授权的工具按钮
 * */
-export function getUserAuthTool(orgId: string, roleId: string, position: number) {
+export function getUserAuthTool() {
     return new Promise<Tool[]>(resolve => {
-        axiosForServer.get('/api/user/auth/tool', {
-            params: {
-                orgId: orgId,
-                roleId: roleId,
-                position: position
-            }
-        })
+        axiosForServer.get('/api/user/auth/tool')
             .then(({data}) => {
                 if (data.code != 200) {
                     resolve([])
@@ -98,15 +92,9 @@ export function getUserAuthTool(orgId: string, roleId: string, position: number)
     })
 }
 
-export function getUserAuthToolMenu(orgId: string, roleId: string, toolId: string) {
+export function getUserAuthToolMenu() {
     return new Promise<Tree<Router>[]>(resolve => {
-        axiosForServer.get('/api/user/auth/tool/menu', {
-            params: {
-                orgId: orgId,
-                roleId: roleId,
-                toolId: toolId,
-            }
-        })
+        axiosForServer.get('/api/user/auth/tool/menu')
             .then(({data}) => {
                 if (data.code != 200) {
                     resolve([])
@@ -390,8 +378,8 @@ export function registerUser(data: any) {
 }
 
 export function appSetting(tools: string[]) {
-    return new Promise<Tree<AppSetting>[]>(resolve => {
-        axiosForServer.post<Result<Tree<AppSetting>[]>>('/api/settings', {
+    return new Promise<Tree<AppSetting<any>>[]>(resolve => {
+        axiosForServer.post<Result<Tree<AppSetting<any>>[]>>('/api/settings', {
             tools: tools
         }).then(({data}) => {
             if (data.code != 200) {

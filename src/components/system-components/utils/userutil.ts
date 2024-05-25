@@ -30,8 +30,7 @@ export async function loadUserInfo() {
     await baseInfo()
     // todo 加载用户已授权的工具栏按钮
     tool.buttons = []
-    tool.buttons.push(...await getUserAuthTool(user.info.org.id, user.info.role.id, 1))
-    tool.buttons.push(...await getUserAuthTool(user.info.org.id, user.info.role.id, 2))
+    tool.buttons.push(...await getUserAuthTool())
     // todo 注册工具按钮 路由
     await tool.UpdateToolRoute()
     // todo 加载用户当前组织当前角色的所有前端路由权限列表

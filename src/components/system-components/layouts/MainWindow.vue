@@ -26,7 +26,7 @@
     </q-header>
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" behavior="desktop" bordered :width=" tool.left.width"
               style="overflow: hidden; background: rgba(241,241,241,0);min-width: 52px;-webkit-app-region: drag;">
-      <MainWindowTool :position="ToolLayout.Left" :tool-ctx="tool.left.ctx">
+      <MainWindowTool :position="ToolLayout.Left" :tool-ctx="tool.left.ctx" style="-webkit-app-region: no-drag;">
         <div class="row justify-center drawer-opt">
           <UserAvatar style="-webkit-app-region: no-drag;"/>
         </div>
@@ -87,7 +87,7 @@ import {useWindowsStore} from "@/store/windows";
 
 import {useRouter} from "vue-router";
 import {useThemeStore} from "@/store/theme";
-import {GlobalNotification} from "@/plugins/evenKey";
+import {GlobalNotification, UserLogout} from "@/plugins/evenKey";
 import emitter from "@/plugins/event";
 import WindowScroll from "@/components/system-components/window/tag/WindowScroll.vue";
 import {useToolStore} from "@/store/tool";
@@ -105,7 +105,6 @@ import {
   desktop_minimize, desktop_theme_change, desktop_toggle
 } from "@/components/system-components/desktop/desktop";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
-import {ConversationEntity} from "@/components/tool-components/chatGptTool/chat/model/chat";
 import AboutDialog from "@/components/system-components/other/AboutDialog.vue";
 import SettingDialog from "@/components/system-components/setting/SettingDialog.vue";
 import WindowThemeBtn from "@/components/system-components/desktop/WindowThemeBtn.vue";
@@ -134,19 +133,7 @@ function toggleLeftDrawer() {
 async function logout() {
   desktop_logout()
   setTimeout(async () => {
-    await router.push('/login')
-    localStorage.clear()
-    user.info = {
-      defaultOrg: "",
-      defaultRole: "",
-      org: undefined,
-      orgList: undefined,
-      refreshToken: "",
-      role: undefined,
-      roleList: undefined,
-      token: "",
-      user: undefined
-    }
+    emitter.emit(UserLogout)
   }, 100)
 }
 

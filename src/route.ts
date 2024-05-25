@@ -24,8 +24,8 @@ router.beforeEach((to, from) => {
 // 初始化 adman 基础路由
 let registerMenuRoute = true
 router.beforeEach(async (to, from, next) => {
-    let menus = useRouterStore(pinia).menu_route
-    if (registerMenuRoute && menus != null) {
+    // let menus = useRouterStore(pinia).menu_route
+    if (registerMenuRoute) {
         // 初始化登录路由
         router.addRoute({
             path: '/',
@@ -81,9 +81,12 @@ router.beforeEach(async (to, from, next) => {
                 }
             )
         })
-        // 初始化加载 tool 路由
-        let tool = useToolStore(pinia)
-        await tool.UpdateToolRoute()
+        // 初始化加载 tool 路由 未登录状态不用加载
+        const user = userStore(pinia)
+        if (user.info.token !== '') {
+            let tool = useToolStore(pinia)
+            await tool.UpdateToolRoute()
+        }
         registerMenuRoute = false
         next({path: to.path})
     } else {
@@ -92,7 +95,7 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.beforeEach((to, from, next) => {
-    console.log(from.path)
+    // console.log(from.path)
     if (from.path.startsWith("/verify") && to.path.startsWith(rootPath)) {
         return
     }
