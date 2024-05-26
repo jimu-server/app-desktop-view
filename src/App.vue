@@ -33,7 +33,6 @@ const router = useRouter()
 const win = useWindowsStore()
 
 ipcRenderer.on('win-change', (event, arg) => {
-  // console.log(ctx.ui.window.width, ctx.ui.window.height)
   setTimeout(() => {
     let byId = document.getElementById("page-view");
     if (byId) {
@@ -57,7 +56,6 @@ const $q = useQuasar()
 
 $q.iconMapFn = (iconName) => {
   // iconName 是来自 QIcon 中 "name" 属性的值
-
   // 您的自定义方法，以下只是一个示例：
   if (iconName.startsWith('jimu-') === true) {
     return {
