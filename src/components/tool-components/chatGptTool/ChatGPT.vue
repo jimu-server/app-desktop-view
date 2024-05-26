@@ -1,13 +1,13 @@
 <template>
   <main-page>
     <q-splitter
+        class="fit"
         v-model="splitterModel"
         :limits="splitterModelLimit"
         id="chatview"
         before-class="conversations"
         after-class="chat"
         separator-class="separator"
-        :style="{height:app.ui.page.height}"
     >
       <!--   聊天会话消息列表   -->
       <template v-slot:before>
@@ -23,7 +23,9 @@
                       v-for="(item,index) in ctx.sortConversation"
                       :item="item"
                       :index="index"
-                      @select="selectChat"/>
+                      @select="selectChat"
+                      style="transition: all 0.5s ease;"
+                  />
                 </q-list>
               </div>
             </q-scroll-area>
@@ -198,6 +200,18 @@ onMounted(init)
 
 .chat-tool-opt:hover {
   color: v-bind('getPaletteColor("primary")');
+}
+
+
+.list-enter-active, .list-leave-active {
+  transition: all 0.5s;
+}
+.list-enter, .list-leave-to /* .list-leave-active for <2.1.8 */ {
+  /*opacity: 0;*/
+  /*transform: translateY(30px);*/
+}
+.list-move {
+ /* transition: transform 0.3s;*/
 }
 
 

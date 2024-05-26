@@ -1,6 +1,6 @@
 <template>
   <main-page>
-    <div id="router" class="row justify-center">
+    <div id="router" class="fit row justify-center">
       <RouterTable/>
     </div>
   </main-page>

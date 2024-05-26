@@ -32,6 +32,39 @@ export function getIds(tree: Tree<any>[]): string[] {
     return ids
 }
 
+
+/*
+* @description 获取用户路由的授权状态映射
+* */
+export function getUserRouterAuthMapping(tree: Tree<any>[]): Map<string, boolean> {
+    let map = new Map<string, boolean>()
+    for (let i = 0; i < tree.length; i++) {
+        let item = tree[i]
+        map.set(item.entity.id, item.entity.status)
+        if (item.children.length > 0) {
+            let chaild = getUserRouterAuthMapping(item.children)
+            for (let [key, value] of chaild) {
+                map.set(key, value)
+            }
+        }
+    }
+    return map
+}
+
+export function updateTreeStatus(tree: Tree<any>[], status: Map<string, boolean>) {
+    if (tree == null) {
+        return
+    }
+    for (let i = 0; i < tree.length; i++) {
+        let item = tree[i]
+        item.entity.status = status.get(item.entity.id)
+        if (item.children.length > 0) {
+            updateTreeStatus(item.children, status)
+        }
+        item.entity.status = true
+    }
+}
+
 export function getTreeIds(tree: any[]): string[] {
     let ids: string[] = []
     for (let i = 0; i < tree.length; i++) {

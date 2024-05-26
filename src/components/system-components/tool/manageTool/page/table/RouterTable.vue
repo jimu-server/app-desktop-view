@@ -58,18 +58,31 @@
           </template>
         </el-table-column>
         <el-table-column prop="remark" width="100" label="备注"/>
-        <el-table-column prop="status" width="100" label="状态"/>
+        <el-table-column prop="status" label="状态" width="200px">
+          <template #default="scope">
+            <el-switch
+                v-model="scope.row.status"
+                class="ml-2"
+                inline-prompt
+                style="--el-switch-on-color: #1b77d2; --el-switch-off-color: rgba(158,160,161,0.54)"
+                active-text="启用"
+                inactive-text="禁用"
+            />
+          </template>
+        </el-table-column>
         <el-table-column fixed="right" label="操作" align="right">
           <template #default="scope">
-            <el-button link size="large" type="primary">
+            <el-button text  type="primary">
               <el-icon>
                 <span class="icon iconfont jimu-add"></span>
               </el-icon>
+              <span style="padding-right: 5px">添加</span>
             </el-button>
-            <el-button link size="large" type="warning">
+            <el-button text  type="primary">
               <el-icon>
-                <span class="icon iconfont jimu-quanxianguanli"></span>
+                <span class="icon iconfont jimu-bianji1"></span>
               </el-icon>
+              <span style="padding-right: 5px">编辑</span>
             </el-button>
             <el-popconfirm title="确认删除?">
               <template #reference>
@@ -77,16 +90,13 @@
                   <el-icon>
                     <span class="icon iconfont jimu-shanchu"></span>
                   </el-icon>
+                  <span style="padding-right: 5px">删除</span>
                 </el-button>
               </template>
             </el-popconfirm>
           </template>
           <template #header class="fit">
-            <div class="fit row reverse">
-              <div class="full-height column justify-center">
-                <el-button text type="danger" size="small">删除</el-button>
-              </div>
-            </div>
+           操作
           </template>
         </el-table-column>
       </el-table>

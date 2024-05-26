@@ -27,7 +27,23 @@
               :key="item.id"
               :label="item.name"
               :value="item"
-          />
+          >
+            <template #default>
+              <div class="fit row justify-between" style="padding-right: 5px">
+                <span>{{ item.name }}</span>
+                <div @click.stop>
+                  <el-switch
+                      v-model="item.status"
+                      class="ml-2"
+                      inline-prompt
+                      style="--el-switch-on-color: #1b77d2; --el-switch-off-color: rgba(158,160,161,0.54)"
+                      active-text="启用"
+                      inactive-text="禁用"
+                  />
+                </div>
+              </div>
+            </template>
+          </el-option>
         </el-select>
         <div>
           <el-button v-if="check_roles" plain type="primary" size="large" @click.stop="addUserAuthRole"
@@ -78,13 +94,25 @@
                     >
                       <template #default="{option}">
                         <div class="fit column justify-center">
-                          <div class="fit row ">
-                            <div class="column justify-center">
-                              <el-icon>
-                                <span :class="'icon iconfont '+option.icon"></span>
-                              </el-icon>
+                          <div class="fit row justify-between">
+                            <div class="row">
+                              <div class="column justify-center">
+                                <el-icon>
+                                  <span :class="'icon iconfont '+option.icon"></span>
+                                </el-icon>
+                              </div>
+                              <div style="margin-left: 5px" class="column justify-center">{{ option.name }}</div>
                             </div>
-                            <div style="margin-left: 5px" class="column justify-center">{{ option.name }}</div>
+                            <div style="padding-right: 5px">
+                              <el-switch
+                                  v-model="option.status"
+                                  class="ml-2"
+                                  inline-prompt
+                                  style="--el-switch-on-color: #1b77d2; --el-switch-off-color: rgba(158,160,161,0.54)"
+                                  active-text="启用"
+                                  inactive-text="禁用"
+                              />
+                            </div>
                           </div>
                         </div>
                       </template>
@@ -148,7 +176,30 @@
                           node-key="id"
                           show-checkbox
                           :default-checked-keys="default_checked_keys"
-                      />
+                      >
+                        <template #default="{node,data}">
+                          <div class="fit row justify-between">
+                            <div class="column full-height justify-center">
+                              <div>
+                                <el-icon>
+                                  <span :class="'icon iconfont '+data.icon"></span>
+                                </el-icon>
+                              </div>
+                              <div style="margin-left: 5px">{{ node.label }}</div>
+                            </div>
+                            <div class="column full-height justify-center" style="padding-right: 5px" @click.stop>
+                              <el-switch
+                                  v-model="data.status"
+                                  class="ml-2"
+                                  inline-prompt
+                                  style="--el-switch-on-color: #1b77d2; --el-switch-off-color: rgba(158,160,161,0.54)"
+                                  active-text="启用"
+                                  inactive-text="禁用"
+                              />
+                            </div>
+                          </div>
+                        </template>
+                      </el-tree>
                     </q-scroll-area>
                   </div>
                   <div class="row justify-end" style="margin-top: 5px;margin-bottom: 5px">
@@ -185,7 +236,7 @@ import {useToolStore} from "@/store/tool";
 import {
   computingAuthorization,
   getIds,
-  getTreeRootNodeIds,
+  getTreeRootNodeIds, getUserRouterAuthMapping,
   initializeElTree
 } from "@/components/system-components/tool/utils";
 import {ElMessage} from "element-plus";
@@ -244,6 +295,7 @@ const route_tool_auth_check_before = ref<string[]>([])
 const route_tool_auth_check_after = ref<string[]>([])
 // tree 的所有根根节点id
 const default_checked_keys = ref<string[]>([])
+const RouterAuthMapping = ref<Map<string, boolean>>()
 const root_ids = ref<string[]>([])
 
 let rootTreeProps = {
@@ -415,6 +467,7 @@ function routeToolChange(value: Tool) {
   // 获取组织角色 对应工具栏 对应角色已授权的路由
   OrgRoleToolRouter(props.orgId, route_role.value.id, value.id).then(data => {
     current_tool_router.value = initializeElTree(data)
+    console.log("router : ", current_tool_router.value)
     current_tool_router_ids.value = getIds(data)
     // 获取当前操作用户对应授权的路由
     getUserAuthToolRouter()

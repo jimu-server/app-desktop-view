@@ -54,6 +54,18 @@
         </el-table-column>
         <el-table-column prop="phone" label="手机" width="200px"/>
         <el-table-column prop="email" label="邮箱" width="200px"/>
+        <el-table-column prop="status" label="状态" width="200px">
+          <template #default="scope">
+            <el-switch
+                v-model="scope.row.status"
+                class="ml-2"
+                inline-prompt
+                style="--el-switch-on-color: #1b77d2; --el-switch-off-color: rgba(158,160,161,0.54)"
+                active-text="启用"
+                inactive-text="禁用"
+            />
+          </template>
+        </el-table-column>
         <el-table-column fixed="right" label="操作" align="right" >
           <template #default="scope">
             <div class="row justify-end">

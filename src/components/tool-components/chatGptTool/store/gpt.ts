@@ -112,11 +112,8 @@ export const useGptStore = defineStore('gpt', {
     getters: {
         sortConversation() {
             this.CurrentChat.conversationList.sort((a, b) => {
-                // Assuming each conversation has a `lastMessageTimestamp` property
-                // You might need to adjust this based on your actual data structure
                 const timestampA = new Date(a.Conversation.lastTime).getTime();
                 const timestampB = new Date(b.Conversation.lastTime).getTime();
-
                 return timestampA - timestampB; // F
             })
             let list: ConversationEntity[] = []

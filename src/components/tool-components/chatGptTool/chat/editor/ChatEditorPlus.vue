@@ -1,12 +1,21 @@
 <template>
   <div class="edit fit">
     <div class="edit-tool row">
+      <!--GPT 配置按钮-->
       <ToolWidget>
         <GPTSettingPanel/>
       </ToolWidget>
+
+      <ToolWidget>
+        <ChatPlugin/>
+      </ToolWidget>
+
+      <!-- 知识库文件查看按钮 -->
       <ToolWidget>
         <KnowledgeOptionsPanel/>
       </ToolWidget>
+
+      <!--  消息上下文携带配置按钮    -->
       <div class="column justify-center">
         <q-toggle v-model="ctx.ui.autoHistory" size="sm" color="primary" checked-icon="jimu-shijian-2">
           <q-tooltip :offset="[0, 0]">
@@ -14,6 +23,7 @@
           </q-tooltip>
         </q-toggle>
       </div>
+      <!--  消息折叠配置按钮    -->
       <div class="column justify-center">
         <q-toggle v-model="ctx.ui.autoFold" size="sm" color="primary">
           <q-tooltip :offset="[0, 0]">

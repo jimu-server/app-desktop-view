@@ -26,3 +26,8 @@ console.log(tree.value)
 <style scoped>
 
 </style>
+<style>
+.el-menu{
+  border-style: none !important;
+}
+</style>

@@ -62,16 +62,16 @@ function mouseLeave() {
 
 <style scoped>
 .drag {
-  width: 2px;
+  width: 3px;
   height: 100%;
   background: v-bind('color');
   z-index: 10;
 }
 
-/*.drag:hover {
+.drag:hover {
   background: v-bind('active');
   width: 3px;
-}*/
+}
 
 </style>
 

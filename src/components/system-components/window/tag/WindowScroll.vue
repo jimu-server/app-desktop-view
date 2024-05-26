@@ -15,18 +15,9 @@
                   @contextmenu="OpenContextmenu(ctx.index)"/>
               <q-menu context-menu fit>
                 <q-list dense>
-                  <q-item class="column justify-center" dense clickable v-close-popup @click="labels.closeLabel"
-                          style="padding: 0">
-                    <menu-item icon="jimu-guanbi-2" text="关闭"/>
-                  </q-item>
-                  <q-item class="column justify-center" dense clickable v-close-popup @click="labels.closeOther"
-                          style="padding: 0">
-                    <menu-item text="关闭其他"/>
-                  </q-item>
-                  <q-item class="column justify-center" dense clickable v-close-popup @click="labels.closeAll"
-                          style="padding: 0">
-                    <menu-item text="关闭所有"/>
-                  </q-item>
+                  <menu-item icon="jimu-guanbi-2" text="关闭" @click="labels.closeLabel"/>
+                  <menu-item text="关闭其他" @click="labels.closeOther"/>
+                  <menu-item text="关闭所有" @click="labels.closeAll"/>
                 </q-list>
               </q-menu>
             </div>
