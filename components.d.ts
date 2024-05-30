@@ -22,6 +22,7 @@ declare module 'vue' {
     ChatGPT: typeof import('./src/components/tool-components/chatGptTool/ChatGPT.vue')['default']
     ChatMessage: typeof import('./src/components/tool-components/chatGptTool/chat/message/ChatMessage.vue')['default']
     ChatPlugin: typeof import('./src/components/tool-components/chatGptTool/widget/plugins/ChatPlugin.vue')['default']
+    CodeBlockBox: typeof import('./src/components/tool-components/chatGptTool/chat/mdPlugin/CodeBlockBox.vue')['default']
     ConversationItemLabel: typeof import('./src/components/tool-components/chatGptTool/chat/conversation/ConversationItemLabel.vue')['default']
     ConversationItemMenu: typeof import('./src/components/tool-components/chatGptTool/chat/conversation/ConversationItemMenu.vue')['default']
     CreateConversationDialog: typeof import('./src/components/tool-components/chatGptTool/dialog/CreateConversationDialog.vue')['default']

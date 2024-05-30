@@ -12,7 +12,7 @@
 import {useToolStore} from "@/store/tool";
 import {Tool} from "@/components/system-components/model/system";
 import {ToolLayout} from "@/components/system-components/model/menu";
-import {ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {useThemeStore} from "@/store/theme";
 
 
@@ -26,6 +26,7 @@ const props = defineProps<{
 let layout_l = ref(['fit', 'column', 'l_tool', 'tool_body'])
 let layout_r = ref(['fit', 'column', 'r_tool', 'tool_body'])
 
+
 watch(() => theme.dark, (value) => {
   let byClassName = document.getElementsByClassName('tool_body');
   if (value) {
@@ -35,6 +36,15 @@ watch(() => theme.dark, (value) => {
   } else {
     for (let i = 0; i < byClassName.length; i++) {
       byClassName[i].setAttribute("theme", "light")
+    }
+  }
+})
+
+onMounted(() => {
+  if (theme.dark) {
+    let byClassName = document.getElementsByClassName('tool_body');
+    for (let i = 0; i < byClassName.length; i++) {
+      byClassName[i].setAttribute("theme", "dark")
     }
   }
 })

@@ -29,9 +29,6 @@ import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
 import {Stream} from "@/components/system-components/stream/stream";
 
-import { MdPreview } from 'md-editor-v3';
-import 'md-editor-v3/lib/preview.css';
-const id = 'preview-only';
 const ctx = useGptStore()
 const theme = useThemeStore()
 const emit = defineEmits({
