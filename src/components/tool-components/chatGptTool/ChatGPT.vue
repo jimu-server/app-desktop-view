@@ -1,13 +1,13 @@
 <template>
   <main-page>
     <q-splitter
-        class="fit"
         v-model="splitterModel"
         :limits="splitterModelLimit"
         id="chatview"
         before-class="conversations"
         after-class="chat"
         separator-class="separator"
+        class="fit"
     >
       <!--   聊天会话消息列表   -->
       <template v-slot:before>

@@ -25,7 +25,8 @@
         </slot>
       </div>
       <!--   消息正文   -->
-      <div ref="bodyRef" v-show="isShow" class="chat-body" @mouseover="overMessage=true" @mouseleave="outOverMessage">
+      <div ref="bodyRef" v-show="isShow" class="chat-body" @mouseover="overMessage=true"
+           @mouseleave="outOverMessage">
         <!--   用户消息展示     -->
         <TextMessage v-if="message.role=='user'" :message="message" :index="index"/>
         <!--   gpt消息展示     -->
@@ -338,7 +339,7 @@ function retry() {
 }
 
 .chat-message-body {
-  max-width: 70%;
+  max-width: 65%;
 }
 
 .chat-header {

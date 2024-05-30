@@ -108,7 +108,7 @@ async function getReply(message: AppChatMessageItem) {
 * @description 根据环境获取Ollama服务器地址
 * */
 export function getOllamaServer() {
-    let server: string = import.meta.env.VITE_APP_OLLAMA_SERVER
+    let server: string = import.meta.env.VITE_APP_OLLAMA_API
     if (server.endsWith("/")) {
         return server.substring(0, localServerUrl.length - 1)
     }

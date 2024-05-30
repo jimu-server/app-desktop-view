@@ -3,9 +3,10 @@
     <div ref="typing" class="markdown-message gpt-message" v-html="info.content"></div>
   </template>
   <template v-else-if="!send">
-    <div  ref="typingBox" style="position: relative">
+    <div  ref="typingBox" class="full-width" style="position: relative">
       <div ref="typing" class="markdown-message gpt-message" :theme="theme.dark?'dark':''" v-html="info.content"
            v-height="height"></div>
+<!--      <md-preview ref="typing" :editorId="id" :modelValue="info.content"/>-->
       <div ref="cursor" v-show="showCursor" :theme="theme.dark?'dark':''" class="typing-cursor"></div>
     </div>
   </template>
@@ -28,7 +29,9 @@ import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
 import {Stream} from "@/components/system-components/stream/stream";
 
-
+import { MdPreview } from 'md-editor-v3';
+import 'md-editor-v3/lib/preview.css';
+const id = 'preview-only';
 const ctx = useGptStore()
 const theme = useThemeStore()
 const emit = defineEmits({

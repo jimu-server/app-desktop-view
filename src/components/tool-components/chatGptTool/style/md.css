@@ -114,6 +114,8 @@
     overflow: auto;
 }
 
+
+
 .markdown-message .token.parameter.variable {
     background: transparent;
 }
@@ -153,4 +155,33 @@
     border-bottom-right-radius: 5px;
     transition: color .25s, background-color .5s;
     background-image: linear-gradient(0deg, #fafafa 0, #fff 30%, rgba(255, 255, 255, .8) 65%, rgba(255, 255, 255, 0) 100%);
+}
+
+
+.markdown-code-block{
+    position: relative;
+    width: 100%;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+    overflow: auto;
+}
+
+
+.copy-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: #409EFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.copy-button:hover {
+    background-color: #1e8bfe;
 }
