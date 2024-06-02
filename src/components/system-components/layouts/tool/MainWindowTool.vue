@@ -96,7 +96,7 @@ function leftWidthChange(movement) {
   if (movement < 0 && tool.left.width >= w) {
     return;
   }
-  if (movement > 0 && tool.left.width <= 56) {
+  if (movement > 0 && tool.left.width <= 57) {
     return
   }
   tool.left.width -= movement;
@@ -109,7 +109,7 @@ function rightWidthChange(movement) {
   if (movement > 0 && tool.right.width >= w) {
     return;
   }
-  if (movement < 0 && tool.right.width <= 56) {
+  if (movement < 0 && tool.right.width <= 57) {
     return
   }
   tool.right.width += movement;

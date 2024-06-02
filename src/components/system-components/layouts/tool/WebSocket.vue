@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 import {userStore} from "@/store/user";
 import {GetHeaders} from "@/plugins/axiosutil";
 
@@ -17,7 +17,7 @@ const props = defineProps({
 })
 let emits = defineEmits({
   receive: function (data) {
-
+    // console.log("default receive", data);
   },
   close: function () {
     console.log("close")
@@ -43,6 +43,12 @@ onMounted(() => {
   webSocket.value.onerror = function () {
     emits('error')
   };
+})
+onUnmounted(() => {
+  if (webSocket.value) {
+    console.log("ws close")
+    webSocket.value.close()
+  }
 })
 </script>
 

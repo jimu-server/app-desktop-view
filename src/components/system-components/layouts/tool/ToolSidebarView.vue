@@ -53,8 +53,12 @@ onMounted(() => {
 
 
 <style scoped>
+.tool_body {
+  user-select: none;
+}
 .l_tool {
   border-left: 1px solid rgba(0, 0, 0, 0.12);
+  animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-down both;
 }
 
 .r_tool {
@@ -71,5 +75,18 @@ onMounted(() => {
   border-color: rgba(255, 255, 255, 0.28);
 }
 
+
+@keyframes wipe-in-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+[transition-style="in:wipe:down"] {
+  animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-down both;
+}
 
 </style>
