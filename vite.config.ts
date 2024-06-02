@@ -28,6 +28,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from "path";
+import {univerPlugin} from "@univerjs/vite-plugin";
 
 const require = createRequire(import.meta.url);
 // https://vitejs.dev/config/
@@ -62,6 +63,7 @@ export default defineConfig(({command, mode}) => {
         sassVariables: 'src/quasar-variables.sass',
         runMode: 'web-client',
       }),
+      univerPlugin(),
       electron([
         {
           entry: 'electron/main/index.ts',

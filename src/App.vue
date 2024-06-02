@@ -68,8 +68,7 @@ $q.iconMapFn = (iconName) => {
 // 主要处理更新权限相关
 async function UpdateAuth() {
   // todo 加载用户已授权的工具栏按钮
-  tool.buttons = []
-  tool.buttons.push(...await getUserAuthTool())
+  tool.init(await getUserAuthTool())
   await tool.UpdateToolRoute()
   // todo 加载用户当前组织当前角色的所有前端路由权限列表
   auth.auth = await getUserAllRoute(user.info.org.id, user.info.role.id)
