@@ -3,7 +3,8 @@
     <q-splitter
         v-model="splitterModel"
         :limits="[20,40]"
-        class="fit"
+        :style="{height:app.ui.page.height}"
+        class="full-width"
     >
       <template v-slot:before>
         <q-splitter

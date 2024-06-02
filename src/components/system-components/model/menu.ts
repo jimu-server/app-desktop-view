@@ -11,3 +11,15 @@ export enum ToolBtnType {
     // 窗口工具按钮组(有自定义的工具侧边窗口)
     ToolWindowBtn = 2
 }
+
+export enum NotifyMsgType {
+    Info = 1,
+    Success,
+    Warning,
+    Error,
+}
+
+export enum NotifyStatus {
+    Read,
+    UnRead,
+}

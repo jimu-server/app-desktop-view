@@ -5,17 +5,20 @@ import {getUserAuthToolMenu} from "@/components/system-components/request";
 import {userStore} from "@/store/user";
 import pina from "@/pinia";
 import {Router, Tool, Tree} from "@/components/system-components/model/system";
+import {ToolLayout} from "@/components/system-components/model/menu";
 
 export const useToolStore = defineStore('tool', {
     state: () => {
         return {
             left: {
-                width: 53,
+                width: 57,
+                buttons: [] as Tool[],
                 ctx: {} as Tool,
                 isOpen: false
             },
             right: {
-                width: 53,
+                width: 57,
+                buttons: [] as Tool[],
                 ctx: {} as Tool,
                 isOpen: false
             },
@@ -93,7 +96,7 @@ export const useToolStore = defineStore('tool', {
             if (ctx.ctx == btn) {
                 if (ctx.isOpen) {
                     ctx.isOpen = false
-                    ctx.width = 52
+                    ctx.width = 57
                     // 清空 侧边栏对于的当前组件上下文
                     ctx.ctx = {}
                     return
@@ -102,21 +105,40 @@ export const useToolStore = defineStore('tool', {
             ctx.ctx = btn
             if (!ctx.isOpen) {
                 ctx.isOpen = true
-                if (ctx.width <= 56) {
-                    ctx.width = 300
-                }
+                ctx.width = 300
             }
         },
 
+        /*
+        * @description: 初始化工具栏,对工具位置进行分类
+        * */
+        init(buttons: Tool[]) {
+            this.buttons = []
+            this.left.buttons = []
+            this.right.buttons = []
+            for (const button of buttons) {
+                switch (button.position) {
+                    case ToolLayout.Left:
+                        this.left.buttons.push(button)
+                        break
+                    case ToolLayout.Right:
+                        this.right.buttons.push(button)
+                        break
+                }
+            }
+            this.buttons.push(...buttons)
+        },
 
         clear() {
             this.left = {
-                width: 53,
+                width: 57,
+                buttons: [],
                 ctx: {} as Tool,
                 isOpen: false
             }
             this.right = {
-                width: 53,
+                width: 57,
+                buttons: [],
                 ctx: {} as Tool,
                 isOpen: false
             }

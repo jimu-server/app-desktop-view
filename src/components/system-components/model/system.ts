@@ -1,3 +1,5 @@
+import {NotifyMsgType, NotifyStatus} from "@/components/system-components/model/menu";
+
 export interface User {
     id?: string
     name?: string
@@ -7,6 +9,7 @@ export interface User {
     gender?: number
     age?: string
     picture?: string // 头像
+    status?: boolean
     creatTime?: string
 }
 
@@ -42,6 +45,7 @@ export interface Tool {
     pull: string
     path: string
     tip: string
+    status?: boolean
     position: number
 }
 
@@ -86,6 +90,7 @@ export interface Role {
     id?: string
     name?: string
     roleKey?: string
+    status?: boolean
     createTime?: string
 }
 
@@ -133,10 +138,12 @@ export interface Records {
     pubId: string   // 发布者
     subId: string   // 消费者
     title: string   // 标题
-    msgType: number // 消息类型
+    msgType: NotifyMsgType // 消息类型
     text: string    // 消息文本
-    status: number  // 消息状态
-    del: number     // 删除标记
+    status: NotifyStatus  // 消息状态
+    template: string
+    param: string
+    isDelete: boolean     // 删除标记
     createTime: string // 消息生成时间
     updateTime: string //消息处理时间
 }

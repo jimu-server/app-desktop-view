@@ -74,6 +74,7 @@
         <q-btn-dropdown  :ripple="false" split no-caps align="left" dense color="primary" label="发 送 "
                         icon="jimu-send"
                         @click="sendMessage"
+                         :disable="ctx.ui.replying"
                         dropdown-icon="jimu-xiangxia-2"
                         style="height:30px;width: 109px;margin-right: 10px"
                         content-class="send-box-dropdown">

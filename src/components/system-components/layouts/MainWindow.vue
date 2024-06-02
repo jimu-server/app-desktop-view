@@ -31,9 +31,8 @@
           <UserAvatar style="-webkit-app-region: no-drag;"/>
         </div>
         <template v-slot:top="scope">
-          <template v-for="item in tool.buttons">
-            <DefaultBtn :btn="item" :key="item.id" v-if="item.position==scope.position" :position="scope.position"
-                        style="-webkit-app-region: no-drag;"/>
+          <template v-for="item in tool.left.buttons">
+            <component :is="item.btn" class="tool-btn" :btn="item" :position="scope.position"/>
           </template>
         </template>
         <template v-slot:bottom>
@@ -60,7 +59,16 @@
               bordered
               style="min-width: 52px"
     >
-      <MainWindowTool :position="ToolLayout.Right" :tool-ctx="tool.right.ctx" style="-webkit-app-region: no-drag;"/>
+      <MainWindowTool :position="ToolLayout.Right" :tool-ctx="tool.right.ctx">
+        <template v-slot:top="scope">
+          <template v-for="item in tool.right.buttons">
+            <!--      在按钮之间添加上间距处理消息数量展示            -->
+            <div style="margin-top: 5px">
+              <component :is="item.btn" class="tool-btn" :btn="item" :position="scope.position"/>
+            </div>
+          </template>
+        </template>
+      </MainWindowTool>
     </q-drawer>
 
     <!--  主视图  -->

@@ -1,16 +1,19 @@
 <template>
-  <div class="notify fit">
-    <q-scroll-area class="fit" :visible="false">
-      <q-list class="fit">
-        <q-expansion-item v-for="item in notify.list" :key="item.id" :label="item.title" :label-lines="1">
-          <!--          <template v-slot:header>
-                      <div class="ellipsis">
-                        {{ item.title }}
-                      </div>
-                    </template>-->
-        </q-expansion-item>
-      </q-list>
-    </q-scroll-area>
+  <div class="notify fit column">
+    <div class="full-width row reverse" style="padding: 5px">
+      <el-link type="primary">
+        清空全部消息
+      </el-link>
+    </div>
+    <div class="full-width" style="flex-grow: 1">
+      <q-scroll-area class="fit" :visible="false">
+        <q-list class="fit" style="padding-right: 5px;padding-left: 5px">
+          <template v-for="item in notify.list" :key="item.id">
+            <NotifyCard :data="item"/>
+          </template>
+        </q-list>
+      </q-scroll-area>
+    </div>
   </div>
 </template>
 

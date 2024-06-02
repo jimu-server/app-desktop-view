@@ -110,7 +110,7 @@ async function getReply(message: AppChatMessageItem) {
 export function getOllamaServer() {
     let server: string = import.meta.env.VITE_APP_OLLAMA_API
     if (server.endsWith("/")) {
-        return server.substring(0, localServerUrl.length - 1)
+        return server.substring(0, server.length - 1)
     }
     // 使用用户的主机信息
     return server

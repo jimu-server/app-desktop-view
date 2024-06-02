@@ -9,28 +9,33 @@ import ToolManagePage from "@/components/system-components/tool/manageTool/page/
 import RouterManagePage from "@/components/system-components/tool/manageTool/page/RouterManagePage.vue";
 import ModelManagePage from "@/components/tool-components/chatGptTool/manage/ModelManagePage.vue";
 import Login from "@/components/system-components/Login.vue";
-
-import FlowChart from "@/components/tool-components/flowTool/FlowChart.vue";
 import OllamaSetting from "@/components/tool-components/chatGptTool/setting/OllamaSetting.vue";
 import UserInfoSetting from "@/components/system-components/avatar/UserInfoSetting.vue";
-import ChatGPT from "@/components/tool-components/chatGptTool/ChatGPT.vue";
+import DescriptionNode from "@/components/tool-components/flowTool/node/DescriptionNode.vue";
+import DefaultBtn from "@/components/system-components/tool/btn/DefaultBtn.vue";
+import OfficeTool from "@/components/tool-components/officeTool/OfficeTool.vue";
+import DefaultNotifyBody from "@/components/system-components/tool/notifyTool/notifyBody/DefaultNotifyBody.vue";
+import LoginNotifyBody from "@/components/system-components/tool/notifyTool/notifyBody/LoginNotifyBody.vue";
 
 
 const components = [
     NotifyTool,
+    DefaultNotifyBody,
+    LoginNotifyBody,
     ManageTool,
     NotifyBtn,
+    DefaultBtn,
+    OfficeTool,
     UserManagePage,
     OrgManagePage,
     RouterManagePage,
     FunManagePage,
     ToolManagePage,
     ModelManagePage,
-    FlowChart,
-    ChatGPT,
     Login,
     OllamaSetting,
-    UserInfoSetting
+    UserInfoSetting,
+    DescriptionNode
 ]
 
 export function init(app: App) {
