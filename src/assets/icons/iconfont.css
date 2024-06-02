@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4446394 */
-  src: url('iconfont.woff2?t=1715223764269') format('woff2'),
-       url('iconfont.woff?t=1715223764269') format('woff'),
-       url('iconfont.ttf?t=1715223764269') format('truetype');
+  src: url('iconfont.woff2?t=1717235396880') format('woff2'),
+       url('iconfont.woff?t=1717235396880') format('woff'),
+       url('iconfont.ttf?t=1717235396880') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,38 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.jimu-success_fill:before {
+  content: "\e72d";
+}
+
+.jimu-warring_shape:before {
+  content: "\e626";
+}
+
+.jimu-error-fill:before {
+  content: "\e839";
+}
+
+.jimu-info-fill:before {
+  content: "\e83d";
+}
+
+.jimu-icon_zhinengzhushou:before {
+  content: "\e610";
+}
+
+.jimu-MYBATIS:before {
+  content: "\e695";
+}
+
+.jimu-xitongmoxingchajian:before {
+  content: "\e65c";
+}
+
+.jimu-bianjiqi:before {
+  content: "\e6a9";
 }
 
 .jimu-window-maximize:before {
