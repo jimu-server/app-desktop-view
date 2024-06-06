@@ -13,7 +13,8 @@
 import {Records} from "@/components/system-components/model/system";
 import {NotifyStatus} from "@/components/system-components/model/enum";
 import {useNotifyStore} from "@/store/tool/notify";
-import {delMsg, readMsg} from "@/components/system-components/tool/notifyTool/notifyutil";
+import {readMsg} from "@/components/system-tool/notifyTool/notifyutil";
+
 
 const props = defineProps<{
   data: Records

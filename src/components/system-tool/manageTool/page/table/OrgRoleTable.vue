@@ -88,7 +88,7 @@ import {onMounted, ref, watch} from "vue";
 import {Role} from "@/components/system-components/model/system";
 import {getOrgRoleList} from "@/components/system-components/request";
 
-import AddOrgRoleDialog from "@/components/system-components/tool/manageTool/page/dialog/AddOrgRoleDialog.vue";
+import AddOrgRoleDialog from "@/components/system-tool/manageTool/page/dialog/AddOrgRoleDialog.vue";
 
 const app = useAppStore()
 

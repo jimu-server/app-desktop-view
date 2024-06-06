@@ -118,12 +118,9 @@
 import {useAppStore} from "@/store/app";
 import {onMounted, ref} from "vue";
 import {Role, Router, Tool} from "@/components/system-components/model/system";
-import AddRouterDialog from "@/components/system-components/tool/manageTool/page/dialog/AddRouterDialog.vue";
-import {
-  getToolRouter,
-  getToolRouterChild,
-  getTools
-} from "@/components/system-components/tool/manageTool/manageRequest";
+import AddRouterDialog from "@/components/system-tool/manageTool/page/dialog/AddRouterDialog.vue";
+import {getToolRouter, getToolRouterChild, getTools} from "@/components/system-tool/manageTool/manageRequest";
+
 
 const app = useAppStore()
 

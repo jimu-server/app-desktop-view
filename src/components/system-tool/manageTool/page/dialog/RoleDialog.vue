@@ -109,7 +109,7 @@ import {
   OrgRoleToolAuth,
   OrgRoleToolRouter,
   OrgRoleToolRouterAuth
-} from "@/components/system-components/tool/manageTool/manageRequest";
+} from "@/components/system-tool/manageTool/manageRequest";
 import {userStore} from "@/store/user";
 import {useToolStore} from "@/store/tool";
 import {
@@ -117,7 +117,7 @@ import {
   getIds,
   getTreeRootNodeIds,
   initializeElTree
-} from "@/components/system-components/tool/utils";
+} from "@/components/system-tool/utils";
 import {ElMessage} from "element-plus";
 
 const user = userStore()

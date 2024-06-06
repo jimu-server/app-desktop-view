@@ -127,8 +127,9 @@ import {useAppStore} from "@/store/app";
 import {onMounted, ref} from "vue";
 import {Tool} from "@/components/system-components/model/system";
 
-import AddToolDialog from "@/components/system-components/tool/manageTool/page/dialog/AddToolDialog.vue";
-import {getTools} from "@/components/system-components/tool/manageTool/manageRequest";
+import AddToolDialog from "@/components/system-tool/manageTool/page/dialog/AddToolDialog.vue";
+import {getTools} from "@/components/system-tool/manageTool/manageRequest";
+
 
 const app = useAppStore()
 

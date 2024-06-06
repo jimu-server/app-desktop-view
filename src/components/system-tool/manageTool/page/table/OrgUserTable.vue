@@ -117,7 +117,7 @@
 <script setup lang="ts">
 import {useAppStore} from "@/store/app";
 import {onMounted, ref, watch} from "vue";
-import {getOrgUserList} from "@/components/system-components/tool/manageTool/manageRequest";
+import {getOrgUserList} from "@/components/system-tool/manageTool/manageRequest";
 import {User} from "@/components/system-components/model/system";
 
 const app = useAppStore()

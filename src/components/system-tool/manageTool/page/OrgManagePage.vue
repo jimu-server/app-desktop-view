@@ -85,12 +85,13 @@
 
 import {onMounted, ref, watch} from "vue";
 import {userStore} from "@/store/user";
-import {getOrgChildTree} from "@/components/system-components/tool/manageTool/manageRequest";
+
 import {Org, Tree} from "@/components/system-components/model/system";
-import OrgNodeIcon from "@/components/system-components/tool/manageTool/icon/OrgNodeIcon.vue";
 import {useAppStore} from "@/store/app";
 
 import {ElMessage} from "element-plus";
+import {getOrgChildTree} from "@/components/system-tool/manageTool/manageRequest";
+import OrgNodeIcon from "@/components/system-tool/manageTool/icon/OrgNodeIcon.vue";
 
 const user = userStore()
 const app = useAppStore()

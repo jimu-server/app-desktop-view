@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import {useQuasar} from "quasar";
-import {Tool} from "@/components/system-components/model/system";
+import {Tool} from "../../system-components/model/system";
 
 const $q = useQuasar()
 const props = defineProps<{

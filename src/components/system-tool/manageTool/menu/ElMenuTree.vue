@@ -11,7 +11,9 @@
 </template>
 <script setup lang="ts">
 import {Router, Tree} from "@/components/system-components/model/system";
-import ElSubMenuLabel from "@/components/system-components/tool/manageTool/menu/ElSubMenuLabel.vue";
+import ElSubMenuLabel from "@/components/system-tool/manageTool/menu/ElSubMenuLabel.vue";
+import ElMenuLabel from "@/components/system-tool/manageTool/menu/ElMenuLabel.vue";
+
 
 const props = defineProps<{
   menus: Tree<Router>[]

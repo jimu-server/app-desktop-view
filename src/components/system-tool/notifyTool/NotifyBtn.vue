@@ -14,10 +14,10 @@
 import {useQuasar} from "quasar";
 import {useNotifyStore} from "@/store/tool/notify";
 import {Records, Tool} from "@/components/system-components/model/system";
-import {notifyMsg} from "@/components/system-components/tool/notifyTool/notify";
-import {getAllNotify} from "@/components/system-components/tool/notifyTool/notifyRequest";
+
 import {onMounted} from "vue";
 import {NotifyToolStatusType} from "@/components/system-components/model/enum";
+import {notifyMsg} from "@/components/system-tool/notifyTool/notify";
 
 const $q = useQuasar()
 const notify = useNotifyStore()

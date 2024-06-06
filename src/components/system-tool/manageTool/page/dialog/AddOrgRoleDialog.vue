@@ -34,7 +34,7 @@
 
 import {ref, watch} from "vue";
 import {ElMessage} from "element-plus";
-import {createOrgRole} from "@/components/system-components/tool/manageTool/manageRequest";
+import {createOrgRole} from "@/components/system-tool/manageTool/manageRequest";
 import {loadUserInfo} from "@/components/system-components/utils/userutil";
 
 const props = defineProps({

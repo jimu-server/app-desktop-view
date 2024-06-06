@@ -1,6 +1,6 @@
-import {deleteNotify, getAllNotify, readNotify} from "@/components/system-components/tool/notifyTool/notifyRequest";
 import {useNotifyStore} from "@/store/tool/notify";
 import pina from "@/pinia";
+import {deleteNotify, getAllNotify, readNotify} from "@/components/system-tool/notifyTool/notifyRequest";
 
 
 export async function readMsg(id: string) {

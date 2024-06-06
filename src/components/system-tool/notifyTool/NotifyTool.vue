@@ -18,7 +18,8 @@
 <script setup lang="ts">
 
 import {useNotifyStore} from "@/store/tool/notify";
-import {clearNotify, getAllNotify} from "@/components/system-components/tool/notifyTool/notifyRequest";
+import {clearNotify, getAllNotify} from "@/components/system-tool/notifyTool/notifyRequest";
+
 
 
 const notify = useNotifyStore()

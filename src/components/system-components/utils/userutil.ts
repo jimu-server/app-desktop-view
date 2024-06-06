@@ -14,10 +14,10 @@ import {
     getUserJoinOrgList,
     getUserJoinOrgRoleList
 } from "@/components/system-components/request";
-import {getAllNotify} from "@/components/system-components/tool/notifyTool/notifyRequest";
 import {useAuthStore} from "@/store/auth";
 import {useNotifyStore} from "@/store/tool/notify";
 import {useAppStore} from "@/store/app";
+import {getAllNotify} from "@/components/system-tool/notifyTool/notifyRequest";
 
 export async function loadUserInfo() {
     let user = userStore(pina)

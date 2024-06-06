@@ -2,10 +2,10 @@ import {ElNotification} from "element-plus";
 import {Records} from "@/components/system-components/model/system";
 import {NotifyMsgType} from "@/components/system-components/model/enum";
 import {h, render} from "vue";
-import LoginNotifyBody from "@/components/system-components/tool/notifyTool/notifyBody/LoginNotifyBody.vue";
-import DefaultNotifyBody from "@/components/system-components/tool/notifyTool/notifyBody/DefaultNotifyBody.vue";
-import {NotifyMsgTemplate} from "@/components/system-components/tool/notifyTool/template";
-import {readMsgElNotifyOprion} from "@/components/system-components/tool/notifyTool/notifyutil";
+import {NotifyMsgTemplate} from "@/components/system-tool/notifyTool/template";
+import LoginNotifyBody from "@/components/system-tool/notifyTool/notifyBody/LoginNotifyBody.vue";
+import DefaultNotifyBody from "@/components/system-tool/notifyTool/notifyBody/DefaultNotifyBody.vue";
+import {readMsgElNotifyOprion} from "@/components/system-tool/notifyTool/notifyutil";
 
 let count = 0
 

@@ -11,7 +11,8 @@
 import {ref} from "vue";
 import {Records} from "@/components/system-components/model/system";
 import {useNotifyStore} from "@/store/tool/notify";
-import Option from "@/components/system-components/tool/notifyTool/notifyBody/Option.vue";
+import Option from "@/components/system-tool/notifyTool/notifyBody/Option.vue";
+
 
 const props = defineProps<{
   data: Records

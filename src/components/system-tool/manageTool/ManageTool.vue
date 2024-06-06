@@ -28,6 +28,8 @@
 import {ref, watch} from "vue";
 import {Router, Tool, Tree} from "@/components/system-components/model/system";
 import {useToolStore} from "@/store/tool";
+import ElMenuTree from "@/components/system-tool/manageTool/menu/ElMenuTree.vue";
+
 
 const props = defineProps<{
   btn: Tool
