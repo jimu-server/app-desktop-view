@@ -25,14 +25,15 @@
       </slot>
     </q-header>
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" behavior="desktop" bordered :width=" tool.left.width"
-              style="overflow: hidden; background: rgba(241,241,241,0);min-width: 52px;-webkit-app-region: drag;">
-      <MainWindowTool :position="ToolLayout.Left" :tool-ctx="tool.left.ctx" style="-webkit-app-region: no-drag;">
+              class="app-drawer" style="-webkit-app-region: drag;">
+      <MainWindowTool :position="ToolLayout.Left" :tool-ctx="tool.left.ctx" style="-webkit-app-region: drag;">
         <div class="row justify-center drawer-opt">
           <UserAvatar style="-webkit-app-region: no-drag;"/>
         </div>
         <template v-slot:top="scope">
           <template v-for="item in tool.left.buttons">
-            <component :is="item.btn" class="tool-btn" :btn="item" :position="scope.position"/>
+            <component :is="item.btn" class="tool-btn" :btn="item" :position="scope.position"
+                       style="-webkit-app-region: no-drag;"/>
           </template>
         </template>
         <template v-slot:bottom>
@@ -103,7 +104,7 @@ import {userStore} from "@/store/user";
 import MainWindowTool from "@/components/system-components/layouts/tool/MainWindowTool.vue";
 import UserAvatar from "@/components/system-components/avatar/UserAvatar.vue";
 import DefaultBtn from "@/components/system-components/tool/btn/DefaultBtn.vue";
-import {ToolLayout} from "@/components/system-components/model/menu";
+import {ToolLayout} from "@/components/system-components/model/enum";
 import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBtn.vue";
 import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMinimizeBtn.vue";
 import {
@@ -238,5 +239,9 @@ onUnmounted(async () => {
 </style>
 
 <style>
-
+.app-drawer {
+  overflow: hidden;
+  background: rgba(241, 241, 241, 0);
+  min-width: 57px;
+}
 </style>

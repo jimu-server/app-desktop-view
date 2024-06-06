@@ -1,9 +1,6 @@
 <template>
   <div :class="position==ToolLayout.Left?layout_l:layout_r" style="flex: 1;overflow: hidden">
-    <div class="full-width ellipsis" style="padding: 5px;overflow: hidden">
-      {{ toolCtx.name }}
-    </div>
-    <div class="full-width" style="flex-grow: 1;overflow: auto">
+    <div class="full-width" style="flex-grow: 1;overflow: hidden">
       <component :is="toolCtx.component" :btn="toolCtx"/>
     </div>
   </div>
@@ -11,7 +8,7 @@
 <script setup lang="ts">
 import {useToolStore} from "@/store/tool";
 import {Tool} from "@/components/system-components/model/system";
-import {ToolLayout} from "@/components/system-components/model/menu";
+import {ToolLayout} from "@/components/system-components/model/enum";
 import {onMounted, ref, watch} from "vue";
 import {useThemeStore} from "@/store/theme";
 
@@ -58,7 +55,6 @@ onMounted(() => {
 }
 .l_tool {
   border-left: 1px solid rgba(0, 0, 0, 0.12);
-  animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-down both;
 }
 
 .r_tool {

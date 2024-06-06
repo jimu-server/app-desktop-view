@@ -247,9 +247,9 @@ ipcMain.on('login', () => {
             win.setResizable(true)
             win.setMinimizable(true)
 
-            win.setMinimumSize(1000, 600)
-            win.setContentSize(1000, 600)
-            win.setSize(1000, 600)
+            win.setMinimumSize(1200, 800)
+            win.setContentSize(1200, 800)
+            win.setSize(1200, 800)
             win.center()
 
             win.show()

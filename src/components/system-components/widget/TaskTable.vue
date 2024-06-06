@@ -49,7 +49,7 @@
 import {onMounted, ref, watch} from "vue";
 
 import {colors} from 'quasar'
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 
 const {getPaletteColor} = colors
 
@@ -517,7 +517,7 @@ onMounted(() => {
 
 
 .table-col:hover {
-  //background-color: rgba(194, 198, 201, 0.31);
+
 }
 
 .cell_selected {

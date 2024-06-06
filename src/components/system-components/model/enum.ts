@@ -20,6 +20,15 @@ export enum NotifyMsgType {
 }
 
 export enum NotifyStatus {
-    Read,
-    UnRead,
+    UnRead = 0,
+    Read = 1,
+}
+
+export enum NotifyToolStatusType {
+    // 未读消息类型
+    UnReadNotify = 0,
+    // 消息以全部读取
+    ReadAllNotify = 1,
+    // 没有消息通知
+    NoNotify = 2,
 }

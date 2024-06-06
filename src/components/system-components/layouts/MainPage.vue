@@ -24,7 +24,6 @@ onMounted(async () => {
 <style scoped>
 #page-view {
   overflow: hidden;
-  padding: 5px;
   height: calc(v-bind('app.ui.page.height') * 1px);
 }
 </style>

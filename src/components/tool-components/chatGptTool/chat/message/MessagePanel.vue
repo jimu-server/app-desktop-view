@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%;overflow: hidden">
     <!-- 用户头像及其在线状态 -->
-    <q-toolbar style="height: 10%;width: 100%;border-bottom: rgba(140,147,157,0.34) 1px solid">
+    <q-toolbar style="height: 5%;width: 100%;border-bottom: rgba(140,147,157,0.34) 1px solid">
       <div class="row" style="margin-left: 10px;height: 100%">
         <div class="column justify-center" style="margin-left: 5px">
           <div class="row">

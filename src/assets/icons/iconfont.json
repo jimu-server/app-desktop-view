@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6805521",
+      "name": "Office",
+      "font_class": "Office",
+      "unicode": "e99e",
+      "unicode_decimal": 59806
+    },
+    {
+      "icon_id": "3220381",
+      "name": "清空历史",
+      "font_class": "qingkonglishi",
+      "unicode": "e67f",
+      "unicode_decimal": 59007
+    },
+    {
       "icon_id": "7009015",
       "name": "success_fill",
       "font_class": "success_fill",

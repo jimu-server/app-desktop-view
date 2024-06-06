@@ -6,7 +6,7 @@
       clickable
       @click="selectChat(item,index)"
       :active-class="item.active? 'chat-active text-white':'text-black'"
-      style="border-radius: 5px;margin-top: 5px"
+      style="border-radius: 3px;margin-top: 5px"
       :class="item.active?'chat-active text-white':'chat-unactive'"
       :theme="theme.dark?'dark':'light'"
   >

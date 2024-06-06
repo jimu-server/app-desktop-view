@@ -1,4 +1,4 @@
-import {NotifyMsgType, NotifyStatus} from "@/components/system-components/model/menu";
+import {NotifyMsgType, NotifyStatus} from "@/components/system-components/model/enum";
 
 export interface User {
     id?: string

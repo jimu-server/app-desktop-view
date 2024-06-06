@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable v-close-popup style="padding: 0;-webkit-app-region: no-drag;">
+  <q-item clickable v-close-popup style="padding: 0">
     <div class="row fit justify-center">
       <div class="fit column justify-center">
         <div class="row fit">
@@ -11,13 +11,13 @@
                   <q-icon ref="iconRef" v-if="icon!==''" :name="icon" class="menu-icon"/>
                 </slot>
               </div>
-              <div class="column justify-center" style="margin-left: 5px;align-content: center" @click="isClick==true">
+              <div class="column justify-center" style="margin-left: 5px;align-content: center">
                 {{ text }}
               </div>
             </div>
             <div v-if="isMenu" style="align-content: center;margin-left: 3px">
-              <q-icon name="jimu-xiangyou-3" class="menu-icon"/>
-              <slot name="extend-menu" :isClick="isClick">
+              <slot name="extend-menu">
+                <q-icon name="jimu-xiangyou-3" class="menu-icon"/>
               </slot>
             </div>
           </div>
@@ -45,8 +45,6 @@ const props = defineProps({
     default: false
   }
 })
-
-const isClick = ref(false)
 
 const iconRef = ref()
 

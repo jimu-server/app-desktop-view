@@ -27,22 +27,31 @@ let emits = defineEmits({
   }
 });
 const webSocket = ref<WebSocket>()
+webSocket.value = new WebSocket(props.url, props.protocols);
+webSocket.value.onopen = function () {
+  console.log("success");
+};
+webSocket.value.onmessage = function (evt) {
+  let message: string = evt.data;
+  let data = JSON.parse(message)
+  emits('receive', data)
+};
+webSocket.value.onclose = function () {
+  emits('close')
+};
+webSocket.value.onerror = function () {
+  emits('error')
+};
+
+function sendCloseMessage() {
+  if (webSocket.value && webSocket.value.readyState === WebSocket.OPEN) {
+    const closeMessage = JSON.stringify({ type: "close", reason: "Client closing connection" });
+    webSocket.value.send(closeMessage);
+  }
+}
+
 onMounted(() => {
-  webSocket.value = new WebSocket(props.url, props.protocols);
-  webSocket.value.onopen = function () {
-    console.log("success");
-  };
-  webSocket.value.onmessage = function (evt) {
-    let message: string = evt.data;
-    let data = JSON.parse(message)
-    emits('receive', data)
-  };
-  webSocket.value.onclose = function () {
-    emits('close')
-  };
-  webSocket.value.onerror = function () {
-    emits('error')
-  };
+
 })
 onUnmounted(() => {
   if (webSocket.value) {

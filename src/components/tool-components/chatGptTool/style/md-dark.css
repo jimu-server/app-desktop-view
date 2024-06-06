@@ -99,3 +99,21 @@
     top: -3rem;
     background-image: linear-gradient(0deg, rgba(31, 31, 31, 0.74) 0, #1f1f1f 30%, rgb(47 45 45 / 78%) 65%, rgba(255, 255, 255, 0) 100%);
 }
+
+.code-copy-button[theme="dark"] {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: rgba(158, 160, 161, 0.54);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.code-copy-button[theme="dark"]:hover {
+    background-color: rgba(158, 160, 161, 0.82);
+}

@@ -5,6 +5,7 @@ import pinia from "@/pinia";
 import NotFound from "@/components/system-components/NotFound.vue";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
+import {set} from "lodash";
 
 
 const routes: RouteRecordRaw[] = []
@@ -95,7 +96,6 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.beforeEach((to, from, next) => {
-    // console.log(from.path)
     if (from.path.startsWith("/verify") && to.path.startsWith(rootPath)) {
         return
     }
@@ -110,5 +110,4 @@ router.beforeEach((to, from, next) => {
     }
     next()
 })
-
 export default router

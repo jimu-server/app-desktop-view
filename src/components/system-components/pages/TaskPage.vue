@@ -1,5 +1,5 @@
 <template>
-  <div id="taskpage" :style="{height:ctx.ui.page.height,width:'100%'}">
+  <div id="taskpage" class="fit">
     <div class="column justify-center" style="height: 5%">
       <q-bar
           class="bg-transparent fit"
@@ -40,7 +40,7 @@ import {onMounted, ref} from "vue";
 import {colors} from 'quasar'
 
 import TaskTable from "@/components/system-components/widget/TaskTable.vue";
-import {useGptStore} from "@/components/tool-components/chatGptTool/chat/store/gpt";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 
 const {getPaletteColor} = colors
 

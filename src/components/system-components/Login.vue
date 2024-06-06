@@ -372,7 +372,8 @@ function phoneLoginAction() {
       message: '请输入手机号码',
       type: 'warning',
       plain: true,
-      grouping: true
+      grouping: true,
+      appendTo: document.getElementById('loginBox')
     })
     return
   }
@@ -381,7 +382,8 @@ function phoneLoginAction() {
       message: '请输入验证码',
       type: 'warning',
       plain: true,
-      grouping: true
+      grouping: true,
+      appendTo: document.getElementById('loginBox')
     })
     return
   }
@@ -399,6 +401,7 @@ function defaultLoginAction() {
       duration: 1000,
       plain: true,
       grouping: true,
+      appendTo: document.getElementById('loginBox')
     })
     return
   }
@@ -435,6 +438,8 @@ async function doRegister() {
           type: 'success',
           duration: 2000,
           plain: true,
+          grouping: true,
+          appendTo: document.getElementById('loginBox')
         })
         showPanel.value = 'login'
       }
@@ -463,6 +468,7 @@ async function doReset() {
       duration: 1000,
       plain: true,
       grouping: true,
+      appendTo: document.getElementById('loginBox')
     })
     setTimeout(() => {
       showPanel.value = 'login'

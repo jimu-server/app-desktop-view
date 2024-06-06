@@ -1,5 +1,8 @@
 <template>
-  <el-menu style="user-select: none">
+  <el-menu
+      :collapse="collapse"
+      :collapse-transition="false"
+      style="user-select: none">
     <template v-for="item in menus">
       <ElSubMenuLabel v-if="item.children.length>0" :menu="item"/>
       <ElMenuLabel v-else :menu="item"/>
@@ -12,6 +15,7 @@ import ElSubMenuLabel from "@/components/system-components/tool/manageTool/menu/
 
 const props = defineProps<{
   menus: Tree<Router>[]
+  collapse: boolean
 }>()
 </script>
 

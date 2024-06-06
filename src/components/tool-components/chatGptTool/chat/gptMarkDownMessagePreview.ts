@@ -28,9 +28,11 @@ const md = markdownit({
         } else {
             code = md.utils.escapeHtml(str);
         }
-        const copyButton = '<button class="copy-button" onclick="copyToClipboard(this)">复制</button>';
-        const preClass = theme.dark ? ' theme="dark' : '';
-        return `<pre class="markdown-code-block" ${preClass}>${copyButton}<code>${code}</code></pre>`;
+        const copyButton = '<button class="code-copy-button" onclick="copyToClipboard(this)">复制</button>';
+        if (theme.dark) {
+            return `<pre class="markdown-code-block" theme="dark">${copyButton}<code>${code}</code></pre>`;
+        }
+        return `<pre class="markdown-code-block">${copyButton}<code>${code}</code></pre>`;
     }
 })
 

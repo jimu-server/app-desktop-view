@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-center drawer-opt">
-    <q-btn dense flat :icon="btn.icon" @click="action">
+    <q-btn dense flat :icon="btn.icon" @click.stop="action">
       <q-tooltip anchor="center end" self="center start">
         {{ btn.tip }}
       </q-tooltip>
@@ -17,7 +17,7 @@ import {useWindowsStore} from "@/store/windows";
 
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
-import {ToolBtnType, ToolLayout} from "@/components/system-components/model/menu";
+import {ToolBtnType, ToolLayout} from "@/components/system-components/model/enum";
 import {useRouter} from "vue-router";
 
 const props = defineProps<{

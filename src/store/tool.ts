@@ -5,11 +5,12 @@ import {getUserAuthToolMenu} from "@/components/system-components/request";
 import {userStore} from "@/store/user";
 import pina from "@/pinia";
 import {Router, Tool, Tree} from "@/components/system-components/model/system";
-import {ToolLayout} from "@/components/system-components/model/menu";
+import {ToolLayout} from "@/components/system-components/model/enum";
 
 export const useToolStore = defineStore('tool', {
     state: () => {
         return {
+            baseWidth: 57,
             left: {
                 width: 57,
                 buttons: [] as Tool[],
@@ -93,19 +94,24 @@ export const useToolStore = defineStore('tool', {
         * @description 工具栏点击按钮操作,执行对更具蓝窗口视图的更新控制,点击相同的工具栏按钮会触发关闭(即拖拽宽度恢复到初始52状态),切换到其他工具栏按钮则不关闭
         * */
         OpenToolWindow(ctx: any, btn: Tool) {
-            if (ctx.ctx == btn) {
+            console.log("ctx: ", ctx.ctx)
+            console.log("btn: ", btn)
+            if (ctx.ctx.id == btn.id) {
                 if (ctx.isOpen) {
                     ctx.isOpen = false
                     ctx.width = 57
                     // 清空 侧边栏对于的当前组件上下文
                     ctx.ctx = {}
+                    console.log("close tool")
                     return
+
                 }
             }
             ctx.ctx = btn
             if (!ctx.isOpen) {
                 ctx.isOpen = true
                 ctx.width = 300
+                console.log("open tool")
             }
         },
 
@@ -127,6 +133,15 @@ export const useToolStore = defineStore('tool', {
                 }
             }
             this.buttons.push(...buttons)
+        },
+
+        alterWidth(ctx: any, width: number) {
+            let btn = ctx.ctx as Tool
+            if (btn.position == ToolLayout.Left) {
+                this.left.width = this.baseWidth + width
+            } else {
+                this.right.width = this.baseWidth + width
+            }
         },
 
         clear() {

@@ -1,18 +1,26 @@
 <template>
-  <div class="text-primary">
-    {{ ctx.message }}
+  <div class="column fit">
+    <div>
+      {{ ctx.message }}
+    </div>
+    <Option :data="data"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
+import {Records} from "@/components/system-components/model/system";
+import {useNotifyStore} from "@/store/tool/notify";
+import Option from "@/components/system-components/tool/notifyTool/notifyBody/Option.vue";
 
 const props = defineProps<{
-  data: string
+  data: Records
 }>()
 
 const ctx = ref<any>()
-ctx.value = JSON.parse(props.data)
+ctx.value = JSON.parse(props.data.param)
+const notify = useNotifyStore()
+
 
 </script>
 

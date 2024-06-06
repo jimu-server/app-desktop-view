@@ -1,6 +1,5 @@
 <template>
   <div :class="position==ToolLayout.Left?layout_l:layout_r">
-    <!--  :class="position==1?slide_btn_l:slide_btn_r"  -->
     <ToolSidebar>
       <div class="full-height column">
         <div class="row " style="height: 50%;flex-grow: 1;">
@@ -30,9 +29,11 @@
         </div>
       </div>
     </ToolSidebar>
-    <ToolSidebarView :id="position" :toolCtx="toolCtx" :position="position"/>
-    <!--  在工具窗口打开时才可以拖拽宽度  -->
-    <Slide v-show="toolShow" :class="position==ToolLayout.Left?slide_line_l:slide_line_r" @widthChange="widthChange"/>
+    <template v-if="toolShow">
+      <ToolSidebarView :id="position" :toolCtx="toolCtx" :position="position" style="-webkit-app-region: no-drag;"/>
+      <!--  在工具窗口打开时才可以拖拽宽度  -->
+      <Slide :class="position==ToolLayout.Left?slide_line_l:slide_line_r" @widthChange="widthChange" style="-webkit-app-region: no-drag;"/>
+    </template>
   </div>
 </template>
 
@@ -44,7 +45,7 @@ import {computed, onMounted, ref, watch} from "vue";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
 import {Tool} from "@/components/system-components/model/system";
-import {ToolLayout} from "@/components/system-components/model/menu";
+import {ToolLayout} from "@/components/system-components/model/enum";
 
 const tool = useToolStore()
 const user = userStore()
@@ -96,7 +97,7 @@ function leftWidthChange(movement) {
   if (movement < 0 && tool.left.width >= w) {
     return;
   }
-  if (movement > 0 && tool.left.width <= 57) {
+  if (movement > 0 && tool.left.width <= tool.baseWidth) {
     return
   }
   tool.left.width -= movement;
@@ -109,7 +110,7 @@ function rightWidthChange(movement) {
   if (movement > 0 && tool.right.width >= w) {
     return;
   }
-  if (movement < 0 && tool.right.width <= 57) {
+  if (movement < 0 && tool.right.width <= tool.baseWidth) {
     return
   }
   tool.right.width += movement;

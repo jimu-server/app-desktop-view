@@ -1,3 +1,9 @@
+
+:root {
+    --app-bg-color: transparent;
+    --el-fill-color-blank: var(--app-bg-color) !important;
+    --el-table-tr-bg-color: var(--app-bg-color) !important;
+}
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +12,8 @@
 body {
     width: 100vw;
     height: 100vh;
-    background: white;
+    background: var(--app-bg-color);
     overflow: hidden;
-
 }
 
 #app {
@@ -59,9 +64,12 @@ div::-webkit-scrollbar-track {
 
 /* 覆盖el 部分全局属性 */
 
+.el-message {
+    position: absolute !important;
+}
 
 .el-tree {
-    --el-tree-node-content-height: 40px;
+    --el-tree-node-content-height: 40px!important;
 }
 
 .el-checkbox__inner, .el-checkbox__inner {
@@ -98,6 +106,7 @@ div::-webkit-scrollbar-track {
     border-style: solid;
     border-width: 1px;
 }
+
 
 
 

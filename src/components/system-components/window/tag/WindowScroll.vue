@@ -1,9 +1,9 @@
 <template>
   <transition enter-active-class="animate__animated animate__bounceIn">
-    <WindowScrollX class="fit" style="height: 32px">
+    <WindowScrollX class="fit" style="height: 39px">
       <div class="fit row">
         <draggable class="row" :list="labels.windowLabels" :force-fallback="true"
-                   animation="100"
+                   animation="300"
                    style="flex-wrap: nowrap"
         >
           <template #item="ctx">

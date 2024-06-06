@@ -1,7 +1,10 @@
 <template>
   <ToolButton :btn="btn" @receive="receive" :position="position">
     <template v-slot:notify-badge>
-      <q-badge v-if="notify.list.length>0" color="red" rounded floating>{{ notify.list.length }}</q-badge>
+      <q-badge v-if="notify.getStatus==NotifyToolStatusType.UnReadNotify" color="red" rounded floating>
+        {{ notify.unread }}
+      </q-badge>
+      <q-badge v-else-if="notify.getStatus==NotifyToolStatusType.ReadAllNotify" color="primary" rounded floating/>
     </template>
   </ToolButton>
 </template>
@@ -14,6 +17,7 @@ import {Records, Tool} from "@/components/system-components/model/system";
 import {notifyMsg} from "@/components/system-components/tool/notifyTool/notify";
 import {getAllNotify} from "@/components/system-components/tool/notifyTool/notifyRequest";
 import {onMounted} from "vue";
+import {NotifyToolStatusType} from "@/components/system-components/model/enum";
 
 const $q = useQuasar()
 const notify = useNotifyStore()

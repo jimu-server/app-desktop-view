@@ -1,21 +1,28 @@
 <template>
   <Transition class="animate__animated animate__zoomIn">
-    <div class="label-body bg-transparent column" @mousemove="showClose" @mouseleave="hideClose">
-      <div class="row fit">
-        <div class="column justify-center" @click.stop="OpenWindow">
-          <q-icon style="margin-left: 5px" :name="win.icon"/>
-        </div>
-        <div class="label-title column justify-center" @click.stop="OpenWindow">
-          <div style="margin-left: 5px;width: 50px;user-select: none">
-            {{ win.title }}
+    <div class="label-body column" @mousemove="showClose" @mouseleave="hideClose">
+      <div class="fit justify-between" style="display: flex">
+        <div class="row ellipsis" style="padding-left: 5px">
+          <div class="column justify-center" @click.stop="OpenWindow">
+            <q-icon style="margin-left: 5px" :name="win.icon"/>
+          </div>
+          <div class="label-title column justify-center ellipsis" @click.stop="OpenWindow">
+            <div class="ellipsis" style="margin-left: 5px;user-select: none;max-width: 120px">
+              {{ win.title }}
+            </div>
           </div>
         </div>
-        <div class="column justify-center">
+        <div class="column justify-center" style="width: 25px;padding-right: 5px">
           <q-btn v-if="showCloseFlag" size="sm" dense flat icon="jimu-guanbi-2" @click.stop="CloseWindow"
                  :text-color="'red'"
-                 style="margin-right: 1px;"/>
+          />
         </div>
       </div>
+      <transition
+          enter-active-class="animate__animated animate__bounceIn"
+      >
+        <div v-if="props.win.check" class="active"></div>
+      </transition>
     </div>
   </Transition>
 </template>
@@ -107,16 +114,29 @@ onMounted(() => {
 
 <style scoped>
 .label-body {
+  position: relative;
   border-style: none;
-  width: 100px;
-  height: 40px;
+  min-width: 120px;
+  height: 39px;
   cursor: default;
   user-select: none;
-  border-bottom: rgba(140, 147, 157, 0.34) 1px solid;
   -webkit-app-region: no-drag;
+  /*  border-bottom: rgba(140, 147, 157, 0.34) 1px solid;*/
 }
 
 .label-title {
   font-size: 12px;
 }
+
+.active {
+  position: absolute;
+  width: 99%;
+  top: 5px;
+  border-style: solid;
+  border-width: 1px;
+  height: 30px;
+  pointer-events: none;
+  border-radius: 10px;
+}
+
 </style>

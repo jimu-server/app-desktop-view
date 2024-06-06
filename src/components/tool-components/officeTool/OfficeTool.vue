@@ -21,11 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import "@univerjs/design/lib/index.css";
+/*import "@univerjs/design/lib/index.css";
 import "@univerjs/ui/lib/index.css";
-import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";*/
 
-import {Univer} from "@univerjs/core";
+/*import {Univer} from "@univerjs/core";
 import {defaultTheme} from "@univerjs/design";
 
 import {UniverFormulaEnginePlugin} from "@univerjs/engine-formula";
@@ -45,10 +45,11 @@ import {zhCN as DesignZhCN} from '@univerjs/design';
 import {zhCN as DocsUIZhCN} from '@univerjs/docs-ui';
 import {zhCN as SheetsZhCN} from '@univerjs/sheets';
 import {zhCN as SheetsUIZhCN} from '@univerjs/sheets-ui';
-import {zhCN as UIZhCN} from '@univerjs/ui';
+import {zhCN as UIZhCN} from '@univerjs/ui';*/
 import {onMounted, ref} from "vue";
 import {useAppStore} from "@/store/app";
 import {useThemeStore} from "@/store/theme";
+import MainPage from "@/components/system-components/layouts/MainPage.vue";
 
 const splitterModel = ref(20)
 const divRef = ref<HTMLDivElement>(null)
@@ -57,6 +58,7 @@ const theme = useThemeStore()
 
 
 onMounted(() => {
+/*
   setTimeout(() => {
     const univer = new Univer({
       theme: defaultTheme,
@@ -90,6 +92,7 @@ onMounted(() => {
 
     univer.createUnit(UniverInstanceType.UNIVER_SHEET, {});
   }, 2000)
+*/
 
 })
 </script>

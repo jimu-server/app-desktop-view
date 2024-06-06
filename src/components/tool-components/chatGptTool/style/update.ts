@@ -5,6 +5,7 @@ export function updateTheme(dark: boolean) {
     elements.push(document.querySelectorAll('.markdown-message pre'))
     elements.push(document.querySelectorAll('.gpt-fold'))
     elements.push(document.querySelectorAll('.typing-cursor'))
+    elements.push(document.querySelectorAll('.code-copy-button'))
     if (dark) {
         for (const element of elements) {
             element.forEach(item => {
