@@ -4,7 +4,6 @@ import Login from "@/components/system-components/Login.vue";
 import OllamaSetting from "@/components/tool-components/chatGptTool/setting/OllamaSetting.vue";
 import UserInfoSetting from "@/components/system-components/avatar/UserInfoSetting.vue";
 import DescriptionNode from "@/components/tool-components/flowTool/node/DescriptionNode.vue";
-import OfficeTool from "@/components/tool-components/officeTool/OfficeTool.vue";
 
 import ManageTool from "@/components/system-tool/manageTool/ManageTool.vue";
 import NotifyTool from "@/components/system-tool/notifyTool/NotifyTool.vue";
@@ -26,7 +25,6 @@ const components = [
     ManageTool,
     NotifyBtn,
     DefaultBtn,
-    OfficeTool,
     UserManagePage,
     OrgManagePage,
     RouterManagePage,

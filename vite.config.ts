@@ -124,7 +124,7 @@ export default defineConfig(({command, mode}) => {
       cors: true,
       // 如果端口已占用直接退出
       strictPort: true,
-
+/*
       proxy: {
         // 服务器代理
         [env.VITE_APP_API]: {
@@ -154,7 +154,7 @@ export default defineConfig(({command, mode}) => {
             return replace
           }
         }
-      }
+      }*/
     },
     clearScreen: false,
     build:{

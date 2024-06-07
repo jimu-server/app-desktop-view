@@ -6,6 +6,7 @@ import {
 } from "@/components/tool-components/chatGptTool/model/model";
 import {GetHeaders} from "@/plugins/axiosutil";
 import {OllamaServer} from "@/components/tool-components/chatGptTool/gptAxios";
+import axiosForServer from "@/plugins/axiosForServer";
 
 
 
@@ -47,13 +48,14 @@ export function delConversation(id: string) {
 }
 
 
-export function send(conversationId: string, recoverMessageId: string, value: string, modelId: string) {
+export function send(conversationId: string, recoverMessageId: string, value: string, modelId: string, avatar: string) {
     return new Promise<Result<AppChatMessageItem>>(resolve => {
         OllamaServer.post<Result<AppChatMessageItem>>("/api/chat/send", {
             conversationId: conversationId,
             content: value,
             modelId: modelId,
             messageId: recoverMessageId,
+            avatar: avatar
         })
             .then(({data}) => {
                 resolve(data)
@@ -63,7 +65,7 @@ export function send(conversationId: string, recoverMessageId: string, value: st
 
 export function getUuid() {
     return new Promise<string>(resolve => {
-        OllamaServer.get<Result<string>>("/api/uuid").then(({data}) => {
+        axiosForServer.get<Result<string>>("/api/uuid").then(({data}) => {
             if (data.code === 200) {
                 resolve(data.data)
                 return

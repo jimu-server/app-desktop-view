@@ -7,19 +7,17 @@ import {getUuid, send} from "@/components/tool-components/chatGptTool/chatReques
 import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
 import {genStream} from "@/components/tool-components/chatGptTool/ollamaRequest";
 import {useAppStore} from "@/store/app";
-import pina from "@/pinia";
-import {OllamaSetting} from "@/components/tool-components/chatGptTool/setting/setting";
-import {Platform} from "@/components/tool-components/chatGptTool/variable";
+import {userStore} from "@/store/user";
 
 
 
-const localServerUrl = "http://localhost:8080"
-const originServerUrl = "http://localhost:8080"
+
 
 
 export async function SendTextMessage(recoverMessageId: string, text: string) {
     // 获取当前连天选择模型
     let store = useGptStore(pinia);
+    let user = userStore(pinia).info
     let model = store.ui.currentModel
     let conversationId = ""
     if (!store.CurrentChat.Current) {
@@ -28,7 +26,7 @@ export async function SendTextMessage(recoverMessageId: string, text: string) {
     }
     conversationId = store.CurrentChat.Current.Conversation.id
     // 创建问题消息
-    send(conversationId, recoverMessageId, text, model.model).then(async result => {
+    send(conversationId, recoverMessageId, text, model.model, user.user.picture).then(async result => {
         if (result.code === 200) {
             store.CurrentChat.messageList.push(result.data)
             // 新消息要追加到可显示列表中
@@ -108,7 +106,7 @@ async function getReply(message: AppChatMessageItem) {
 * @description 根据环境获取Ollama服务器地址
 * */
 export function getOllamaServer() {
-    let server: string = import.meta.env.VITE_APP_OLLAMA_API
+    let server: string = import.meta.env.VITE_APP_OLLAMA_SERVER
     if (server.endsWith("/")) {
         return server.substring(0, server.length - 1)
     }

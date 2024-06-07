@@ -7,6 +7,7 @@ import {exec} from 'node:child_process'
 import {ChildProcess} from "child_process";
 
 
+
 // The built directory structure
 //
 // ├─┬ dist-electron
@@ -63,7 +64,14 @@ process.env.VITE_DEV_SERVER_URL
 
 const vueDevToolsPath = path.resolve(__dirname, '../../6.5.1_0')
 let appIcon = null
+
+// 本地服务 基路径
+let appServerBasePath = null
+// 服务器路径
 let appServerPath = null
+// 文件数据库路径
+let fileDbPath = null
+
 
 // app 图标
 if (process.env.VITE_DEV_SERVER_URL) {
@@ -75,15 +83,25 @@ if (process.env.VITE_DEV_SERVER_URL) {
 
 // app 本地服务器
 if (process.env.VITE_DEV_SERVER_URL) {
-    appServerPath = join(__dirname, "../../server/app.exe")
+    appServerBasePath = join(__dirname, "../../server")
+    appServerPath = join(appServerBasePath, "server.exe")
+    fileDbPath = join(appServerBasePath, "gpt.db")
+    // console.log('appServerBasePath:', appServerBasePath)
+    // console.log('appServerPath:', appServerPath)
+    // console.log('fileDbPath:', fileDbPath)
 } else {
     // 生产环境 本地服务器 加载位置为打包后的位置
-    appServerPath = join(path.dirname(app.getPath('exe')), "resources/server/app.exe")
+    appServerBasePath = join(path.dirname(app.getPath('exe')), "resources/server")
+    // 生产环境 本地服务器 加载位置为打包后的位置
+    appServerPath = join(appServerBasePath, "server.exe")
+    fileDbPath = join(appServerBasePath, "gpt.db")
+    // console.log('appServerBasePath:', appServerBasePath)
+    // console.log('appServerPath:', appServerPath)
+    // console.log('fileDbPath:', fileDbPath)
 }
 
 
-
-async function createWindow() {
+function createWindow() {
     win = new BrowserWindow({
         title: 'jimuos',
         width: 360,
@@ -94,9 +112,7 @@ async function createWindow() {
         frame: false,
         resizable: false,
         maximizable: false,
-        // transparent: true,
         titleBarStyle: 'hidden',
-        // skipTaskbar: true,
         webPreferences: {
             preload,
             nodeIntegration: true,
@@ -108,11 +124,11 @@ async function createWindow() {
     winId = win.id
     if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
         // console.log(url)
-        await win.loadURL(url + '#/login')
+        win.loadURL(url + '#/login')
         // 打开浏览器调试窗口
         win.webContents.openDevTools()
     } else {
-        await win.loadURL(indexHtml + '#/login')
+        win.loadURL(indexHtml + '#/login')
     }
     // Test actively push message to the Electron-Renderer
     win.webContents.on('did-finish-load', () => {
@@ -175,15 +191,12 @@ function startAppLocalServer() {
 
 app.whenReady().then(async () => {
     app.setUserTasks([])
-    await createWindow()
-    await createTray()
-    // 加载 vue 调试器插件
-    await session.defaultSession.loadExtension(vueDevToolsPath)
+    // await initFileDb(fileDbPath)
+    createWindow()
+    createTray()
     // 加载本地服务
-    if (process.env.VITE_USER_NODE_ENV=="production.electron"){
-        console.log("begin start ollama server")
-        startAppLocalServer()
-    }
+    console.log("begin start ollama server")
+    startAppLocalServer()
 })
 
 
@@ -211,14 +224,7 @@ app.on('activate', async () => {
 
 
 app.on('quit', () => {
-    if (tray) {
-        tray.destroy()
-    }
-    // 结束正在运行的 服务器程序
-    if (server) {
-        server.kill()
-        console.log("shut down server")
-    }
+
 })
 
 ipcMain.on('DevTools', () => {
@@ -302,13 +308,26 @@ ipcMain.on("on-copy", () => {
 })
 
 /*
-* @description: 执行关闭应用程序
+* @description: 执行关闭应用程序窗口
 * */
 ipcMain.on("window-quite", () => {
     win.hide()
 })
 
+/*
+* @description: 执行推出应用程序
+* */
 ipcMain.on("window-exit", () => {
+
+    if (tray) {
+        tray.destroy()
+    }
+    // 结束正在运行的 服务器程序
+    if (server) {
+        server.kill('SIGTERM')
+        console.log("shut down server")
+    }
+
     app.quit()
 })
 
@@ -319,7 +338,6 @@ ipcMain.on("window-exit", () => {
 ipcMain.on("window-logout", () => {
 
 })
-
 
 ipcMain.on("window-max", (event, args) => {
     if (win.isMaximized()) {
@@ -349,7 +367,7 @@ ipcMain.on("theme", (event, args) => {
 
 let showFlag = false
 
-async function createTray() {
+function createTray() {
     // trayMessageView = new BrowserView()
     // 创建 托盘图标
     const icon = nativeImage.createFromPath(appIcon)
@@ -374,9 +392,9 @@ async function createTray() {
         },
     })
     if (process.env.VITE_DEV_SERVER_URL) {
-        await trayMenu.loadURL(url + "#/tray")
+        trayMenu.loadURL(url + "#/tray")
     } else {
-        await trayMenu.webContents.loadURL(indexHtml + "#/tray")
+        trayMenu.webContents.loadURL(indexHtml + "#/tray")
     }
     trayMenu.on('blur', () => {
         trayMenu.hide()
@@ -409,23 +427,8 @@ async function createTray() {
     tray.setToolTip('jimu-os')
 }
 
-
-// 托盘菜单 关闭防抖函数
-let trayTimer = null;
-
-function debounce_tray(fn: Function, delay: number) {
-    return function (...args: any) {
-        clearTimeout(trayTimer);
-        trayTimer = setTimeout(() => {
-            fn.apply(this, args);
-        }, delay);
-    };
-}
-
 ipcMain.on('close-tray', () => {
-    debounce_tray(() => {
-        trayMenu.hide()
-    }, 500)
+    trayMenu.hide()
 })
 
 
