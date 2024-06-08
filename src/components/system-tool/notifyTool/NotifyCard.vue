@@ -37,7 +37,8 @@
 import {Records} from "@/components/system-components/model/system";
 import {ref} from "vue";
 import {delMsg} from "@/components/system-tool/notifyTool/notifyutil";
-import {NotifyMsgType} from "@/components/system-tool/notifyTool/template";
+import {NotifyMsgType, NotifyStatus} from "@/components/system-tool/notifyTool/template";
+
 
 const props = defineProps<{
   data: Records

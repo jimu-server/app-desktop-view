@@ -124,37 +124,6 @@ export default defineConfig(({command, mode}) => {
       cors: true,
       // 如果端口已占用直接退出
       strictPort: true,
-/*
-      proxy: {
-        // 服务器代理
-        [env.VITE_APP_API]: {
-          // 代理到 配置文件中的地址
-          target: env.VITE_APP_SERVER,
-          changeOrigin: true,
-          rewrite: (path) => {
-            let replace = path
-            if (path.startsWith(env.VITE_APP_API)) {
-              replace = path.substring(env.VITE_APP_API.length)
-            }
-            return replace
-          }
-        },
-        // ollama 服务代理
-        [env.VITE_APP_OLLAMA_API]: {
-          target: env.VITE_APP_OLLAMA_SERVER,
-          changeOrigin: true,
-          rewrite: (path) => {
-            console.log(path)
-            console.log(env.VITE_APP_OLLAMA_API)
-            let replace = path
-            if (path.startsWith(env.VITE_APP_OLLAMA_API)) {
-              replace = path.substring(env.VITE_APP_OLLAMA_API.length)
-            }
-            console.log(replace)
-            return replace
-          }
-        }
-      }*/
     },
     clearScreen: false,
     build:{

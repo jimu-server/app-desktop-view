@@ -82,14 +82,14 @@ if (process.env.VITE_DEV_SERVER_URL) {
 // app 本地服务器
 if (process.env.VITE_DEV_SERVER_URL) {
     appServerBasePath = join(__dirname, "../../server")
-    appServerPath = join(appServerBasePath, "server.exe")
+    appServerPath = join(appServerBasePath, "assistant.exe")
     // console.log('appServerBasePath:', appServerBasePath)
     // console.log('appServerPath:', appServerPath)
 } else {
     // 生产环境 本地服务器 加载位置为打包后的位置
     appServerBasePath = join(path.dirname(app.getPath('exe')), "resources/server")
     // 生产环境 本地服务器 加载位置为打包后的位置
-    appServerPath = join(appServerBasePath, "server.exe")
+    appServerPath = join(appServerBasePath, "assistant.exe")
     // console.log('appServerBasePath:', appServerBasePath)
     // console.log('appServerPath:', appServerPath)
 }

@@ -3,8 +3,6 @@ import ModelManagePage from "@/components/tool-components/chatGptTool/manage/Mod
 import Login from "@/components/system-components/Login.vue";
 import OllamaSetting from "@/components/tool-components/chatGptTool/setting/OllamaSetting.vue";
 import UserInfoSetting from "@/components/system-components/avatar/UserInfoSetting.vue";
-import DescriptionNode from "@/components/tool-components/flowTool/node/DescriptionNode.vue";
-
 import ManageTool from "@/components/system-tool/manageTool/ManageTool.vue";
 import NotifyTool from "@/components/system-tool/notifyTool/NotifyTool.vue";
 import UserManagePage from "@/components/system-tool/manageTool/page/UserManagePage.vue";
@@ -34,7 +32,7 @@ const components = [
     Login,
     OllamaSetting,
     UserInfoSetting,
-    DescriptionNode
+
 ]
 
 export function init(app: App) {

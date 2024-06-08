@@ -88,10 +88,10 @@ import draggable from 'vuedraggable'
 const {getPaletteColor} = colors
 
 const app = useAppStore()
-const splitterModel = ref(15)
-const splitterModelLimit = ref([15, 15])
-const splitterModel2 = ref(20)
-const splitterModel2Limit = ref([20, 50])
+const splitterModel = ref(20)
+const splitterModelLimit = ref([20, 30])
+const splitterModel2 = ref(25)
+const splitterModel2Limit = ref([25, 50])
 const conversationListRef = ref()
 const messageListRef = ref()
 const ctx = useGptStore()

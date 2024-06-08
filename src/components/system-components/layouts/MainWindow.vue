@@ -56,7 +56,7 @@
       </MainWindowTool>
     </q-drawer>
     <!--  聊天窗口 目标的信息窗口,单聊显示 好友信息及其好友设置,群聊则显示群信息和群设置  -->
-    <q-drawer id="r-d" show-if-above side="right" :width="tool.right.width" behavior="desktop"
+    <q-drawer id="r-d" v-if="tool.right.buttons.length>0" show-if-above side="right" :width="tool.right.width" behavior="desktop"
               bordered
               style="min-width: 52px"
     >

@@ -21,8 +21,7 @@ import './styles/el-light.scss'
 import './styles/el-dark.scss'
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-// vueflow
-import './styles/vueflow.css'
+
 import {init} from "@/init";
 //
 import Vue3DraggableResizable from 'vue3-draggable-resizable'
@@ -33,8 +32,6 @@ import '@/components/tool-components/chatGptTool/style/md.css'
 import '@/components/tool-components/chatGptTool/style/md-dark.css'
 import '@/components/tool-components/chatGptTool/chat/initPrism'
 
-import ai from 'src/assets/ai.svg'
-import gpt from 'src/assets/GPT.png'
 
 const app = createApp(App)
 

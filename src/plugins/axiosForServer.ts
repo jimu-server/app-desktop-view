@@ -16,7 +16,7 @@ Axios.interceptors.request.use(function (request) {
 Axios.interceptors.response.use(function (response: AxiosResponse<any>) {
     return response
 }, function (error) {
-    errHandler(error.response)
+    // errHandler(error.response)
     return error.response
 })
 
