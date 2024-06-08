@@ -69,8 +69,6 @@ let appIcon = null
 let appServerBasePath = null
 // 服务器路径
 let appServerPath = null
-// 文件数据库路径
-let fileDbPath = null
 
 
 // app 图标
@@ -85,19 +83,15 @@ if (process.env.VITE_DEV_SERVER_URL) {
 if (process.env.VITE_DEV_SERVER_URL) {
     appServerBasePath = join(__dirname, "../../server")
     appServerPath = join(appServerBasePath, "server.exe")
-    fileDbPath = join(appServerBasePath, "gpt.db")
     // console.log('appServerBasePath:', appServerBasePath)
     // console.log('appServerPath:', appServerPath)
-    // console.log('fileDbPath:', fileDbPath)
 } else {
     // 生产环境 本地服务器 加载位置为打包后的位置
     appServerBasePath = join(path.dirname(app.getPath('exe')), "resources/server")
     // 生产环境 本地服务器 加载位置为打包后的位置
     appServerPath = join(appServerBasePath, "server.exe")
-    fileDbPath = join(appServerBasePath, "gpt.db")
     // console.log('appServerBasePath:', appServerBasePath)
     // console.log('appServerPath:', appServerPath)
-    // console.log('fileDbPath:', fileDbPath)
 }
 
 
@@ -191,9 +185,8 @@ function startAppLocalServer() {
 
 app.whenReady().then(async () => {
     app.setUserTasks([])
-    // await initFileDb(fileDbPath)
     createWindow()
-    createTray()
+    await createTray()
     // 加载本地服务
     console.log("begin start ollama server")
     startAppLocalServer()
@@ -220,11 +213,6 @@ app.on('activate', async () => {
     } else {
         await createWindow()
     }
-})
-
-
-app.on('quit', () => {
-
 })
 
 ipcMain.on('DevTools', () => {
@@ -314,31 +302,6 @@ ipcMain.on("window-quite", () => {
     win.hide()
 })
 
-/*
-* @description: 执行推出应用程序
-* */
-ipcMain.on("window-exit", () => {
-
-    if (tray) {
-        tray.destroy()
-    }
-    // 结束正在运行的 服务器程序
-    if (server) {
-        server.kill('SIGTERM')
-        console.log("shut down server")
-    }
-
-    app.quit()
-})
-
-
-/*
-* @description: 执行推出应用程序
-* */
-ipcMain.on("window-logout", () => {
-
-})
-
 ipcMain.on("window-max", (event, args) => {
     if (win.isMaximized()) {
         win.unmaximize()
@@ -357,26 +320,43 @@ ipcMain.on("window-min", (event) => {
     event.sender.send("win-change")
 })
 
-ipcMain.on("login-app", (event) => {
-    event.sender.send("init-im-listener")
-})
-
+/*
+* @description: 切换主题
+* */
 ipcMain.on("theme", (event, args) => {
     trayMenu.webContents.send("theme-change", args)
 })
 
-let showFlag = false
+/*
+* @description: 执行推出应用程序
+* */
+ipcMain.on("window-exit", () => {
+    if (tray) {
+        tray.destroy()
+    }
+    if (trayMenu) {
+        trayMenu.destroy()
+    }
+    if (win) {
+        win.destroy()
+    }
+    // 结束正在运行的 服务器程序
+    if (server) {
+        server.kill('SIGTERM')
+        console.log("shut down server")
+    }
+    app.quit()
+})
 
-function createTray() {
-    // trayMessageView = new BrowserView()
-    // 创建 托盘图标
+async function createTray() {
     const icon = nativeImage.createFromPath(appIcon)
     tray = new Tray(icon)
+    tray.setToolTip('jimu-os')
     // 当前 ui 写的托盘菜单最低30(单个菜单项)
     let menuHeight = 30
     trayMenu = new BrowserWindow({
         title: 'tray',
-        width: 100,
+        width: 110,
         height: menuHeight,
         frame: false,
         resizable: false,
@@ -391,11 +371,13 @@ function createTray() {
             partition: String(+new Date())
         },
     })
+    trayMenu.setAlwaysOnTop(true, 'pop-up-menu')
     if (process.env.VITE_DEV_SERVER_URL) {
-        trayMenu.loadURL(url + "#/tray")
+        await trayMenu.loadURL(url + "#/tray")
     } else {
-        trayMenu.webContents.loadURL(indexHtml + "#/tray")
+        await trayMenu.loadURL(indexHtml + "#/tray")
     }
+
     trayMenu.on('blur', () => {
         trayMenu.hide()
     })
@@ -411,20 +393,17 @@ function createTray() {
         win.moveTop()
         trayMenu.hide()
     })
-
+    /*
+    * @description: 点击托盘图标，显示托盘菜单窗口
+    * */
     tray.on('right-click', (event, point) => {
-        trayMenu.setPosition(point.x + (point.width / 2), point.y - menuHeight + (point.height / 2))
+        let x = point.x + (point.width / 2)
+        let y = point.y - menuHeight + (point.height / 2)
+        trayMenu.setPosition(parseInt(x.toString()), parseInt(y.toString()))
         trayMenu.show()
         trayMenu.focus()
-        trayMenu.setAlwaysOnTop(true, 'pop-up-menu')
     })
-    tray.on("mouse-enter", (event, point) => {
-    })
-    tray.on("mouse-move", (event, point) => {
-    })
-    tray.on("mouse-leave", (event, point) => {
-    })
-    tray.setToolTip('jimu-os')
+
 }
 
 ipcMain.on('close-tray', () => {

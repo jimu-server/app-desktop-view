@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {Records} from "@/components/system-components/model/system";
-import {NotifyStatus, NotifyToolStatusType} from "@/components/system-components/model/enum";
+import {NotifyStatus, NotifyToolStatusType} from "@/components/system-tool/notifyTool/template";
 
 
 export const useNotifyStore = defineStore('notify', {

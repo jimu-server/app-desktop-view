@@ -11,9 +11,10 @@
 
 <script setup lang="ts">
 import {Records} from "@/components/system-components/model/system";
-import {NotifyStatus} from "@/components/system-components/model/enum";
+
 import {useNotifyStore} from "@/store/tool/notify";
 import {readMsg} from "@/components/system-tool/notifyTool/notifyutil";
+import {NotifyStatus} from "@/components/system-tool/notifyTool/template";
 
 
 const props = defineProps<{

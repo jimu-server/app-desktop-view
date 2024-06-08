@@ -160,7 +160,6 @@ function sizeChange(width: number, height: number) {
 
 
 async function logout() {
-  desktop_logout()
   setTimeout(async () => {
     emitter.emit(UserLogout)
   }, 100)

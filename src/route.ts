@@ -6,6 +6,7 @@ import NotFound from "@/components/system-components/NotFound.vue";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
 import {set} from "lodash";
+import {usePlatformStore} from "@/store/platform";
 
 
 const routes: RouteRecordRaw[] = []
@@ -27,6 +28,7 @@ let registerMenuRoute = true
 router.beforeEach(async (to, from, next) => {
     // let menus = useRouterStore(pinia).menu_route
     if (registerMenuRoute) {
+        let platform = usePlatformStore(pinia);
         // 初始化登录路由
         router.addRoute({
             path: '/',
@@ -44,11 +46,13 @@ router.beforeEach(async (to, from, next) => {
             component: () => import('@/components/system-components/EmailVerify.vue'),
             props: true
         })
-        router.addRoute({
-            path: '/tray',
-            name: 'tray',
-            component: () => import('@/components/system-components/desktop/TrayMenu.vue')
-        },)
+        if (platform.isDesktop()) {
+            router.addRoute({
+                path: '/tray',
+                name: 'tray',
+                component: () => import('@/components/system-components/desktop/TrayMenu.vue')
+            },)
+        }
         // 初始化 管理系统父路由
         router.addRoute({
             path: rootPath,

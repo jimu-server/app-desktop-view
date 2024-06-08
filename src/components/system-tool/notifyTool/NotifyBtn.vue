@@ -16,8 +16,8 @@ import {useNotifyStore} from "@/store/tool/notify";
 import {Records, Tool} from "@/components/system-components/model/system";
 
 import {onMounted} from "vue";
-import {NotifyToolStatusType} from "@/components/system-components/model/enum";
 import {notifyMsg} from "@/components/system-tool/notifyTool/notify";
+import {NotifyToolStatusType} from "@/components/system-tool/notifyTool/template";
 
 const $q = useQuasar()
 const notify = useNotifyStore()

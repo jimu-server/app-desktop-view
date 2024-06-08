@@ -20,9 +20,10 @@ import {useAuthStore} from "@/store/auth";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
 import {LoginOut, UpdateAuthEvent, UpdateAuthWindowEvent, UserLogout} from "@/plugins/evenKey";
-import {desktop_open_dev} from "@/components/system-components/desktop/desktop";
+import {desktop_logout, desktop_open_dev} from "@/components/system-components/desktop/desktop";
 import {useWindowsStore} from "@/store/windows";
 import {useRouter} from "vue-router";
+import {usePlatformStore} from "@/store/platform";
 
 const app = useAppStore()
 const user = userStore()
@@ -31,6 +32,7 @@ const auth = useAuthStore()
 const theme = useThemeStore()
 const router = useRouter()
 const win = useWindowsStore()
+const platform = usePlatformStore()
 
 ipcRenderer.on('win-change', (event, arg) => {
   setTimeout(() => {
@@ -85,6 +87,9 @@ async function UserLogoutEvent() {
   tool.clear()
   localStorage.clear()
   sessionStorage.clear()
+  if (platform.isDesktop()) {
+    desktop_logout()
+  }
   // 回到登陆页面
   await router.push('/login')
 }
