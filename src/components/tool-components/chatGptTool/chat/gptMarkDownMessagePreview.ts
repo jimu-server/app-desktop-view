@@ -28,8 +28,9 @@ const md = markdownit({
         } else {
             code = md.utils.escapeHtml(str);
         }
-        const copyButton = '<button class="code-copy-button" onclick="copyToClipboard(this)">复制</button>';
+        let copyButton = '<button class="code-copy-button" onclick="copyToClipboard(this)">复制</button>';
         if (theme.dark) {
+            copyButton = '<button class="code-copy-button" theme="dark" onclick="copyToClipboard(this)">复制</button>'
             return `<pre class="markdown-code-block" theme="dark">${copyButton}<code>${code}</code></pre>`;
         }
         return `<pre class="markdown-code-block">${copyButton}<code>${code}</code></pre>`;
@@ -47,13 +48,6 @@ md.renderer.rules.code_inline = (tokens, idx, options, env, slf) => {
     }
     return '<code' + slf.renderAttrs(token) + '>' + escapeHtml(token.content) + '</code>'
 }
-// console.log(md.renderer.rules)
-// md.renderer.rules.code_block = function (tokens, idx, options, env, slf) {
-//     const token = tokens[idx]
-//     // return '<pre' + slf.renderAttrs(token) + '><code>' + escapeHtml(tokens[idx].content) + '</code></pre>\n'
-//     console.log('code_block', tokens[idx].content)
-//     return escapeHtml(tokens[idx].content)
-// }
 
 
 md.use(MarkdownItMark)
