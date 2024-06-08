@@ -14,6 +14,7 @@ import DefaultNotifyBody from "@/components/system-tool/notifyTool/notifyBody/De
 import LoginNotifyBody from "@/components/system-tool/notifyTool/notifyBody/LoginNotifyBody.vue";
 import DefaultBtn from "@/components/system-tool/btn/DefaultBtn.vue";
 import NotifyBtn from "@/components/system-tool/notifyTool/NotifyBtn.vue";
+import GptBtn from "@/components/tool-components/chatGptTool/GptBtn.vue";
 
 
 const components = [
@@ -22,6 +23,7 @@ const components = [
     LoginNotifyBody,
     ManageTool,
     NotifyBtn,
+    GptBtn,
     DefaultBtn,
     UserManagePage,
     OrgManagePage,
