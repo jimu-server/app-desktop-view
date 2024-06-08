@@ -86,7 +86,6 @@ if (process.env.VITE_DEV_SERVER_URL) {
     // 生产环境 本地服务器 加载位置为打包后的位置
     appServerBasePath = join(path.dirname(app.getPath('exe')), "resources/server")
     appServerPath = join(appServerBasePath, "assistant.exe")
-
 }
 
 
