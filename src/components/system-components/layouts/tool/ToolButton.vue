@@ -28,6 +28,9 @@ const props = defineProps<{
 const emits = defineEmits({
   receive: function (data) {
 
+  },
+  btnClick: function () {
+
   }
 })
 
@@ -38,6 +41,7 @@ const tool = useToolStore()
 const widowsLabel = useWindowsStore()
 
 function action() {
+  emits('btnClick')
   switch (props.btn.type) {
     case ToolBtnType.ToolRouteBtn:
       addWindows(props.btn.path, props.btn.name, props.btn.icon)
