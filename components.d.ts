@@ -81,6 +81,7 @@ declare module 'vue' {
     ForGetPassword: typeof import('./src/components/system-components/ForGetPassword.vue')['default']
     FunManagePage: typeof import('./src/components/system-tool/manageTool/page/FunManagePage.vue')['default']
     GenKnowledgeUI: typeof import('./src/components/tool-components/chatGptTool/widget/knowledge/GenKnowledgeUI.vue')['default']
+    GptBtn: typeof import('./src/components/tool-components/chatGptTool/GptBtn.vue')['default']
     GPTSettingPanel: typeof import('./src/components/tool-components/chatGptTool/chat/editor/widget/GPTSettingPanel.vue')['default']
     HomePage: typeof import('./src/components/system-components/pages/HomePage.vue')['default']
     ImageEdit: typeof import('./src/components/tool-components/chatGptTool/chat/editor/ImageEdit.vue')['default']

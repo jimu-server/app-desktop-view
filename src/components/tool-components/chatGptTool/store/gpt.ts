@@ -245,5 +245,42 @@ export const useGptStore = defineStore('gpt', {
                 }
             }
         },
+
+        clear() {
+            this.CurrentChat = {
+                create: [] as ConversationEntity[],
+                status: 0,
+                conversationList: [] as ConversationEntity[],
+                messageList: [] as AppChatMessageItem[],
+                Current: {} as ConversationEntity,
+                index: -1,
+            }
+            this.view = []
+            this.newView = []
+            this.ui = {
+                search: '',
+                autoFold: false,
+                autoHistory: false,
+                replying: false,
+                send: false,
+                stop: false,
+                currentStream: null as Stream,
+                showChat: false,
+                marks: [0, 0],
+                defaultMarks: 0,
+                baseModelList: [] as LLmMole[],
+                currentModel: null as OllamaModelResponse,
+                modelList: [] as OllamaModelResponse[],
+                modelInfo: {},
+                downloadModelList: [] as OllamaDownload[],
+                knowledge: {
+                    nva: [],
+                    root: [] as Tree<AppChatKnowledgeFile>[],
+                    files: [] as Tree<AppChatKnowledgeFile>[],
+                    instance: [] as AppChatKnowledgeInstance[],
+                },
+            }
+            this.CurrentChat.index = -1
+        }
     }
 })

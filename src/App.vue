@@ -24,6 +24,7 @@ import {desktop_logout, desktop_open_dev} from "@/components/system-components/d
 import {useWindowsStore} from "@/store/windows";
 import {useRouter} from "vue-router";
 import {usePlatformStore} from "@/store/platform";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 
 const app = useAppStore()
 const user = userStore()
@@ -33,6 +34,7 @@ const theme = useThemeStore()
 const router = useRouter()
 const win = useWindowsStore()
 const platform = usePlatformStore()
+const gpt = useGptStore()
 
 ipcRenderer.on('win-change', (event, arg) => {
   setTimeout(() => {
@@ -85,6 +87,9 @@ async function UserLogoutEvent() {
   win.clear()
   // 清空tool信息
   tool.clear()
+  // 清空会话消息
+  gpt.clear()
+  // 清空缓存
   localStorage.clear()
   sessionStorage.clear()
   if (platform.isDesktop()) {
