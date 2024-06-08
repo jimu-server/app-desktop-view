@@ -43,7 +43,6 @@ if (!app.requestSingleInstanceLock()) {
 
 // 主窗口
 let win: BrowserWindow | null = null
-let winId: number | null = 0
 
 
 // 托盘
@@ -104,6 +103,7 @@ function createWindow() {
         maximizable: false,
         titleBarStyle: 'hidden',
         webPreferences: {
+            spellcheck: false,
             preload,
             nodeIntegration: true,
             contextIsolation: false,
@@ -111,7 +111,6 @@ function createWindow() {
         },
     })
     // win.setIgnoreMouseEvents(false, {forward: true})
-    winId = win.id
     if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
         // console.log(url)
         win.loadURL(url + '#/login')
@@ -162,7 +161,6 @@ function createWindow() {
     })
 }
 
-
 function startAppLocalServer() {
     if (appServerPath) {
         server = exec(appServerPath, (error, stdout, stderr) => {
@@ -184,12 +182,11 @@ app.whenReady().then(async () => {
     createWindow()
     await createTray()
     // 加载本地服务
-    if (import.meta.env.NODE_ENV !== 'development') {
+    if (import.meta.env.MODE !== 'development') {
         console.log("begin start ollama server")
         startAppLocalServer()
     }
 })
-
 
 app.on('window-all-closed', () => {
     win = null

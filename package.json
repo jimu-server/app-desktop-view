@@ -57,6 +57,7 @@
     "dedent": "^1.5.1",
     "dom-to-image": "^2.6.0",
     "element-plus": "^2.6.3",
+    "highlight.js": "^11.9.0",
     "iconfont-tools": "^1.7.13",
     "linkify-it": "^5.0.0",
     "lodash": "^4.17.21",
