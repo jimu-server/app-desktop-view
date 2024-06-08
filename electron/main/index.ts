@@ -83,15 +83,11 @@ if (process.env.VITE_DEV_SERVER_URL) {
 if (process.env.VITE_DEV_SERVER_URL) {
     appServerBasePath = join(__dirname, "../../server")
     appServerPath = join(appServerBasePath, "assistant.exe")
-    // console.log('appServerBasePath:', appServerBasePath)
-    // console.log('appServerPath:', appServerPath)
 } else {
     // 生产环境 本地服务器 加载位置为打包后的位置
     appServerBasePath = join(path.dirname(app.getPath('exe')), "resources/server")
-    // 生产环境 本地服务器 加载位置为打包后的位置
     appServerPath = join(appServerBasePath, "assistant.exe")
-    // console.log('appServerBasePath:', appServerBasePath)
-    // console.log('appServerPath:', appServerPath)
+
 }
 
 
@@ -188,8 +184,10 @@ app.whenReady().then(async () => {
     createWindow()
     await createTray()
     // 加载本地服务
-    console.log("begin start ollama server")
-    startAppLocalServer()
+    if (import.meta.env.NODE_ENV !== 'development') {
+        console.log("begin start ollama server")
+        startAppLocalServer()
+    }
 })
 
 
