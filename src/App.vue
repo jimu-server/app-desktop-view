@@ -25,6 +25,7 @@ import {useWindowsStore} from "@/store/windows";
 import {useRouter} from "vue-router";
 import {usePlatformStore} from "@/store/platform";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
+import {homePath} from "@/variable";
 
 const app = useAppStore()
 const user = userStore()
@@ -35,6 +36,7 @@ const router = useRouter()
 const win = useWindowsStore()
 const platform = usePlatformStore()
 const gpt = useGptStore()
+const $q = useQuasar()
 
 ipcRenderer.on('win-change', (event, arg) => {
   setTimeout(() => {
@@ -54,8 +56,19 @@ window.onresize = function () {
   }
 }
 
+/*
+* @description 登录成功后触发路由跳转,使用事件通知是为了优化用户体验效果
+* */
+ipcRenderer.on('home', async (event, arg) => {
+  await router.push(homePath)
+})
 
-const $q = useQuasar()
+/*
+* @description 退出登录触发,使用事件通知是为了优化用户体验效果
+* */
+ipcRenderer.on('login', async (event, arg) => {
+  await router.push('/login')
+})
 
 
 $q.iconMapFn = (iconName) => {
@@ -95,8 +108,8 @@ async function UserLogoutEvent() {
   if (platform.isDesktop()) {
     desktop_logout()
   }
-  // 回到登陆页面
-  await router.push('/login')
+  // // 回到登陆页面
+  // await router.push('/login')
 }
 
 onMounted(() => {

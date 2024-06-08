@@ -99,6 +99,7 @@ function createWindow() {
         minHeight: 450,
         icon: appIcon,
         frame: false,
+        show: false,
         resizable: false,
         maximizable: false,
         titleBarStyle: 'hidden',
@@ -129,6 +130,12 @@ function createWindow() {
         if (url.startsWith('https:')) shell.openExternal(url)
         return {action: 'deny'}
     })
+
+    // 通过事件初始化窗口显示时机 避免白版闪烁
+    win.on('ready-to-show', () => {
+        win.show()
+    })
+
     /*
     *  @description: resize 监听窗口大小改变
     * */
@@ -228,19 +235,19 @@ ipcMain.on('toggle', () => {
     }
 })
 
-ipcMain.on('login', () => {
+ipcMain.on('login', (event, args) => {
     if (win) {
         win.hide()
+        // 通知渲染进程 跳转页面
+        event.sender.send('home')
         setTimeout(() => {
             win.setMaximizable(true)
             win.setResizable(true)
             win.setMinimizable(true)
-
             win.setMinimumSize(1200, 800)
             win.setContentSize(1200, 800)
             win.setSize(1200, 800)
             win.center()
-
             win.show()
         }, 1000)
     }
@@ -250,9 +257,10 @@ ipcMain.on('login', () => {
 * @description 执行登出操作
 * 修改窗口大小
 * */
-ipcMain.on('logout', () => {
+ipcMain.on('logout', (event, args) => {
     if (win) {
         win.hide()
+        event.sender.send('login')
         setTimeout(() => {
             if (win.isMaximized()) {
                 win.restore()
@@ -263,9 +271,9 @@ ipcMain.on('logout', () => {
             win.setContentSize(360, 450)
             win.setSize(360, 450)
             win.center()
-
             win.show()
         }, 1000)
+
     }
 })
 
@@ -373,6 +381,7 @@ async function createTray() {
         await trayMenu.loadURL(indexHtml + "#/tray")
     }
 
+    // 失去焦点后隐藏窗口
     trayMenu.on('blur', () => {
         trayMenu.hide()
     })
@@ -381,10 +390,7 @@ async function createTray() {
     * @description: 双击托盘图标，显示窗口
     * */
     tray.on('double-click', () => {
-        if (!win.isVisible()) {
-            win.show()
-            win.moveTop()
-        }
+        if (!win.isVisible()) win.show()
         win.moveTop()
         trayMenu.hide()
     })

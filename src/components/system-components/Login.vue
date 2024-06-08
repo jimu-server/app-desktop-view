@@ -242,6 +242,7 @@ import ForGetPassword from "@/components/system-components/ForGetPassword.vue";
 import WindowMinimizeBtn from "@/components/system-components/desktop/WindowMinimizeBtn.vue";
 import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBtn.vue";
 import {desktop_login} from "@/components/system-components/desktop/desktop";
+import {ipcRenderer} from "electron";
 
 const user = userStore()
 const router = useRouter()
@@ -416,7 +417,7 @@ function defaultLoginAction() {
       await loadUserInfo()
       setTimeout(async () => {
         desktop_login()
-        await router.push(homePath)
+        // await router.push(homePath)
         loading.value = false
       }, 1000)
       return
@@ -531,6 +532,9 @@ const rules = reactive<FormRules<typeof registerForm>>({
   name: [{validator: nameCheck, trigger: 'blur'}],
   confirmPassword: [{validator: confirmPasswordCheck, trigger: 'blur'}],
 })
+
+
+
 
 
 onMounted(() => {
