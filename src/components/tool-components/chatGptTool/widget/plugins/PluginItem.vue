@@ -14,12 +14,17 @@
       <q-radio dense v-model="ctx.ui.currentPlugin" :val="plugin"/>
     </div>
     <q-menu
-        v-model="infoShow" @mouseenter="infoShowOut = true" @mouseleave="popupOut"
+        v-model="infoShow" @mouseenter="into" @mouseleave="popupOut"
         anchor="top end" self="top start"
+        persistent
         :offset="[5,0]"
     >
       <q-card class="fit">
-
+        <div style="width: 100px;height: 100px">
+          <el-button>
+            test
+          </el-button>
+        </div>
       </q-card>
     </q-menu>
   </q-item>
@@ -53,9 +58,15 @@ function check() {
 }
 
 
+function into() {
+  infoShowOut.value = true
+  ctx.ui.pluginMenuShowFlag = true
+}
+
 function popupOut() {
   infoShow.value = false
   infoShowOut.value = false
+  ctx.ui.pluginMenuShowFlag = false
 }
 
 function infoOut() {

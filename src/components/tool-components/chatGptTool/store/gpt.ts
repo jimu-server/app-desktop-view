@@ -108,7 +108,8 @@ export const useGptStore = defineStore('gpt', {
 
                 plugins: [] as AppChatPlugin[],
                 currentPlugin: {} as AppChatPlugin,
-                checked: [] as string[]
+                checked: [] as string[],
+                pluginMenuShowFlag: false
             },
         }
     },
