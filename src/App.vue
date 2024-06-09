@@ -26,6 +26,7 @@ import {useRouter} from "vue-router";
 import {usePlatformStore} from "@/store/platform";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {homePath} from "@/variable";
+import { v4 as uuidv4 } from "uuid";
 
 const app = useAppStore()
 const user = userStore()
@@ -140,6 +141,9 @@ onMounted(() => {
       desktop_open_dev()
     }
   }
+
+  const uniqueId = uuidv4();
+  console.log(uniqueId);
 
 })
 

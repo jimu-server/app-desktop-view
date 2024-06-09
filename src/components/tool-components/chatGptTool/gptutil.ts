@@ -3,11 +3,13 @@ import pinia from "@/pinia";
 import emitter from "@/plugins/event";
 import {SendActionScroll} from "@/plugins/evenKey";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
-import {getUuid, send} from "@/components/tool-components/chatGptTool/chatRequest";
+import {send} from "@/components/tool-components/chatGptTool/chatRequest";
 import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
 import {genStream} from "@/components/tool-components/chatGptTool/ollamaRequest";
 import {useAppStore} from "@/store/app";
 import {userStore} from "@/store/user";
+import {VITE_APP_OLLAMA_SERVER} from "@/env";
+import {getUuid} from "@/utils/systemutils";
 
 
 
@@ -60,7 +62,7 @@ async function getReply(message: AppChatMessageItem) {
     conversationId = store.CurrentChat.Current.Conversation.id
     // 通过问题消息获取流是回答
     //创建 一个gpt回答消息
-    let uuid = await getUuid()
+    let uuid = getUuid()
 
     // 创建一个消息用户传递 用户的问题输入 ,结束后把这个消息转化为gpt角色 并重置 content 和 role
     let msg: AppChatMessageItem = {
@@ -103,10 +105,10 @@ async function getReply(message: AppChatMessageItem) {
 
 
 /*
-* @description 根据环境获取Ollama服务器地址
+* @description 获取 本地gpt服务器地址
 * */
 export function getOllamaServer() {
-    let server: string = import.meta.env.VITE_APP_OLLAMA_SERVER
+    let server: string = VITE_APP_OLLAMA_SERVER
     if (server.endsWith("/")) {
         return server.substring(0, server.length - 1)
     }

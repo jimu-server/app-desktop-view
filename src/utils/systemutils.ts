@@ -1,3 +1,5 @@
+import {v4 as uuidv4} from "uuid"
+
 export function IsEmpty(value: any): boolean {
     return Object.keys(value).length == 0
 }
@@ -86,4 +88,9 @@ export function formatTime(timeStamp) {
         }
     }
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
+
+export function getUuid(): string {
+    return uuidv4()
 }

@@ -1,9 +1,10 @@
 import axios, {AxiosInstance, AxiosResponse} from 'axios';
 import {ElNotification} from "element-plus";
 import {GetHeaders} from "@/plugins/axiosutil";
+import {VITE_APP_SERVER} from "@/env";
 
 const Axios: AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_APP_SERVER,
+    baseURL: VITE_APP_SERVER,
     timeout: 5000,
 })
 

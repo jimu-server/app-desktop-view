@@ -46,13 +46,11 @@ router.beforeEach(async (to, from, next) => {
             component: () => import('@/components/system-components/EmailVerify.vue'),
             props: true
         })
-        if (platform.isDesktop()) {
-            router.addRoute({
-                path: '/tray',
-                name: 'tray',
-                component: () => import('@/components/system-components/desktop/TrayMenu.vue')
-            },)
-        }
+        router.addRoute({
+            path: '/tray',
+            name: 'tray',
+            component: () => import('@/components/system-components/desktop/TrayMenu.vue')
+        },)
         // 初始化 管理系统父路由
         router.addRoute({
             path: rootPath,

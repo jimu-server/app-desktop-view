@@ -1,9 +1,10 @@
 import axios, {AxiosInstance} from "axios";
 import {GetHeaders} from "@/plugins/axiosutil";
 import Axios from "@/plugins/axiosForServer";
+import {VITE_APP_OLLAMA_SERVER} from "@/env";
 
 export const OllamaServer: AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_APP_OLLAMA_SERVER,
+    baseURL: VITE_APP_OLLAMA_SERVER,
     timeout: 5000,
 })
 

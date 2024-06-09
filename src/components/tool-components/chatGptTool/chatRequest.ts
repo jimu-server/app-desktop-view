@@ -63,7 +63,7 @@ export function send(conversationId: string, recoverMessageId: string, value: st
     })
 }
 
-export function getUuid() {
+/*export function getUuid() {
     return new Promise<string>(resolve => {
         axiosForServer.get<Result<string>>("/api/uuid").then(({data}) => {
             if (data.code === 200) {
@@ -74,7 +74,7 @@ export function getUuid() {
             resolve("")
         })
     })
-}
+}*/
 
 export function getConversationMessage(id: string) {
     return new Promise<AppChatMessageItem[]>(resolve => {

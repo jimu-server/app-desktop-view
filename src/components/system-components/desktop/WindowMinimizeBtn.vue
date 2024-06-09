@@ -5,7 +5,7 @@ const platform = usePlatformStore()
 </script>
 
 <template>
-  <q-btn v-if="platform.isDesktop()" dense square flat class="window-minimize" icon="jimu-zuixiaohua1" @click.stop="desktop_minimize"
+  <q-btn  dense square flat class="window-minimize" icon="jimu-zuixiaohua1" @click.stop="desktop_minimize"
          style="height: 100%;width: 43px;-webkit-app-region: no-drag;"/>
 </template>
 

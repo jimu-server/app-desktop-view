@@ -7,6 +7,7 @@ export const usePlatformStore = defineStore('platform', {
     },
     actions: {
         isDesktop() {
+            console.log(import.meta.env.VITE_APP_PLATFORM)
             if (import.meta.env.VITE_APP_PLATFORM === Platform.Desktop) {
                 return true
             }
