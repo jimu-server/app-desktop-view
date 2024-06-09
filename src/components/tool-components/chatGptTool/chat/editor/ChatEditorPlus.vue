@@ -2,22 +2,24 @@
   <div class="edit fit">
     <div class="edit-tool row">
       <!--GPT 配置按钮-->
-      <ToolWidget>
-        <GPTSettingPanel/>
-      </ToolWidget>
+      <!--      <ToolWidget>
+              <GPTSettingPanel/>
+            </ToolWidget>-->
+      <!-- 知识库文件查看按钮 -->
+      <!--      <ToolWidget>
+              <KnowledgeOptionsPanel/>
+            </ToolWidget>-->
 
       <ToolWidget>
         <ChatPlugin/>
       </ToolWidget>
 
-      <!-- 知识库文件查看按钮 -->
-      <ToolWidget>
-        <KnowledgeOptionsPanel/>
-      </ToolWidget>
 
+
+      <q-space/>
       <!--  消息上下文携带配置按钮    -->
       <div class="column justify-center">
-        <q-toggle v-model="ctx.ui.autoHistory" size="sm" color="primary" checked-icon="jimu-shijian-2">
+        <q-toggle v-model="ctx.ui.autoHistory" size="md" color="primary" checked-icon="jimu-shijian-2">
           <q-tooltip :offset="[0, 0]">
             {{ ctx.ui.autoHistory ? '取消上下文' : '开启上下文' }}
           </q-tooltip>
@@ -25,20 +27,19 @@
       </div>
       <!--  消息折叠配置按钮    -->
       <div class="column justify-center">
-        <q-toggle v-model="ctx.ui.autoFold" size="sm" color="primary">
+        <q-toggle v-model="ctx.ui.autoFold" size="md" color="primary">
           <q-tooltip :offset="[0, 0]">
             {{ ctx.ui.autoFold ? '取消折叠新消息' : '自动折叠新消息' }}
           </q-tooltip>
         </q-toggle>
       </div>
-      <q-space/>
       <!--   终止gpt回答   -->
       <ToolWidget v-show="ctx.ui.replying">
         <div class="row">
           <div class="full-height column justify-center">
             <q-spinner-comment
                 color="primary"
-                size="sm"
+                size="md"
             />
             <q-tooltip :offset="[0, 0]">回复中</q-tooltip>
           </div>

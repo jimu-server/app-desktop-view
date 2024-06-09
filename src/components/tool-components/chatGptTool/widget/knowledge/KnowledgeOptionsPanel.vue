@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-icon size="20px" class="edit-tool-option" name="jimu-zhishi">
+    <q-icon size="md" class="edit-tool-option" name="jimu-zhishi">
       <q-tooltip :offset="[0, 0]">
         知识库
       </q-tooltip>

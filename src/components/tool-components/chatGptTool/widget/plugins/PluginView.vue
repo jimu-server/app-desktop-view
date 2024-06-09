@@ -1,24 +1,17 @@
 <template>
-  <div>
+  <div class="fit">
     <q-list dense>
-      <q-item dense style="padding: 0" clickable>
-        <q-item-section>
-          <q-radio size="xs" v-model="shape" val="line"/>
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>
-            Line
-          </q-item-label>
-        </q-item-section>
-      </q-item>
+      <PluginItem v-for="item in ctx.ui.plugins" :plugin="item"/>
     </q-list>
   </div>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
+import PluginItem from "@/components/tool-components/chatGptTool/widget/plugins/PluginItem.vue";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 
-const shape = ref('')
+const ctx = useGptStore()
 </script>
 
 

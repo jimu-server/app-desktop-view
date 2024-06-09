@@ -1,12 +1,13 @@
 import {Result, Tree} from "@/components/system-components/model/system";
 import {
     AppChatConversationItem, AppChatKnowledgeFile, AppChatKnowledgeInstance,
-    AppChatMessageItem,
+    AppChatMessageItem, AppChatPlugin,
     LLmMole
 } from "@/components/tool-components/chatGptTool/model/model";
 import {GetHeaders} from "@/plugins/axiosutil";
 import {OllamaServer} from "@/components/tool-components/chatGptTool/gptAxios";
 import axiosForServer from "@/plugins/axiosForServer";
+import AxiosForServer from "@/plugins/axiosForServer";
 
 
 
@@ -204,6 +205,22 @@ export function deleteMsg(id: string[]) {
         })
             .then(({data}) => {
                 resolve(data)
+            })
+    })
+}
+
+
+export function getPlugins() {
+    return new Promise<AppChatPlugin[]>(resolve => {
+        AxiosForServer.get<Result<AppChatPlugin[]>>("/api/chat/plugin")
+            .then(({data}) => {
+                if (data.code === 200) {
+                    if (data.data == null) {
+                        resolve([])
+                        return;
+                    }
+                    resolve(data.data)
+                }
             })
     })
 }

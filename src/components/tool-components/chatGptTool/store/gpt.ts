@@ -5,7 +5,7 @@ import {MessageObserver} from "@/plugins/evenKey";
 import {ConversationEntity, MessageItem} from "@/components/tool-components/chatGptTool/model/chat";
 import {
     AppChatConversationItem, AppChatKnowledgeFile, AppChatKnowledgeInstance,
-    AppChatMessageItem,
+    AppChatMessageItem, AppChatPlugin,
     LLmMole, OllamaDownload, OllamaModelResponse
 } from "@/components/tool-components/chatGptTool/model/model";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
@@ -105,6 +105,10 @@ export const useGptStore = defineStore('gpt', {
 
                     instance: [] as AppChatKnowledgeInstance[],
                 },
+
+                plugins: [] as AppChatPlugin[],
+                currentPlugin: {} as AppChatPlugin,
+                checked: [] as string[]
             },
         }
     },

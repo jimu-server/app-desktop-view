@@ -72,6 +72,7 @@ declare module 'vue' {
     ElUpload: typeof import('element-plus/es')['ElUpload']
     EmailVerify: typeof import('./src/components/system-components/EmailVerify.vue')['default']
     FileUI: typeof import('./src/components/tool-components/chatGptTool/widget/knowledge/FileUI.vue')['default']
+    FloatCard: typeof import('./src/components/tool-components/chatGptTool/widget/plugins/FloatCard.vue')['default']
     FloatingDownload: typeof import('./src/components/tool-components/chatGptTool/widget/FloatingDownload.vue')['default']
     FloatingPopup: typeof import('./src/components/system-components/widget/FloatingPopup.vue')['default']
     ForGetPassword: typeof import('./src/components/system-components/ForGetPassword.vue')['default']

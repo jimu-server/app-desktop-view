@@ -124,3 +124,13 @@ export interface OllamaDownload {
     progress?:ProgressResponse
     stream?: Stream
 }
+
+
+export interface AppChatPlugin {
+    id: string
+    name: string
+    icon: string
+    model: string
+    status: boolean
+    createTime: string
+}
