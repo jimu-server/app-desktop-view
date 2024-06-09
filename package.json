@@ -7,8 +7,8 @@
     "electron:dev": "vite --mode development",
     "electron:test": "vite --mode test",
     "electron:produc": "vite --mode production",
-    "electron:test:build": "vite build --mode test.electron && electron-builder",
-    "electron:produc:build": "vite build --mode production.electron && electron-builder",
+    "electron:test:build": "vite build --mode test && electron-builder",
+    "electron:produc:build": "vite build --mode production && electron-builder",
     "build": "vite build && electron-builder",
     "preview": "vite preview",
     "electron:generate-icons": "electron-icon-builder --input=./public/logo.png --output=build --flatten"

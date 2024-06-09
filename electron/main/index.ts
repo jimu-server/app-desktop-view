@@ -3,7 +3,7 @@ import {release} from 'node:os'
 import {join} from 'node:path'
 import * as path from "path";
 
-import {exec} from 'node:child_process'
+import {spawn} from 'node:child_process'
 import {ChildProcess} from "child_process";
 
 
@@ -169,17 +169,8 @@ function createWindow() {
 
 function startAppLocalServer() {
     if (appServerPath) {
-        server = exec(appServerPath, (error, stdout, stderr) => {
-            if (error) {
-                console.error(error)
-            }
-            if (stderr) {
-                console.error(stderr)
-            }
-            if (stdout) {
-                console.log(stdout)
-            }
-        })
+        // 通过 spawn 创建的进程服务,应用程序结束自动退出
+        server=spawn(appServerPath)
     }
 }
 
@@ -212,8 +203,12 @@ app.on('activate', async () => {
     if (allWindows.length) {
         allWindows[0].focus()
     } else {
-        await createWindow()
+        createWindow()
     }
+})
+
+app.on('quit', () => {
+
 })
 
 ipcMain.on('DevTools', () => {
@@ -341,11 +336,6 @@ ipcMain.on("window-exit", () => {
     }
     if (win) {
         win.destroy()
-    }
-    // 结束正在运行的 服务器程序
-    if (server) {
-        server.kill('SIGTERM')
-        console.log("shut down server")
     }
     app.quit()
 })

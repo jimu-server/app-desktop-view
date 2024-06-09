@@ -11,7 +11,7 @@ export async function readMsg(id: string) {
     }
 }
 
-export async function readMsgElNotifyOprion(id: string, callback: () => void) {
+export async function readMsgElNotifyOption(id: string, callback: () => void) {
     let result = await readNotify(id)
     const notify = useNotifyStore(pina)
     if (result.code == 200) {

@@ -5,7 +5,7 @@ import {h, render} from "vue";
 import {NotifyMsgTemplate, NotifyMsgType} from "@/components/system-tool/notifyTool/template";
 import LoginNotifyBody from "@/components/system-tool/notifyTool/notifyBody/LoginNotifyBody.vue";
 import DefaultNotifyBody from "@/components/system-tool/notifyTool/notifyBody/DefaultNotifyBody.vue";
-import {readMsgElNotifyOprion} from "@/components/system-tool/notifyTool/notifyutil";
+import {readMsgElNotifyOption} from "@/components/system-tool/notifyTool/notifyutil";
 
 let count = 0
 
@@ -66,7 +66,7 @@ export function notifyMsg(records: Records) {
             if (className.length > 0) {
                 let element = className[0];
                 element.addEventListener("click", async () => {
-                    await readMsgElNotifyOprion(records.id, () => {
+                    await readMsgElNotifyOption(records.id, () => {
                         elNotification.close()
                     })
                 })

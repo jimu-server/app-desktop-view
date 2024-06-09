@@ -26,7 +26,6 @@ import {useRouter} from "vue-router";
 import {usePlatformStore} from "@/store/platform";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {homePath} from "@/variable";
-import { v4 as uuidv4 } from "uuid";
 
 const app = useAppStore()
 const user = userStore()
@@ -106,11 +105,7 @@ async function UserLogoutEvent() {
   // 清空缓存
   localStorage.clear()
   sessionStorage.clear()
-  if (platform.isDesktop()) {
-    desktop_logout()
-  }
-  // // 回到登陆页面
-  // await router.push('/login')
+  desktop_logout()
 }
 
 onMounted(() => {
@@ -141,10 +136,6 @@ onMounted(() => {
       desktop_open_dev()
     }
   }
-
-  const uniqueId = uuidv4();
-  console.log(uniqueId);
-
 })
 
 // 切换组织 角色 触发更新权限

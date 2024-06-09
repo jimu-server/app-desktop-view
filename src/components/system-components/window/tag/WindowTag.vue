@@ -136,7 +136,7 @@ onMounted(() => {
   border-width: 1px;
   height: 30px;
   pointer-events: none;
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 </style>
