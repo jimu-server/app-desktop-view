@@ -1,22 +1,6 @@
 <template>
-  <div class="editor fit column" @click="Focus" style="overflow: auto;position: relative">
+  <div class="editor fit column" @click="Focus" style="overflow: hidden;position: relative">
     <div ref="editorArea" class="fit" id="editor" @paste="Paste" spellcheck="false"></div>
-    <!--    <q-menu
-            context-menu
-        >
-          <q-list dense>
-            <q-item dense clickable v-close-popup>
-              <q-item-section>
-                <q-item-label>test</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item dense clickable v-close-popup>
-              <q-item-section>
-                <q-item-label>test</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-menu>-->
   </div>
 </template>
 

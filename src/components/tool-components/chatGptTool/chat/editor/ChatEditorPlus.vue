@@ -61,7 +61,7 @@
         </q-icon>
       </ToolWidget>
     </div>
-    <div class="edit-box" style="flex-grow: 1">
+    <div class="edit-box">
       <Editor
           ref="editRef"
           v-model:characters="characters"
@@ -222,12 +222,13 @@ onMounted(() => {
 
 .edit-box {
   width: 100%;
-  overflow: hidden
+  flex-grow: 1;
+  overflow: auto;
 }
 
 .send-box {
   width: 100%;
-  height: 40px;
+  min-height: 40px !important;
 }
 
 .edit-tool-option {

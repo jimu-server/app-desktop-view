@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%;overflow: hidden">
+  <div class="fit column" style="overflow: hidden">
     <!-- 用户头像及其在线状态 -->
     <q-toolbar style="height: 5%;width: 100%;border-bottom: rgba(140,147,157,0.34) 1px solid">
       <div class="row" style="margin-left: 10px;height: 100%">
@@ -14,7 +14,7 @@
       <q-space/>
       <MessageHeaderBar/>
     </q-toolbar>
-    <div style="height:89%;overflow-x: hidden;">
+    <div style="flex-grow:1;overflow-x: hidden;">
       <q-scroll-area ref="scrollAreaRef" id="messageScrollArea" class="fit" :visible="false"
                      style="overflow-x: hidden;">
         <!-- 更具实际布局对照,消息大于多少条时切换到 -->
@@ -63,11 +63,11 @@ defineExpose({
 })
 
 function loadMessage(index, done) {
-  setTimeout(async () => {
-    // await ctx.GetMessageHistory()
-    done()
-  }, 500)
-
+  /*  setTimeout(async () => {
+      // await ctx.GetMessageHistory()
+      done()
+    }, 500)*/
+  done()
 }
 
 function isMessage(id: MessageType): boolean {
