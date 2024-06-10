@@ -56,8 +56,6 @@ import KnowledgeFileManage from "@/components/tool-components/chatGptTool/widget
 
 const scrollAreaRef = ref()
 const ctx = useGptStore()
-const fileManageFlag = ref(false)
-const ollamaCreateFlag = ref(false)
 defineExpose({
   MoveScrollBottom,
 })

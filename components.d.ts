@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AboutDialog: typeof import('./src/components/system-components/other/AboutDialog.vue')['default']
+    AccountMenuList: typeof import('./src/components/system-components/AccountMenuList.vue')['default']
     AddOrgDialog: typeof import('./src/components/system-tool/manageTool/page/dialog/AddOrgDialog.vue')['default']
     AddOrgRoleDialog: typeof import('./src/components/system-tool/manageTool/page/dialog/AddOrgRoleDialog.vue')['default']
     AddRouterDialog: typeof import('./src/components/system-tool/manageTool/page/dialog/AddRouterDialog.vue')['default']

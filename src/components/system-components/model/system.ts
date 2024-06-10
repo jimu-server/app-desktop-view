@@ -1,4 +1,4 @@
-import {NotifyMsgType, NotifyStatus} from "@/components/system-components/model/enum";
+import {NotifyMsgType, NotifyStatus} from "@/components/system-tool/notifyTool/template";
 
 export interface User {
     id?: string
@@ -176,4 +176,9 @@ export interface AppSetting<T> {
     name: string
     value: string
     setting: T
+}
+
+export interface AccountList {
+    account: string
+    password: string
 }

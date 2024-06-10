@@ -11,7 +11,7 @@
       <q-list dense>
         <menu-item icon="jimu-Model" text="我的模型" @click="userModelManageFlag=true"/>
         <menu-item icon="jimu-folderOpen" text="文件管理" @click="fileManageFlag=true"/>
-        <menu-item icon="jimu-chuangjian" text="创建模型" @click="ollamaCreateFlag=true"/>
+<!--        <menu-item icon="jimu-chuangjian" text="创建模型" @click="ollamaCreateFlag=true"/>-->
       </q-list>
     </q-menu>
   </q-btn>

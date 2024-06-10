@@ -102,9 +102,6 @@ async function UserLogoutEvent() {
   tool.clear()
   // 清空会话消息
   gpt.clear()
-  // 清空缓存
-  localStorage.clear()
-  sessionStorage.clear()
   desktop_logout()
 }
 

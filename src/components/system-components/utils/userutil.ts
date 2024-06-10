@@ -18,6 +18,7 @@ import {useAuthStore} from "@/store/auth";
 import {useNotifyStore} from "@/store/tool/notify";
 import {useAppStore} from "@/store/app";
 import {getAllNotify} from "@/components/system-tool/notifyTool/notifyRequest";
+import CryptoJS from 'crypto-js'
 
 export async function loadUserInfo() {
     let user = userStore(pina)
@@ -67,6 +68,7 @@ export async function orgInfo() {
     user.info.roleList = await getUserJoinOrgRoleList(user.info.org.id)
 }
 
-export async function logout() {
-
+export function getPassword(password: string) {
+    const hash = CryptoJS.SHA512(password).toString()
+    return hash
 }
