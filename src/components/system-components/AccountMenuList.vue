@@ -8,7 +8,7 @@
     <div style="width: 260px;height: 100px">
       <q-scroll-area class="fit">
         <q-list class="fit">
-          <q-item v-for="item in account.list" clickable v-close-popup @click="select(item)">
+          <q-item class="account-list" v-for="item in account.list" clickable v-close-popup @click="select(item)">
             <q-item-section avatar>
               <q-icon size="xs" name="jimu-yonghuming"/>
             </q-item-section>
@@ -31,7 +31,7 @@ import {AccountList} from "@/components/system-components/model/system";
 const account = useAccountStore()
 
 function select(value: AccountList) {
-  account.curent = value
+  account.curent = {...value}
 }
 
 function deleteItem(value: AccountList) {
@@ -41,5 +41,7 @@ function deleteItem(value: AccountList) {
 
 
 <style scoped>
-
+.account-list:hover {
+  background-color: rgba(209, 211, 218, 0.93);
+}
 </style>
