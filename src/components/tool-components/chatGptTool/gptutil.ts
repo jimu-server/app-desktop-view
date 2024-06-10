@@ -94,7 +94,7 @@ async function getReply(message: AppChatMessageItem) {
     msg.stream = await genStream(`${serverUrl}/api/chat/conversation`, data);
     // 清空内容,表示表示后面接收到流消息 判断 content 为 '' 就开始打印消息
     msg.content = ''
-    msg.role = 'assistant'
+    msg.role = 'Assistant'
     // 把消息添加到本地缓存
     store.CurrentChat.messageList.push(msg)
     // 新消息要追加到可显示列表中

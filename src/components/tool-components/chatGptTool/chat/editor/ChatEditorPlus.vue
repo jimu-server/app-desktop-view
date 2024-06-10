@@ -61,7 +61,7 @@
         </q-icon>
       </ToolWidget>
     </div>
-    <div class="edit-box">
+    <div class="edit-box" style="flex-grow: 1">
       <Editor
           ref="editRef"
           v-model:characters="characters"
@@ -75,7 +75,7 @@
         <q-btn-dropdown  :ripple="false" split no-caps align="left" dense color="primary" label="发 送 "
                         icon="jimu-send"
                         @click="sendMessage"
-                         :disable="ctx.ui.replying"
+                         :disable="ctx.ui.replying || ctx.ui.sendDisable"
                         dropdown-icon="jimu-xiangxia-2"
                         style="height:30px;width: 109px;margin-right: 10px"
                         content-class="send-box-dropdown">
@@ -136,14 +136,7 @@ const editRef = ref()
 const characters = ref(0)
 const shame = ref(false)
 const ctx = useGptStore()
-const info = ref(null)
 const isMax = ref(false)
-const MaxHeight = ref({
-  tool: '15%',
-  edit: '60%',
-  send: '25%'
-})
-
 if (!ctx.ui.send) {
   shape.value = 'Enter'
 } else {
@@ -158,16 +151,6 @@ function stopReplying() {
 }
 
 function max(event) {
-  isMax.value = !isMax.value
-  if (!isMax.value) {
-    MaxHeight.value.tool = '10%'
-    MaxHeight.value.edit = '65%'
-    MaxHeight.value.send = '5%'
-  } else {
-    MaxHeight.value.tool = '5%'
-    MaxHeight.value.edit = '85%'
-    MaxHeight.value.send = '10%'
-  }
   emits('MaxEditor')
 }
 
@@ -235,18 +218,16 @@ onMounted(() => {
 
 .edit-tool {
   margin-top: 2px;
-  height: v-bind('MaxHeight.tool');
 }
 
 .edit-box {
-  height: v-bind('MaxHeight.edit');
   width: 100%;
   overflow: hidden
 }
 
 .send-box {
   width: 100%;
-  height: v-bind('MaxHeight.send');
+  height: 40px;
 }
 
 .edit-tool-option {

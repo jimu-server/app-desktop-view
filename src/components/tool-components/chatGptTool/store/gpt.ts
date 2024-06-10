@@ -71,6 +71,9 @@ export const useGptStore = defineStore('gpt', {
                 // gpt 是否正在回复消息 , 目前对于回复中的消息不能切换会话
                 replying: false,
 
+                // 是否禁用发送消息按钮
+                sendDisable: false,
+
                 // 编辑器发送消息方式切换 (false 案件 enter 发送) (true 按键 ctrl+enter 发送)
                 send: false,
 
@@ -109,7 +112,7 @@ export const useGptStore = defineStore('gpt', {
                 plugins: [] as AppChatPlugin[],
                 currentPlugin: {} as AppChatPlugin,
                 checked: [] as string[],
-                pluginMenuShowFlag: false
+                pluginMenuShowFlag: false,
             },
         }
     },
@@ -129,7 +132,7 @@ export const useGptStore = defineStore('gpt', {
                 return list
             }
             return this.CurrentChat.conversationList.reverse()
-        }
+        },
     },
     actions: {
         setConversation(list: AppChatConversationItem[]) {
@@ -284,8 +287,11 @@ export const useGptStore = defineStore('gpt', {
                     files: [] as Tree<AppChatKnowledgeFile>[],
                     instance: [] as AppChatKnowledgeInstance[],
                 },
+                plugins: [] as AppChatPlugin[],
+                currentPlugin: {} as AppChatPlugin,
+                checked: [] as string[],
+                pluginMenuShowFlag: false,
             }
-            this.CurrentChat.index = -1
         }
     }
 })

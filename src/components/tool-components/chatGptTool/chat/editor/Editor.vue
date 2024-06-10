@@ -1,28 +1,28 @@
 <template>
   <div class="editor fit column" @click="Focus" style="overflow: auto;position: relative">
     <div ref="editorArea" class="fit" id="editor" @paste="Paste" spellcheck="false"></div>
-    <q-menu
-        context-menu
-    >
-      <q-list dense>
-        <q-item dense clickable v-close-popup>
-          <q-item-section>
-            <q-item-label>test</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item dense clickable v-close-popup>
-          <q-item-section>
-            <q-item-label>test</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-menu>
+    <!--    <q-menu
+            context-menu
+        >
+          <q-list dense>
+            <q-item dense clickable v-close-popup>
+              <q-item-section>
+                <q-item-label>test</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item dense clickable v-close-popup>
+              <q-item-section>
+                <q-item-label>test</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>-->
   </div>
 </template>
 
 <script setup lang="ts">
 
-import {onMounted, onUnmounted, reactive, ref} from "vue";
+import {onMounted, onUnmounted, reactive, ref, watch} from "vue";
 
 
 // CKEditorInspector 编辑器开发的检查工具
@@ -265,6 +265,24 @@ function copyVideo(file: Blob) {
 
 }
 
+/*
+ * @description: 检查当前选中插件的模型已经安装到本地,若本地未安装,则经用编辑器并且禁用发送按钮
+ * */
+watch(() => ctx.ui.currentPlugin, (value) => {
+  // 检查插件在本地是否存在插件所需要用到的模型
+  let number = ctx.ui.modelList.findIndex(item => {
+    return item.model === value.model
+  });
+  if (editor) {
+    if (number === -1) {
+      editor.enableReadOnlyMode('editor')
+      ctx.ui.sendDisable = true
+      return
+    }
+    ctx.ui.sendDisable = false
+    editor.disableReadOnlyMode('editor');
+  }
+})
 
 
 onMounted(async () => {
@@ -272,9 +290,6 @@ onMounted(async () => {
   // 初始化编辑器
   editor = await createEditor(elementById, {...editorConfig, ...toolbar.value})
   EditorEvents(editor)
-  console.log(editor)
-  // 开启 or 关闭 对指定的编辑区域检查
-  // CKEditorInspector.attach(balloonEditor)
 })
 
 function EditorEvents(editor: BalloonEditor) {
@@ -438,6 +453,10 @@ onUnmounted(() => {
   padding: 1em !important;
   background-color: rgba(227, 231, 232, 0.38) !important;
   border-radius: 3px !important;
+}
+
+.ck-read-only {
+  background-color: rgba(245, 245, 245, 0.33);
 }
 
 </style>
