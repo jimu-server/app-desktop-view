@@ -1,5 +1,5 @@
 <template>
-  <OllamaModelSelect/>
+  <!--  <OllamaModelSelect/>-->
   <q-btn dense flat icon="jimu-caidan1">
     <q-menu
         anchor="bottom end" self="top right"

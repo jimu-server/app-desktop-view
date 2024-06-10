@@ -37,11 +37,11 @@
         :offset="[5,0]"
     >
       <q-card class="fit">
-        <div style="width: 100px;height: 100px">
+<!--        <div style="width: 100px;height: 100px">
           <el-button>
             test
           </el-button>
-        </div>
+        </div>-->
       </q-card>
     </q-menu>
   </q-item>
