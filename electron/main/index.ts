@@ -72,7 +72,7 @@ let appServerPath = null
 
 // app 图标
 if (process.env.VITE_DEV_SERVER_URL) {
-    appIcon = join(__dirname, "../../build/icons/1024x1024.png")
+    appIcon = join(__dirname, "../../build/icons/icon.ico")
 } else {
     // 生产环境 图标加载位置为打包后的位置
     appIcon = join(path.dirname(app.getPath('exe')), "resources/build/icons/icon.ico")
