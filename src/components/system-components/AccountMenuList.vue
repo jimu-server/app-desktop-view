@@ -2,7 +2,6 @@
   <q-menu
       transition-show="jump-down"
       transition-hide="jump-up"
-      square
       :offset="[0,5]"
   >
     <div style="width: 260px;height: 100px">

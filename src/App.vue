@@ -1,6 +1,6 @@
 <template>
-  <Transition enter-active-class="animate__animated animate__fadeIn"
-              leave-active-class="animate__animated animate__fadeOut">
+  <Transition enter-active-class="animate__animated animate__zoomIn"
+              leave-active-class="animate__animated animate__zoomOut">
     <router-view v-slot="{ Component }">
       <keep-alive>
         <component :is="Component"/>
@@ -19,11 +19,10 @@ import {getUserAllRoute, getUserAuthTool} from "@/components/system-components/r
 import {useAuthStore} from "@/store/auth";
 import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
-import {LoginOut, UpdateAuthEvent, UpdateAuthWindowEvent, UserLogout} from "@/plugins/evenKey";
+import {UpdateAuthEvent, UpdateAuthWindowEvent, UserLogout} from "@/plugins/evenKey";
 import {desktop_logout, desktop_open_dev} from "@/components/system-components/desktop/desktop";
 import {useWindowsStore} from "@/store/windows";
 import {useRouter} from "vue-router";
-import {usePlatformStore} from "@/store/platform";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {homePath} from "@/variable";
 
@@ -34,11 +33,10 @@ const auth = useAuthStore()
 const theme = useThemeStore()
 const router = useRouter()
 const win = useWindowsStore()
-const platform = usePlatformStore()
 const gpt = useGptStore()
 const $q = useQuasar()
 
-ipcRenderer.on('win-change', (event, arg) => {
+/*ipcRenderer.on('win-change', (event, arg) => {
   setTimeout(() => {
     let byId = document.getElementById("page-view");
     if (byId) {
@@ -46,7 +44,7 @@ ipcRenderer.on('win-change', (event, arg) => {
       app.ui.page.height = parseInt(h)
     }
   }, 100)
-})
+})*/
 
 window.onresize = function () {
   let byId = document.getElementById("page-view");

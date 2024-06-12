@@ -11,7 +11,7 @@
     "electron:produc:build": "vite build --mode production && electron-builder",
     "build": "vite build && electron-builder",
     "preview": "vite preview",
-    "electron:generate-icons": "electron-icon-builder --input=./public/favicon.png --output=build --flatten"
+    "electron:generate-icons": "electron-icon-builder --input=./public/logo.png --output=build --flatten"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-alignment": "^41.0.0",

@@ -34,7 +34,6 @@
                                        :ref="el=> loginInputRef[0]=el"
                                        dense
                                        outlined
-                                       square
                                        v-model="account.curent.account"
                                        placeholder="账号/手机/邮箱"
                                        :error="false"
@@ -51,7 +50,6 @@
                                        v-model="account.curent.password"
                                        type="password"
                                        :error="false"
-                                       square
                                        style="width: 260px"
                                        placeholder="密码"
                               >

@@ -1,5 +1,5 @@
 <template>
-  <div ref="tray" class="column justify-center fit ">
+  <div ref="tray" class="column justify-center fit " style="user-select: none">
     <q-list dense>
       <MenuItem icon="jimu-exit" text="退出" @click="desktop_exit"/>
     </q-list>

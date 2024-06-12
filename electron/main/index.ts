@@ -41,14 +41,14 @@ if (!app.requestSingleInstanceLock()) {
 // Read more on https://www.electronjs.org/docs/latest/tutorial/security
 // process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
+
+
+
 // 主窗口
 let win: BrowserWindow | null = null
-
-
 // 托盘
 let tray: Tray | null = null
 let trayMenu: BrowserWindow | null = null
-
 // 本地服务
 let server: ChildProcess = null
 
@@ -61,7 +61,12 @@ process.env.VITE_DEV_SERVER_URL
     ? join(process.env.DIST_ELECTRON, "../public")
     : process.env.DIST;
 
-const vueDevToolsPath = path.resolve(__dirname, '../../6.5.1_0')
+// const vueDevToolsPath = path.resolve(__dirname, '../../6.5.1_0')
+
+const ctx={
+    name:'Ai Assistant'
+}
+
 let appIcon = null
 
 // 本地服务 基路径
@@ -91,7 +96,7 @@ if (process.env.VITE_DEV_SERVER_URL) {
 
 function createWindow() {
     win = new BrowserWindow({
-        title: 'jimuos',
+        title: ctx.name,
         width: 360,
         height: 450,
         minWidth: 360,
@@ -110,6 +115,7 @@ function createWindow() {
             partition: String(+new Date())
         },
     })
+    win.setBackgroundColor("transparent")
     // win.setIgnoreMouseEvents(false, {forward: true})
     if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
         // console.log(url)
@@ -135,36 +141,36 @@ function createWindow() {
         win.show()
     })
 
-    /*
+  /*  /!*
     *  @description: resize 监听窗口大小改变
-    * */
+    * *!/
     win.on('resize', (event) => {
         win.webContents.send('win-change')
     })
-    /*
+    /!*
     * @description: 放大窗口监听
-    * */
+    * *!/
     win.on('maximize', (event) => {
         win.webContents.send('win-change')
     })
-    /*
+    /!*
     * @description: 取消最大化监听
-    * */
+    * *!/
     win.on('unmaximize', (event) => {
         win.webContents.send('win-change')
     })
-    /*
+    /!*
     * @description: 最小化窗口监听
-    * */
+    * *!/
     win.on('minimize', (event) => {
         win.webContents.send('win-change')
     })
-    /*
+    /!*
     * @description: 取消最小化窗口监听
-    * */
+    * *!/
     win.on('restore', (event) => {
         win.webContents.send('win-change')
-    })
+    })*/
 }
 
 function startAppLocalServer() {
@@ -343,11 +349,11 @@ ipcMain.on("window-exit", () => {
 async function createTray() {
     const icon = nativeImage.createFromPath(appIcon)
     tray = new Tray(icon)
-    tray.setToolTip('jimu-os')
+    tray.setToolTip(ctx.name)
     // 当前 ui 写的托盘菜单最低30(单个菜单项)
     let menuHeight = 30
     trayMenu = new BrowserWindow({
-        title: 'tray',
+        title: ctx.name,
         width: 110,
         height: menuHeight,
         frame: false,
