@@ -114,7 +114,28 @@ export default defineConfig(({command, mode}) => {
               isServe && notBundle(),
             ],
           },
-        }
+        },
+        {
+          entry: 'electron/utils/index.ts',
+          onstart({reload}) {
+            // Notify the Renderer process to reload the page when the Preload scripts build is complete,
+            // instead of restarting the entire Electron App.
+            reload()
+          },
+          vite: {
+            build: {
+              sourcemap: sourcemap ? 'inline' : undefined, // #332
+              minify: isBuild,
+              outDir: 'dist-electron/utils',
+              rollupOptions: {
+                external: Object.keys('dependencies' in pkg ? pkg.dependencies : {}),
+              },
+            },
+            plugins: [
+              isServe && notBundle(),
+            ],
+          },
+        },
       ]),
       renderer(),
     ],

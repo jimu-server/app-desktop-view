@@ -37,7 +37,7 @@
           </template>
         </template>
         <template v-slot:bottom>
-          <q-btn dense flat icon="jimu-caidan" style="-webkit-app-region: no-drag;">
+          <q-btn dense flat :ripple="false" icon="jimu-caidan2" style="-webkit-app-region: no-drag;">
             <q-menu
                 anchor="top right" self="top left" fit
                 transition-show="scale"

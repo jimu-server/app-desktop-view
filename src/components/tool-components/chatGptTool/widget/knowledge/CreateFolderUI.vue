@@ -67,7 +67,10 @@ async function submit() {
   let formData = new FormData();
   formData.append("folders", name.value)
   formData.append("pid", props.pid)
-  let result = await createFiles(formData)
+  let result = await createFiles({
+    pid: props.pid,
+    folders: [name.value]
+  })
   if (result.code == 200) {
     ElMessage(
         {

@@ -97,7 +97,7 @@
   </q-dialog>
 </template>
 <script setup lang="ts">
-import ScrollX from "@/components/tool-components/chatGptTool/widget/knowledge/ScrollX.vue";
+import ScrollX from "@/components/tool-components/chatGptTool/widget/file-manage/ScrollX.vue";
 import {ref, watch} from "vue";
 import {getFiles} from "@/components/tool-components/chatGptTool/chatRequest";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";

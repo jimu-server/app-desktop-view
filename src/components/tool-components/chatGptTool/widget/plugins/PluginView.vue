@@ -7,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
 import PluginItem from "@/components/tool-components/chatGptTool/widget/plugins/PluginItem.vue";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 

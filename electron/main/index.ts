@@ -5,6 +5,7 @@ import * as path from "path";
 
 import {spawn} from 'node:child_process'
 import {ChildProcess} from "child_process";
+import {getSubdirectories} from "../utils";
 
 
 
@@ -404,6 +405,19 @@ async function createTray() {
 
 ipcMain.on('close-tray', () => {
     trayMenu.hide()
+})
+
+
+ipcMain.handle('getDesktopPath', async () => {
+    let desktop = app.getPath('desktop');
+    console.log(desktop)
+    return desktop
+})
+
+ipcMain.handle('getChildPath', async (event, value) => {
+    console.log(value)
+    let newVar = await getSubdirectories(value);
+    return newVar
 })
 
 

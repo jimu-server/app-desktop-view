@@ -131,6 +131,8 @@ export interface AppChatPlugin {
     name: string
     icon: string
     model: string
+    floatView: string
+    props: string
     status: boolean
     createTime: string
 }

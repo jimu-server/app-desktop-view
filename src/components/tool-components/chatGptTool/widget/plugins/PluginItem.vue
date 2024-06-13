@@ -36,13 +36,9 @@
         anchor="top end" self="top start"
         :offset="[5,0]"
     >
-      <q-card class="fit">
-<!--        <div style="width: 100px;height: 100px">
-          <el-button>
-            test
-          </el-button>
-        </div>-->
-      </q-card>
+      <template v-if="plugin.floatView!=''">
+        <component :is="plugin.floatView" :data="plugin.props"/>
+      </template>
     </q-menu>
   </q-item>
 </template>

@@ -1,12 +1,9 @@
 <template>
-  <Transition enter-active-class="animate__animated animate__zoomIn"
-              leave-active-class="animate__animated animate__zoomOut">
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component"/>
-      </keep-alive>
-    </router-view>
-  </Transition>
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component"/>
+    </keep-alive>
+  </router-view>
 </template>
 <script lang="ts" setup>
 import {onMounted, onUnmounted} from "vue";

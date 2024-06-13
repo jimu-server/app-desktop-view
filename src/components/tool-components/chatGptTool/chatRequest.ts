@@ -159,9 +159,9 @@ export function getFiles(pid: string) {
     })
 }
 
-export function createFiles(data: FormData) {
+export function createFiles(data: any) {
     return new Promise<Result<any>>(resolve => {
-        OllamaServer.post<Result<any>>("/api/chat/knowledge/file/create", data)
+        OllamaServer.post<Result<any>>("/api/chat/knowledge/file/create", data, {})
             .then(({data}) => {
                 resolve(data)
             })
