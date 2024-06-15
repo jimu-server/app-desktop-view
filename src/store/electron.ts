@@ -13,8 +13,8 @@ export const useElectronStore = defineStore('electron', {
             return await ipcRenderer.invoke('getDesktopPath')
         },
         // 获取用户桌面目录
-        getChildPath(value: string) {
-            return ipcRenderer.invoke('getChildPath', value)
+        async getChildPath(value: string): Promise<any[]> {
+            return await ipcRenderer.invoke('getChildPath', value)
         },
         // 获取用户桌面目录
         getUserDataPath() {
@@ -24,6 +24,9 @@ export const useElectronStore = defineStore('electron', {
         getDownloadsPath() {
             return ipcRenderer.sendSync('getDownloadsPath')
         },
-        // 获取用户桌面目录
+        // 读取文件对象
+        readFiles(path: string[]) {
+            return ipcRenderer.invoke('readFiles', path)
+        }
     }
 })

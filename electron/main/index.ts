@@ -1,12 +1,11 @@
-import {app, BrowserWindow, clipboard, dialog, ipcMain, nativeImage, session, shell, Tray} from 'electron'
+import {app, BrowserWindow, clipboard, ipcMain, nativeImage, session, shell, Tray} from 'electron'
 import {release} from 'node:os'
 import {join} from 'node:path'
 import * as path from "path";
 
 import {spawn} from 'node:child_process'
 import {ChildProcess} from "child_process";
-import {getSubdirectories} from "../utils";
-
+import {getSubdirectories, readFiles} from "../utils";
 
 
 // The built directory structure
@@ -190,6 +189,22 @@ app.whenReady().then(async () => {
         console.log("begin start ollama server")
         startAppLocalServer()
     }
+    // 获取默认的session对象
+    const ses = session.defaultSession;
+
+    // 设置请求头的函数
+    const filter = {
+        urls: ['*://*/*'] // 匹配所有网址
+    };
+
+    const headerName = 'custom-header';
+    const headerValue = 'custom-value';
+
+    ses.webRequest.onBeforeRequest((details, callback) => {
+        console.log("details >> ", details)
+        callback({cancel: false});
+    });
+
 })
 
 app.on('window-all-closed', () => {
@@ -409,16 +424,18 @@ ipcMain.on('close-tray', () => {
 
 
 ipcMain.handle('getDesktopPath', async () => {
-    let desktop = app.getPath('desktop');
-    console.log(desktop)
-    return desktop
+    return app.getPath('desktop')
 })
 
 ipcMain.handle('getChildPath', async (event, value) => {
-    console.log(value)
-    let newVar = await getSubdirectories(value);
-    return newVar
+    return await getSubdirectories(value)
 })
+ipcMain.handle('readFiles', async (event, value) => {
+    return readFiles(value);
+})
+
+
+
 
 
 

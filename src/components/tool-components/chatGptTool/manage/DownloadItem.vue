@@ -8,7 +8,6 @@
       </q-item-label>
       <q-item-section class="ellipsis">
         <div class="fit ellipsis"> {{ progressInfo }}</div>
-
       </q-item-section>
     </q-item-section>
     <q-item-section avatar>

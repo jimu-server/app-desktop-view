@@ -1,6 +1,5 @@
 import axios, {AxiosInstance} from "axios";
 import {GetHeaders} from "@/plugins/axiosutil";
-import Axios from "@/plugins/axiosForServer";
 import {VITE_APP_OLLAMA_SERVER} from "@/env";
 
 export const OllamaServer: AxiosInstance = axios.create({
@@ -12,6 +11,9 @@ OllamaServer.interceptors.request.use(headers)
 
 
 function headers(request) {
-    request.headers = GetHeaders()
+    request.headers = {
+        ...GetHeaders(),
+        ...request.headers
+    }
     return request
 }

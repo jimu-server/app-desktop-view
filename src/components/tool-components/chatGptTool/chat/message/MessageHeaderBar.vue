@@ -10,7 +10,7 @@
     >
       <q-list dense>
         <menu-item icon="jimu-Model" text="我的模型" @click="userModelManageFlag=true"/>
-        <menu-item icon="jimu-folderOpen" text="文件管理" @click="fileManageFlag=true"/>
+        <menu-item icon="jimu-folderOpen" text="创建知识库" @click="fileManageFlag=true"/>
         <menu-item icon="jimu-chuangjian" text="Open" @click="systemFileSelect=true"/>
       </q-list>
     </q-menu>
@@ -22,7 +22,11 @@
       <DownloadPanel/>
     </q-menu>
   </q-btn>
-  <KnowledgeFileManage v-model="fileManageFlag"/>
+  <q-btn dense flat icon="jimu-flow" @click="fileManageFlag=true">
+
+  </q-btn>
+<!--  <KnowledgeFileManage v-model="fileManageFlag"/>-->
+  <GenKnowledgeFileSelectDialog v-model="fileManageFlag"/>
   <UserModelManage v-model="userModelManageFlag"/>
   <SystemFileSelectDialog v-model="systemFileSelect"/>
 </template>
@@ -35,6 +39,8 @@ import KnowledgeFileManage from "@/components/tool-components/chatGptTool/widget
 import UserModelManage from "@/components/tool-components/chatGptTool/manage/UserModelManage.vue";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import SystemFileSelectDialog from "@/components/system-components/system-file-manage/SystemFileSelectDialog.vue";
+import GenKnowledgeFileSelectDialog
+  from "@/components/tool-components/chatGptTool/widget/knowledge-manage/GenKnowledgeFileSelectDialog.vue";
 
 const fileManageFlag = ref(false)
 const systemFileSelect = ref(false)

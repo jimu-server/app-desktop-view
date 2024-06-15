@@ -21,7 +21,7 @@ import KnowledgePanelView
 
 // 处理 electron 中文件上传
 if (typeof window.FormData === 'undefined') {
-    window.FormData = require('form-data');
+    // window.FormData = require('form-data');
 }
 
 const components = [

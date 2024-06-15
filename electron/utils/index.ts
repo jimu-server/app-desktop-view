@@ -25,3 +25,9 @@ export function getSubdirectories(dirPath) {
     });
 }
 
+
+export function readFiles(list: string[]) {
+    return list.map(item => {
+        return fs.createReadStream(item)
+    })
+}

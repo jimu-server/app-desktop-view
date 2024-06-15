@@ -2,82 +2,27 @@
   <q-dialog
       v-model="model"
       bordered
+      persistent
   >
-    <!--    <q-card
-            class="system-file-select-dialog"
-        >
-          <div class="fit column" style="padding: 5px">
-            <div class="tool-bt full-width row justify-between">
-              <div>
-                选择文件
-              </div>
-              <div>
-                <q-btn dense flat class="close-btn" icon="jimu-guanbi" @click="model=false"/>
-              </div>
-            </div>
-            <div class="file-selector full-width">
-              <el-select
-                  v-model="data"
-                  value-key="path"
-                  :teleported="false"
-              >
-                <el-option v-for="item in list"
-                           :key="item.path"
-                           :value="item">
-                  <div class="fit row">
-                    <div class="select-icon">
-                      <el-icon>
-                        <span class="iconfont jimu-wenjianjia1"></span>
-                      </el-icon>
-                    </div>
-                    <div style="margin-left: 5px">
-                      {{ item.path }}
-                    </div>
-                  </div>
-                </el-option>
-                <template #label>
-                  <div class="fit row">
-                    <div class="select-icon">
-                      <el-icon>
-                        <span class="iconfont jimu-wenjianjia1"></span>
-                      </el-icon>
-                    </div>
-                    <div style="margin-left: 5px">
-                      {{ data.path }}
-                    </div>
-                  </div>
-                </template>
-              </el-select>
-            </div>
-            <div class="file-view">
-              <q-scroll-area class="fit">
-                <el-tree
-                    :data="treeData"
-                    :props="fileProps"
-                    lazy
-                    :load="getChildren"
-                >
-                  <template #default="{node,data}">
-                    <div class="fit row">
-                      <div class="select-icon column justify-center">
-                        <el-icon>
-                          <span :class="'iconfont '+getFileIcon(data)"></span>
-                        </el-icon>
-                      </div>
-                      <div class=" column justify-center" style="margin-left: 5px">
-                        {{ getFileName(data) }}
-                      </div>
-                    </div>
-                  </template>
-                </el-tree>
-              </q-scroll-area>
-            </div>
-            <div class="file-footer">
-
-            </div>
+    <q-card
+        class="system-file-select-dialog"
+    >
+      <div class="fit column" style="padding: 5px">
+        <div class="tool-bt full-width row justify-between">
+          <div>
+            选择文件
           </div>
-        </q-card>-->
-    <SystemFileSelect/>
+          <div>
+            <q-btn dense flat class="close-btn" icon="jimu-guanbi" @click="model=false"/>
+          </div>
+        </div>
+        <div style="flex-grow: 1">
+          <SystemFileSelect/>
+        </div>
+        <div class="file-footer">
+        </div>
+      </div>
+    </q-card>
   </q-dialog>
 </template>
 

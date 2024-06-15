@@ -97,7 +97,7 @@
   </q-dialog>
 </template>
 <script setup lang="ts">
-import ScrollX from "@/components/tool-components/chatGptTool/widget/file-manage/ScrollX.vue";
+import ScrollX from "@/components/tool-components/chatGptTool/widget/knowledge/ScrollX.vue";
 import {ref, watch} from "vue";
 import {getFiles} from "@/components/tool-components/chatGptTool/chatRequest";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
@@ -110,7 +110,7 @@ import draggable from 'vuedraggable'
 import CreateFolderUI from "@/components/tool-components/chatGptTool/widget/knowledge/CreateFolderUI.vue";
 import {GetHeaders} from "@/plugins/axiosutil";
 import {ElMessage, UploadProps} from "element-plus";
-import CreateKnowledge from "@/components/tool-components/chatGptTool/widget/knowledge/CreateKnowledge.vue";
+import CreateKnowledge from "@/components/tool-components/chatGptTool/widget/knowledge-manage/CreateKnowledge.vue";
 
 
 const manageRef = ref(null)

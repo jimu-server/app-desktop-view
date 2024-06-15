@@ -5,9 +5,9 @@ import {hasOwnProperty} from "@/components/system-components/utils/systemutils";
 * @param data 流消息
 * @param status 业务状态码
 * */
-type handler = (data: any, status: number) => void;
+export type handler = (data: any, status: number) => void;
 
-type check = (data: any) => boolean;
+export type check = (data: any) => boolean;
 
 export enum StreamStatus {
     // 成功
@@ -31,39 +31,39 @@ export class Stream {
     /*
     * @description: 流消息处理器,任何有效的流消息在结束之前都会调用 handler 处理器
     * */
-    private handler: handler = (data: any, status: number) => {
+    protected handler: handler = (data: any, status: number) => {
         console.log("default stream handler")
     };
 
     /*
     * @description: 流消息遇到了后端的非流式业务响应状态导致结束会调用 end 处理器
     * */
-    private end: handler = (data: any, status: number) => {
+    protected end: handler = (data: any, status: number) => {
         console.log("default stream end")
     };
 
     /*
     * @description: 流消息正常完成处理,正常完成包括一下 正常读取完成,人为手动取消
     * */
-    private complete: handler = (data: any, status: number) => {
+    protected complete: handler = (data: any, status: number) => {
         console.log("default stream end")
     };
     // 流消息错误处理器
-    private err: handler = (data: any, status: number) => {
+    protected err: handler = (data: any, status: number) => {
         console.error(status, data)
     };
 
     /*
     * @description: 检查消息是否是流消息,如果检查返回了 true 则为非流消息,当前可能遇到了 标准业务响应数据,此时会调用 end 处理器
     * */
-    private checkData: check = (data: any) => {
+    checkData: check = (data: any) => {
         let code = hasOwnProperty(data, "code");
         let msg = hasOwnProperty(data, "msg");
         let err = hasOwnProperty(data, "data");
         return code && msg && err
     }
 
-    private stop: boolean = false;
+    protected stop: boolean = false;
 
     constructor(response: Response) {
         this.response = response;

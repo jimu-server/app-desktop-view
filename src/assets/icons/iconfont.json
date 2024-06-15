@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "34453176",
+      "name": "code",
+      "font_class": "code",
+      "unicode": "e84f",
+      "unicode_decimal": 59471
+    },
+    {
+      "icon_id": "5243981",
+      "name": "插件参数数据",
+      "font_class": "chajiancanshushuju",
+      "unicode": "e69c",
+      "unicode_decimal": 59036
+    },
+    {
+      "icon_id": "5668861",
+      "name": "在线咨询_面",
+      "font_class": "zaixianzixun_mian",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "37724811",
+      "name": "生成式AI",
+      "font_class": "shengchengshiAI",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
       "icon_id": "6805521",
       "name": "Office",
       "font_class": "Office",

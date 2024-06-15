@@ -99,6 +99,9 @@ export const useGptStore = defineStore('gpt', {
                 // 下载模型列表
                 downloadModelList: [] as OllamaDownload[],
 
+                // 知识库生成任务列表
+                genList: [],
+
                 knowledge: {
                     // 知识库导航目录
                     nva: [],

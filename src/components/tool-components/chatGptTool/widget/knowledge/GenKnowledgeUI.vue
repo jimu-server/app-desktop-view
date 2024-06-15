@@ -37,14 +37,22 @@
 
 
 <script setup lang="ts">
-import {ref} from "vue";
-import {hasOwnProperty} from "@/components/system-components/utils/systemutils";
+import {ref, toRaw} from "vue";
 import {Stream} from "@/components/system-components/stream/stream";
 import {genKnowledge} from "@/components/tool-components/chatGptTool/chatRequest";
 import {Result} from "@/components/system-components/model/system";
+import fs from "fs";
 
+import {GetHeaders} from "@/plugins/axiosutil";
+import fetch from 'node-fetch';
+import {set} from "lodash";
+import {NodeFetchStream} from "@/components/system-components/stream/node_fetch_stream";
+
+const AbortController = require('abort-controller');
+var FormData = require('form-data');
 defineExpose({
   beginGen,
+  beginGenFile
 })
 
 const model = defineModel({default: false, required: false})
@@ -73,8 +81,69 @@ function complete() {
 async function beginGen(name: string, files: string[]) {
   response.value = await genKnowledge(name, files)
   model.value = true
-  stream()
+  // stream()
 }
+
+async function beginGenFile(name: string, files: any[]) {
+  let {response, controller} = await genKnowledgeFile(name, files)
+  model.value = true
+  // stream()
+  setTimeout(() => {
+    let stream = new NodeFetchStream(response, controller)
+    stream.setHandler((data, status) => {
+      console.log(data)
+      msgs.value.push(data.msg)
+      progress.value = data.percent
+      setTimeout(async () => {
+        let scrollTarget = scroll.value.getScrollTarget()
+        let height = scrollTarget.scrollHeight
+        scroll.value.setScrollPosition('vertical', height)
+      }, 200)
+    })
+
+    stream.setComplete((data, status) => {
+      console.log("complete")
+      isComplete.value = true
+    })
+
+    stream.setEnd((data: Result<any>, status) => {
+      if (data.code == 200) {
+        isComplete.value = true
+        return
+      } else {
+        isComplete.value = true
+        return
+      }
+    })
+    stream.listen()
+  }, 200)
+}
+
+
+async function genKnowledgeFile(name, files: any[]) {
+  files = toRaw(files)
+  let form = new FormData()
+  form.append('name', name)
+  files.map(item => {
+    form.append('files', fs.createReadStream(item.path))
+  });
+  let controller = new AbortController();
+  let response = await fetch('http://localhost:8080/api/chat/knowledge/gen', {
+    signal: controller.signal,
+    method: 'POST',
+    body: form,
+    headers: {
+      ...GetHeaders(),
+      ...form.getHeaders()
+    }
+  })
+  return {
+    response: response,
+    controller: controller
+  }
+}
+
+
 
 function stream() {
   setTimeout(async () => {
@@ -105,19 +174,6 @@ function stream() {
     })
     await load.value.listen()
   }, 200)
-}
-
-/*
-* @description: 检查当前的流消息的状态,是否出需要客户端退出流读取
-* */
-function streamResponse(value: any) {
-  let code = hasOwnProperty(value, "code");
-  let msg = hasOwnProperty(value, "msg");
-  let err = hasOwnProperty(value, "data");
-  return {
-    code: value.code,
-    streamFlag: code && msg && err,
-  };
 }
 
 </script>
