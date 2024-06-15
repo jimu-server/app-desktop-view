@@ -16,7 +16,7 @@
 </template>
 <script setup lang="ts">
 
-import DownloadItem from "@/components/tool-components/chatGptTool/manage/DownloadItem.vue";
+import DownloadItem from "@/components/tool-components/chatGptTool/widget/download/DownloadItem.vue";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 
 const ctx = useGptStore()

@@ -36,7 +36,7 @@
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {ref} from "vue";
 import KnowledgeFileManage from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeFileManage.vue";
-import UserModelManage from "@/components/tool-components/chatGptTool/manage/UserModelManage.vue";
+import UserModelManage from "@/components/tool-components/chatGptTool/widget/download/UserModelManage.vue";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import SystemFileSelectDialog from "@/components/system-components/system-file-manage/SystemFileSelectDialog.vue";
 import GenKnowledgeFileSelectDialog
