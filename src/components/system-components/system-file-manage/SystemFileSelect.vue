@@ -81,7 +81,7 @@ const props = defineProps({
   // 文件类型过滤器
   filter: {
     type: Array,
-    default: ['docx']
+    default: []
   }
 })
 
@@ -174,13 +174,11 @@ function getFiles() {
 }
 
 function fileFilter(item: FileTree) {
-  if (item.isDirectory) {
-    return true;
-  }
-  let suffix
+  if (props.filter.length == 0) return true;
+  if (item.isDirectory) return true;
   let number = item.name.lastIndexOf(".");
   if (number !== -1) {
-    suffix = item.name.substring(number + 1, item.name.length)
+    let suffix = item.name.substring(number + 1, item.name.length)
     return props.filter.includes(suffix)
   }
   return false;
