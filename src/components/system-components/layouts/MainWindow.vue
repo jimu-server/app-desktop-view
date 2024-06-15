@@ -152,7 +152,6 @@ const vSize = {
 function sizeChange(width: number, height: number) {
   let byId = document.getElementById("page-view");
   if (byId) {
-    console.log(byId.style)
     let h = byId.style.minHeight.substring(0, byId.style.minHeight.length - 2);
     app.ui.page.height = parseInt(h)
   }

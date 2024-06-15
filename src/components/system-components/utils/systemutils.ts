@@ -27,8 +27,7 @@ export function formatTime(timeStamp) {
 
 export function getConversationLastTime(sendTime: Date) {
     let now = new Date();
-
-    console.log(`${sendTime.getFullYear() + '-' + sendTime.getMonth() + '-' + sendTime.getDate() + " " + sendTime.getUTCHours() + ':' + sendTime.getUTCMinutes()}`)
+    // console.log(`${sendTime.getFullYear() + '-' + sendTime.getMonth() + '-' + sendTime.getDate() + " " + sendTime.getUTCHours() + ':' + sendTime.getUTCMinutes()}`)
     let y: any = sendTime.getUTCFullYear()
     let m: any = sendTime.getUTCMonth()
     let d: any = sendTime.getUTCDate()
