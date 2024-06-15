@@ -10,7 +10,7 @@
     >
       <q-list dense>
         <menu-item icon="jimu-Model" text="我的模型" @click="userModelManageFlag=true"/>
-        <menu-item icon="jimu-folderOpen" text="创建知识库" @click="fileManageFlag=true"/>
+        <menu-item icon="jimu-wenjianjia1" text="创建知识库" @click="fileManageFlag=true"/>
         <menu-item icon="jimu-chuangjian" text="Open" @click="systemFileSelect=true"/>
       </q-list>
     </q-menu>

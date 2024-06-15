@@ -126,6 +126,8 @@ declare module 'vue' {
     PluginCard: typeof import('./src/components/system-tool/PluginCard.vue')['default']
     PluginItem: typeof import('./src/components/tool-components/chatGptTool/widget/plugins/PluginItem.vue')['default']
     PluginView: typeof import('./src/components/tool-components/chatGptTool/widget/plugins/PluginView.vue')['default']
+    ProgrammingAssistantPanelView: typeof import('./src/components/tool-components/chatGptTool/widget/plugins/plugin-instance/programming-assistant/ProgrammingAssistantPanelView.vue')['default']
+    ProgrammingAssistantView: typeof import('./src/components/tool-components/chatGptTool/widget/plugins/plugin-instance/programming-assistant/ProgrammingAssistantView.vue')['default']
     PublicPage: typeof import('./src/components/system-components/PublicPage.vue')['default']
     RefEdit: typeof import('./src/components/tool-components/chatGptTool/chat/editor/RefEdit.vue')['default']
     RoleDialog: typeof import('./src/components/system-tool/manageTool/page/dialog/RoleDialog.vue')['default']

@@ -6,14 +6,23 @@
       <div class="full-width">
         知识库列表
       </div>
+      <div style="flex-grow: 1">
+
+      </div>
     </div>
   </q-card>
 </template>
 
 <script setup lang="ts">
+import {onMounted} from "vue";
+
 const props = defineProps<{
   data: any
 }>()
+
+onMounted(() => {
+
+})
 </script>
 
 

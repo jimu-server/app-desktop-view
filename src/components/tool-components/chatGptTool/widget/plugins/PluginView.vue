@@ -1,16 +1,16 @@
 <template>
   <div class="fit">
     <q-list dense>
-      <PluginItem v-for="item in ctx.ui.plugins" :plugin="item"/>
+      <PluginItem v-for="item in plugin.plugins" :data="item"/>
     </q-list>
   </div>
 </template>
 
 <script setup lang="ts">
 import PluginItem from "@/components/tool-components/chatGptTool/widget/plugins/PluginItem.vue";
-import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
+import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";
 
-const ctx = useGptStore()
+const plugin = useAiPluginStore()
 </script>
 
 

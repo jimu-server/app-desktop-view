@@ -20,7 +20,7 @@
         transition-show="scale"
         transition-hide="scale"
         style="overflow: hidden;width: 150px"
-        :persistent="ctx.ui.pluginMenuShowFlag"
+        :persistent="plugin.pluginMenuShowFlag"
     >
       <PluginView/>
     </q-menu>
@@ -34,8 +34,10 @@ import {computed, onMounted, ref, watch} from "vue";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {getPlugins} from "@/components/tool-components/chatGptTool/chatRequest";
 import {useThemeStore} from "@/store/theme";
+import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";
 
 const ctx = useGptStore()
+const plugin = useAiPluginStore()
 const theme = useThemeStore()
 const show = ref(false)
 
@@ -49,10 +51,10 @@ watch(() => theme.dark, (value) => {
 })
 
 onMounted(async () => {
-  ctx.ui.plugins = await getPlugins()
+  plugin.plugins = await getPlugins()
   // 默认选中第一个插件
-  if (ctx.ui.plugins.length > 0) {
-    ctx.ui.currentPlugin = ctx.ui.plugins[0]
+  if (plugin.plugins.length > 0) {
+    plugin.currentPlugin = plugin.plugins[0]
   }
 
 })

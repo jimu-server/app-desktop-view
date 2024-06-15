@@ -12,10 +12,10 @@
     >
       <div class="row plugin-item full-width" @click.stop="check">
         <div class="column justify-center" style="margin-left: 5px">
-          <q-icon :name="plugin.icon"/>
+          <q-icon :name="data.icon"/>
         </div>
         <div class="column justify-center" style="margin-left: 5px">
-          {{ plugin.name }}
+          {{ data.name }}
         </div>
       </div>
     </div>
@@ -23,8 +23,8 @@
       <q-radio
           ref="radioRef"
           dense
-          v-model="ctx.ui.currentPlugin"
-          :val="plugin"
+          v-model="plugin.currentPlugin"
+          :val="data"
           :keep-color="false"
           :color="checkColor"
           @mouseover="checkColor='white'"
@@ -36,8 +36,8 @@
         anchor="top end" self="top start"
         :offset="[5,0]"
     >
-      <template v-if="plugin.floatView!=''">
-        <component :is="plugin.floatView" :data="plugin.props"/>
+      <template v-if="data.floatView!=''">
+        <component :is="data.floatView" :data="data.props"/>
       </template>
     </q-menu>
   </q-item>
@@ -48,12 +48,14 @@ import {ref} from "vue";
 import {AppChatPlugin} from "@/components/tool-components/chatGptTool/model/model";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {colors} from 'quasar'
+import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";
 
 const {getPaletteColor} = colors
 
 const ctx = useGptStore()
+const plugin = useAiPluginStore()
 const props = defineProps<{
-  plugin: AppChatPlugin;
+  data: AppChatPlugin;
 }>()
 
 const infoShow = ref(false)
@@ -62,9 +64,9 @@ const radioRef = ref(null)
 const checkColor = ref('')
 // 初始化选中状态
 
-if (ctx.ui.currentPlugin){
-  if (ctx.ui.currentPlugin.id === props.plugin.id) {
-    ctx.ui.currentPlugin = props.plugin
+if (plugin.currentPlugin){
+  if (plugin.currentPlugin.id === props.data.id) {
+    plugin.currentPlugin = props.data
   }
 }
 
@@ -76,13 +78,13 @@ function check() {
 
 function enterMenu() {
   infoShowOut.value = true
-  ctx.ui.pluginMenuShowFlag = true
+  plugin.pluginMenuShowFlag = true
 }
 
 function leaveMenu() {
   infoShow.value = false
   infoShowOut.value = false
-  ctx.ui.pluginMenuShowFlag = false
+  plugin.pluginMenuShowFlag = false
 }
 
 function overColor() {

@@ -17,6 +17,8 @@ import NotifyBtn from "@/components/system-tool/notifyTool/NotifyBtn.vue";
 import GptBtn from "@/components/tool-components/chatGptTool/GptBtn.vue";
 import KnowledgePanelView
     from "@/components/tool-components/chatGptTool/widget/plugins/plugin-instance/knowledge/KnowledgePanelView.vue";
+import ProgrammingAssistantPanelView
+    from "@/components/tool-components/chatGptTool/widget/plugins/plugin-instance/programming-assistant/ProgrammingAssistantPanelView.vue";
 
 
 // 处理 electron 中文件上传
@@ -41,7 +43,8 @@ const components = [
     Login,
     OllamaSetting,
     UserInfoSetting,
-    KnowledgePanelView
+    KnowledgePanelView,
+    ProgrammingAssistantPanelView
 ]
 
 export function init(app: App) {
