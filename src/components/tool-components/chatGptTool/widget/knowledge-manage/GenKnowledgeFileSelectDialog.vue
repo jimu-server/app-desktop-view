@@ -73,8 +73,6 @@ async function openCreate() {
 
 function openGenUI(name: string) {
   genKnowledgeFlag.value = true
-  // 获取选中的知识文件
-  // gen.value.beginGen(name, files.value)
   gen.value.beginGenFile(name, files.value)
   files.value = []
 }

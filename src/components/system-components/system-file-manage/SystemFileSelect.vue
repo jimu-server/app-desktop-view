@@ -39,6 +39,8 @@
         <el-tree
             ref="tree"
             :data="treeData"
+            node-key="fullPath"
+            :default-checked-keys="defaultCheckedKeys"
             :props="fileProps"
             lazy
             show-checkbox
@@ -47,9 +49,6 @@
           <template #default="{node,data}">
             <div class="fit row">
               <div class="select-icon column justify-center">
-                <!--                <el-icon>
-                                  <span :class="'iconfont '+getFileIcon(data)"></span>
-                                </el-icon>-->
                 <q-icon :name="getFileIcon(data)"/>
               </div>
               <div class=" column justify-center" style="margin-left: 5px">
@@ -64,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref, watch} from "vue";
+import {nextTick, onMounted, ref, watch} from "vue";
 import {useElectronStore} from "@/store/electron";
 
 const electron = useElectronStore()
@@ -72,7 +71,7 @@ const tree = ref()
 const data = ref<FileTree>()
 const list = ref<FileTree[]>([])
 const treeData = ref<FileTree[]>([])
-
+const defaultCheckedKeys = ref([]);
 defineExpose({
   getFiles,
 })
@@ -89,6 +88,7 @@ const props = defineProps({
 interface FileTree {
   path: string
   name: string
+  fullPath: string
   isDirectory: boolean
   parentPath: string
   children?: FileTree[]
@@ -111,9 +111,9 @@ const fileProps = {
     return !data.isDirectory;
   },
   disabled: function (data, node) {
-    if (data.isDirectory) {
-      return true;
-    }
+    /*    if (data.isDirectory) {
+          return true;
+        }*/
     return false;
   },
   children: 'children',
@@ -124,9 +124,14 @@ function getChildren(node, resolve, reject) {
     let data = node.data;
     let newVar = []
     if (data.path && data.name) {
-      let fullPath = data.path + "\\" + data.name
-      console.log(fullPath)
-      newVar = await electron.getChildPath(fullPath);
+
+      newVar = await electron.getChildPath(data.fullPath);
+      newVar = newVar.map((item: FileTree) => {
+        return {
+          fullPath: item.path + "\\" + item.name,
+          ...item,
+        }
+      })
       newVar = newVar.filter(item => {
         return fileFilter(item);
       })
@@ -162,14 +167,22 @@ function getFileName(data) {
   return name
 }
 
+
+/*
+* @description: 获取当前选中的文件的绝对路径,不包含目录,获取之后清空选中状态
+* */
 function getFiles() {
   let nodes = tree.value.getCheckedNodes();
-  return nodes.map((item: any) => {
-    console.log(item)
-    return {
-      name: item.name,
-      path: item.path + "\\" + item.name
-    }
+  nodes = nodes.filter((item: FileTree) => {
+    return !item.isDirectory
+  })
+  nodes.map((item: FileTree) => {
+    return item.fullPath
+  });
+  tree.value.setCheckedKeys([])
+  defaultCheckedKeys.value = []
+  return nodes.map((item: FileTree) => {
+    return item.fullPath
   });
 }
 
@@ -188,6 +201,12 @@ function fileFilter(item: FileTree) {
 watch(data, async (val: FileTree) => {
   // 根据根目录加载当前目录下的子内容
   treeData.value = await electron.getChildPath(val.path)
+  treeData.value = treeData.value.map((item: FileTree) => {
+    return {
+      fullPath: item.path + "\\" + item.name,
+      ...item,
+    }
+  })
   treeData.value = treeData.value.filter((item: FileTree) => {
     return fileFilter(item);
   })
@@ -201,6 +220,7 @@ onMounted(async () => {
       {
         name: "Desktop",
         path: desktopPath,
+        fullPath: desktopPath,
         parentPath: desktopPath,
         isDirectory: true,
         children: []

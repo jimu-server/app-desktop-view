@@ -12,7 +12,8 @@
             <q-item>
               <q-item-section>
                 <q-linear-progress v-if="progress==0" indeterminate rounded size="15px"/>
-                <q-linear-progress v-else rounded size="15px" :value="progress"/>
+                <q-linear-progress v-else-if="progress<1" rounded size="15px" :value="progress"/>
+                <q-linear-progress v-else rounded size="15px" :value="1"/>
               </q-item-section>
               <q-item-section avatar>
                 <q-btn v-if="!isComplete" outline dense color="red" icon="jimu-daochu1024-16" @click="stopGen"/>
@@ -51,7 +52,6 @@ import {NodeFetchStream} from "@/components/system-components/stream/node_fetch_
 const AbortController = require('abort-controller');
 var FormData = require('form-data');
 defineExpose({
-  beginGen,
   beginGenFile
 })
 
@@ -60,16 +60,17 @@ const progress = ref(0)
 const response = ref<Response | null>(null)
 const isComplete = ref(false)
 const msgs = ref<string[]>([])
-const load = ref<Stream>()
+const stream = ref<NodeFetchStream>()
 const scroll = ref()
 
 function stopGen() {
-  if (load.value != null) {
-    load.value.Stop()
+  if (stream.value != null) {
+    stream.value.Stop()
   }
   msgs.value = []
   model.value = false
   isComplete.value = false
+  progress.value = 0
 }
 
 function complete() {
@@ -78,35 +79,27 @@ function complete() {
   isComplete.value = false
 }
 
-async function beginGen(name: string, files: string[]) {
-  response.value = await genKnowledge(name, files)
-  model.value = true
-  // stream()
-}
 
-async function beginGenFile(name: string, files: any[]) {
+async function beginGenFile(name: string, files: string[]) {
   let {response, controller} = await genKnowledgeFile(name, files)
-  model.value = true
-  // stream()
   setTimeout(() => {
-    let stream = new NodeFetchStream(response, controller)
-    stream.setHandler((data, status) => {
+    model.value = true
+    stream.value = new NodeFetchStream(response, controller)
+    stream.value.setHandler((data, status) => {
       console.log(data)
       msgs.value.push(data.msg)
-      progress.value = data.percent
+      progress.value = data.percent.toFixed(2)
       setTimeout(async () => {
         let scrollTarget = scroll.value.getScrollTarget()
         let height = scrollTarget.scrollHeight
         scroll.value.setScrollPosition('vertical', height)
       }, 200)
     })
-
-    stream.setComplete((data, status) => {
+    stream.value.setComplete((data, status) => {
       console.log("complete")
       isComplete.value = true
     })
-
-    stream.setEnd((data: Result<any>, status) => {
+    stream.value.setEnd((data: Result<any>, status) => {
       if (data.code == 200) {
         isComplete.value = true
         return
@@ -115,17 +108,17 @@ async function beginGenFile(name: string, files: any[]) {
         return
       }
     })
-    stream.listen()
+    stream.value.listen()
   }, 200)
 }
 
 
-async function genKnowledgeFile(name, files: any[]) {
+async function genKnowledgeFile(name, files: string[]) {
   files = toRaw(files)
   let form = new FormData()
   form.append('name', name)
-  files.map(item => {
-    form.append('files', fs.createReadStream(item.path))
+  files.map((item, index) => {
+    form.append('files', fs.createReadStream(item))
   });
   let controller = new AbortController();
   let response = await fetch('http://localhost:8080/api/chat/knowledge/gen', {
@@ -144,8 +137,7 @@ async function genKnowledgeFile(name, files: any[]) {
 }
 
 
-
-function stream() {
+/*function stream() {
   setTimeout(async () => {
     load.value = new Stream(response.value)
     load.value.setHandler((data, status) => {
@@ -174,7 +166,7 @@ function stream() {
     })
     await load.value.listen()
   }, 200)
-}
+}*/
 
 </script>
 

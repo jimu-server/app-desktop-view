@@ -189,22 +189,6 @@ app.whenReady().then(async () => {
         console.log("begin start ollama server")
         startAppLocalServer()
     }
-    // 获取默认的session对象
-    const ses = session.defaultSession;
-
-    // 设置请求头的函数
-    const filter = {
-        urls: ['*://*/*'] // 匹配所有网址
-    };
-
-    const headerName = 'custom-header';
-    const headerValue = 'custom-value';
-
-    ses.webRequest.onBeforeRequest((details, callback) => {
-        console.log("details >> ", details)
-        callback({cancel: false});
-    });
-
 })
 
 app.on('window-all-closed', () => {
