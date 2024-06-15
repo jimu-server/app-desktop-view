@@ -4,11 +4,11 @@
       <div>
         <q-chip
             size="md"
-            icon="jimu-xitongmoxingchajian"
+            :icon="plugin.currentPlugin.icon"
             style="cursor: default"
             :color="toggleColer"
         >
-          {{ ctx.ui.currentPlugin.name }}
+          {{ plugin.currentPlugin.name }}
         </q-chip>
       </div>
     </div>
@@ -31,9 +31,7 @@
 
 import PluginView from "@/components/tool-components/chatGptTool/widget/plugins/PluginView.vue";
 import {computed, onMounted, ref, watch} from "vue";
-import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
-import {getPlugins} from "@/components/tool-components/chatGptTool/chatRequest";
-import {useThemeStore} from "@/store/theme";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";import {useThemeStore} from "@/store/theme";
 import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";
 
 const ctx = useGptStore()
@@ -50,14 +48,6 @@ watch(() => theme.dark, (value) => {
 
 })
 
-onMounted(async () => {
-  plugin.plugins = await getPlugins()
-  // 默认选中第一个插件
-  if (plugin.plugins.length > 0) {
-    plugin.currentPlugin = plugin.plugins[0]
-  }
-
-})
 </script>
 
 

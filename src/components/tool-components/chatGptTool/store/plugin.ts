@@ -43,7 +43,8 @@ export const useAiPluginStore = defineStore('ai-plugin', {
                             icon: "img:public/lang/pyc.png",
                         }
                     ]
-                }
+                },
+                knowledge: []
             }
         }
     },

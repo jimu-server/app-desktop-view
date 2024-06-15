@@ -20,7 +20,7 @@ const props = defineProps<{
   data: any
 }>()
 
-onMounted(() => {
+onMounted(async () => {
 
 })
 </script>
