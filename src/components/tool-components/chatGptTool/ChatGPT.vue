@@ -68,7 +68,7 @@
 import {onMounted, ref} from "vue";
 
 
-import {UpdateChatViewUI} from "@/plugins/evenKey";
+import {SendActionScroll, UpdateChatViewUI} from "@/plugins/evenKey";
 import {colors} from "quasar";
 import emitter from "@/plugins/event";
 import SearchInput from "@/components/tool-components/chatGptTool/widget/SearchInput.vue";
@@ -82,8 +82,11 @@ import {
   ConversationEntity,
   MessageType
 } from "@/components/tool-components/chatGptTool/model/chat";
-import {SendTextMessage} from "@/components/tool-components/chatGptTool/gptutil";
+import {getReply, getSendCtx} from "@/components/tool-components/chatGptTool/gptutil";
 import draggable from 'vuedraggable'
+import {sendMessage} from "@/components/tool-components/chatGptTool/chatRequest";
+import {AiPlugin} from "@/components/tool-components/chatGptTool/variable";
+import {sendDefaultMessage} from "@/components/tool-components/chatGptTool/send_message";
 
 const {getPaletteColor} = colors
 
@@ -124,33 +127,22 @@ function selectChat(data: ConversationEntity, index: number) {
     }
   }, 100)
 }
+
 /*
 * @description: 正常消息编辑器发送消息
 * */
 async function send(message: ChatMessageEntity[]) {
-  // 计算当前用户发送的消息对于回复gpt的那条消息
-  let messageId = ""
-  if (ctx.CurrentChat.messageList.length > 0) {
-    let data = ctx.CurrentChat.messageList[ctx.CurrentChat.messageList.length - 1]
-    // 如果最后一次的消息依就是用户的,gpt那边没有,应该认为这一条用户消息为一个新消息
-    if (data.role !== 'user') {
-      messageId = data.id
-    }
-  }
-  for (const item of message) {
-    switch (item.contentType) {
-        // 文本消息,包含表情
-      case MessageType.TextMessage:
-        await SendTextMessage(messageId, item.data)
-        break
-        // 图片消息
-      case MessageType.PictureMessage:
-        // await SendImageMessage(item)
-        break
-        // 自定义消息类型
-      case MessageType.CustomMessage:
-        break
-    }
+  let sendCtx = getSendCtx();
+  switch (sendCtx.plugin.code) {
+    case AiPlugin.Programming:
+      sendDefaultMessage(sendCtx, message)
+      break
+    case AiPlugin.Knowledge:
+      sendDefaultMessage(sendCtx, message)
+      break
+    case AiPlugin.Default:
+      sendDefaultMessage(sendCtx, message)
+      break
   }
 }
 

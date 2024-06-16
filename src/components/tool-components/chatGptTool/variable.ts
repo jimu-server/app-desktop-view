@@ -1,6 +1,5 @@
-export enum Platform {
-    Web = 'Web',
-    Android = 'Android',
-    IOS = 'Ios',
-    Electron = 'Electron'
+export enum AiPlugin {
+    Default = 'default',
+    Programming = 'programming',
+    Knowledge = 'knowledge',
 }

@@ -49,7 +49,7 @@ export function delConversation(id: string) {
 }
 
 
-export function send(conversationId: string, recoverMessageId: string, value: string, modelId: string, avatar: string) {
+export function sendMessage(conversationId: string, recoverMessageId: string, value: string, modelId: string, avatar: string) {
     return new Promise<Result<AppChatMessageItem>>(resolve => {
         OllamaServer.post<Result<AppChatMessageItem>>("/api/chat/send", {
             conversationId: conversationId,
@@ -229,6 +229,17 @@ export function getPlugins() {
 export function delKnowledge(id: string) {
     return new Promise<Result<any>>(resolve => {
         OllamaServer.post<Result<any>>("/api/chat/knowledge/del", {
+            Id: id
+        })
+            .then(({data}) => {
+                resolve(data)
+            })
+    })
+}
+
+export function clearMessage(id: string) {
+    return new Promise<Result<any>>(resolve => {
+        OllamaServer.post<Result<any>>("/api/chat/conversation/message/delete", {
             Id: id
         })
             .then(({data}) => {

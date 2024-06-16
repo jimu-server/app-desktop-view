@@ -1,5 +1,6 @@
 import {MessageType} from "@/components/tool-components/chatGptTool/model/chat";
 import {Stream} from "@/components/system-components/stream/stream";
+import {Token} from "@/components/system-components/model/system";
 
 
 export interface AppChatConversationItem {
@@ -130,10 +131,19 @@ export interface OllamaDownload {
 export interface AppChatPlugin {
     id: string
     name: string
+    code: string
     icon: string
     model: string
     floatView: string
     props: string
     status: boolean
     createTime: string
+}
+
+export interface SendCtx {
+    conversationId: string
+    recoverId: string
+    plugin: AppChatPlugin
+    user: Token
+    store: any
 }

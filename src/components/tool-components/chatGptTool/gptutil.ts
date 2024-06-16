@@ -3,17 +3,16 @@ import pinia from "@/pinia";
 import emitter from "@/plugins/event";
 import {SendActionScroll} from "@/plugins/evenKey";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
-import {send} from "@/components/tool-components/chatGptTool/chatRequest";
-import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
+import {sendMessage} from "@/components/tool-components/chatGptTool/chatRequest";
+import {AppChatMessageItem, SendCtx} from "@/components/tool-components/chatGptTool/model/model";
 import {genStream} from "@/components/tool-components/chatGptTool/ollamaRequest";
-import {useAppStore} from "@/store/app";
 import {userStore} from "@/store/user";
 import {VITE_APP_OLLAMA_SERVER} from "@/env";
 import {getUuid} from "@/utils/systemutils";
 import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";
 
 
-function getSendCtx() {
+export function getSendCtx(): SendCtx {
     let store = useGptStore(pinia)
     // 获取当前连天选择模型
     let pluginStore = useAiPluginStore(pinia);
@@ -27,10 +26,27 @@ function getSendCtx() {
     }
     // 获取当前会话信息
     conversationId = store.CurrentChat.Current.Conversation.id
+
+    // 计算当前用户发送的消息对于回复gpt的那条消息
+    let recoverId = ""
+    if (store.CurrentChat.messageList.length > 0) {
+        let data = store.CurrentChat.messageList[store.CurrentChat.messageList.length - 1]
+        // 如果最后一次的消息依就是用户的,gpt那边没有,应该认为这一条用户消息为一个新消息
+        if (data.role !== 'user') {
+            recoverId = data.id
+        }
+    }
+
     return {
-        conversationId: conversationId,
-        plugin: plugin,
-        user: user
+        // 会话id
+        conversationId,
+        recoverId,
+        // 插件
+        plugin,
+        // 用户信息
+        user,
+        // gpt store
+        store
     }
 }
 
@@ -38,11 +54,10 @@ function getSendCtx() {
 
 
 export async function SendTextMessage(recoverMessageId: string, text: string) {
-    let {conversationId, plugin, user} = getSendCtx()
+    let {conversationId, plugin, user, store} = getSendCtx()
     // 创建问题消息,
-    send(conversationId, recoverMessageId, text, plugin.model, user.user.picture).then(async result => {
+    sendMessage(conversationId, recoverMessageId, text, plugin.model, user.user.picture).then(async result => {
         if (result.code === 200) {
-            let store = useGptStore(pinia)
             store.CurrentChat.messageList.push(result.data)
             // 新消息要追加到可显示列表中
             store.newView.push(result.data.id)
@@ -63,7 +78,7 @@ export async function retryMessage(message: AppChatMessageItem) {
 }
 
 
-async function getReply(message: AppChatMessageItem) {
+export async function getReply(message: AppChatMessageItem) {
     // 获取当前连天选择模型
     let store = useGptStore(pinia);
     let {conversationId, plugin, user} = getSendCtx()

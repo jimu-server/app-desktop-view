@@ -5,7 +5,7 @@
         <q-chip
             size="md"
             :icon="plugin.currentPlugin.icon"
-            style="cursor: default"
+            style="cursor: default;user-select: none"
             :color="toggleColer"
         >
           {{ plugin.currentPlugin.name }}

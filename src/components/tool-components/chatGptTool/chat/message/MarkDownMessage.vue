@@ -3,11 +3,13 @@
     <div ref="typing" class="markdown-message gpt-message" v-html="info.content"></div>
   </template>
   <template v-else-if="!send">
-    <div  ref="typingBox" class="full-width" style="position: relative">
+    <div v-if="info.content!=''" ref="typingBox" class="full-width" style="position: relative;min-height: 40px">
       <div ref="typing" class="markdown-message gpt-message" :theme="theme.dark?'dark':''" v-html="info.content"
            v-height="height"></div>
-<!--      <md-preview ref="typing" :editorId="id" :modelValue="info.content"/>-->
       <div ref="cursor" v-show="showCursor" :theme="theme.dark?'dark':''" class="typing-cursor"></div>
+    </div>
+    <div v-else>
+      <q-skeleton animation="wave" style="min-width: 100px;height: 40px"/>
     </div>
   </template>
 </template>
@@ -263,6 +265,15 @@ function updateCursor() {
   textNode.remove()
 }
 
+
+/*watch(() => props.message.stream, () => {
+  if (props.message.stream) {
+    info.value = {...props.message}
+    updateCursor()
+    beginTyping()
+    onUpdated(updateCursor)
+  }
+})*/
 
 /*
 * @description: 如果消息是gpt消息则加载周期事件
