@@ -10,26 +10,39 @@ import {useAppStore} from "@/store/app";
 import {userStore} from "@/store/user";
 import {VITE_APP_OLLAMA_SERVER} from "@/env";
 import {getUuid} from "@/utils/systemutils";
+import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";
 
 
-
-
-
-
-export async function SendTextMessage(recoverMessageId: string, text: string) {
+function getSendCtx() {
+    let store = useGptStore(pinia)
     // 获取当前连天选择模型
-    let store = useGptStore(pinia);
+    let pluginStore = useAiPluginStore(pinia);
     let user = userStore(pinia).info
-    let model = store.ui.currentModel
+    // 获取当前选中插件
+    let plugin = pluginStore.currentPlugin
     let conversationId = ""
     if (!store.CurrentChat.Current) {
         console.error("conversationId is null")
         return
     }
+    // 获取当前会话信息
     conversationId = store.CurrentChat.Current.Conversation.id
-    // 创建问题消息
-    send(conversationId, recoverMessageId, text, model.model, user.user.picture).then(async result => {
+    return {
+        conversationId: conversationId,
+        plugin: plugin,
+        user: user
+    }
+}
+
+
+
+
+export async function SendTextMessage(recoverMessageId: string, text: string) {
+    let {conversationId, plugin, user} = getSendCtx()
+    // 创建问题消息,
+    send(conversationId, recoverMessageId, text, plugin.model, user.user.picture).then(async result => {
         if (result.code === 200) {
+            let store = useGptStore(pinia)
             store.CurrentChat.messageList.push(result.data)
             // 新消息要追加到可显示列表中
             store.newView.push(result.data.id)
@@ -53,14 +66,7 @@ export async function retryMessage(message: AppChatMessageItem) {
 async function getReply(message: AppChatMessageItem) {
     // 获取当前连天选择模型
     let store = useGptStore(pinia);
-    // 使用插件中的模型
-    let model = store.ui.currentPlugin
-    let conversationId = ""
-    if (!store.CurrentChat.Current) {
-        console.error("conversationId is null")
-        return false
-    }
-    conversationId = store.CurrentChat.Current.Conversation.id
+    let {conversationId, plugin, user} = getSendCtx()
     // 通过问题消息获取流是回答
     //创建 一个gpt回答消息
     let uuid = getUuid()
@@ -73,7 +79,7 @@ async function getReply(message: AppChatMessageItem) {
         messageId: message.id,
         createTime: "",
         role: "user",
-        modelId: model.model,
+        modelId: plugin.model,
         picture: "",
     }
 
@@ -87,8 +93,8 @@ async function getReply(message: AppChatMessageItem) {
         conversationId: conversationId,
         id: uuid,
         messageId: message.id,
-        model: model.model,
-        modelId: model.model,
+        model: plugin.model,
+        modelId: plugin.model,
         messages: messages
     }
     let serverUrl = getOllamaServer()

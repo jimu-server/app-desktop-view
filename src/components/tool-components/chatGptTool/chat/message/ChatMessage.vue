@@ -128,6 +128,7 @@ import {useThemeStore} from "@/store/theme";
 import MessageAction from "@/components/tool-components/chatGptTool/chat/message/MessageAction.vue";
 import {deleteMsg} from "@/components/tool-components/chatGptTool/chatRequest";
 import {ElMessage} from "element-plus";
+import TextMessage from "@/components/tool-components/chatGptTool/chat/message/TextMessage.vue";
 
 const theme = useThemeStore()
 const ctx = useGptStore()
@@ -233,6 +234,7 @@ switch (info.role) {
     if (model) {
       name.value = model.name
     }
+    name.value = 'Assistant'
     break
 }
 
