@@ -4,8 +4,13 @@
       class="column"
   >
     <div class="fit column" style="padding: 5px">
-      <div class="full-width">
-        助手偏好
+      <div class="full-width row justify-between">
+        <div>
+          助手偏好
+        </div>
+        <div>
+          <q-chip dense icon="jimu-15qingkong-1" label="清空" clickable outline color="primary" @click="clear"/>
+        </div>
       </div>
       <div class="programming-assistant">
         <q-scroll-area class="fit">
@@ -44,6 +49,13 @@ function select(value: any, index: number) {
   } else {
     plugin.ctx.programming.list[index].bgColor = ''
   }
+}
+
+function clear() {
+  plugin.ctx.programming.list.forEach((item: any) => {
+    item.selected = false
+    item.bgColor = ''
+  })
 }
 
 </script>

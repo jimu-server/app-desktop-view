@@ -224,3 +224,15 @@ export function getPlugins() {
             })
     })
 }
+
+
+export function delKnowledge(id: string) {
+    return new Promise<Result<any>>(resolve => {
+        OllamaServer.post<Result<any>>("/api/chat/knowledge/del", {
+            Id: id
+        })
+            .then(({data}) => {
+                resolve(data)
+            })
+    })
+}

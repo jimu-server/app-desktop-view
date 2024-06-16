@@ -94,6 +94,7 @@ export interface AppChatKnowledgeInstance {
     knowledgeType?: string
     createTime?: string
     check: boolean
+    bgColor?: string
 }
 
 

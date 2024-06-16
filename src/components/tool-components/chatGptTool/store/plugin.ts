@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {AppChatPlugin} from "@/components/tool-components/chatGptTool/model/model";
+import {AppChatKnowledgeInstance, AppChatPlugin} from "@/components/tool-components/chatGptTool/model/model";
 
 
 export const useAiPluginStore = defineStore('ai-plugin', {
@@ -54,7 +54,7 @@ export const useAiPluginStore = defineStore('ai-plugin', {
                         }
                     ]
                 },
-                knowledge: []
+                knowledge: [] as AppChatKnowledgeInstance[]
             }
         }
     },

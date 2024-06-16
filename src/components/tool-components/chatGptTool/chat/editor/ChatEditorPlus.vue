@@ -14,6 +14,10 @@
         <ChatPlugin/>
       </ToolWidget>
 
+      <ToolWidget>
+        <ClearHistory/>
+      </ToolWidget>
+
 
 
       <q-space/>
@@ -48,13 +52,6 @@
           </div>
         </div>
       </ToolWidget>
-      <div class="column justify-center">
-        <q-icon size="20px" class="edit-tool-option" name="jimu-shijian-2">
-          <q-tooltip :offset="[0, 0]">
-            历史消息
-          </q-tooltip>
-        </q-icon>
-      </div>
       <ToolWidget style="margin-right: 5px">
         <q-icon size="20px" class="edit-tool-option" :name="isMax?'jimu-zuixiaohua':'jimu-zuidahua'"
                 @click.stop="max">
@@ -105,7 +102,9 @@ import Editor from "./Editor.vue";
 import {IsEmpty} from "@/components/system-components/utils/systemutils";
 import {ChatMessageEntity, MessageType} from "@/components/tool-components/chatGptTool/model/chat";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
-import KnowledgeOptionsPanel from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeOptionsPanel.vue";
+import ClearHistory from "@/components/tool-components/chatGptTool/chat/editor-tool-bar/clear-history/ClearHistory.vue";
+import ToolWidget from "@/components/tool-components/chatGptTool/chat/editor/tool/ToolWidget.vue";
+import ChatPlugin from "@/components/tool-components/chatGptTool/chat/editor-tool-bar/plugins/ChatPlugin.vue";
 
 
 
