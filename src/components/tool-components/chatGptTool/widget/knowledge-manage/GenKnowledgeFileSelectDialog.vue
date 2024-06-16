@@ -43,7 +43,7 @@ import CreateKnowledge from "@/components/tool-components/chatGptTool/widget/kno
 import {AppChatKnowledgeFileType} from "@/components/tool-components/chatGptTool/model/model";
 import {ElMessage} from "element-plus";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
-import GenKnowledgeUI from "@/components/tool-components/chatGptTool/widget/knowledge/GenKnowledgeUI.vue";
+import GenKnowledgeUI from "@/components/tool-components/chatGptTool/widget/knowledge-manage/GenKnowledgeUI.vue";
 
 
 const model = defineModel({default: false})

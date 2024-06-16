@@ -29,10 +29,11 @@
 
 <script setup lang="ts">
 
-import PluginView from "@/components/tool-components/chatGptTool/widget/plugins/PluginView.vue";
+import PluginView from "@/components/tool-components/chatGptTool/chat/editor-tool-bar/plugins/PluginView.vue";
 import {computed, onMounted, ref, watch} from "vue";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";import {useThemeStore} from "@/store/theme";
 import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";
+import {getPlugins} from "@/components/tool-components/chatGptTool/chatRequest";
 
 const ctx = useGptStore()
 const plugin = useAiPluginStore()
@@ -46,6 +47,14 @@ const toggleColer = computed(() => {
 
 watch(() => theme.dark, (value) => {
 
+})
+
+onMounted(async () => {
+  plugin.plugins = await getPlugins()
+  // 默认选中第一个插件
+  if (plugin.plugins.length > 0) {
+    plugin.currentPlugin = plugin.plugins[0]
+  }
 })
 
 </script>

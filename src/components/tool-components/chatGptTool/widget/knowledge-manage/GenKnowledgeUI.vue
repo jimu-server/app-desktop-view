@@ -57,7 +57,6 @@ defineExpose({
 
 const model = defineModel({default: false, required: false})
 const progress = ref(0)
-const response = ref<Response | null>(null)
 const isComplete = ref(false)
 const msgs = ref<string[]>([])
 const stream = ref<NodeFetchStream>()
@@ -69,8 +68,8 @@ function stopGen() {
   }
   msgs.value = []
   model.value = false
-  isComplete.value = false
   progress.value = 0
+  isComplete.value = false
 }
 
 function complete() {
@@ -82,23 +81,32 @@ function complete() {
 
 async function beginGenFile(name: string, files: string[]) {
   let {response, controller} = await genKnowledgeFile(name, files)
+  isComplete.value = false
   setTimeout(() => {
     model.value = true
     stream.value = new NodeFetchStream(response, controller)
+
+    // 处理流消息 更新消息数据
     stream.value.setHandler((data, status) => {
       console.log(data)
       msgs.value.push(data.msg)
       progress.value = data.percent.toFixed(2)
       setTimeout(async () => {
-        let scrollTarget = scroll.value.getScrollTarget()
-        let height = scrollTarget.scrollHeight
-        scroll.value.setScrollPosition('vertical', height)
+        if (scroll.value != null) {
+          let scrollTarget = scroll.value.getScrollTarget()
+          let height = scrollTarget.scrollHeight
+          scroll.value.setScrollPosition('vertical', height)
+        }
       }, 200)
     })
+
+    // 流流消息处理完成
     stream.value.setComplete((data, status) => {
       console.log("complete")
       isComplete.value = true
     })
+
+    // 处理业务状态
     stream.value.setEnd((data: Result<any>, status) => {
       if (data.code == 200) {
         isComplete.value = true
@@ -108,6 +116,7 @@ async function beginGenFile(name: string, files: string[]) {
         return
       }
     })
+    // 开始监听流消息
     stream.value.listen()
   }, 200)
 }
@@ -136,37 +145,6 @@ async function genKnowledgeFile(name, files: string[]) {
   }
 }
 
-
-/*function stream() {
-  setTimeout(async () => {
-    load.value = new Stream(response.value)
-    load.value.setHandler((data, status) => {
-      msgs.value.push(data.msg)
-      progress.value = data.percent
-      setTimeout(async () => {
-        let scrollTarget = scroll.value.getScrollTarget()
-        let height = scrollTarget.scrollHeight
-        scroll.value.setScrollPosition('vertical', height)
-      }, 200)
-    })
-
-    load.value.setComplete((data, status) => {
-      console.log("complete")
-      isComplete.value = true
-    })
-
-    load.value.setEnd((data: Result<any>, status) => {
-      if (data.code == 200) {
-        isComplete.value = true
-        return
-      } else {
-        isComplete.value = true
-        return
-      }
-    })
-    await load.value.listen()
-  }, 200)
-}*/
 
 </script>
 

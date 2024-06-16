@@ -10,12 +10,15 @@
       <div class="programming-assistant">
         <q-scroll-area class="fit">
           <q-chip
-              v-for="item in plugin.ctx.programming.list"
-              v-model:selected="item.selected"
               square
               outline
+              v-for="(item,index) in plugin.ctx.programming.list"
+              v-model:selected="item.selected"
+              :color="item.bgColor"
               :icon="item.icon"
+              :icon-selected="item.icon"
               :label="item.name"
+              @click="select(item,index)"
           />
         </q-scroll-area>
       </div>
@@ -31,14 +34,17 @@ import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/p
 const props = defineProps<{
   data: any
 }>()
-const desert = reactive({
-  Icecream: false,
-  Eclair: true,
-  Cupcake: false,
-  Gingerbread: false
-})
+
 
 const plugin = useAiPluginStore()
+
+function select(value: any, index: number) {
+  if (value.selected) {
+    plugin.ctx.programming.list[index].bgColor = 'primary'
+  } else {
+    plugin.ctx.programming.list[index].bgColor = ''
+  }
+}
 
 </script>
 
