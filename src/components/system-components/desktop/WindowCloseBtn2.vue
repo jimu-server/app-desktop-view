@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {ipcRenderer} from "electron";
 import {desktop_close} from "@/components/system-components/desktop/desktop";
-import {usePlatformStore} from "@/store/platform";
-const platform = usePlatformStore()
 </script>
 
 <template>
