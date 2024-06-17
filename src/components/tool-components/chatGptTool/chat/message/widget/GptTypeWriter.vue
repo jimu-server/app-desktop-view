@@ -30,7 +30,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits({
-  // 打字容器高度变化时间
+  // 打字容器高度变化事件,主要用于通知上层元素,对消息的折叠判断
   heightChange: function (value) {
   }
 })

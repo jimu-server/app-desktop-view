@@ -57,7 +57,7 @@ info.value.content = md.render(info.value.content)
 // 标识当前消息是否是用户发送的
 const send = ref(false)
 
-// 获取消息发送标识,处理发送消息内容方向
+// 获取消息发送标识
 send.value = props.message.role === 'user'
 
 
