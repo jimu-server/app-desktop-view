@@ -111,11 +111,6 @@ export const useGptStore = defineStore('gpt', {
 
                     instance: [] as AppChatKnowledgeInstance[],
                 },
-
-                plugins: [] as AppChatPlugin[],
-                currentPlugin: {} as AppChatPlugin,
-                checked: [] as string[],
-                pluginMenuShowFlag: false,
             },
         }
     },
@@ -290,10 +285,6 @@ export const useGptStore = defineStore('gpt', {
                     files: [] as Tree<AppChatKnowledgeFile>[],
                     instance: [] as AppChatKnowledgeInstance[],
                 },
-                plugins: [] as AppChatPlugin[],
-                currentPlugin: {} as AppChatPlugin,
-                checked: [] as string[],
-                pluginMenuShowFlag: false,
             }
         }
     }

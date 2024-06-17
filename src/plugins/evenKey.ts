@@ -6,6 +6,7 @@ export const MessageObserver = "MessageObserver"
 export const SendActionScroll = "SendActionScroll"
 
 export const ScrollMove = "ScrollMove"
+export const TypewriterScrollMove = "TypewriterScrollMove"
 
 export const UpdateChatViewUI = "UpdateChatViewUI"
 

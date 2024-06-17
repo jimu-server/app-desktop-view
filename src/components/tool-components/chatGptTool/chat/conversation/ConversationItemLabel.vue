@@ -61,7 +61,10 @@ import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
 import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/model/model";
 import {delConversation, getConversation} from "@/components/tool-components/chatGptTool/chatRequest";
 import {useThemeStore} from "@/store/theme";
+import {colors} from "quasar";
+import ConversationItemMenu from "@/components/tool-components/chatGptTool/chat/conversation/ConversationItemMenu.vue";
 
+const {getPaletteColor} = colors
 
 defineProps<{
   item: ConversationEntity,
@@ -130,7 +133,7 @@ function latestMsg(conver: AppChatConversationItem) {
 </style>
 <style>
 .chat-active {
-  background-color: #0098fe;
+  background-color: v-bind('getPaletteColor("primary")');
   color: #ffffff;
 }
 

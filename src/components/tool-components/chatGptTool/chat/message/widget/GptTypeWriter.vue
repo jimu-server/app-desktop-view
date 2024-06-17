@@ -21,7 +21,7 @@ import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
 import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
 import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessagePreview";
 import emitter from "@/plugins/event";
-import {SendActionScroll} from "@/plugins/evenKey";
+import {SendActionScroll, TypewriterScrollMove} from "@/plugins/evenKey";
 
 const props = defineProps<{
   // 消息
@@ -92,7 +92,7 @@ function beginTyping() {
           // 渲染 md 消息进行展示
           info.value.content = md.render(content.value);
           // 发送滚动条滚动指令
-          emitter.emit(SendActionScroll)
+          emitter.emit(TypewriterScrollMove)
         }
       })
       stream.value.setComplete((data, status) => {

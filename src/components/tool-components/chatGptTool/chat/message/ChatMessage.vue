@@ -25,7 +25,7 @@
         </slot>
       </div>
       <!--   消息正文   -->
-      <div ref="bodyRef" v-show="isShow" class="chat-body" @mouseover="overMessage=true"
+      <div ref="bodyRef" v-show="isShow" class="chat-body shadow-1" @mouseover="overMessage=true"
            @mouseleave="outOverMessage">
         <!--   用户消息展示     -->
         <TextMessage v-if="message.role=='user'" :message="message" :index="index"/>
@@ -41,13 +41,6 @@
           <div v-show="foldFlag" class="gpt-fold" :theme="theme.dark?'dark':''"></div>
           <!--    消息操作按钮      -->
           <div class="full-width row reverse" style="margin-top: 5px">
-<!--            <MessageAction v-show="isShowAction">
-              <q-icon class="msg-option" size="15px" dense flat name="jimu-shanchu" @click="deleteMessage">
-                <q-tooltip :offset="[0, 10]">
-                  删除
-                </q-tooltip>
-              </q-icon>
-            </MessageAction>-->
             <MessageAction v-show="isShowAction">
               <q-icon class="msg-option" size="15px" dense flat name="jimu-fuzhi">
                 <q-tooltip :offset="[0, 10]">
@@ -101,13 +94,7 @@
         <!--  用户消息操作      -->
         <template v-if="send">
           <div class="full-width row" style="margin-top: 5px">
-<!--            <MessageAction v-show="isShowAction">
-              <q-icon class="user-msg-option" size="15px" dense flat name="jimu-shanchu" @click="deleteMessage">
-                <q-tooltip :offset="[0, 10]">
-                  删除
-                </q-tooltip>
-              </q-icon>
-            </MessageAction>-->
+
           </div>
         </template>
       </div>
@@ -179,8 +166,8 @@ function outOverFooter() {
 * @description: 根据消息数量控制面板消息加载渲染
 * */
 const isShow = computed(() => {
-  if (ctx.CurrentChat.messageList.length < 50) return true
-  return ctx.view.includes(props.message.id) || ctx.newView.includes(props.message.id)
+    if (ctx.CurrentChat.messageList.length < 50) return true
+    return ctx.view.includes(props.message.id) || ctx.newView.includes(props.message.id)
 })
 
 let info = props.message!
@@ -354,6 +341,8 @@ function retry() {
   flex-direction: v-bind('direction_text');
   max-height: v-bind('fold');
   overflow: hidden;
+  border-radius: 5px;
+  background: transparent;
 }
 
 

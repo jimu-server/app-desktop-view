@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "36961665",
+      "name": "回到底部",
+      "font_class": "a-ziyuan207",
+      "unicode": "e6f2",
+      "unicode_decimal": 59122
+    },
+    {
       "icon_id": "1304965",
       "name": "Clear-1",
       "font_class": "15qingkong-1",
