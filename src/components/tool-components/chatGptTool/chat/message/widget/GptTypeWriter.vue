@@ -1,44 +1,43 @@
 <template>
-  <template v-if="send">
-    <div ref="typing" class="markdown-message gpt-message shadow-3" v-html="info.content"></div>
-  </template>
-  <template v-else-if="!send">
-    <GptTypeWriter :index="index" :message="message" @heightChange="height"/>
-  </template>
+  <div class="full-width">
+    <div v-if="info.content!=''" ref="typingBox" class="full-width" style="position: relative;min-height: 40px">
+      <div ref="typing" class="markdown-message gpt-message" :theme="theme.dark?'dark':''" v-html="info.content"
+           v-height="height"></div>
+      <div ref="cursor" v-show="showCursor" :theme="theme.dark?'dark':''" class="typing-cursor"></div>
+    </div>
+    <div v-else>
+      <q-skeleton animation="wave" style="min-width: 100px;height: 40px"/>
+    </div>
+  </div>
 </template>
 
-
 <script setup lang="ts">
-import {onMounted, onUpdated, reactive, ref, watch} from "vue";
-import {SendActionScroll} from "@/plugins/evenKey";
-import emitter from "@/plugins/event";
-import {useThemeStore} from "@/store/theme";
 import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
-import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessagePreview";
-import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
-import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
-import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
+import {onMounted, onUpdated, reactive, ref} from "vue";
 import {Stream} from "@/components/system-components/stream/stream";
-import GptTypeWriter from "@/components/tool-components/chatGptTool/chat/message/widget/GptTypeWriter.vue";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
+import {useThemeStore} from "@/store/theme";
+import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessagePreview";
+import emitter from "@/plugins/event";
+import {SendActionScroll} from "@/plugins/evenKey";
+import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
+import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
 
-const ctx = useGptStore()
-const theme = useThemeStore()
+const props = defineProps<{
+  // 消息
+  message: AppChatMessageItem,
+  index: number
+}>()
+
 const emit = defineEmits({
   // 打字容器高度变化时间
   heightChange: function (value) {
   }
 })
-const props = defineProps<{
-      // 消息
-      message: AppChatMessageItem,
-      index: number
-}>()
-// 打字容器对象
+
 const typingBox = ref<HTMLElement>()
 const typing = ref<HTMLElement>()
 const cursor = ref<HTMLElement>()
-const stream = ref<Stream>()
-
 // 是否显示打字光标
 const showCursor = ref(false)
 // 打字机 光标显示位置
@@ -46,13 +45,17 @@ const pos = reactive({
   x: 0,
   y: 0,
 })
+const stream = ref<Stream>()
+
+const ctx = useGptStore()
+const theme = useThemeStore()
 
 // 渲染消息文本存储
 const info = ref({...props.message!})
-// 存储流消息拼接文本
-const content = ref('')
 // 初始化默认渲染数据
 info.value.content = md.render(info.value.content)
+// 存储流消息拼接文本
+const content = ref('')
 
 // 标识当前消息是否是用户发送的
 const send = ref(false)
@@ -60,6 +63,18 @@ const send = ref(false)
 // 获取消息发送标识,处理发送消息内容方向
 send.value = props.message.role === 'user'
 
+// 自定义指令监听dvi的高度变化
+const vHeight = {
+  updated(el, binding, vnode, prevVnode) {
+    if (typeof binding.value === 'function') {
+      binding.value(el.clientHeight);
+    }
+  },
+}
+
+function height(value: number) {
+  emit('heightChange', value)
+}
 
 function beginTyping() {
   // 非用户身份 使用 stream 加载流消息
@@ -115,19 +130,6 @@ async function updateSelfMessage() {
   let message = await getMessage(props.message.id);
   ctx.UpdateConversationLastMsg(props.message.conversationID, message)
   ctx.CurrentChat.messageList[props.index] = message
-}
-
-// 自定义指令监听dvi的高度变化
-const vHeight = {
-  updated(el, binding, vnode, prevVnode) {
-    if (typeof binding.value === 'function') {
-      binding.value(el.clientHeight);
-    }
-  },
-}
-
-function height(value: number) {
-  emit('heightChange', value)
 }
 
 /*
@@ -202,12 +204,8 @@ if (theme.dark) {
 
 </script>
 
+
 <style scoped>
-
-</style>
-
-<style>
-
 .typing-cursor[theme="dark"] {
   background: #fff !important;
 }

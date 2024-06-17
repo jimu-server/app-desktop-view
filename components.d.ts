@@ -84,6 +84,7 @@ declare module 'vue' {
     GenKnowledgeUI: typeof import('./src/components/tool-components/chatGptTool/widget/knowledge-manage/GenKnowledgeUI.vue')['default']
     GptBtn: typeof import('./src/components/tool-components/chatGptTool/GptBtn.vue')['default']
     GPTSettingPanel: typeof import('./src/components/tool-components/chatGptTool/chat/editor/widget/GPTSettingPanel.vue')['default']
+    GptTypeWriter: typeof import('./src/components/tool-components/chatGptTool/chat/message/widget/GptTypeWriter.vue')['default']
     HomePage: typeof import('./src/components/system-components/pages/HomePage.vue')['default']
     ImageEdit: typeof import('./src/components/tool-components/chatGptTool/chat/editor/ImageEdit.vue')['default']
     InfoEditor: typeof import('./src/components/system-components/avatar/InfoEditor.vue')['default']
