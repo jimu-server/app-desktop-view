@@ -7,6 +7,8 @@ import {getReply} from "@/components/tool-components/chatGptTool/gptutil";
 
 /*
 * @description 发送默认文本消息
+* @ctx 发送消息需要用到的赏析问信息
+* @messages 编辑器解析的消息
 * */
 export function sendDefaultMessage(ctx: SendCtx, messages: ChatMessageEntity[]) {
     for (const item of messages) {
@@ -26,7 +28,6 @@ export function sendDefaultMessage(ctx: SendCtx, messages: ChatMessageEntity[]) 
                 break
             // 图片消息
             case MessageType.PictureMessage:
-                // await SendImageMessage(item)
                 break
             // 自定义消息类型
             case MessageType.CustomMessage:

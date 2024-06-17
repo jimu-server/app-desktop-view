@@ -1,6 +1,6 @@
 <template>
   <template v-if="send">
-    <div ref="typing" class="markdown-message gpt-message" v-html="info.content"></div>
+    <div ref="typing" class="markdown-message gpt-message shadow-3" v-html="info.content"></div>
   </template>
   <template v-else-if="!send">
     <div v-if="info.content!=''" ref="typingBox" class="full-width" style="position: relative;min-height: 40px">
@@ -17,13 +17,9 @@
 
 <script setup lang="ts">
 import {onMounted, onUpdated, reactive, ref, watch} from "vue";
-
 import {SendActionScroll} from "@/plugins/evenKey";
 import emitter from "@/plugins/event";
-
 import {useThemeStore} from "@/store/theme";
-
-import {ElNotification} from "element-plus";
 import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
 import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessagePreview";
 import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
@@ -38,18 +34,17 @@ const emit = defineEmits({
   heightChange: function (value) {
   }
 })
-const props = defineProps<
-    {
+const props = defineProps<{
       // 消息
       message: AppChatMessageItem,
       index: number
-    }
->()
+}>()
 // 打字容器对象
 const typingBox = ref<HTMLElement>()
 const typing = ref<HTMLElement>()
 const cursor = ref<HTMLElement>()
 const stream = ref<Stream>()
+
 // 是否显示打字光标
 const showCursor = ref(false)
 // 打字机 光标显示位置
@@ -75,14 +70,9 @@ send.value = props.message.role === 'user'
 const direction = ref('row-reverse')
 const direction_text = ref('row-reverse')
 
-
 if (!send.value) {
   direction.value = 'row'
   direction_text.value = 'row'
-}
-
-function sleep(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function beginTyping() {
@@ -123,58 +113,6 @@ function beginTyping() {
   }, 300);
 }
 
-const decoder = new TextDecoder();
-
-function do_typing(value): boolean {
-  let decodedData = decoder.decode(value);
-  let accumulatedData = ""; // Accumulate chunks of data here
-  accumulatedData += decodedData;
-  accumulatedData.split('\n').forEach(line => {
-    if (line) {
-      try {
-        let parsed = JSON.parse(line);
-        // 检查当前的流消息是否出现错误
-        if (checkError(parsed)) {
-          return false;
-        }
-        if (parsed.message.content) {
-          // 保存原始消息
-          content.value += parsed.message.content
-          // 渲染 md 消息进行展示
-          info.value.content = md.render(content.value);
-          // 发送滚动条滚动指令
-          emitter.emit(SendActionScroll)
-        }
-      } catch (error) {
-        console.error("Error parsing JSON:", error);
-        console.error(line)
-      }
-    }
-  });
-  return true;
-}
-
-
-/*
-* @description 检查当前的消息类型 ,在流式消息返回中发现了 正常响应的消息结构,则表示出现了问题
-* */
-function checkError(value) {
-  let code = hasOwnProperty(value, "code");
-  let msg = hasOwnProperty(value, "msg");
-  let err = hasOwnProperty(value, "data");
-  if (code && msg && err) {
-    if (value.code != 200) {
-      ElNotification({
-        title: '系统消息',
-        message: value.msg,
-        type: 'error'
-      })
-      return true;
-    }
-  }
-  return false;
-}
-
 function hasOwnProperty(obj: object, prop: string) {
   return obj.hasOwnProperty(prop);
 }
@@ -195,7 +133,6 @@ async function updateSelfMessage() {
   ctx.UpdateConversationLastMsg(props.message.conversationID, message)
   ctx.CurrentChat.messageList[props.index] = message
 }
-
 
 // 自定义指令监听dvi的高度变化
 const vHeight = {
@@ -265,16 +202,6 @@ function updateCursor() {
   textNode.remove()
 }
 
-
-/*watch(() => props.message.stream, () => {
-  if (props.message.stream) {
-    info.value = {...props.message}
-    updateCursor()
-    beginTyping()
-    onUpdated(updateCursor)
-  }
-})*/
-
 /*
 * @description: 如果消息是gpt消息则加载周期事件
 * */
@@ -289,7 +216,6 @@ if (!send.value) {
 if (theme.dark) {
   updateTheme(theme.dark)
 }
-
 
 </script>
 

@@ -19,6 +19,7 @@ import KnowledgePanelView
     from "@/components/tool-components/chatGptTool/chat/editor-tool-bar/plugins/plugin-instance/knowledge/KnowledgePanelView.vue";
 import ProgrammingAssistantPanelView
     from "@/components/tool-components/chatGptTool/chat/editor-tool-bar/plugins/plugin-instance/programming-assistant/ProgrammingAssistantPanelView.vue";
+import ChatGPT from "@/components/tool-components/chatGptTool/ChatGPT.vue";
 
 
 // 处理 electron 中文件上传
@@ -44,7 +45,8 @@ const components = [
     OllamaSetting,
     UserInfoSetting,
     KnowledgePanelView,
-    ProgrammingAssistantPanelView
+    ProgrammingAssistantPanelView,
+    ChatGPT
 ]
 
 export function init(app: App) {

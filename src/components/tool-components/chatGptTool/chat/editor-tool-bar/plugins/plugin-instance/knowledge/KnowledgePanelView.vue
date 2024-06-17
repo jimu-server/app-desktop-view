@@ -1,6 +1,6 @@
 <template>
   <q-card
-      style="width: 25vw;height: 20vh"
+      style="width: 25vw;max-height: 20vh;min-height: 10vh"
   >
     <div class="fit column" style="padding: 5px">
       <div class="full-width row justify-between">
