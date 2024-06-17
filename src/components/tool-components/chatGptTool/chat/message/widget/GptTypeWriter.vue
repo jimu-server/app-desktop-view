@@ -17,11 +17,11 @@ import {onMounted, onUpdated, reactive, ref} from "vue";
 import {Stream} from "@/components/system-components/stream/stream";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {useThemeStore} from "@/store/theme";
+import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
+import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
 import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessagePreview";
 import emitter from "@/plugins/event";
 import {SendActionScroll} from "@/plugins/evenKey";
-import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
-import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
 
 const props = defineProps<{
   // 消息

@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-center drawer-opt">
-    <q-btn dense flat :icon="btn.icon" @click.stop="action">
+    <q-btn class="too-btn" dense flat :icon="btn.icon" @click.stop="action">
       <q-tooltip anchor="center end" self="center start">
         {{ btn.tip }}
       </q-tooltip>
@@ -19,6 +19,7 @@ import {useToolStore} from "@/store/tool";
 import {userStore} from "@/store/user";
 import {ToolBtnType, ToolLayout} from "@/components/system-components/model/enum";
 import {useRouter} from "vue-router";
+import ToolNotify from "@/components/system-components/layouts/tool/ToolNotify.vue";
 
 const props = defineProps<{
   btn: Tool
@@ -72,5 +73,10 @@ function receive(data) {
 </script>
 
 <style scoped>
+/*.too-btn{
 
+}
+.too-btn:hover{
+  background-color: rgba(209, 211, 218, 0.58);
+}*/
 </style>
