@@ -7,7 +7,7 @@
                    style="flex-wrap: nowrap"
         >
           <template #item="ctx">
-            <div>
+            <div class="full-height column reverse">
               <WindowTag
                   :key="ctx.index"
                   :win="ctx.element"

@@ -110,7 +110,7 @@ import draggable from 'vuedraggable'
 import CreateFolderUI from "@/components/tool-components/chatGptTool/widget/knowledge/CreateFolderUI.vue";
 import {GetHeaders} from "@/plugins/axiosutil";
 import {ElMessage, UploadProps} from "element-plus";
-import CreateKnowledge from "@/components/tool-components/chatGptTool/widget/knowledge-manage/CreateKnowledge.vue";
+import CreateKnowledge from "@/components/tool-components/chatGptTool/chat/message-tool-bar/knowledge-manage/CreateKnowledge.vue";
 
 
 const manageRef = ref(null)

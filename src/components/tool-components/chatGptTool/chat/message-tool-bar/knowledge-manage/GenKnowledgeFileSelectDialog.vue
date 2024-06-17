@@ -39,11 +39,11 @@
 
 import {ref, watch} from "vue";
 import SystemFileSelect from "@/components/system-components/system-file-manage/SystemFileSelect.vue";
-import CreateKnowledge from "@/components/tool-components/chatGptTool/widget/knowledge-manage/CreateKnowledge.vue";
-import {AppChatKnowledgeFileType} from "@/components/tool-components/chatGptTool/model/model";
+import CreateKnowledge
+  from "@/components/tool-components/chatGptTool/chat/message-tool-bar/knowledge-manage/CreateKnowledge.vue";
 import {ElMessage} from "element-plus";
-import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
-import GenKnowledgeUI from "@/components/tool-components/chatGptTool/widget/knowledge-manage/GenKnowledgeUI.vue";
+import GenKnowledgeUI
+  from "@/components/tool-components/chatGptTool/chat/message-tool-bar/knowledge-manage/GenKnowledgeUI.vue";
 
 
 const model = defineModel({default: false})

@@ -1,28 +1,29 @@
 <template>
   <Transition class="animate__animated animate__zoomIn">
-    <div class="label-body column" @mousemove="showClose" @mouseleave="hideClose">
+    <div ref="label" class="label-body column" @mousemove="showClose" @mouseleave="hideClose">
       <div class="fit justify-between" style="display: flex">
-        <div class="row ellipsis" style="padding-left: 5px">
-          <div class="column justify-center" @click.stop="OpenWindow">
+        <div class="row ellipsis" style="padding-left: 5px" @click.stop="OpenWindow">
+          <div class="column justify-center">
             <q-icon style="margin-left: 5px" :name="win.icon"/>
           </div>
-          <div class="label-title column justify-center ellipsis" @click.stop="OpenWindow">
+          <div class="label-title column justify-center ellipsis">
             <div class="ellipsis" style="margin-left: 5px;user-select: none;max-width: 120px">
               {{ win.title }}
             </div>
           </div>
         </div>
+        <q-space @click.stop="OpenWindow"/>
         <div class="column justify-center" style="width: 25px;padding-right: 5px">
           <q-btn v-if="showCloseFlag" size="sm" dense flat icon="jimu-guanbi-2" @click.stop="CloseWindow"
                  :text-color="'red'"
           />
         </div>
       </div>
-      <transition
-          enter-active-class="animate__animated animate__bounceIn"
-      >
-        <div v-if="props.win.check" class="active"></div>
-      </transition>
+      <!--      <transition
+                enter-active-class="animate__animated animate__bounceIn"
+            >
+              <div v-if="props.win.check" class="active"></div>
+            </transition>-->
     </div>
   </Transition>
 </template>
@@ -40,7 +41,7 @@ const {getPaletteColor} = colors
 const windowLabel = useWindowsStore()
 const router = useRouter()
 const theme = useThemeStore()
-
+const label = ref()
 const props = defineProps<{
   win: WindowLabel,
   index: number
@@ -48,8 +49,8 @@ const props = defineProps<{
 
 
 // 标签 背景色
-const label_bg_color = ref('white')
-const label_text_color = ref('black')
+const label_bg_color = ref('primary')
+const label_text_color = ref('white')
 
 // 标签 活跃背景色
 const label_active_bg_color = ref()
@@ -98,12 +99,32 @@ WindowTagIcon[0] = 'jimu-chuangkouzuidahua'
 WindowTagIcon[1] = 'jimu-ChatGPT'
 const icon = ref()
 
+setTimeout(() => {
+  if (props.win.check) {
+    label.value.style.background = getPaletteColor(label_bg_color.value)
+    label.value.style.color = getPaletteColor(label_text_color.value)
+    label.value.style.mask = `url("public/label.png")`
+    label.value.style.maskSize = '100% 100%'
+  }
+}, 200)
+
 
 /*
 * @description 监听每次的状态变化,否则会有更新不及时的地方
 * */
 watch(() => props.win.check, (val) => {
   showCloseFlag.value = val
+  if (val) {
+    label.value.style.background = getPaletteColor(label_bg_color.value)
+    label.value.style.color = getPaletteColor(label_text_color.value)
+    label.value.style.mask = `url("public/label.png")`
+    label.value.style.maskSize = '100% 100%'
+  } else {
+    label.value.style.background = 'none'
+    label.value.style.color = ''
+    label.value.style.mask = ''
+    label.value.style.maskSize = ''
+  }
 })
 
 
@@ -117,11 +138,14 @@ onMounted(() => {
   position: relative;
   border-style: none;
   min-width: 120px;
-  height: 39px;
+  height: 30px;
   cursor: default;
   user-select: none;
   -webkit-app-region: no-drag;
   /*  border-bottom: rgba(140, 147, 157, 0.34) 1px solid;*/
+  /*  mask: url("public/label.png");
+    mask-size: 100% 100%;
+    background: #64b385;*/
 }
 
 .label-title {
