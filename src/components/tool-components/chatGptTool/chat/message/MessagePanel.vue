@@ -15,12 +15,6 @@
       <MessageHeaderBar/>
     </q-toolbar>
     <div class="column relative-position" style="flex-grow:1;overflow-x: hidden;">
-      <!--      <q-intersection
-                v-for="(item,index) in ctx.CurrentChat.messageList"
-                :key="index"
-            >
-              <chat-message :message="item" :index="index"/>
-            </q-intersection>-->
       <q-scroll-area
           ref="scrollAreaRef"
           id="messageScrollArea"
@@ -78,11 +72,7 @@ import emitter from "@/plugins/event";
 import {MessageObserver, ScrollMove, SendActionScroll, TypewriterScrollMove} from "@/plugins/evenKey";
 import {useThemeStore} from "@/components/system-components/store/theme";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
-import {MessageType} from "@/components/tool-components/chatGptTool/model/chat";
 import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
-import MenuItem from "@/components/system-components/widget/MenuItem.vue";
-import OllamaModelSelect from "@/components/tool-components/chatGptTool/widget/OllamaModelSelect.vue";
-import KnowledgeFileManage from "@/components/tool-components/chatGptTool/widget/knowledge/KnowledgeFileManage.vue";
 import ChatMessage from "@/components/tool-components/chatGptTool/chat/message/ChatMessage.vue";
 import MessageHeaderBar from "@/components/tool-components/chatGptTool/chat/message/MessageHeaderBar.vue";
 
@@ -194,9 +184,10 @@ let observer = null
 
 function beginObserver() {
   // 当前消息数量 小于50条数据不需要进行优化,不执行元素观察优化
-  if (ctx.CurrentChat.messageList.length < 50) {
-    return
-  }
+  /*  if (ctx.CurrentChat.messageList.length < 50) {
+      return
+    }*/
+
   // 创建元素观察器
   if (observer != null) {
     observer.disconnect()
@@ -207,24 +198,58 @@ function beginObserver() {
       let id = entry.target.id
       let nextId = ((entry.target.nextSibling) as HTMLElement).id
       if (entry.isIntersecting) {
-        if (entry.target.previousSibling) {
-          if (!ctx.view.includes(perId)) {
-            ctx.view.push(perId)
-          }
-        }
-        if (entry.target.nextSibling) {
-          if (!ctx.view.includes(nextId)) {
-            ctx.view.push(nextId)
-          }
-        }
-        if (!ctx.view.includes(id)) {
+        // 显示当前节点
+        if (id && !ctx.view.includes(id)) {
           ctx.view.push(id)
         }
-      } else {
-        // 元素离开可视区域,可显示数量超过一定数量就随机删除显示数据
-        if (ctx.view.length > 15) {
-          ctx.view.splice(0, ctx.view.length - 10)
+        // 根据滚动条的方向来判断是向下滚动还是向上滚动,分别处理应该加载的数据
+        if (scrollDirection.value) {
+          // 向下滚动,提前显示下一个节点
+          if (entry.target.nextSibling) {
+            if (nextId && !ctx.view.includes(nextId)) {
+              ctx.view.push(nextId)
+            }
+          }
+        } else {
+          // 提前显示上一个节点
+          if (entry.target.previousSibling) {
+            if (perId && !ctx.view.includes(perId)) {
+              ctx.view.push(perId)
+            }
+          }
         }
+      } else {
+        /*        if (id && !ctx.view.includes(id)) {
+                  let index = ctx.view.findIndex(item => {
+                    return item === id
+                  });
+                  if (index != -1) {
+                    ctx.view.splice(index, 1);
+                  }
+                }*/
+
+        setTimeout(() => {
+          if (scrollDirection.value) {
+            if (entry.target.previousSibling) {
+              let index = ctx.view.findIndex(item => {
+                return item === perId
+              });
+              if (index != -1) {
+                ctx.view.splice(index, 1);
+              }
+            }
+          } else {
+            if (entry.target.nextSibling) {
+              let index = ctx.view.findIndex(item => {
+                return item === nextId
+              });
+              if (index != -1) {
+                ctx.view.splice(index, 1);
+              }
+            }
+          }
+        }, 300)
+
       }
     });
   }, options);

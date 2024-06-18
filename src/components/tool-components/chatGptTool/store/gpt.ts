@@ -237,9 +237,6 @@ export const useGptStore = defineStore('gpt', {
             this.newView = []
             let data = await getConversationMessage(id)
             this.CurrentChat.messageList = data
-            setTimeout(() => {
-                emitter.emit(MessageObserver)
-            }, 500)
         },
 
         UpdateConversationLastMsg(conversationID: string, message: AppChatMessageItem) {

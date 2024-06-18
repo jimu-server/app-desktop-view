@@ -52,6 +52,12 @@
           </div>
         </div>
       </ToolWidget>
+
+      <ToolWidget>
+        <q-icon size="20px" class="edit-tool-option" name="jimu-shijian-2"
+                >
+        </q-icon>
+      </ToolWidget>
       <ToolWidget style="margin-right: 5px">
         <q-icon size="20px" class="edit-tool-option" :name="isMax?'jimu-zuixiaohua':'jimu-zuidahua'"
                 @click.stop="max">

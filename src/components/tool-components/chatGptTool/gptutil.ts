@@ -50,24 +50,6 @@ export function getSendCtx(): SendCtx {
     }
 }
 
-
-
-
-export async function SendTextMessage(recoverMessageId: string, text: string) {
-    let {conversationId, plugin, user, store} = getSendCtx()
-    // 创建问题消息,
-    sendMessage(conversationId, recoverMessageId, text, plugin.model, user.user.picture).then(async result => {
-        if (result.code === 200) {
-            store.CurrentChat.messageList.push(result.data)
-            // 新消息要追加到可显示列表中
-            store.newView.push(result.data.id)
-            emitter.emit(SendActionScroll)
-            // 问题消息发送成功 ,开始获取流是回答
-            await getReply(result.data)
-        }
-    })
-}
-
 /*
 * @description 对指定消息的回答进行重试操作
 * @param {conversationId} 会话id
@@ -119,8 +101,6 @@ export async function getReply(message: AppChatMessageItem) {
     msg.role = 'assistant'
     // 把消息添加到本地缓存
     store.CurrentChat.messageList.push(msg)
-    // 新消息要追加到可显示列表中
-    store.newView.push(uuid)
     return true
 }
 

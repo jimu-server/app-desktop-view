@@ -17,13 +17,10 @@ export const useNotifyStore = defineStore('notify', {
             this.list.forEach(item => {
                 if (item.status === NotifyStatus.UnRead) this.unread++
             })
-            if (this.unread == 0 && this.list.length > 0) {
-                return NotifyToolStatusType.ReadAllNotify
-            } else if (this.unread > 0) {
+            if (this.unread > 0) {
                 return NotifyToolStatusType.UnReadNotify
-            } else {
-                return NotifyToolStatusType.NoNotify
             }
+            return NotifyToolStatusType.NoNotify
         }
     },
     actions: {

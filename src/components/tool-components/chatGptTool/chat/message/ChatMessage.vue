@@ -25,7 +25,7 @@
         </slot>
       </div>
       <!--   消息正文   -->
-      <div ref="bodyRef" v-show="isShow" class="chat-body shadow-1" @mouseover="overMessage=true"
+      <div ref="bodyRef" class="chat-body shadow-1" @mouseover="overMessage=true"
            @mouseleave="outOverMessage">
         <!--   用户消息展示     -->
         <TextMessage v-if="message.role=='user'" :message="message" :index="index"/>
@@ -134,22 +134,6 @@ const props = defineProps<
     }
 >()
 
-
-function deleteMessage() {
-  setTimeout(async () => {
-    let result = await deleteMsg([props.message.id])
-    if (result.code == 200) {
-      ctx.CurrentChat.messageList.splice(props.index, 1)
-      ElMessage({
-        message: '删除成功',
-        type: 'success',
-        plain: true
-      })
-    }
-  }, 200)
-
-}
-
 function outOverMessage() {
   setTimeout(() => {
     overMessage.value = false
@@ -161,14 +145,6 @@ function outOverFooter() {
     overFooter.value = false
   }, 200)
 }
-
-/*
-* @description: 根据消息数量控制面板消息加载渲染
-* */
-const isShow = computed(() => {
-    if (ctx.CurrentChat.messageList.length < 50) return true
-    return ctx.view.includes(props.message.id) || ctx.newView.includes(props.message.id)
-})
 
 let info = props.message!
 const send = ref(false)

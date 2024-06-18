@@ -35,6 +35,8 @@ async function clear() {
       grouping: true
     })
     ctx.CurrentChat.messageList = []
+    ctx.view = []
+    ctx.newView = []
   }
 }
 </script>
