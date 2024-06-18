@@ -58,7 +58,7 @@
 import {computed, ref, watch} from "vue";
 import {ElMessage} from "element-plus";
 import {getSecurePhoneCode, updatePhone} from "@/components/system-components/request";
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 
 const props = defineProps({
   title: {

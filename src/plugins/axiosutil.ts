@@ -1,4 +1,4 @@
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import pinia from "@/pinia";
 
 

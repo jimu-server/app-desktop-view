@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {desktop_minimize} from "@/components/system-components/desktop/desktop";
-import {usePlatformStore} from "@/store/platform";
+import {usePlatformStore} from "@/components/system-components/store/platform";
 const platform = usePlatformStore()
 </script>
 

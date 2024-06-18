@@ -1,4 +1,4 @@
-import {useNotifyStore} from "@/store/tool/notify";
+import {useNotifyStore} from "@/components/system-tool/notifyTool/store/notify";
 import pina from "@/pinia";
 import {deleteNotify, getAllNotify, readNotify} from "@/components/system-tool/notifyTool/notifyRequest";
 

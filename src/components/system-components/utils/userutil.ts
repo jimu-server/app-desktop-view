@@ -1,9 +1,9 @@
 /*
 * @description: 重新加载用户信息
 * */
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import pina from "@/pinia";
-import {useToolStore} from "@/store/tool";
+import {useToolStore} from "@/components/system-components/store/tool";
 import {
     appSetting,
     getDicts,
@@ -14,9 +14,9 @@ import {
     getUserJoinOrgList,
     getUserJoinOrgRoleList
 } from "@/components/system-components/request";
-import {useAuthStore} from "@/store/auth";
-import {useNotifyStore} from "@/store/tool/notify";
-import {useAppStore} from "@/store/app";
+import {useAuthStore} from "@/components/system-components/store/auth";
+import {useNotifyStore} from "@/components/system-tool/notifyTool/store/notify";
+import {useAppStore} from "@/components/system-components/store/app";
 import {getAllNotify} from "@/components/system-tool/notifyTool/notifyRequest";
 import CryptoJS from 'crypto-js'
 

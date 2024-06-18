@@ -115,7 +115,7 @@
 </template>
 
 <script setup lang="ts">
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 import {onMounted, ref} from "vue";
 import {Role, Router, Tool} from "@/components/system-components/model/system";
 import AddRouterDialog from "@/components/system-tool/manageTool/page/dialog/AddRouterDialog.vue";

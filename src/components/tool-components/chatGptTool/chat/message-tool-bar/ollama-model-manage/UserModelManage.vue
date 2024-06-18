@@ -77,7 +77,7 @@ import {
 import {GetHeaders} from "@/plugins/axiosutil";
 import {ElMessage, ElNotification} from "element-plus";
 import {deleteModel} from "@/components/tool-components/chatGptTool/chatRequest";
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 import {Stream} from "@/components/system-components/stream/stream";
 import {downloadOllamaModel} from "@/components/tool-components/chatGptTool/ollamaRequest";
 import {Result} from "@/components/system-components/model/system";

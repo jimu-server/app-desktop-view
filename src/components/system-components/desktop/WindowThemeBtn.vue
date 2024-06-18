@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import {desktop_theme_change} from "@/components/system-components/desktop/desktop";
 import {useQuasar} from "quasar";
 

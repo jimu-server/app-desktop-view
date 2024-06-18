@@ -10,24 +10,26 @@ import {onMounted, onUnmounted} from "vue";
 import {ipcRenderer} from "electron";
 import emitter from "./plugins/event";
 import {useQuasar} from "quasar";
-import {useThemeStore} from "./store/theme";
-import {useAppStore} from "@/store/app";
+import {useThemeStore} from "./components/system-components/store/theme";
+import {useAppStore} from "@/components/system-components/store/app";
 import {getUserAllRoute, getUserAuthTool} from "@/components/system-components/request";
-import {useAuthStore} from "@/store/auth";
-import {useToolStore} from "@/store/tool";
-import {userStore} from "@/store/user";
+import {useAuthStore} from "@/components/system-components/store/auth";
+import {useToolStore} from "@/components/system-components/store/tool";
+import {userStore} from "@/components/system-components/store/user";
 import {UpdateAuthEvent, UpdateAuthWindowEvent, UserLogout} from "@/plugins/evenKey";
 import {desktop_logout, desktop_open_dev} from "@/components/system-components/desktop/desktop";
-import {useWindowsStore} from "@/store/windows";
+import {useWindowsStore} from "@/components/system-components/store/windows";
 import {useRouter} from "vue-router";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {homePath} from "@/variable";
+import {useNotifyStore} from "@/components/system-tool/notifyTool/store/notify";
 
 const app = useAppStore()
 const user = userStore()
 const tool = useToolStore()
 const auth = useAuthStore()
 const theme = useThemeStore()
+const notify = useNotifyStore()
 const router = useRouter()
 const win = useWindowsStore()
 const gpt = useGptStore()
@@ -97,6 +99,8 @@ async function UserLogoutEvent() {
   tool.clear()
   // 清空会话消息
   gpt.clear()
+  // 清空通知
+  notify.clear()
   desktop_logout()
 }
 

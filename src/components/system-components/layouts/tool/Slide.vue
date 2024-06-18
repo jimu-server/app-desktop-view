@@ -5,7 +5,7 @@
 <script setup lang="ts">
 
 import {onDeactivated, onMounted, ref} from "vue";
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 
 
 const emits = defineEmits({

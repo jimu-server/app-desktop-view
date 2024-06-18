@@ -9,7 +9,7 @@ import MarkdownItContainer from 'markdown-it-container'
 import MarkdownItAddr from 'markdown-it-abbr'
 import MarkdownItFootnote from 'markdown-it-footnote'
 import MarkdownItDeflist from 'markdown-it-deflist'
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import pinia from "@/pinia";
 
 const md = markdownit({

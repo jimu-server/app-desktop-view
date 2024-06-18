@@ -1,12 +1,12 @@
 import {createRouter, createWebHashHistory, Router, RouteRecordRaw} from "vue-router";
 import {homePath, homePathName, rootPath, rootPathName} from "@/variable";
-import {useRouterStore} from "@/store/router";
+import {useRouterStore} from "@/components/system-components/store/router";
 import pinia from "@/pinia";
 import NotFound from "@/components/system-components/NotFound.vue";
-import {useToolStore} from "@/store/tool";
-import {userStore} from "@/store/user";
+import {useToolStore} from "@/components/system-components/store/tool";
+import {userStore} from "@/components/system-components/store/user";
 import {set} from "lodash";
-import {usePlatformStore} from "@/store/platform";
+import {usePlatformStore} from "@/components/system-components/store/platform";
 
 
 const routes: RouteRecordRaw[] = []

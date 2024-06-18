@@ -106,12 +106,12 @@
 import {computed, ref} from "vue";
 
 
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
 import {retryMessage} from "@/components/tool-components/chatGptTool/gptutil";
 import MarkDownMessage from "@/components/tool-components/chatGptTool/chat/message/MarkDownMessage.vue";
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import MessageAction from "@/components/tool-components/chatGptTool/chat/message/MessageAction.vue";
 import {deleteMsg} from "@/components/tool-components/chatGptTool/chatRequest";
 import {ElMessage} from "element-plus";

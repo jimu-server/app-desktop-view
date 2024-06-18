@@ -188,7 +188,7 @@
 
 
 import {onMounted, ref, watch} from "vue";
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import {ElMessage, UploadProps} from "element-plus";
 import InfoEditor from "@/components/system-components/avatar/InfoEditor.vue";
 import {
@@ -200,7 +200,7 @@ import {
   updateUserOrgRole
 } from "@/components/system-components/request";
 import {baseInfo} from "@/components/system-components/utils/userutil";
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 import {Role} from "@/components/system-components/model/system";
 import AlterPasswordDialog from "@/components/system-components/avatar/AlterPasswordDialog.vue";
 import AlterPhoneDialog from "@/components/system-components/avatar/AlterPhoneDialog.vue";

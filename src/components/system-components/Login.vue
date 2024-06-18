@@ -236,7 +236,7 @@
 import {computed, onMounted, onUnmounted, reactive, ref} from "vue";
 import {useRouter} from "vue-router";
 import {homePath} from "@/variable";
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import {ElMessage, FormInstance, FormItemRule, FormRules} from "element-plus";
 import {getPassword, loadUserInfo} from "@/components/system-components/utils/userutil";
 import {defaultLogin, doResetPassword, getPhoneCode, registerUser} from "@/components/system-components/request";
@@ -246,7 +246,7 @@ import WindowCloseBtn from "@/components/system-components/desktop/WindowCloseBt
 import {desktop_login} from "@/components/system-components/desktop/desktop";
 import {ipcRenderer} from "electron";
 import AccountMenuList from "@/components/system-components/AccountMenuList.vue";
-import {useAccountStore} from "@/store/account";
+import {useAccountStore} from "@/components/system-components/store/account";
 
 const user = userStore()
 const router = useRouter()

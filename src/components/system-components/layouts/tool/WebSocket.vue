@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import {onMounted, onUnmounted, ref} from "vue";
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import {GetHeaders} from "@/plugins/axiosutil";
 
 const props = defineProps({

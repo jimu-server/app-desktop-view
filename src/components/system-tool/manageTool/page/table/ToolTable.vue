@@ -123,7 +123,7 @@
 </template>
 
 <script setup lang="ts">
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 import {onMounted, ref} from "vue";
 import {Tool} from "@/components/system-components/model/system";
 

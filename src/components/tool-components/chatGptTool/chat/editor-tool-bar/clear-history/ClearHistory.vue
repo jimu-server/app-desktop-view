@@ -10,7 +10,7 @@
 </template>
 <script setup lang="ts">
 import {computed} from "vue";
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import {clearMessage} from "@/components/tool-components/chatGptTool/chatRequest";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {ElMessage} from "element-plus";

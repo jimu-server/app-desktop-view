@@ -24,7 +24,7 @@
   </q-menu>
 </template>
 <script setup lang="ts">
-import {useAccountStore} from "@/store/account";
+import {useAccountStore} from "@/components/system-components/store/account";
 import {AccountList} from "@/components/system-components/model/system";
 
 const account = useAccountStore()

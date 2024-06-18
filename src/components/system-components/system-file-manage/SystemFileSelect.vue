@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import {nextTick, onMounted, ref, watch} from "vue";
-import {useElectronStore} from "@/store/electron";
+import {useElectronStore} from "@/components/system-components/store/electron";
 
 const electron = useElectronStore()
 const tree = ref()

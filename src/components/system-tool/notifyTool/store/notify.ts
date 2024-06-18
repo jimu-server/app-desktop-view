@@ -26,5 +26,10 @@ export const useNotifyStore = defineStore('notify', {
             }
         }
     },
-    actions: {}
+    actions: {
+        clear(){
+            this.list = []
+            this.unread = 0
+        }
+    }
 })

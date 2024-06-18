@@ -60,7 +60,7 @@ import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";
 import {AppChatConversationItem} from "@/components/tool-components/chatGptTool/model/model";
 import {delConversation, getConversation} from "@/components/tool-components/chatGptTool/chatRequest";
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import {colors} from "quasar";
 import ConversationItemMenu from "@/components/tool-components/chatGptTool/chat/conversation/ConversationItemMenu.vue";
 

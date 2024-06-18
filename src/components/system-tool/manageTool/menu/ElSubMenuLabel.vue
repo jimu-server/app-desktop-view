@@ -17,7 +17,7 @@
 
 import {Router, Tree, WindowLabel} from "@/components/system-components/model/system";
 import router from "@/route";
-import {useWindowsStore} from "@/store/windows";
+import {useWindowsStore} from "@/components/system-components/store/windows";
 
 const widowsLabel = useWindowsStore()
 const props = defineProps<{

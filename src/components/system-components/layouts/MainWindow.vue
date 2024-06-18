@@ -92,15 +92,15 @@
 <script setup lang="ts">
 import {onMounted, onUnmounted, ref} from 'vue'
 import {useQuasar} from "quasar";
-import {useWindowsStore} from "@/store/windows";
+import {useWindowsStore} from "@/components/system-components/store/windows";
 
 import {useRouter} from "vue-router";
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import {GlobalNotification, UserLogout} from "@/plugins/evenKey";
 import emitter from "@/plugins/event";
 import WindowScroll from "@/components/system-components/window/tag/WindowScroll.vue";
-import {useToolStore} from "@/store/tool";
-import {userStore} from "@/store/user";
+import {useToolStore} from "@/components/system-components/store/tool";
+import {userStore} from "@/components/system-components/store/user";
 import MainWindowTool from "@/components/system-components/layouts/tool/MainWindowTool.vue";
 import UserAvatar from "@/components/system-components/avatar/UserAvatar.vue";
 import DefaultBtn from "@/components/system-components/tool/btn/DefaultBtn.vue";
@@ -119,7 +119,7 @@ import SettingDialog from "@/components/system-components/setting/SettingDialog.
 import WindowThemeBtn from "@/components/system-components/desktop/WindowThemeBtn.vue";
 import WindowCloseBtn2 from "@/components/system-components/desktop/WindowCloseBtn2.vue";
 import WindowToggleBtn from "@/components/system-components/desktop/WindowToggleBtn.vue";
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 
 
 const widowsLabel = useWindowsStore()

@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import {useQuasar} from "quasar";
-import {useNotifyStore} from "@/store/tool/notify";
+import {useNotifyStore} from "@/components/system-tool/notifyTool/store/notify";
 import {Records, Tool} from "@/components/system-components/model/system";
 
 import {onMounted} from "vue";

@@ -31,7 +31,7 @@
 
 import PluginView from "@/components/tool-components/chatGptTool/chat/editor-tool-bar/plugins/PluginView.vue";
 import {computed, onMounted, ref, watch} from "vue";
-import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";import {useThemeStore} from "@/store/theme";
+import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";import {useThemeStore} from "@/components/system-components/store/theme";
 import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";
 import {getPlugins} from "@/components/tool-components/chatGptTool/chatRequest";
 

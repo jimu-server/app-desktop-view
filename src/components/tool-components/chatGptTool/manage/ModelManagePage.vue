@@ -65,7 +65,7 @@ import {LLmMole, ProgressResponse} from "@/components/tool-components/chatGptToo
 import {GetHeaders} from "@/plugins/axiosutil";
 import {ElMessage, ElNotification} from "element-plus";
 import {deleteModel} from "@/components/tool-components/chatGptTool/chatRequest";
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 
 const ctx = useGptStore()
 // 只允许单个下载

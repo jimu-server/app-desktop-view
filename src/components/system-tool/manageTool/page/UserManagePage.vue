@@ -104,9 +104,9 @@
 <script setup lang="ts">
 
 import {onMounted, ref, watch} from "vue";
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import {Org, Tree, User} from "@/components/system-components/model/system";
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 import {getUserList} from "@/components/system-tool/manageTool/manageRequest";
 
 const user = userStore()

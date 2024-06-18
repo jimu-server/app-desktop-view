@@ -31,12 +31,12 @@
 <script setup lang="ts">
 import WindowTag from "./WindowTag.vue";
 import {onMounted, onUnmounted} from "vue";
-import {useWindowsStore} from "@/store/windows";
+import {useWindowsStore} from "@/components/system-components/store/windows";
 import draggable from 'vuedraggable'
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import emitter from "@/plugins/event";
 import {UpdateAuthEvent, UpdateAuthWindowEvent} from "@/plugins/evenKey";
-import {useAuthStore} from "@/store/auth";
+import {useAuthStore} from "@/components/system-components/store/auth";
 import WindowScrollX from "@/components/system-components/window/tag/WindowScrollX.vue";
 
 

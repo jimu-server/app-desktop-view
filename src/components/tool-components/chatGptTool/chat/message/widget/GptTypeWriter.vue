@@ -16,7 +16,7 @@ import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model
 import {onMounted, onUpdated, reactive, ref} from "vue";
 import {Stream} from "@/components/system-components/stream/stream";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import {getMessage} from "@/components/tool-components/chatGptTool/chatRequest";
 import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
 import md from "@/components/tool-components/chatGptTool/chat/gptMarkDownMessagePreview";

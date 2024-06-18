@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import {Records} from "@/components/system-components/model/system";
 
-import {useNotifyStore} from "@/store/tool/notify";
+import {useNotifyStore} from "@/components/system-tool/notifyTool/store/notify";
 import {readMsg} from "@/components/system-tool/notifyTool/notifyutil";
 import {NotifyStatus} from "@/components/system-tool/notifyTool/template";
 

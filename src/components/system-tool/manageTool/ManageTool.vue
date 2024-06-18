@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import {ref, watch} from "vue";
 import {Router, Tool, Tree} from "@/components/system-components/model/system";
-import {useToolStore} from "@/store/tool";
+import {useToolStore} from "@/components/system-components/store/tool";
 import ElMenuTree from "@/components/system-tool/manageTool/menu/ElMenuTree.vue";
 
 

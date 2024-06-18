@@ -29,7 +29,7 @@
 <script setup lang="ts">
 
 import {ref, watch} from "vue";
-import {useElectronStore} from "@/store/electron";
+import {useElectronStore} from "@/components/system-components/store/electron";
 import SystemFileSelect from "@/components/system-components/system-file-manage/SystemFileSelect.vue";
 
 const electron = useElectronStore()

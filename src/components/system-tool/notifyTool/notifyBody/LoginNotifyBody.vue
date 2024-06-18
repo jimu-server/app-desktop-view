@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {Records} from "@/components/system-components/model/system";
-import {useNotifyStore} from "@/store/tool/notify";
+import {useNotifyStore} from "@/components/system-tool/notifyTool/store/notify";
 import Option from "@/components/system-tool/notifyTool/notifyBody/Option.vue";
 
 

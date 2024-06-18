@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 import {onMounted, ref, watch} from "vue";
 import {Role} from "@/components/system-components/model/system";
 import {getOrgRoleList} from "@/components/system-components/request";

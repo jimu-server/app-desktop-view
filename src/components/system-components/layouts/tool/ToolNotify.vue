@@ -7,7 +7,7 @@
 <script setup lang="ts">
 
 import WebSocket from "@/components/system-components/layouts/tool/WebSocket.vue";
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import {Tool} from "@/components/system-components/model/system";
 
 const props = defineProps<{

@@ -13,10 +13,10 @@
 <script setup lang="ts">
 import {Tool, WindowLabel} from "@/components/system-components/model/system";
 
-import {useWindowsStore} from "@/store/windows";
+import {useWindowsStore} from "@/components/system-components/store/windows";
 
-import {useToolStore} from "@/store/tool";
-import {userStore} from "@/store/user";
+import {useToolStore} from "@/components/system-components/store/tool";
+import {userStore} from "@/components/system-components/store/user";
 import {ToolBtnType, ToolLayout} from "@/components/system-components/model/enum";
 import {useRouter} from "vue-router";
 import ToolNotify from "@/components/system-components/layouts/tool/ToolNotify.vue";

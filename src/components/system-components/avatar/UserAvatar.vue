@@ -118,13 +118,13 @@
 import {onMounted, ref} from 'vue'
 import type {UploadInstance} from 'element-plus'
 
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import {getUserJoinOrgRoleList, getUserOrgDefaultRole} from "@/components/system-components/request";
 import {Org, Role} from "@/components/system-components/model/system";
 import emitter from "@/plugins/event";
 import {UpdateAuthEvent} from "@/plugins/evenKey";
 import UserInfoEditorDialog from "@/components/system-components/avatar/UserInfoEditorDialog.vue";
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 
 const user = userStore()
 const app = useAppStore()

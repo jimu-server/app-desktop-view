@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import {AppChatMessageItem} from "@/components/tool-components/chatGptTool/model/model";
 import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
 import GptTypeWriter from "@/components/tool-components/chatGptTool/chat/message/widget/GptTypeWriter.vue";

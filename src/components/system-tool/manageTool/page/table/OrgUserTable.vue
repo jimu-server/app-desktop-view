@@ -115,7 +115,7 @@
 </template>
 
 <script setup lang="ts">
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 import {onMounted, ref, watch} from "vue";
 import {getOrgUserList} from "@/components/system-tool/manageTool/manageRequest";
 import {User} from "@/components/system-components/model/system";

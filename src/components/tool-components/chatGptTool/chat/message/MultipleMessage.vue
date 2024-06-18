@@ -9,7 +9,7 @@
 
 import {ref} from "vue";
 
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import {MessageItem} from "@/components/tool-components/chatGptTool/model/chat";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 

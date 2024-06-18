@@ -6,11 +6,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import {useToolStore} from "@/store/tool";
+import {useToolStore} from "@/components/system-components/store/tool";
 import {Tool} from "@/components/system-components/model/system";
 import {ToolLayout} from "@/components/system-components/model/enum";
 import {onMounted, ref, watch} from "vue";
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 
 
 const tool = useToolStore()

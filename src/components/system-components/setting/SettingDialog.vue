@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import {ref, watch} from "vue";
 import {AppSetting} from "@/components/system-components/model/system";
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 
 const model = defineModel({default: false, required: true})
 const splitterModel = ref(15)

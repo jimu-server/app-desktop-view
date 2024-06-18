@@ -42,8 +42,8 @@
 import ToolSidebarView from "@/components/system-components/layouts/tool/ToolSidebarView.vue";
 import ToolSidebar from "@/components/system-components/layouts/tool/ToolSidebar.vue";
 import {computed, onMounted, ref, watch} from "vue";
-import {useToolStore} from "@/store/tool";
-import {userStore} from "@/store/user";
+import {useToolStore} from "@/components/system-components/store/tool";
+import {userStore} from "@/components/system-components/store/user";
 import {Tool} from "@/components/system-components/model/system";
 import {ToolLayout} from "@/components/system-components/model/enum";
 

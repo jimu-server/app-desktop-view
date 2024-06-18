@@ -6,7 +6,7 @@ import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {sendMessage} from "@/components/tool-components/chatGptTool/chatRequest";
 import {AppChatMessageItem, SendCtx} from "@/components/tool-components/chatGptTool/model/model";
 import {genStream} from "@/components/tool-components/chatGptTool/ollamaRequest";
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import {VITE_APP_OLLAMA_SERVER} from "@/env";
 import {getUuid} from "@/utils/systemutils";
 import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";

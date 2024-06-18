@@ -31,8 +31,8 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 import {useRouter} from "vue-router";
-import {useWindowsStore} from "@/store/windows";
-import {useThemeStore} from "@/store/theme";
+import {useWindowsStore} from "@/components/system-components/store/windows";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import {colors, useQuasar} from "quasar";
 import {WindowLabel} from "@/components/system-components/model/system";
 

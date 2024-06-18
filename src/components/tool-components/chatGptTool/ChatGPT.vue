@@ -73,7 +73,7 @@ import {colors} from "quasar";
 import emitter from "@/plugins/event";
 import SearchInput from "@/components/tool-components/chatGptTool/widget/SearchInput.vue";
 
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 import {ElMessage} from "element-plus";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {IsEmpty} from "@/components/tool-components/chatGptTool/chat/chatutils";

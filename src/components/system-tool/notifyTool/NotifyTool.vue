@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 
-import {useNotifyStore} from "@/store/tool/notify";
+import {useNotifyStore} from "@/components/system-tool/notifyTool/store/notify";
 import {clearNotify, getAllNotify} from "@/components/system-tool/notifyTool/notifyRequest";
 
 

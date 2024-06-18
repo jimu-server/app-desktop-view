@@ -13,8 +13,8 @@ import {onMounted, ref} from "vue";
 import {ipcMain, ipcRenderer} from "electron";
 import MenuItem from "@/components/system-components/widget/MenuItem.vue";
 import {desktop_exit} from "@/components/system-components/desktop/desktop";
-import {useAppStore} from "@/store/app";
-import {useThemeStore} from "@/store/theme";
+import {useAppStore} from "@/components/system-components/store/app";
+import {useThemeStore} from "@/components/system-components/store/theme";
 
 const tray = ref()
 const app = useAppStore()

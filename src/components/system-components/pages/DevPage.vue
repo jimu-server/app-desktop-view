@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import {h, onMounted, ref, render} from "vue";
-import {useAppStore} from "@/store/app";
+import {useAppStore} from "@/components/system-components/store/app";
 
 const app = useAppStore()
 

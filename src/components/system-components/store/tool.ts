@@ -2,7 +2,7 @@ import {defineStore} from "pinia";
 import router, {modules} from "@/route";
 import {rootPathName} from "@/variable";
 import {getUserAuthToolMenu} from "@/components/system-components/request";
-import {userStore} from "@/store/user";
+import {userStore} from "@/components/system-components/store/user";
 import pina from "@/pinia";
 import {Router, Tool, Tree} from "@/components/system-components/model/system";
 import {ToolLayout} from "@/components/system-components/model/enum";

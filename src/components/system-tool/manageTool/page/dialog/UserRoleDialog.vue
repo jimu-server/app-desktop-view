@@ -231,8 +231,8 @@ import {
   OrgUserAuthTool,
   OrgUserAuthToolRouter
 } from "@/components/system-tool/manageTool/manageRequest";
-import {userStore} from "@/store/user";
-import {useToolStore} from "@/store/tool";
+import {userStore} from "@/components/system-components/store/user";
+import {useToolStore} from "@/components/system-components/store/tool";
 import {
   computingAuthorization,
   getIds,

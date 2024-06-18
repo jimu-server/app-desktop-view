@@ -76,7 +76,7 @@
 import {computed, onUnmounted, ref, watch} from "vue";
 import emitter from "@/plugins/event";
 import {MessageObserver, ScrollMove, SendActionScroll, TypewriterScrollMove} from "@/plugins/evenKey";
-import {useThemeStore} from "@/store/theme";
+import {useThemeStore} from "@/components/system-components/store/theme";
 import {useGptStore} from "@/components/tool-components/chatGptTool/store/gpt";
 import {MessageType} from "@/components/tool-components/chatGptTool/model/chat";
 import {updateTheme} from "@/components/tool-components/chatGptTool/style/update";
