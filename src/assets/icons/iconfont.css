@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4446394 */
-  src: url('iconfont.woff2?t=1718608771591') format('woff2'),
-       url('iconfont.woff?t=1718608771591') format('woff'),
-       url('iconfont.ttf?t=1718608771591') format('truetype');
+  src: url('iconfont.woff2?t=1718678500685') format('woff2'),
+       url('iconfont.woff?t=1718678500685') format('woff'),
+       url('iconfont.ttf?t=1718678500685') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.jimu-ClearNight-qing-yewan:before {
+  content: "\e612";
+}
+
+.jimu-Sunny:before {
+  content: "\e615";
 }
 
 .jimu-a-ziyuan207:before {

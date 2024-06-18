@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "29548736",
+      "name": "Clear Night晴-夜晚",
+      "font_class": "ClearNight-qing-yewan",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "29550808",
+      "name": "Sunny晴",
+      "font_class": "Sunny",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
       "icon_id": "36961665",
       "name": "回到底部",
       "font_class": "a-ziyuan207",
