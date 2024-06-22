@@ -19,7 +19,7 @@
           </div>
         </div>
         <div style="flex-grow: 1">
-          <SystemFileSelect ref="select" :filter="['docx']"/>
+          <SystemFileSelect ref="select" :filter="['docx','pdf']"/>
         </div>
         <div class="file-footer row reverse">
           <div class=" column justify-center">

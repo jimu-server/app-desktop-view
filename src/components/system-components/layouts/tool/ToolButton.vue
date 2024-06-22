@@ -37,7 +37,6 @@ const emits = defineEmits({
 
 const router = useRouter()
 
-const user = userStore()
 const tool = useToolStore()
 const widowsLabel = useWindowsStore()
 

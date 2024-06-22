@@ -1,6 +1,6 @@
 <template>
   <q-btn dense square flat :icon=" $q.dark.isActive?'img:/public/light.png':'img:/public/dark.png'" @click.stop="alter"
-         style="height: 100%;width: 40px;-webkit-app-region: no-drag;"/>
+        :ripple="false" style="height: 100%;width: 40px;-webkit-app-region: no-drag;"/>
 </template>
 
 <script setup lang="ts">

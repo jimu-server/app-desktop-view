@@ -19,6 +19,7 @@
 
 import {useNotifyStore} from "@/components/system-tool/notifyTool/store/notify";
 import {clearNotify, getAllNotify} from "@/components/system-tool/notifyTool/notifyRequest";
+import NotifyCard from "@/components/system-tool/notifyTool/NotifyCard.vue";
 
 
 

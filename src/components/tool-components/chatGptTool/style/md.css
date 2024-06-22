@@ -2,7 +2,7 @@
 :root {
 
     --md-msg-gpt-bg: rgb(255, 255, 255);
-    --md-msg-user-bg: #96ec6a;
+    --md-msg-user-bg: var(--q-primary);
 
     --md-msg-title1: 25px;
     --md-msg-title2: 24px;
@@ -138,7 +138,7 @@
     padding: 10px;
     border-radius: 5px;
     background-color: var(--md-msg-user-bg);
-    color: black;
+    color: #ffffff;
 }
 
 .markdown-message.gpt-message {

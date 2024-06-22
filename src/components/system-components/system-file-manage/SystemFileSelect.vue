@@ -151,6 +151,9 @@ function getFileIcon(data: FileTree) {
   if (data.name.endsWith(".xlsx")) {
     return 'img:public/file-icon/xlsx.png'
   }
+  if (data.name.endsWith(".pdf")) {
+    return 'img:public/file-icon/pdfwenjian.png'
+  }
   return 'jimu-wenjian'
 }
 
