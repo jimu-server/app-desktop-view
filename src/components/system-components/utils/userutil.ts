@@ -44,7 +44,7 @@ export async function loadUserInfo() {
     tool.buttons.forEach(element => {
         tools.push(element.id)
     })
-    app.settings = await appSetting(tools)
+    // app.settings = await appSetting(tools)
 }
 
 export async function baseInfo() {

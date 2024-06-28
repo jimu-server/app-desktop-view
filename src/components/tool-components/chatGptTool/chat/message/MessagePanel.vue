@@ -14,14 +14,14 @@
       <q-space/>
       <MessageHeaderBar/>
     </q-toolbar>
-    <div class="column relative-position" style="flex-grow:1;overflow-x: hidden;">
+    <div ref="messageList" class="column relative-position" style="flex-grow:1;overflow-x: hidden;">
       <q-scroll-area
           ref="scrollAreaRef"
           id="messageScrollArea"
           class="fit"
           :visible="false"
           @scroll="scroll"
-                     style="overflow-x: hidden;">
+          style="overflow-x: hidden;">
         <!--        &lt;!&ndash; 更具实际布局对照,消息大于多少条时切换到 &ndash;&gt;
                 <q-infinite-scroll v-if="ctx.CurrentChat.messageList.length>10" :visible="false" :offset="0" reverse
                                    style="width: 100%"
@@ -47,6 +47,13 @@
                     <chat-message :message="item" :index="index"/>
                   </template>
                 </div>-->
+        <!--        <q-virtual-scroll
+                    scroll-target="#messageScrollArea > .scroll"
+                    :items="ctx.CurrentChat.messageList"
+                    v-slot="{ item, index }"
+                >
+                  <chat-message :message="item" :index="index"/>
+                </q-virtual-scroll>-->
         <template v-for="(item,index) in ctx.CurrentChat.messageList">
           <chat-message :message="item" :index="index"/>
         </template>
@@ -79,6 +86,7 @@ import MessageHeaderBar from "@/components/tool-components/chatGptTool/chat/mess
 const scrollAreaRef = ref()
 const ctx = useGptStore()
 const previousScrollTop = ref(0)
+const messageList = ref()
 // 记录滚动方向 true:向下,false:向上
 const scrollDirection = ref(true)
 defineExpose({
@@ -118,10 +126,6 @@ function scroll(value) {
 * */
 function MoveScrollBottom() {
   move_scroll_bottom()
-  // 处理大量消息的动态渲染,第一次滚动到底部会不完整,需要补偿,递归调用,直到滚动到底部
-  setTimeout(() => {
-    move_scroll_bottom()
-  }, 1000)
 }
 
 function move_scroll_bottom() {

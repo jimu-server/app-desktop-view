@@ -146,13 +146,13 @@ function getFileIcon(data: FileTree) {
     return 'jimu-wenjianjia1'
   }
   if (data.name.endsWith(".docx") || data.name.endsWith(".doc")) {
-    return 'img:public/file-icon/docx1.png'
+    return 'img:./file-icon/docx1.png'
   }
   if (data.name.endsWith(".xlsx")) {
-    return 'img:public/file-icon/xlsx.png'
+    return 'img:./file-icon/xlsx.png'
   }
   if (data.name.endsWith(".pdf")) {
-    return 'img:public/file-icon/pdfwenjian.png'
+    return 'img:./file-icon/pdfwenjian.png'
   }
   return 'jimu-wenjian'
 }

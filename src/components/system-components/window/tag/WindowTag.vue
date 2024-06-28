@@ -103,7 +103,7 @@ setTimeout(() => {
   if (props.win.check) {
     label.value.style.background = getPaletteColor(label_bg_color.value)
     label.value.style.color = getPaletteColor(label_text_color.value)
-    label.value.style.mask = `url("public/label.png")`
+    label.value.style.mask = `url("./label.png")`
     label.value.style.maskSize = '100% 100%'
   }
 }, 200)
@@ -117,7 +117,7 @@ watch(() => props.win.check, (val) => {
   if (val) {
     label.value.style.background = getPaletteColor(label_bg_color.value)
     label.value.style.color = getPaletteColor(label_text_color.value)
-    label.value.style.mask = `url("public/label.png")`
+    label.value.style.mask = `url("./label.png")`
     label.value.style.maskSize = '100% 100%'
   } else {
     label.value.style.background = 'none'

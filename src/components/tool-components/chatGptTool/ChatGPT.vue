@@ -92,7 +92,7 @@ const {getPaletteColor} = colors
 
 const app = useAppStore()
 const splitterModel = ref(20)
-const splitterModelLimit = ref([20, 30])
+const splitterModelLimit = ref([20, 20])
 const splitterModel2 = ref(25)
 const splitterModel2Limit = ref([25, 50])
 const conversationListRef = ref()

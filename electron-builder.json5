@@ -42,7 +42,7 @@
         ]
       }
     ],
-    "artifactName": "${productName}-Windows-${version}-Setup.${ext}"
+    "artifactName": "${productName}-v${version}-${os}-${arch}.${ext}"
   },
   "nsis": {
     "oneClick": false,

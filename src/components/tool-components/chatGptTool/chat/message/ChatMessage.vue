@@ -226,7 +226,9 @@ const isShowFoldAction = computed(() => {
 * @description: 对当前高度进行一个延迟计算,防止计算过快导致无法正常显示折叠按钮
 * */
 setTimeout(() => {
-  currentHeight.value = bodyRef.value.clientHeight
+  if (bodyRef.value) {
+    currentHeight.value = bodyRef.value.clientHeight
+  }
 }, 500)
 
 /*

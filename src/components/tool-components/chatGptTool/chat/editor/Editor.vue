@@ -24,6 +24,7 @@ import {ChatMessageEntity, MessageItem, MessageType} from "@/components/tool-com
 import {createEditor} from "@/components/tool-components/chatGptTool/chat/editor/ckeditor";
 import {TextWatcher} from "@ckeditor/ckeditor5-typing";
 import {createRegExp} from "@ckeditor/ckeditor5-mention/src/mentionui";
+import {useAiPluginStore} from "@/components/tool-components/chatGptTool/store/plugin";
 
 
 
@@ -53,6 +54,7 @@ const editorArea = ref()
 // 编辑器 当前的字符数量双向绑定
 const characters = defineModel('characters', {default: 0})
 const ctx = useGptStore()
+const plugin=useAiPluginStore()
 // 当前编辑器是否处于回复消息状态
 const isRef = ref(false)
 
@@ -252,7 +254,7 @@ function copyVideo(file: Blob) {
 /*
  * @description: 检查当前选中插件的模型已经安装到本地,若本地未安装,则经用编辑器并且禁用发送按钮
  * */
-watch(() => ctx.ui.currentPlugin, (value) => {
+watch(() => plugin.currentPlugin, (value) => {
   // 检查插件在本地是否存在插件所需要用到的模型
   let number = ctx.ui.modelList.findIndex(item => {
     return item.model === value.model
