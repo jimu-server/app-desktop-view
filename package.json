@@ -1,5 +1,5 @@
 {
-  "name": "ai-assistant",
+  "name": "AI 智能助手",
   "private": true,
   "version": "0.0.1",
   "main": "dist-electron/main/index.js",

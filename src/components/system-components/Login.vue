@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="full-width row justify-center">
-                          <q-btn color="primary" style="width: 96%" @click="login" :loading="loading" :disable="loading">
+                          <q-btn unelevated color="primary" style="width: 96%" @click="login" :loading="loading" :disable="loading">
                             登录
                             <template v-slot:loading>
                               <q-spinner style="margin-right: 5px"/>
@@ -160,8 +160,8 @@
                       </el-form-item>
                     </el-form>
                     <div class="row justify-between" style="margin-top: 10px">
-                      <q-btn v-if="step==1" @click="cleanRegister" label="取消"/>
-                      <q-btn v-show="step == 1" @click="doRegister" color="primary" label="注册"/>
+                      <q-btn unelevated v-if="step==1" @click="cleanRegister" label="取消"/>
+                      <q-btn unelevated v-show="step == 1" @click="doRegister" color="primary" label="注册"/>
                     </div>
                   </div>
                 </div>
@@ -189,12 +189,12 @@
                   </div>
                   <div class="full-width column">
                     <div class="row justify-center" style="margin-bottom: 10px">
-                      <q-btn dense color="primary" @click="doReset" style="width: 90%;height: 36px">
+                      <q-btn unelevated dense color="primary" @click="doReset" style="width: 90%;height: 36px">
                         提交
                       </q-btn>
                     </div>
                     <div class="row justify-center" style="margin-bottom: 10px">
-                      <q-btn dense @click="showPanel='login'" style="width: 90% ;height: 36px">
+                      <q-btn unelevated dense @click="showPanel='login'" style="width: 90% ;height: 36px">
                         取消
                       </q-btn>
                     </div>

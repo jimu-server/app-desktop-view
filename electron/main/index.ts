@@ -64,7 +64,7 @@ process.env.VITE_DEV_SERVER_URL
 // const vueDevToolsPath = path.resolve(__dirname, '../../6.5.1_0')
 
 const ctx={
-    name:'Ai Assistant'
+    name:'AI 智能助手'
 }
 
 let appIcon = null
@@ -129,48 +129,15 @@ function createWindow() {
     win.webContents.on('did-finish-load', () => {
         win?.webContents.send('main-process-message', new Date().toLocaleString())
     })
-
     // Make all links open with the browser, not with the application
     win.webContents.setWindowOpenHandler(({url}) => {
         if (url.startsWith('https:')) shell.openExternal(url)
         return {action: 'deny'}
     })
-
     // 通过事件初始化窗口显示时机 避免白版闪烁
     win.on('ready-to-show', () => {
         win.show()
     })
-
-  /*  /!*
-    *  @description: resize 监听窗口大小改变
-    * *!/
-    win.on('resize', (event) => {
-        win.webContents.send('win-change')
-    })
-    /!*
-    * @description: 放大窗口监听
-    * *!/
-    win.on('maximize', (event) => {
-        win.webContents.send('win-change')
-    })
-    /!*
-    * @description: 取消最大化监听
-    * *!/
-    win.on('unmaximize', (event) => {
-        win.webContents.send('win-change')
-    })
-    /!*
-    * @description: 最小化窗口监听
-    * *!/
-    win.on('minimize', (event) => {
-        win.webContents.send('win-change')
-    })
-    /!*
-    * @description: 取消最小化窗口监听
-    * *!/
-    win.on('restore', (event) => {
-        win.webContents.send('win-change')
-    })*/
 }
 
 function startAppLocalServer() {
