@@ -41,7 +41,6 @@
           lazy
           :load="loadChild"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
-          style="width: 100%;height: 90%"
           @select="select"
       >
         <el-table-column type="selection" width="55"/>
@@ -72,13 +71,13 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" align="right">
           <template #default="scope">
-            <el-button text  type="primary">
+            <el-button link  type="primary">
               <el-icon>
                 <span class="icon iconfont jimu-add"></span>
               </el-icon>
               <span style="padding-right: 5px">添加</span>
             </el-button>
-            <el-button text  type="primary">
+            <el-button link  type="primary">
               <el-icon>
                 <span class="icon iconfont jimu-bianji1"></span>
               </el-icon>

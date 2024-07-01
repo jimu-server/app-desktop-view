@@ -6,7 +6,7 @@
     >
       <slot name="header">
         <q-bar class="bg-transparent row"
-            :style="{
+               :style="{
             padding:0,
             borderBottom:widowsLabel.windowLabels.length <= 0 ?'none':'rgba(140,147,157,0.34) 1px solid',
             height:'40px'
@@ -16,7 +16,7 @@
                  @click.stop="toggleLeftDrawer" style="margin-left: 5px;margin-right: 5px;-webkit-app-region: no-drag;"
           />
           <window-scroll v-show="widowsLabel.windowLabels.length !== 0"/>
-          <q-space />
+          <q-space/>
           <WindowThemeBtn/>
           <WindowMinimizeBtn/>
           <WindowToggleBtn/>
@@ -56,7 +56,8 @@
       </MainWindowTool>
     </q-drawer>
     <!--  聊天窗口 目标的信息窗口,单聊显示 好友信息及其好友设置,群聊则显示群信息和群设置  -->
-    <q-drawer id="r-d" v-if="tool.right.buttons.length>0" show-if-above side="right" :width="tool.right.width" behavior="desktop"
+    <q-drawer id="r-d" v-if="tool.right.buttons.length>0" show-if-above side="right" :width="tool.right.width"
+              behavior="desktop"
               bordered
               style="min-width: 52px"
     >
@@ -120,6 +121,7 @@ import WindowThemeBtn from "@/components/system-components/desktop/WindowThemeBt
 import WindowCloseBtn2 from "@/components/system-components/desktop/WindowCloseBtn2.vue";
 import WindowToggleBtn from "@/components/system-components/desktop/WindowToggleBtn.vue";
 import {useAppStore} from "@/components/system-components/store/app";
+import {loadUserInfo} from "@/components/system-components/utils/userutil";
 
 
 const widowsLabel = useWindowsStore()
@@ -132,7 +134,6 @@ const showAboutDialog = ref(false)
 const showSettingDialog = ref(false)
 const mini = ref(false)
 const app = useAppStore()
-
 const theme = useThemeStore()
 
 
@@ -148,7 +149,6 @@ const vSize = {
   },
 }
 
-
 function sizeChange(width: number, height: number) {
   let byId = document.getElementById("page-view");
   if (byId) {
@@ -157,55 +157,17 @@ function sizeChange(width: number, height: number) {
   }
 }
 
-
 async function logout() {
   setTimeout(async () => {
     emitter.emit(UserLogout)
   }, 100)
 }
 
-
-
-/* 
-@description: 全局消息推送
-*/
-function Notification() {
-}
-
-emitter.on(GlobalNotification, Notification)
-
-
-/* 
-  @description: 左侧抽屉隐藏 鼠标触发悬浮菜单展示
-*/
-document.addEventListener('mousemove', (event) => {
-
-  // 左侧抽屉隐藏 触发悬浮菜单显示
-  if (!leftDrawerOpen.value) {
-    if (event.clientX < 15 && event.clientY > 200) {
-      mini.value = true
-    }
-    if (event.clientX > 100) {
-      mini.value = false
-    }
-    if (mini.value && event.clientY < 200) {
-      mini.value = false
-    }
-    if (mini.value && event.clientY > 500) {
-      mini.value = false
-    }
-  }
-})
-
-
-
-
 onMounted(async () => {
-
+  await loadUserInfo()
 })
-
 onUnmounted(async () => {
-  emitter.off(GlobalNotification, Notification)
+
 })
 
 </script>

@@ -8,7 +8,7 @@
     </div>
     <!--  表格数据  -->
     <div style="flex-grow: 1" class="full-width column justify-between">
-      <el-table :data="tools" border style="width: 100%;height: 90%">
+      <el-table :data="tools" border>
         <el-table-column type="selection" width="55"/>
         <el-table-column fixed prop="name" width="100" label="名称">
           <template #default="scope">
@@ -84,9 +84,9 @@
             <el-tag>{{ app.get('tool_position', scope.row.position) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" align="right">
+        <el-table-column fixed="right" label="操作" align="right" width="200">
           <template #default="scope">
-            <el-button text  type="primary" @click="open(scope.row.id)">
+            <el-button link  type="primary" @click="open(scope.row.id)">
               <el-icon>
                 <span class="icon iconfont jimu-bianji1"></span>
               </el-icon>
@@ -94,7 +94,7 @@
             </el-button>
             <el-popconfirm title="确认删除?">
               <template #reference>
-                <el-button text  type="danger">
+                <el-button link  type="danger">
                   <el-icon>
                     <span class="icon iconfont jimu-shanchu"></span>
                   </el-icon>

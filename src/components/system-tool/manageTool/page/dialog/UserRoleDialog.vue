@@ -93,17 +93,17 @@
                         style="width: 100%"
                     >
                       <template #default="{option}">
-                        <div class="fit column justify-center">
-                          <div class="fit row justify-between">
+                        <div class="column justify-center">
+                          <div class="full-width row justify-between">
                             <div class="row">
                               <div class="column justify-center">
                                 <el-icon>
                                   <span :class="'icon iconfont '+option.icon"></span>
                                 </el-icon>
                               </div>
-                              <div style="margin-left: 5px" class="column justify-center">{{ option.name }}</div>
+                              <div style="margin-left: 2px" class="column justify-center">{{ option.name }}</div>
                             </div>
-                            <div style="padding-right: 5px">
+                            <div style="padding-right: 10px">
                               <el-switch
                                   v-model="option.status"
                                   class="ml-2"
@@ -588,5 +588,13 @@ onMounted(() => {
 </style>
 
 <style>
-
+.el-transfer-panel__list{
+  width: 100%!important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.el-transfer-panel__item {
+  width: 100%;
+}
 </style>

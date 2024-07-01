@@ -419,8 +419,8 @@ function defaultLoginAction() {
   loading.value = true
   defaultLogin(account.curent.account, account.curent.password).then(async (data) => {
     if (data.code == 200) {
+      // 更新 token
       user.info.token = data.data.token
-      await loadUserInfo()
       setTimeout(async () => {
         desktop_login()
         loading.value = false

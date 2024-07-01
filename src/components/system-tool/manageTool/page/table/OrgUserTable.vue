@@ -4,10 +4,10 @@
     <div class="filter column full-width justify-between" style="padding-bottom:10px;">
       <div class="row justify-between">
         <div class="row ">
-          <el-input class="opt" v-model="filter.account" style="width: 140px"  placeholder="账号"/>
-          <el-input class="opt" v-model="filter.name" style="width: 140px"  placeholder="昵称"/>
+          <el-input class="opt" v-model="filter.account" style="width: 140px" placeholder="账号"/>
+          <el-input class="opt" v-model="filter.name" style="width: 140px" placeholder="昵称"/>
           <el-select class="opt" v-model="filter.gender" label="状态" value-key="value"
-                      style="width: 80px"
+                     style="width: 80px"
           >
             <el-option
                 v-for="item in genderOptions"
@@ -16,8 +16,8 @@
                 :value="item">
             </el-option>
           </el-select>
-          <el-input class="opt" v-model="filter.phone" style="width: 140px"  placeholder="手机"/>
-          <el-input class="opt" v-model="filter.email" style="width: 240px"  placeholder="邮箱"/>
+          <el-input class="opt" v-model="filter.phone" style="width: 140px" placeholder="手机"/>
+          <el-input class="opt" v-model="filter.email" style="width: 240px" placeholder="邮箱"/>
         </div>
         <div>
           <el-button text type="primary">
@@ -49,7 +49,7 @@
         <el-table-column prop="name" label="昵称" width="100"/>
         <el-table-column prop="gender" label="性别" width="100px">
           <template #default="scope">
-            {{ app.get('user', scope.row.gender)}}
+            {{ app.get('user', scope.row.gender) }}
           </template>
         </el-table-column>
         <el-table-column prop="phone" label="手机" width="200px"/>
@@ -66,10 +66,10 @@
             />
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" align="right" >
+        <el-table-column fixed="right" label="操作" align="right">
           <template #default="scope">
             <div class="row justify-end">
-              <el-button text type="primary" @click="open(scope.row)">
+              <el-button link type="primary" @click="open(scope.row)">
                 <div>
                   <el-icon>
                     <span class="icon iconfont jimu-bianji1"></span>
@@ -81,7 +81,7 @@
               </el-button>
               <el-popconfirm title="确认删除?">
                 <template #reference>
-                  <el-button text type="danger">
+                  <el-button link type="danger">
                     <div>
                       <el-icon>
                         <span class="icon iconfont jimu-shanchu"></span>
@@ -96,7 +96,7 @@
             </div>
           </template>
           <template #header class="fit">
-           操作
+            操作
           </template>
         </el-table-column>
       </el-table>
@@ -135,16 +135,14 @@ const userInfo = ref<User>({})
 const filter = ref({
   account: '',
   name: '',
-  gender: {
-    value: 0,
-    label: '男'
-  },
+  gender: {value: -1, label: '全部'},
   phone: '',
   email: '',
 })
 
 // 性别过滤条件
 let genderOptions = [
+  {value: -1, label: '全部'},
   {value: 0, label: '男'},
   {value: 1, label: '女'},
 ]
@@ -178,7 +176,7 @@ function open(value: User) {
 /*
 * @description: 加载当前组织下所有用户
 * */
-function load(page: number = 1, size: number =10) {
+function load(page: number = 1, size: number = 10) {
   getOrgUserList(props.orgId, page, size).then(data => {
     users.value = data.rows
     count.value = data.count

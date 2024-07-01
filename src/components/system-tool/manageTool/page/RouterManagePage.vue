@@ -15,6 +15,6 @@ const app = useAppStore()
 
 <style scoped>
 #router {
-  height: v-bind('app.ui.page.height');
+  padding: 10px;
 }
 </style>

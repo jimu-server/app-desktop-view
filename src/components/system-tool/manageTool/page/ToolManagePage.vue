@@ -14,6 +14,6 @@ const app = useAppStore()
 
 <style scoped>
 #tool {
-
+  padding: 10px;
 }
 </style>

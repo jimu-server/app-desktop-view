@@ -34,18 +34,18 @@
                 </div>
                 <div v-if="currentOrg.id==scope.data.entity.id" class="column justify-center">
                   <div class="full-width row reverse">
-                    <el-button text class="org-opt" type="danger" size="small"
+                    <el-button link class="org-opt" type="danger" size="small"
                                @click.stop="delOrg(scope.data.entity.id)">
                       <el-icon>
                         <span class="icon iconfont jimu-shanchu"></span>
                       </el-icon>
                     </el-button>
-                    <el-button text class="org-opt" type="warning" size="small">
+                    <el-button link class="org-opt" type="warning" size="small">
                       <el-icon>
                         <span class="icon iconfont jimu-bianji1"></span>
                       </el-icon>
                     </el-button>
-                    <el-button text class="org-opt" type="primary" @click.stop="addOrg" size="small">
+                    <el-button link class="org-opt" type="primary" @click.stop="addOrg" size="small">
                       <el-icon>
                         <span class="icon iconfont jimu-add"></span>
                       </el-icon>

@@ -34,10 +34,22 @@
         <el-table-column type="selection" width="55"/>
         <el-table-column fixed prop="name" label="名称"/>
         <el-table-column prop="roleKey" label="键"/>
+        <el-table-column prop="status" label="状态" width="200px">
+          <template #default="scope">
+            <el-switch
+                v-model="scope.row.status"
+                class="ml-2"
+                inline-prompt
+                style="--el-switch-on-color: #1b77d2; --el-switch-off-color: rgba(158,160,161,0.54)"
+                active-text="启用"
+                inactive-text="禁用"
+            />
+          </template>
+        </el-table-column>
         <el-table-column prop="createTime" label="创建时间"/>
         <el-table-column fixed="right" label="操作" align="right">
           <template #default="scope">
-            <el-button text type="primary" @click="open(scope.row.id)">
+            <el-button link type="primary" @click="open(scope.row.id)">
               <div>
                 <el-icon>
                   <span class="icon iconfont jimu-bianji1"></span>
@@ -49,7 +61,7 @@
             </el-button>
             <el-popconfirm title="确认删除?">
               <template #reference>
-                <el-button text type="danger">
+                <el-button link type="danger">
                   <div>
                     <el-icon>
                       <span class="icon iconfont jimu-shanchu"></span>
